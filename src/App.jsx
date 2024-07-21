@@ -35,7 +35,7 @@ const App = () => {
       return new Blob([new Uint8Array(array)], { type: 'image/png' });
     };
 
-    const takePhoto = () => { 
+    const takePhoto = () => {  //사진 찍는 코드
       const photoCanvas = photoCanvasRef.current;
       const context = photoCanvas.getContext('2d');
       context.drawImage(videoRef.current, 0, 0, photoCanvas.width, photoCanvas.height);
