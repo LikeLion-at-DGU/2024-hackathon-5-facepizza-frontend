@@ -23,7 +23,7 @@ const VideoComponent = ({ videoRef }) => {
     <video
       ref={videoRef}
       autoPlay={true}
-      style={{ width: "70%", borderRadius: "8px" }}
+      style={{ width: "60%", height: "auto", borderRadius: "8px" }}
     />
   );
 };
