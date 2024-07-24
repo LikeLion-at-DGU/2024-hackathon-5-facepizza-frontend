@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from '../styles/StyledComponents';
+import * as S from '../../styles/StyledComponents';
 
 const Facial_Health_Home = () => {
     return (
