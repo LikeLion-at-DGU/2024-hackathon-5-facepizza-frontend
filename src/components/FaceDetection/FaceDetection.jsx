@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import LoadApiModels from "./LoadApiModels";
+import VideoComponent from "./VideoComponent";
 import * as faceapi from "face-api.js";
 
 const FaceDetection = ({ videoRef, onDetections, DetectionType }) => {
@@ -78,7 +79,11 @@ const FaceDetection = ({ videoRef, onDetections, DetectionType }) => {
     setupFaceDetection();
   }, [videoRef, onDetections, DetectionType]);
 
-  return null;
+  return(
+    <VideoComponent videoRef={videoRef}>
+      
+    </VideoComponent>
+  );
 };
 
 export default FaceDetection;

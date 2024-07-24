@@ -15,7 +15,6 @@ const Face_Camera_Home = () => {
                 <h2>내 표정 기록하기</h2>
                 <div id="cont_box">
                     <div id="left_box">
-                        <VideoComponent videoRef={videoRef} />
                         <FaceDetection videoRef={videoRef}/>
                         <S.desc>
                             <h3>표정 사진 찍기</h3>
