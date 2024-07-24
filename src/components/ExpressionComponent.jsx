@@ -1,13 +1,12 @@
-import React from "react";
-import FaceDetectionCanvas from "./FaceDetectionCanvas"
+import React, { useEffect } from "react";
+import FaceDetectionCanvas from "./FaceDetectionCanvas";
+import LoadApiModels from "./LoadApiModels";
 
-const ExpressionComponent = ({ videoRef, canvasRef, isDetectionSuccessful }) => (
-  <FaceDetectionCanvas
-    videoRef={videoRef}
-    canvasRef={canvasRef}
-    isDetectionSuccessful={isDetectionSuccessful}
-    detectionType="expressions"
-  />
-);
+const ExpressionComponent = ({ videoRef, canvasRef, isDetectionSuccessful }) =>
+  useEffect(() => {
+    const setupApi = async () => {
+      await LoadApiModels("Expressions");
+    };
+  });
 
 export default ExpressionComponent;
