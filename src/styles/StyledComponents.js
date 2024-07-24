@@ -78,17 +78,20 @@ export const Face_Camera_Home = styled.div`
 
 
 export const HeaderContainer = styled.header`
+  background-color: ${props => (props.isNotHome ? 'black' : '#FFC42B')};
+  color: ${props => (props.isNotHome ? '#FFC42B' : 'black')};
   display: flex;
   flex-direction: row;  
   border-radius: 8px;
-  background: #FFF;
+  /* background-color: #FFC42B; */
   padding: 10px;
+  height: 60px;
 `;
 
 export const Nav = styled.nav`
   display: flex;
   width: 100%;
-  height: 60px;
+  
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
@@ -99,7 +102,7 @@ export const Nav = styled.nav`
     width: 50%;
     justify-content: space-between;
     padding: 0 1em;
-    border-right: 2px solid black;
+    border-right: 2px solid white;
   }
 
   #Head_Right {

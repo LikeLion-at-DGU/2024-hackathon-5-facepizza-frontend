@@ -1,10 +1,11 @@
+//src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 //컴포넌트 파일들 풀러오기 여기부터
 import Header from './components/Header';
 import AppRouter from './Router';
-import Facial_Health_Home from './components/Facial_Health_Home';
-import Face_Camera_Home from './components/Face_Camera_Home';
+import Facial_Health_Home from './components/Homepage/Facial_Health_Home';
+import Face_Camera_Home from './components/Homepage/Face_Camera_Home';
 //컴포넌트 파일들 풀러오기 여기까지
 import { Main, Container } from './styles/StyledComponents';
 
@@ -19,7 +20,6 @@ const Title = () => { //Title
 
 const App = () => {  //함수형 컴포넌트 선언
   return (
-    <div>
       <Container>
         <Router>
           <Title />
@@ -31,7 +31,6 @@ const App = () => {  //함수형 컴포넌트 선언
           <Face_Camera_Home />
         </Router>
       </Container>
-    </div>
   );
 };
 
