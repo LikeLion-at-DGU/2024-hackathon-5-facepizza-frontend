@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+//컴포넌트 파일들 풀러오기 여기부터
+import Header from './components/Header';
+import AppRouter from './Router';
+import Facial_Health_Home from './components/Facial_Health_Home';
+import Face_Camera_Home from './components/Face_Camera_Home';
+//컴포넌트 파일들 풀러오기 여기까지
+import { Main, Container } from './styles/StyledComponents';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const Title = () => { //Title
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Container>
+      <h1>Facial Snap!</h1>
+      나를 더 건강하게, 나를 더 풍부하게
+    </Container>
   )
 }
 
-export default App
+const App = () => {  //함수형 컴포넌트 선언
+  return (
+    <div>
+      <Container>
+        <Router>
+          <Title />
+          <Header /> {/*Header 바 컴포넌트*/}
+          <Main>  {/*정의된 styled.div*/}
+            <AppRouter />
+          </Main>
+          <Facial_Health_Home />
+          <Face_Camera_Home />
+        </Router>
+      </Container>
+    </div>
+  );
+};
+
+export default App;
