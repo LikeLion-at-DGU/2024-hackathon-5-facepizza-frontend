@@ -1,18 +1,22 @@
-import React from "react";
+import React, {useRef} from "react";
 import * as S from '../styles/StyledComponents';
 import photo from '../assets/photo.jpg'; // 사진 경로 수정 필요
 import album from '../assets/album.jpg'; // 사진 경로 수정 필요
 import calendar from '../assets/calrender.png';
 import bedge from '../assets/bedge.png';
+import VideoComponent from "./VideoComponent";
+import FaceDetection from "./FaceDetection";
 
 const Face_Camera_Home = () => {
+    const videoRef = useRef(null);
     return (
         <S.Face_Camera_Home>
             <S.Section>
                 <h2>내 표정 기록하기</h2>
                 <div id="cont_box">
                     <div id="left_box">
-                        <S.Image src={photo} alt="Selfie" id="camera_cover"/>
+                        <VideoComponent videoRef={videoRef} />
+                        <FaceDetection videoRef={videoRef}/>
                         <S.desc>
                             <h3>표정 사진 찍기</h3>
                             설명
