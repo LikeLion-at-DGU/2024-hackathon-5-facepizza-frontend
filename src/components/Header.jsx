@@ -1,13 +1,16 @@
 // src/components/Header.jsx
 import React from 'react';
 import * as S from '../styles/StyledComponents';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 
 const Header = () => {
+  const location = useLocation();
+  const isNotHome = location.pathname !== '/';
+
   return (
-    <S.HeaderContainer>
+    <S.HeaderContainer isNotHome={isNotHome}>
       <S.Nav>
         <div id="Head_Left">
           <div class="left_box">
