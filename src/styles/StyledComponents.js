@@ -1,6 +1,6 @@
-// src/styles/StyledComponents.js
 import styled from 'styled-components';
 
+// App.jsx에서 쓰이는 스타일
 export const Container = styled.div`
   padding: 20px;
   text-align: center;
@@ -8,35 +8,37 @@ export const Container = styled.div`
     margin: 0 0 10px 0;
   }
 `;
-
 export const desc = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: self-start;
-    gap: 5px;
-    padding-left: 15px;
-  `
-export const Face_Camera_Home = styled.div`
-//Face_Camera_Home에서 사용하는 스타일
-  padding: 20px; 
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  gap: 5px;
+  padding-left: 15px;
+`;
+export const Main = styled.main`
+  padding: 20px;
+`;
 
-  * {
-  /* border: 1px solid black; */
-  }
-  h2{ 
+// Face_Camera_Home 에서 쓰이는 스타일
+export const Face_Camera_Home = styled.div`
+  padding: 20px;
+  text-align: center;
+  h2 {
     text-align: start;
     padding-left: 10px;
   }
-  h3{ margin: 0;}
+  h3 {
+    margin: 0;
+  }
   #cont_box {
     display: flex;
     flex-direction: row;
     padding: 0 10px;
-    }
+  }
   #left_box {
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     width: 50%;
   }
   #camera_cover {
@@ -58,7 +60,6 @@ export const Face_Camera_Home = styled.div`
     height: 80%;
     object-fit: cover;
   }
-
   #face_calendar {
     display: flex;
     flex-direction: row;
@@ -74,30 +75,86 @@ export const Face_Camera_Home = styled.div`
   img {
     height: 50px;
   }
-`
+`;
 
+// PhotoAlbum.jsx에서 쓰이는 스타일
+export const Album = styled.div`
+  padding: 20px;
+  text-align: center;
 
-export const HeaderContainer = styled.header`
-  background-color: ${props => (props.isNotHome ? 'black' : '#FFC42B')};
-  color: ${props => (props.isNotHome ? '#FFC42B' : 'black')};
+  #title_bar {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    padding: 1em 1.5em;
+    h2 {
+      color: #000;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin: 0;
+    }
+  }
+  #album_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 10px;
+  }
+  .example {
+    width: 406px;
+    height: 238px;
+    flex-shrink: 0;
+    background: #D9D9D9;
+  }
+  #photo_warpper {
+    display: flex;
+    gap: 10px;
+  }
+`;
+
+export const Iner_Section = styled.div`
   display: flex;
-  flex-direction: row;  
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 40px;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  /* background-color: #FFC42B; */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+`;
+
+// Header에서 쓰이는 스타일
+export const HeaderContainer = styled.header`
+  background-color: ${({ isNotHome }) => (isNotHome ? 'black' : '#FFC42B')};
+  color: ${({ isNotHome }) => (isNotHome ? '#FFC42B' : 'black')};
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
   padding: 10px;
   height: 60px;
+
+  button{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+  }
 `;
 
 export const Nav = styled.nav`
   display: flex;
   width: 100%;
-  
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
- 
+
   #Head_Left {
-    /* background-color: burlywood; */
     display: flex;
     width: 50%;
     justify-content: space-between;
@@ -106,29 +163,55 @@ export const Nav = styled.nav`
   }
 
   #Head_Right {
-    /* background-color: skyblue; */
     display: flex;
     width: 50%;
     justify-content: space-between;
     padding: 0 1em;
   }
 
-  .left_box{
+  .left_box {
     display: flex;
     gap: 1em;
-    margin: 0 6px 0 6px;
+    margin: 0 6px;
   }
-  .right_box{
+  .right_box {
     display: flex;
     gap: 1em;
-    margin: 0 6px 0 6px;
+    margin: 0 6px;
   }
 `;
 
-export const Main = styled.main`
+// FacialStretch.jsx 팝업 스타일 추가
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ModalContent = styled.div`
+  width: 80%;
+  height: 80%;
+  background-color: white;
   padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
+export const CameraWrapper =styled.div`
+  width: 100%;
+  height: 100%;
+
+`
+
+// Section, Image 스타일
 export const Section = styled.section`
   margin-bottom: 20px;
   padding: 20px;
@@ -146,7 +229,5 @@ export const Section = styled.section`
 
 export const Image = styled.img`
   width: 70%;
-  /* height: 50%; */
   border-radius: 8px;
 `;
-
