@@ -114,6 +114,7 @@ export const Album = styled.div`
     gap: 10px;
   }
 `;
+
 export const Iner_Section = styled.div`
   display: flex;
   flex-direction: column;
@@ -137,6 +138,13 @@ export const HeaderContainer = styled.header`
   border-radius: 8px;
   padding: 10px;
   height: 60px;
+
+  button{
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+  }
 `;
 
 export const Nav = styled.nav`
@@ -200,7 +208,7 @@ export const ModalContent = styled.div`
 export const CameraWrapper =styled.div`
   width: 100%;
   height: 100%;
-  background: #000;
+
 `
 
 // Section, Image 스타일

@@ -1,12 +1,9 @@
-import * as faceapi from 'face-api.js';
+import * as faceapi from "face-api.js";
 
-const LoadApiModels = async (ModelKind) => {
-    await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-    if (ModelKind === "Landmark") {
-        await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
-    } else if (ModelKind === "Expression") {
-        await faceapi.nets.faceExpressionNet.loadFromUri('/models');
-    }
+const LoadApiModels = async (DetectionType) => {
+  await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
+  await faceapi.nets.faceLandmark68Net.loadFromUri("/models"); // 항상 로드
+  await faceapi.nets.faceExpressionNet.loadFromUri("/models");
 };
 
 export default LoadApiModels;

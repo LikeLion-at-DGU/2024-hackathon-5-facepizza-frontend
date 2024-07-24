@@ -17,10 +17,10 @@ const FacialStretch = ({ isOpen, onRequestClose }) => {
       onRequestClose={onRequestClose}
       contentLabel="Facial Stretch"
       style={{
-        overlay: {
-          backgroundColor: 'rgba(0, 0, 0, 0.75)'
+        overlay: { //모달 뒤에 표시되는 오버레이(배경)의 스타일
+          backgroundColor: '#FEFEFE;'
         },
-        content: {
+        content: { //모달 내용의 스타일입니다
           top: '50%',
           left: '50%',
           right: 'auto',
@@ -29,7 +29,7 @@ const FacialStretch = ({ isOpen, onRequestClose }) => {
           transform: 'translate(-50%, -50%)',
           width: '80%',
           height: '80%',
-          background: 'black'
+          // background: 'black'
         }
       }}
     >
