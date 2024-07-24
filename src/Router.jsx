@@ -10,10 +10,12 @@ import PhotoSnap from './components/PhotoSnap';
 import PhotoAlbum from './components/PhotoAlbum';
 import FacialChallenge from './components/FacialChallenge';
 import About from './components/About';
+import App from './App';
 
 const AppRouter = () => {
   return (
     <Routes>
+      {/* <Route path="/" element={<App />} />       */}
       <Route path="/aboutus" element={<About />} />
       <Route path="/stretch" element={<FacialStretch />} />
       <Route path="/exercise" element={<FacialExercise />} />

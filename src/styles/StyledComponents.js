@@ -9,25 +9,116 @@ export const Container = styled.div`
   }
 `;
 
+export const desc = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    gap: 5px;
+    padding-left: 15px;
+  `
+export const Face_Camera_Home = styled.div`
+//Face_Camera_Home에서 사용하는 스타일
+  padding: 20px; 
+  text-align: center;
+
+  * {
+  /* border: 1px solid black; */
+  }
+  h2{ 
+    text-align: start;
+    padding-left: 10px;
+  }
+  h3{ margin: 0;}
+  #cont_box {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px;
+    }
+  #left_box {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+  }
+  #camera_cover {
+    height: 70%;
+    object-fit: cover;
+  }
+  #right_box {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  #face_album {
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+  }
+  #album_cover {
+    width: 50%;
+    height: 80%;
+    object-fit: cover;
+  }
+
+  #face_calendar {
+    display: flex;
+    flex-direction: row;
+    background-color: #FFF6E4;
+    padding: 30px;
+    border-radius: 8px;
+  }
+  #icon_box {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  img {
+    height: 50px;
+  }
+`
+
+
 export const HeaderContainer = styled.header`
   display: flex;
-  justify-content: space-around;
-  border-radius: 10px;
+  flex-direction: row;  
+  border-radius: 8px;
   background: #FFF;
   padding: 10px;
-  /* text-align: center; */
-
 `;
 
 export const Nav = styled.nav`
-  ul {
-    list-style-type: none;
-    padding: 0;
+  display: flex;
+  width: 100%;
+  height: 60px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+ 
+  #Head_Left {
+    /* background-color: burlywood; */
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    padding: 0 1em;
+    border-right: 2px solid black;
   }
 
-  li {
-    display: inline;
-    margin: 0 10px;
+  #Head_Right {
+    /* background-color: skyblue; */
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    padding: 0 1em;
+  }
+
+  .left_box{
+    display: flex;
+    gap: 1em;
+    margin: 0 6px 0 6px;
+  }
+  .right_box{
+    display: flex;
+    gap: 1em;
+    margin: 0 6px 0 6px;
   }
 `;
 
@@ -51,7 +142,8 @@ export const Section = styled.section`
 `;
 
 export const Image = styled.img`
-  width: 100%;
-  height: auto;
+  width: 70%;
+  /* height: 50%; */
   border-radius: 8px;
 `;
+
