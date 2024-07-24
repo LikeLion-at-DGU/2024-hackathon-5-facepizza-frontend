@@ -1,0 +1,10 @@
+a { 
+    text-decoration: none;
+    color: black;
+    font-family: Inter;
+}
+
+a:hover {
+    color: navy;
+    font-weight: bold;
+}
