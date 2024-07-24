@@ -11,25 +11,27 @@ import { Main, Container } from './styles/StyledComponents';
 const Title = () => { //Title
   return (
     <Container>
-    <h1>Facial Snap!</h1>
-    나를 더 건강하게, 나를 더 풍부하게
+      <h1>Facial Snap!</h1>
+      나를 더 건강하게, 나를 더 풍부하게
     </Container>
   )
 }
 
 const App = () => {  //함수형 컴포넌트 선언
   return (
-    <Container>
-    <Router>
-        <Title/>
-      <Header /> {/*Header 바 컴포넌트*/}
-      <Main>  {/*정의된 styled.div*/}
-        <AppRouter/>
-      </Main>
-      <Facial_Health_Home/>
-      <Face_Camera_Home/>
-    </Router>
-    </Container>
+    <div>
+      <Container>
+        <Router>
+          <Title />
+          <Header /> {/*Header 바 컴포넌트*/}
+          <Main>  {/*정의된 styled.div*/}
+            <AppRouter />
+          </Main>
+          <Facial_Health_Home />
+          <Face_Camera_Home />
+        </Router>
+      </Container>
+    </div>
   );
 };
 
