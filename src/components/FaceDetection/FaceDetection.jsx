@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import LoadApiModels from "./LoadApiModels";
 import * as faceapi from "face-api.js";
 
-const FaceDetection = ({ videoRef, onDetections }) => {
+const FaceDetection = ({ videoRef, onDetections, DetectionType }) => {
   useEffect(() => {
     const setupFaceDetection = async () => {
       if (!videoRef.current) {
-        console.log("Video element is not ready");
+        console.log("FaceDetection: Video element is not ready");
         return;
       }
-
-      await LoadApiModels();
+      
+      await LoadApiModels(DetectionType); // 모델 로드
 
       videoRef.current.onloadedmetadata = () => {
         const displaySize = {
@@ -20,29 +20,48 @@ const FaceDetection = ({ videoRef, onDetections }) => {
 
         const detectFaces = async () => {
           if (videoRef.current.readyState === 4) {
-            const detections = await faceapi.detectAllFaces(
-              videoRef.current,
-              new faceapi.TinyFaceDetectorOptions()
-            );
+            const detections = await faceapi
+              .detectAllFaces(
+                videoRef.current,
+                new faceapi.TinyFaceDetectorOptions()
+              )
+              .withFaceLandmarks()
+              .withFaceExpressions();
+
             const resizedDetections = faceapi.resizeResults(
               detections,
               displaySize
             );
 
             if (resizedDetections.length > 0) {
-              const totalScore = resizedDetections.reduce(
-                (acc, detection) => acc + detection.score,
-                0
-              );
-              
-              const average = totalScore / resizedDetections.length;
+              resizedDetections.forEach(detection => {
+                // 각 얼굴에 대한 처리
+                const totalScore  = detection.detection.score; //예측 정확도를 알려주는 점수
+                const expressions = detection.expressions; //표정 object
+                const landmarks = detection.landmarks; //landmark object
 
-              console.log("Detected face:", resizedDetections);
-              console.log("Average Score: ", average);
-              
-              if (onDetections) {
-                onDetections(resizedDetections, average);
-              }
+                // console.log("Detected face:", detection);
+                // console.log("Score: ", totalScore);
+                // console.log("Expression: ", expressions);
+                // console.log("Landmark: ", landmarks);
+
+                const [maxKey, maxValue] = Object.entries(expressions).reduce((acc, [key, value]) => { //가장 큰 확률의 표정
+                  if (value > acc[1]) {
+                    return [key, value];
+                  } else {
+                    return acc;
+                  }
+                }, [null, -Infinity]);
+                
+                console.log("Key with maximum value:", maxKey); //현재의 표정
+                console.log("Maximum value:", maxValue); //표정의 정확도
+
+                if (onDetections && totalScore > 0.5) {  //0.5 이상의 정확도를 가질 떄
+                  onDetections([detection], totalScore);
+                  console.log(detection);
+                  return detection;
+                }
+              });
             } else {
               console.log("No face detected");
               if (onDetections) {
@@ -52,12 +71,12 @@ const FaceDetection = ({ videoRef, onDetections }) => {
           }
         };
 
-        setInterval(detectFaces, 1000);
+        setInterval(detectFaces, 1000); // 1초마다 얼굴 탐지
       };
     };
 
     setupFaceDetection();
-  }, [videoRef, onDetections]);
+  }, [videoRef, onDetections, DetectionType]);
 
   return null;
 };
