@@ -3,7 +3,7 @@ import LoadApiModels from "./LoadApiModels";
 import VideoComponent from "./VideoComponent";
 import * as faceapi from "face-api.js";
 
-const FaceDetection = ({ videoRef, onDetections, DetectionType }) => {
+const FaceDetection = ({ videoRef, onDetections }) => {
   useEffect(() => {
     const setupFaceDetection = async () => {
       if (!videoRef.current) {
@@ -11,7 +11,7 @@ const FaceDetection = ({ videoRef, onDetections, DetectionType }) => {
         return;
       }
       
-      await LoadApiModels(DetectionType); // 모델 로드
+      await LoadApiModels(); // 모델 로드
 
       videoRef.current.onloadedmetadata = () => {
         const displaySize = {
@@ -54,13 +54,11 @@ const FaceDetection = ({ videoRef, onDetections, DetectionType }) => {
                   }
                 }, [null, -Infinity]);
                 
-                console.log("Key with maximum value:", maxKey); //현재의 표정
-                console.log("Maximum value:", maxValue); //표정의 정확도
+                // console.log("Key with maximum value:", maxKey); //현재의 표정
+                // console.log("Maximum value:", maxValue); //표정의 정확도
 
                 if (onDetections && totalScore > 0.5) {  //0.5 이상의 정확도를 가질 떄
                   onDetections([detection], totalScore);
-                  console.log(detection);
-                  return detection;
                 }
               });
             } else {
@@ -77,12 +75,10 @@ const FaceDetection = ({ videoRef, onDetections, DetectionType }) => {
     };
 
     setupFaceDetection();
-  }, [videoRef, onDetections, DetectionType]);
+  }, [videoRef, onDetections]);
 
   return(
-    <VideoComponent videoRef={videoRef}>
-      
-    </VideoComponent>
+    <VideoComponent videoRef={videoRef}/>
   );
 };
 
