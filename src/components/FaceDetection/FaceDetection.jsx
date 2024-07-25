@@ -58,7 +58,9 @@ const FaceDetection = ({ videoRef, onDetections }) => {
                 // console.log("Maximum value:", maxValue); //표정의 정확도
 
                 if (onDetections && totalScore > 0.5) {  //0.5 이상의 정확도를 가질 떄
-                  onDetections([detection], totalScore);
+                  // console.log("FaceDetection Score: ", totalScore);
+                  // console.log("FaceDetection resizedDetection: ", resizedDetections);
+                  onDetections(resizedDetections);
                 }
               });
             } else {

@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import FaceDetection from "./FaceDetection";
+import { max } from "@tensorflow/tfjs";
 
 const TakePicture = () => {
   const videoRef = useRef(); // videoRef 생성
   const canvasRef = useRef();
   const [imageSrc, setImageSrc] = useState(null);
   const [photoTaken, setPhotoTaken] = useState(false);
+  const [detections, setDetections] = useState(false);
+  const [expressions, setExpressions] = useState(null);
 
   useEffect(() => {
     const captureImage = () => {
@@ -27,12 +30,36 @@ const TakePicture = () => {
       }
     };
 
-    const timer = setTimeout(captureImage, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (detections === true) { //추적 됐을 때만 찍기
+      console.log(expressions);
+      const timer = setTimeout(captureImage, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [detections]);
 
-  const handleDetections = (detections, score) => {
-    console.log(handleDetections);
+  const handleDetections = (resizedDetections) => {
+    resizedDetections.forEach((detection) => {
+      const expressions = detection.expressions;
+      // console.log("TakePicture expressions: ", expressions);
+      const [maxKey, maxValue] = Object.entries(expressions).reduce(
+        (acc, [key, value]) => {
+          //가장 큰 확률의 표정
+          if (value > acc[1]) {
+            return [key, value];
+          } else {
+            return acc;
+          }
+        },
+        [null, -Infinity]
+      );
+      const faceExpression = {maxKey, maxValue};
+      if(maxValue > 0.5){ //0.5 이상일 때 추적 상태 true로 변경
+        setDetections(true);
+        setExpressions(faceExpression);
+      } else{
+        setDetections(false);
+      }
+    });
   };
 
   return (
