@@ -40,7 +40,7 @@ const TakePicture = ({ExpressionType}) => {
         return () => clearTimeout(timer);
       }
     }
-  }, [expressions.maxKey]);
+  }, [detections, expressions.maxKey]);
 
   const handleDetections = (resizedDetections) => {
     resizedDetections.forEach((detection) => {
