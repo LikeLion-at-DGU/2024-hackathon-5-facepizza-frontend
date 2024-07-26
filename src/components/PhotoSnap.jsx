@@ -9,7 +9,7 @@ const PhotoSnap = () => {
     <Container>
       <Section>
         <h2>표정 사진 찍기</h2>
-        <TakePicture/>
+        <TakePicture ExpressionType={"happy"}/>
       </Section>
     </Container>
   );
