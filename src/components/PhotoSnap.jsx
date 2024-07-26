@@ -2,7 +2,7 @@
 import React from 'react';
 import { Section, Container, Image } from '../styles/StyledComponents';
 import photo from '../assets/photo.jpg'; // 사진 경로 수정 필요
-import TakePicture from './FaceDetection/TakePciture';
+import TakePicture from './FaceDetection/TakePicture';
 
 const PhotoSnap = () => {
   return (
