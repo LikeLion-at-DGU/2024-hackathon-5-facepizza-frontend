@@ -208,8 +208,7 @@ export const ModalContent = styled.div`
 export const CameraWrapper =styled.div`
   width: 100%;
   height: 100%;
-
-`
+`;
 
 // Section, Image 스타일
 export const Section = styled.section`
@@ -230,4 +229,32 @@ export const Section = styled.section`
 export const Image = styled.img`
   width: 70%;
   border-radius: 8px;
+`;
+
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+`;
+
+export const GuideText = styled.div`
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
 `;

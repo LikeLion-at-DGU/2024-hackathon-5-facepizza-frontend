@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 
-const Header = ({ openModal }) => {
+const Header = ({ openStretchModal, openExerciseModal }) => {
   const location = useLocation();
   const isNotHome = location.pathname !== '/';
 
@@ -17,8 +17,8 @@ const Header = ({ openModal }) => {
             <Link to="/aboutus">team 얼굴피자</Link>
           </div>
           <div class="right_box">
-            <button onClick={openModal}>표정 스트레칭</button>
-            <Link to="/exercise">표정 연습</Link>
+            <button onClick={openStretchModal}>표정 스트레칭</button>
+            <button onClick={openExerciseModal}>표정 연습</button>
             <Link to="/tracking">실시간 표정 트래킹</Link>
           </div>
         </div>
