@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import FaceDetection from "./FaceDetection";
 
-const FaceExpression = ({ onExpressions }) => {
-  const videoRef = useRef(null);
+const FaceExpression = ({ videoRef, onExpressions }) => {
   const [detections, setDetections] = useState(false);
   const [expressions, setExpressions] = useState({ maxKey: "start", maxValue: 0 });
 
   useEffect(() => {
-    if (detections) {
+    // console.log(videoRef.current);
+    if (detections && videoRef.current) {
       setExpressions(expressions);
       if (onExpressions) {
         onExpressions(expressions); // onExpressions 콜백 호출

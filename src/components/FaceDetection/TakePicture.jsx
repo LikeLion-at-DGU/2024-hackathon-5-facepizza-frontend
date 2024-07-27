@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import FaceExpression from "./FaceExpression";
-import useVideoRef from "./UseVideoRef";
 
 const TakePicture = ({ ExpressionType }) => {
   const videoRef = useRef(null);
@@ -9,10 +8,8 @@ const TakePicture = ({ ExpressionType }) => {
   const [capturing, setCapturing] = useState(false);
 
   useEffect(() => {
-    
     if (capturing) {
-      console.log("capturing processing ...");
-      console.log(videoRef.current);
+      console.log("Capturing processing...");
       const timer = setTimeout(() => {
         if (videoRef.current && canvasRef.current) {
           canvasRef.current.width = videoRef.current.videoWidth;
@@ -28,9 +25,8 @@ const TakePicture = ({ ExpressionType }) => {
           );
           const imageSrc = canvasRef.current.toDataURL("image/jpeg");
           setImageSrc(imageSrc);
-          setCapturing(false); // 사진 촬영 후 capturing 상태를 false로 변경
         } else {
-          console.error("video or canvas reference is null.");
+          console.error("Video or canvas reference is null.");
         }
       }, 3000); // 3초 후 캡처
       return () => clearTimeout(timer);
@@ -38,7 +34,9 @@ const TakePicture = ({ ExpressionType }) => {
   }, [capturing]);
 
   const handleExpressions = (expressions) => {
-    if (expressions.maxKey === ExpressionType) {
+    const { maxKey, maxValue } = expressions;
+
+    if (maxKey === ExpressionType && maxValue > 0.5) {
       if (!capturing) {
         setCapturing(true); // 얼굴이 맞는 경우 capturing 상태를 true로 설정
       }

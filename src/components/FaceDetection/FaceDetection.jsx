@@ -1,81 +1,72 @@
-import React, { useRef, useState, useEffect } from "react";
-import FaceExpression from "./FaceExpression";
+import React, { useEffect } from "react";
+import LoadApiModels from "./LoadApiModels";
+import VideoComponent from "./VideoComponent";
+import * as faceapi from "face-api.js";
 
-const TakePicture = ({ ExpressionType }) => {
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
-  const [imageSrc, setImageSrc] = useState(null);
-  const [capturing, setCapturing] = useState(false);
-  
-  // Use this to track if videoRef is ready
-  const [videoRefReady, setVideoRefReady] = useState(false);
-
+const FaceDetection = ({ videoRef, onDetections }) => {
   useEffect(() => {
-    // Check if videoRef is available every 100ms
-    const checkVideoRef = setInterval(() => {
-      if (videoRef.current) {
-        setVideoRefReady(true);
-        clearInterval(checkVideoRef);
+    // console.log(videoRef.current);
+    const setupFaceDetection = async () => {
+      if (!videoRef.current) {
+        console.log("FaceDetection: Video element is not ready");
+        return;
       }
-    }, 100); // Check every 100ms
 
-    return () => clearInterval(checkVideoRef); // Clean up on unmount
-  }, []);
+      try {
+        await LoadApiModels(); // 모델 로드
+        videoRef.current.onloadedmetadata = () => {
+          const displaySize = {
+            width: videoRef.current.videoWidth,
+            height: videoRef.current.videoHeight,
+          };
 
-  useEffect(() => {
-    if (capturing) {
-      console.log("capturing processing ...");
-      const timer = setTimeout(() => {
-        if (videoRef.current && canvasRef.current) {
-          canvasRef.current.width = videoRef.current.videoWidth;
-          canvasRef.current.height = videoRef.current.videoHeight;
+          const detectFaces = async () => {
+            // videoRef.current이 여전히 유효한지 확인
+            if (videoRef.current && videoRef.current.readyState === 4) {
+              try {
+                const detections = await faceapi
+                  .detectAllFaces(
+                    videoRef.current,
+                    new faceapi.TinyFaceDetectorOptions()
+                  )
+                  .withFaceLandmarks()
+                  .withFaceExpressions();
 
-          const context = canvasRef.current.getContext("2d");
-          context.drawImage(
-            videoRef.current,
-            0,
-            0,
-            videoRef.current.videoWidth,
-            videoRef.current.videoHeight
-          );
-          const imageSrc = canvasRef.current.toDataURL("image/jpeg");
-          setImageSrc(imageSrc);
-          setCapturing(false); // 사진 촬영 후 capturing 상태를 false로 변경
-        } else {
-          console.error("video or canvas reference is null.");
-        }
-      }, 3000); // 3초 후 캡처
-      return () => clearTimeout(timer);
-    }
-  }, [capturing]);
+                const resizedDetections = faceapi.resizeResults(
+                  detections,
+                  displaySize
+                );
 
-  const handleExpressions = (expressions) => {
-    if (expressions.maxKey === ExpressionType) {
-      if (!capturing) {
-        setCapturing(true); // 얼굴이 맞는 경우 capturing 상태를 true로 설정
+                if (onDetections) {
+                  onDetections(resizedDetections);
+                }
+              } catch (error) {
+                console.error("Error during face detection:", error);
+              }
+            }
+          };
+
+          // videoRef.current이 null이 아닌지 확인
+          if (videoRef.current) {
+            const intervalId = setInterval(detectFaces, 1000); // 1초마다 얼굴 탐지
+
+            // Cleanup function
+            return () => clearInterval(intervalId);
+          } else{
+            console.error("videoRef is null");
+          }
+        };
+      } catch (error) {
+        console.error("Error loading models or setting up face detection:", error);
       }
-    } else {
-      if (capturing) {
-        setCapturing(false); // 얼굴이 맞지 않는 경우 capturing 상태를 false로 설정
-      }
-    }
+    };
 
-    console.log("Capturing state:", capturing);
-  };
+    setupFaceDetection();
+  }, [videoRef, onDetections]);
 
   return (
-    <>
-      <FaceExpression videoRef={videoRef} onExpressions={handleExpressions} />
-      <canvas ref={canvasRef} style={{ display: "none" }} />
-      {imageSrc && (
-        <div>
-          <h2>촬영된 사진</h2>
-          <img src={imageSrc} alt="Captured" />
-        </div>
-      )}
-      {!videoRefReady && <p>Video is loading...</p>} {/* Optionally display a loading message */}
-    </>
+    <VideoComponent videoRef={videoRef} />
   );
 };
 
-export default TakePicture;
+export default FaceDetection;
