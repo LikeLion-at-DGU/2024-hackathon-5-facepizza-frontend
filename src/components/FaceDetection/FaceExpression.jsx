@@ -17,6 +17,7 @@ const FaceExpression = ({ videoRef, onExpressions }) => {
 
   const handleDetections = (resizedDetections) => {
     resizedDetections.forEach((detection) => {
+      console.log(detection);
       const expressions = detection.expressions;
       const [maxKey, maxValue] = Object.entries(expressions).reduce(
         (acc, [key, value]) => {
