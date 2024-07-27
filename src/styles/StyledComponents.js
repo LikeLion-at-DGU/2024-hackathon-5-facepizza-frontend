@@ -20,9 +20,36 @@ export const Main = styled.main`
   padding: 20px;
 `;
 
+
+// Face_Health_Home 에서 쓰이는 스타일
+export const Face_Health_Home = styled.div`
+  /* padding: 20px; */
+  h2{
+    text-align: start;
+    padding-left: 10px;
+  }
+  h3{
+    margin: 0;
+  }
+  #content_wrraper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .cont_box {
+    display: flex;
+    gap: 10px;
+  }
+  .example {
+    width: 15vw;
+    aspect-ratio: 1 / 1; /* 가로 세로 비율 1:1 */
+    background-color: lightgray; /* 시각적으로 확인하기 위한 배경색 */
+  }
+`
+
 // Face_Camera_Home 에서 쓰이는 스타일
 export const Face_Camera_Home = styled.div`
-  padding: 20px;
+  /* padding: 20px; */
   text-align: center;
   h2 {
     text-align: start;
@@ -229,10 +256,18 @@ export const ModalContent = styled.div`
   align-items: center;
 `;
 
-export const CameraWrapper =styled.div`
+export const CameraWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+export const PicModal_Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+`
+
 
 // Section, Image 스타일
 export const Section = styled.section`

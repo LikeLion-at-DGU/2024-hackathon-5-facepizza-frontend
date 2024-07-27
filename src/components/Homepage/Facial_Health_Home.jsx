@@ -4,12 +4,25 @@ import * as S from '../../styles/StyledComponents';
 
 const Facial_Health_Home = () => {
     return (
-        <S.Container>
+        <S.Face_Health_Home>
             <S.Section>
-                <h1>표정 건강 가꾸기</h1>
-                <button>도전해보세요!</button>
+                <h2>표정 건강 가꾸기</h2>
+                <div id='content_wrraper'>
+                    <div class="cont_box">
+                        <div class="example"></div>
+                        <h3>표정 스트레칭하기</h3>
+                    </div>
+                    <div class="cont_box">
+                        <div class="example"></div>
+                        <h3>표정 연습하기</h3>
+                    </div>
+                    <div class="cont_box">
+                        <div class="example"></div>
+                        <h3>실시간 표정 트래킹하기</h3>
+                    </div>
+                </div>
             </S.Section>
-        </S.Container>
+        </S.Face_Health_Home>
     );
 };
 
