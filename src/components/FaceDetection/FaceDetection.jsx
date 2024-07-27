@@ -1,87 +1,81 @@
-import React, { useEffect } from "react";
-import LoadApiModels from "./LoadApiModels";
-import VideoComponent from "./VideoComponent";
-import * as faceapi from "face-api.js";
+import React, { useRef, useState, useEffect } from "react";
+import FaceExpression from "./FaceExpression";
 
-const FaceDetection = ({ videoRef, onDetections }) => {
+const TakePicture = ({ ExpressionType }) => {
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [capturing, setCapturing] = useState(false);
+  
+  // Use this to track if videoRef is ready
+  const [videoRefReady, setVideoRefReady] = useState(false);
+
   useEffect(() => {
-    const setupFaceDetection = async () => {
-      if (!videoRef.current) {
-        console.log("FaceDetection: Video element is not ready");
-        return;
+    // Check if videoRef is available every 100ms
+    const checkVideoRef = setInterval(() => {
+      if (videoRef.current) {
+        setVideoRefReady(true);
+        clearInterval(checkVideoRef);
       }
-      
-      await LoadApiModels(); // 모델 로드
+    }, 100); // Check every 100ms
 
-      videoRef.current.onloadedmetadata = () => {
-        const displaySize = {
-          width: videoRef.current.videoWidth,
-          height: videoRef.current.videoHeight,
-        };
+    return () => clearInterval(checkVideoRef); // Clean up on unmount
+  }, []);
 
-        const detectFaces = async () => {
-          if (videoRef.current.readyState === 4) {
-            const detections = await faceapi
-              .detectAllFaces(
-                videoRef.current,
-                new faceapi.TinyFaceDetectorOptions()
-              )
-              .withFaceLandmarks()
-              .withFaceExpressions();
+  useEffect(() => {
+    if (capturing) {
+      console.log("capturing processing ...");
+      const timer = setTimeout(() => {
+        if (videoRef.current && canvasRef.current) {
+          canvasRef.current.width = videoRef.current.videoWidth;
+          canvasRef.current.height = videoRef.current.videoHeight;
 
-            const resizedDetections = faceapi.resizeResults(
-              detections,
-              displaySize
-            );
+          const context = canvasRef.current.getContext("2d");
+          context.drawImage(
+            videoRef.current,
+            0,
+            0,
+            videoRef.current.videoWidth,
+            videoRef.current.videoHeight
+          );
+          const imageSrc = canvasRef.current.toDataURL("image/jpeg");
+          setImageSrc(imageSrc);
+          setCapturing(false); // 사진 촬영 후 capturing 상태를 false로 변경
+        } else {
+          console.error("video or canvas reference is null.");
+        }
+      }, 3000); // 3초 후 캡처
+      return () => clearTimeout(timer);
+    }
+  }, [capturing]);
 
-            if (resizedDetections.length > 0) {
-              resizedDetections.forEach(detection => {
-                // 각 얼굴에 대한 처리
-                const totalScore  = detection.detection.score; //예측 정확도를 알려주는 점수
-                const expressions = detection.expressions; //표정 object
-                const landmarks = detection.landmarks; //landmark object
+  const handleExpressions = (expressions) => {
+    if (expressions.maxKey === ExpressionType) {
+      if (!capturing) {
+        setCapturing(true); // 얼굴이 맞는 경우 capturing 상태를 true로 설정
+      }
+    } else {
+      if (capturing) {
+        setCapturing(false); // 얼굴이 맞지 않는 경우 capturing 상태를 false로 설정
+      }
+    }
 
-                // console.log("Detected face:", detection);
-                // console.log("Score: ", totalScore);
-                // console.log("Expression: ", expressions);
-                // console.log("Landmark: ", landmarks);
+    console.log("Capturing state:", capturing);
+  };
 
-                const [maxKey, maxValue] = Object.entries(expressions).reduce((acc, [key, value]) => { //가장 큰 확률의 표정
-                  if (value > acc[1]) {
-                    return [key, value];
-                  } else {
-                    return acc;
-                  }
-                }, [null, -Infinity]);
-                
-                // console.log("Key with maximum value:", maxKey); //현재의 표정
-                // console.log("Maximum value:", maxValue); //표정의 정확도
-
-                if (onDetections && totalScore > 0.5) {  //0.5 이상의 정확도를 가질 떄
-                  // console.log("FaceDetection Score: ", totalScore);
-                  // console.log("FaceDetection resizedDetection: ", resizedDetections);
-                  onDetections(resizedDetections);
-                }
-              });
-            } else {
-              console.log("No face detected");
-              if (onDetections) {
-                onDetections([], 0);
-              }
-            }
-          }
-        };
-
-        setInterval(detectFaces, 1000); // 1초마다 얼굴 탐지
-      };
-    };
-
-    setupFaceDetection();
-  }, [videoRef, onDetections]);
-
-  return(
-    <VideoComponent videoRef={videoRef}/>
+  return (
+    <>
+      <FaceExpression videoRef={videoRef} onExpressions={handleExpressions} />
+      <canvas ref={canvasRef} style={{ display: "none" }} />
+      {imageSrc && (
+        <div>
+          <h2>촬영된 사진</h2>
+          <img src={imageSrc} alt="Captured" />
+        </div>
+      )}
+      {!videoRefReady && <p>Video is loading...</p>} {/* Optionally display a loading message */}
+    </>
   );
 };
 
-export default FaceDetection;
+export default TakePicture;

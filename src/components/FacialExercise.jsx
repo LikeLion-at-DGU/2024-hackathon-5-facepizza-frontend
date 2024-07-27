@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import * as S from '../styles/StyledComponents';
 import VideoComponent from "./FaceDetection/VideoComponent";
 import FaceDetection from "./FaceDetection/FaceDetection";
+import FaceExpression from './FaceDetection/FaceExpression';
 
 Modal.setAppElement('#root'); // accessibility를 위한 설정
 
@@ -64,8 +65,7 @@ const FacialExercise = ({ isOpen, onRequestClose }) => {
       </div>
       <S.CameraWrapper style = {{position : 'relative', 
         display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <VideoComponent videoRef={videoRef} />
-        <FaceDetection videoRef={videoRef} />
+        <FaceExpression />
         <S.Overlay>
           <S.GuideText>
             <p style = {{color: 'white'}}>표정 연습하기 튜토리얼</p>

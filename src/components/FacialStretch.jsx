@@ -40,7 +40,6 @@ const FacialStretch = ({ isOpen, onRequestClose }) => {
       <h2>표정 스트레칭</h2>
       <S.CameraWrapper style = {{position : 'relative', 
         display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <VideoComponent videoRef={videoRef} />
         <FaceDetection videoRef={videoRef} />
         <S.Overlay>
           <S.GuideText>
