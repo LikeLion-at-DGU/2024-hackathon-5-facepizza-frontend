@@ -10,7 +10,8 @@ import PhotoSnap from './components/PhotoSnap';
 import PhotoAlbum from './components/PhotoAlbum';
 import FacialChallenge from './components/FacialChallenge';
 import About from './components/About';
-import App from './App';
+import Login from './components/Login';
+import Acount from './components/Acount';
 
 const AppRouter = () => {
   return (
@@ -23,6 +24,8 @@ const AppRouter = () => {
       <Route path="/snap" element={<PhotoSnap />} />
       <Route path="/album" element={<PhotoAlbum />} />
       <Route path="/challenge" element={<FacialChallenge />} />
+      <Route path="/Login" element={<Login/>} />
+      <Route path="/Acount" element={<Acount/>} />
     </Routes>
   );
 };
