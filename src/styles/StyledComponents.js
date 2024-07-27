@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 // App.jsx에서 쓰이는 스타일
 export const Container = styled.div`
@@ -131,11 +132,12 @@ export const Iner_Section = styled.div`
 
 // Header에서 쓰이는 스타일
 export const HeaderContainer = styled.header`
-  background-color: ${({ isNotHome }) => (isNotHome ? 'black' : '#FFC42B')};
-  color: ${({ isNotHome }) => (isNotHome ? '#FFC42B' : 'black')};
+  /* $background-color: {({ isNotHome }) => (isNotHome ? 'black' : '#FFC42B')}; */
+  /* $color: {({ isNotHome }) => (isNotHome ? '#FFC42B' : 'black')}; */
+  background: linear-gradient(90deg, #FFC42B 0%, #FFD25F 100%);
   display: flex;
   flex-direction: row;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 10px;
   height: 60px;
 
@@ -144,6 +146,28 @@ export const HeaderContainer = styled.header`
     border: none;
     color: white;
     font-size: 20px;
+  }
+
+  button:hover{
+    background: #FAB400;
+    border-radius: 10px;
+  }
+`;
+
+export const Blink = styled(NavLink)`
+  text-align: center;
+  text-decoration: none;
+  font-family: Inter;
+  color: white;
+  border-radius: 10px;
+  padding: 0.3em;
+
+  &:hover {
+    background-color: #ffd966;
+  }
+
+  &.active {
+    background-color: #FAB400;
   }
 `;
 

@@ -1,10 +1,14 @@
 a { 
+    text-align: center;
     text-decoration: none;
     font-family: Inter;
     color: white;
+    border-radius: 10px;
+    padding: 0.3em;
 }
 
 a:hover {
-    color: navy;
-    font-weight: bold;
+    background: #FAB400;
+    /* color: navy; */
+    /* font-weight: bold; */
 }
