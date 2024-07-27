@@ -208,8 +208,7 @@ export const ModalContent = styled.div`
 export const CameraWrapper =styled.div`
   width: 100%;
   height: 100%;
-
-`
+`;
 
 // Section, Image 스타일
 export const Section = styled.section`
@@ -231,3 +230,88 @@ export const Image = styled.img`
   width: 70%;
   border-radius: 8px;
 `;
+
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+`;
+
+export const GuideText = styled.div`
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 20px 20px;
+`;
+
+export const EmotionButton = styled.button`
+  padding: 10px 40px;
+  font-size: 1.1em;
+  border-radius: 8px;
+  border: none;
+  background-color: ${(props) => (props.selected ? '#FFC700' : '#7A7A7A')};
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0 20px; // 버튼 사이의 간격을 위한 margin 추가
+
+
+  &:hover {
+    background-color: #FFC700;
+    color: white;
+  }
+`;
+
+export const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 텍스트와 체크박스를 수평으로 가운데 정렬 */
+
+  input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  p {
+    margin: 0; /* 텍스트의 여백을 제거 */
+    text-align: center; /* 텍스트를 수평으로 가운데 정렬 */
+  }
+`;
+
+export const PracticeNum = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backgroundColor: '#7A7A7A';
+  padding: 10px 20px;
+  margin: 0 20px;
+  color: 'white';
+  border: 'none';
+  borderRadius: '5px';
+  cursor: 'pointer';
+  fontSize: '1.3em';
+  outline: 'none';
+`
