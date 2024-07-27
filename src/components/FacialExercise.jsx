@@ -12,17 +12,18 @@ const FacialExercise = ({ isOpen, onRequestClose }) => {
   const [selectedEmotion, setSelectedEmotion] = useState('행복');
   const [exerciseType, setExerciseType] = useState(null);
   const [exerciseCount, setExerciseCount] = useState(10); // 초기 횟수 설정
+  const [skipTutorial, setSkipTutorial] = useState(false); // Add skipTutorial state
 
   const handleEmotionClick = (emotion) => {
     setSelectedEmotion(emotion);
   }
 
-  const handleExerciseTypeChange = (type) => {
-    setExerciseType(type);
+  const handleExerciseCountChange = (e) => {
+    setExerciseCount(Number(e.target.value));
   };
 
-  const decreaseCount = () => {
-    setExerciseCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0));
+  const handleSkipTutorialChange = (e) => {
+    setSkipTutorial(e.currentTarget.checked);
   };
 
   useEffect(() => {
@@ -71,7 +72,7 @@ const FacialExercise = ({ isOpen, onRequestClose }) => {
             <p style = {{color: 'white'}}>표정 연습하기 튜토리얼</p>
             <p style = {{color: '#FFC700'}}>표정 연습 진행 방식을 설정해주세요</p>
             <S.CheckboxContainer>
-              <p>단일 표정 계속 연습하기</p>
+              <p>1. 단일 표정 계속 연습하기</p>
               <input 
                 type="checkbox" 
                 onChange={e => handleExerciseTypeChange(e.currentTarget.checked ? 1 : null)}
@@ -84,8 +85,7 @@ const FacialExercise = ({ isOpen, onRequestClose }) => {
               <S.EmotionButton onClick={() => handleEmotionClick('분노')} selected={selectedEmotion === '분노'}>분노</S.EmotionButton>
               <S.EmotionButton onClick={() => handleEmotionClick('놀람')} selected={selectedEmotion === '놀람'}>놀람</S.EmotionButton>
               <div style={{ textAlign: 'center', alignItems: 'center' }}>
-                <S.PracticeNum onClick={decreaseCount}>연습횟수: {exerciseCount}
-                </S.PracticeNum>
+                <S.PracticeNum >연습횟수 {exerciseCount}</S.PracticeNum>
               </div>
             </S.ButtonContainer>
             <S.CheckboxContainer>
@@ -95,7 +95,30 @@ const FacialExercise = ({ isOpen, onRequestClose }) => {
                 onChange={e => handleExerciseTypeChange(e.currentTarget.checked ? 2 : null)}
                 checked={exerciseType === 2}
               />
+              
             </S.CheckboxContainer>
+
+            <p>행복, 슬픔, 화남, 놀람 순으로 한번에 연습이 가능합니다.</p>
+              <div>
+              <label htmlFor="exerciseCount">연습 횟수 </label>
+              <select id="exerciseCount" value={exerciseCount} onChange={handleExerciseCountChange}>
+                <option value={2}>2회</option>
+                <option value={4}>4회</option>
+                <option value={6}>6회</option>
+                <option value={8}>8회</option>
+                <option value={10}>10회</option>
+              </select>
+              </div>
+              <S.CheckboxContainer style={{ marginTop: '20px' }}>
+                <label htmlFor="skipTutorial" >다음부터 튜토리얼 건너뛰기</label>
+                <input 
+                  type="checkbox" 
+                  id="skipTutorial" 
+                  checked={skipTutorial} 
+                  onChange={handleSkipTutorialChange}
+                />
+              </S.CheckboxContainer>
+            
           </S.GuideText>
         </S.Overlay>
       </S.CameraWrapper>
