@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Section, Container } from '../styles/StyledComponents';
 import FaceDetection from "./FaceDetection/FaceDetection";
 import axios from 'axios';
@@ -25,6 +26,8 @@ const RealTimeTracking = () => {
     fearful: { img: null, maxValue: -Infinity },
     neutral: { img: null, maxValue: -Infinity },
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -85,7 +88,9 @@ const RealTimeTracking = () => {
     }, {});
 
     console.log('Emotion Percentages:', emotionPercentages);
-    console.log('Emotion Pictures:', emotionPics);
+
+    // 트래킹 종료 후 결과 페이지로 이동
+    navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages } });
   };
 
   return (
@@ -95,13 +100,13 @@ const RealTimeTracking = () => {
         <FaceDetection videoRef={videoRef} onDetections={handleDetections} />
         <button onClick={handleEndTracking}>트래킹 종료</button>
         <div>
-          <h3>Emotion Percentages:</h3>
+          <h3>Emotion Counts:</h3>
           <pre>{JSON.stringify(emotionCounts, null, 2)}</pre>
           <h3>Emotion Pictures:</h3>
           {Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
             img ? (
               <div key={emotion}>
-                <p>{emotion} (max value: {maxValue.toFixed(2)})</p>
+                <p>{emotion} (max value: {maxValue.toFixed(10)})</p>
                 <img src={img} alt={emotion} width="100" />
               </div>
             ) : null
