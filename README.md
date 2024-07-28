@@ -2,6 +2,6 @@
 
 
 ### 설치 필요한 라이브러리
-npm install react-modal react-webcam face-api.js
+npm install react-modal react-webcam face-api.js <br>
 npm install react-draggable
 
