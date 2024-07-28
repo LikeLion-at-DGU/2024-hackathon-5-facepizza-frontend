@@ -30,14 +30,6 @@ const PhotoSnap = () => {
     setCapturedPhotos([...capturedPhotos, newPhoto]);
   };
 
-  const handleCaptureClick = () => {
-    // 버튼으로 찍기
-    const takePictureElement = document.getElementById('take-picture-component');
-    if (takePictureElement) {
-      takePictureElement.click();
-    }
-  };
-
   return (
     <Container>
       <h2>표정 사진 찍기</h2>
@@ -71,7 +63,7 @@ const PhotoSnap = () => {
               </P.RightPanel>
             </P.CameraContainer>
             <P.BottomBar>
-              <P.CaptureButton onClick={handleCaptureClick}>
+              <P.CaptureButton onClick={() => { /* Capture logic here */ }}>
                 촬영
               </P.CaptureButton>
             </P.BottomBar>

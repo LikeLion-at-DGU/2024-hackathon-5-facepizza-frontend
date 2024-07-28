@@ -364,13 +364,13 @@ export const PracticeNum = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  backgroundColor: '#7A7A7A';
+  background-color: '#7A7A7A';
   padding: 10px 20px;
   margin: 0 20px;
   color: 'white';
   border: 'none';
-  borderRadius: '5px';
+  border-radius: '5px';
   cursor: 'pointer';
-  fontSize: '1.3em';
+  font-size: '1.3em';
   outline: 'none';
 `

@@ -1,6 +1,7 @@
 // src/components/PhotoSnapModal.jsx
 import React from 'react';
 import styled from 'styled-components';
+import Draggable from 'react-draggable';
 
 export const ModalBackground = styled.div`
   position: fixed;
@@ -18,27 +19,25 @@ export const ModalContent = styled.div`
   background-color: transparent;
   width: 90%;
   max-width: 1700px;
-  height: 0;
-  /* padding-top: calc(1260 / 1700 * 50%); */
-  padding-bottom: calc(1260 / 1700 * 50%);
+  height: 90vh; /* 반응형 높이 */
+  max-height: 90vh; /* 반응형 높이 */
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-//탑바
 export const TopBar = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 90px;
-  padding: 0 20px;
+  height: 9vh; /* 비율에 따른 높이 */
   width: 100%;
   background-color: #f0f0f0;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
   box-sizing: border-box;
+  cursor: move; /* 드래그 가능하도록 커서 변경 */
 `;
 
 export const Button = styled.button`
@@ -49,13 +48,11 @@ export const Button = styled.button`
   cursor: pointer;
 `;
 
-//카메라 컨테이너 (가로 flex)
 export const CameraContainer = styled.div`
   display: flex;
-  /* flex: 1; */
-  background-color: white;
   width: 100%;
-  max-height: 1000px;
+  height: 70vh; /* 비율에 따른 높이 */
+  background-color: white;
   position: relative;
 `;
 
@@ -73,11 +70,10 @@ export const CameraView = styled.div`
 `;
 
 export const CameraCanvas = styled.div`
-  /* position: relative; */
   width: 100%;
   padding-bottom: 66.67%; /* 1500:1000 비율 유지 */
   height: 0;
-  /* background-color: blue; */
+  position: relative;
 
   video, canvas {
     position: absolute;
@@ -86,10 +82,8 @@ export const CameraCanvas = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* border: 1px solid black; */
   }
 `;
-
 
 export const RightPanel = styled.div`
   width: 250px;
@@ -108,7 +102,8 @@ export const EmotionButton = styled.button`
 `;
 
 export const BottomBar = styled.div`
-  max-height: 190px;
+  height: 12.6vh; /* 비율에 따른 높이 */
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,23 +120,20 @@ export const CaptureButton = styled.button`
   cursor: pointer;
 `;
 
-
-
-
-
-
 const PhotoSnapModal = ({ children, onClose, onMinimize, onMaximize }) => {
   return (
     <ModalBackground onClick={onClose}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>
-        {/* 내부를 클릭했을 떄 닫히지 않게 함*/}
-        <TopBar>
-          <Button onClick={onMinimize}>–</Button>
-          <Button onClick={onMaximize}>□</Button>
-          <Button onClick={onClose}>×</Button>
-        </TopBar>
-        {children}
-      </ModalContent>
+      <Draggable handle=".handle">
+        <ModalContent onClick={(e) => e.stopPropagation()}>
+          {/* 내부를 클릭했을 떄 닫히지 않게 함 */}
+          <TopBar className="handle">
+            <Button onClick={onMinimize}>–</Button>
+            <Button onClick={onMaximize}>□</Button>
+            <Button onClick={onClose}>×</Button>
+          </TopBar>
+          {children}
+        </ModalContent>
+      </Draggable>
     </ModalBackground>
   );
 };
