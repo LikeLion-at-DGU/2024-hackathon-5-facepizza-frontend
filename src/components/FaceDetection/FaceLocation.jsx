@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useEffect } from "react";
 import FaceDetection from "./FaceDetection";
 
 const FaceLocation = ({videoRef, onLandmarks}) => {
