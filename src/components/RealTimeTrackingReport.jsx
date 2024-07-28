@@ -9,16 +9,14 @@ const RealTimeTrackingReport = () => {
   return (
     <Container>
       <Section>
-        <h2>감정 트래킹 결과</h2>
+        <h2>트래킹 기록</h2>
         <div>
-          <h3>Emotion Percentages:</h3>
-          <pre>{JSON.stringify(emotionPercentages, null, 2)}</pre>
-          <h3>Emotion Pictures:</h3>
-          {emotionPics && Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
+          <h3>하이라이트 사진</h3>
+          {emotionPics && Object.entries(emotionPics).map(([emotion, { img }]) => (
             img ? (
               <div key={emotion}>
-                <p>{emotion} (max value: {maxValue.toFixed(10)})</p>
-                <img src={img} alt={emotion} width="100" />
+                <p>{emotion} &nbsp; 비율 : {emotionPercentages[emotion]}%</p>
+                <img src={img} alt={emotion} width="300" /><br/><br/><br/>
               </div>
             ) : null
           ))}
