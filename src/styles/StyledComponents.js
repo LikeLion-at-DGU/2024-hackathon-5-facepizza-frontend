@@ -374,3 +374,185 @@ export const PracticeNum = styled.button`
   font-size: '1.3em';
   outline: 'none';
 `
+
+
+// 로그인 페이지에 쓰이는 스타일
+export const LoginContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-family: NanumSquare_ac;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+
+  p {
+    display: inline-block;
+    color: #8D8D8D;
+    text-align: center;
+    font-family: NanumSquare_ac;
+    font-size: 24.392px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  margin-bottom: 20px;
+  background: #F8F8F8;
+  padding: 30px 80px;
+  border-radius: 20px;
+
+  h3{
+    text-align: start;
+  }
+
+  .terms-content{
+    padding: 15px;
+    background-color: #E9E9E9;
+    border-radius: 5px;
+    color: #616161;
+    text-align: start;
+  }
+  #agree_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    gap: 5px;
+  }
+  #agree_box input{
+    margin: 0;
+  }
+
+  input {
+    height: 40px;
+    border: none;
+    border-bottom: 2px solid #FFCD82;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    margin: 15px 0;
+    font-family: NanumSquare_ac;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  input::placeholder {
+    color: #C7C7C7;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    input[type='checkbox'] {
+      margin-right: 10px;
+    }
+
+    label {
+      font-family: NanumSquare_ac;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      color: #8D8D8D;
+    }
+  }
+`;
+
+export const LoginButton = styled.button`
+  width: 300px;
+  height: 40px;
+  background: #000000;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  font-family: NanumSquare_ac;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  margin-bottom: 20px;
+
+  &:hover {
+    background: #333333;
+  }
+`;
+
+export const Links = styled.div`
+  text-align: center;
+
+  p {
+    display: inline-block;
+    color: #8D8D8D;
+    font-family: NanumSquare_ac;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    margin: 0 5px;
+
+    &:hover {
+      color: #000000;
+    }
+
+    p:last-child {
+    color: #8D8D8D; /* 회원가입 버튼 색 고정 */
+    cursor: pointer;
+  }
+  }
+`;
+
+
+// 회원가입 페이지에 쓰이는 스타일
+export const SignUpContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+
+  h1 {
+    font-family: NanumSquare_ac;
+    line-height: normal;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+`;
+
+export const SignUpButton = styled.button`
+  width: 300px;
+  height: 40px;
+  background: ${props => props.isAgreed ? '#000000' : '#8D8D8D'};
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  font-family: NanumSquare_ac;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: ${props => props.isAgreed ? 'pointer' : 'not-allowed'};
+  margin-bottom: 20px;
+
+  &:hover {
+    background: ${props => props.isAgreed ? '#333333' : '#8D8D8D'};
+  }
+`;
