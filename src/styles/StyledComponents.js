@@ -339,3 +339,22 @@ export const PracticeNum = styled.button`
   fontSize: '1.3em';
   outline: 'none';
 `
+
+export const CircularButton = styled.button`
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: darkgray;
+  }
+`;

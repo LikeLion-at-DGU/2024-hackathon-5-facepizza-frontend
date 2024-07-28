@@ -19,11 +19,19 @@ const FacialExercise = ({ isOpen, onRequestClose }) => {
   }
 
   const handleExerciseCountChange = (e) => {
-    setExerciseCount(Number(e.target.value));
+    const count = Number(e.target.value);
+    setExerciseCount(count);
+    console.log(`연습 횟수: ${count}`);
   };
 
+  const handleExerciseTypeChange = (type) => {
+    setExerciseType(type);
+  }
+
   const handleSkipTutorialChange = (e) => {
-    setSkipTutorial(e.currentTarget.checked);
+    const skip = e.currentTarget.checked;
+    setSkipTutorial(skip);
+    console.log(`튜토리얼 건너뛰기: ${skip ? '예' : '아니오'}`);
   };
 
   useEffect(() => {
@@ -98,7 +106,7 @@ const FacialExercise = ({ isOpen, onRequestClose }) => {
               
             </S.CheckboxContainer>
 
-            <p>행복, 슬픔, 화남, 놀람 순으로 한번에 연습이 가능합니다.</p>
+            <p style = {{fontWeight: '100'}}>행복, 슬픔, 화남, 놀람 순으로 한번에 연습이 가능합니다.</p>
               <div>
               <label htmlFor="exerciseCount">연습 횟수 </label>
               <select id="exerciseCount" value={exerciseCount} onChange={handleExerciseCountChange}>
@@ -109,20 +117,23 @@ const FacialExercise = ({ isOpen, onRequestClose }) => {
                 <option value={10}>10회</option>
               </select>
               </div>
-              <S.CheckboxContainer style={{ marginTop: '20px' }}>
-                <label htmlFor="skipTutorial" >다음부터 튜토리얼 건너뛰기</label>
-                <input 
-                  type="checkbox" 
-                  id="skipTutorial" 
-                  checked={skipTutorial} 
-                  onChange={handleSkipTutorialChange}
-                />
-              </S.CheckboxContainer>
+              <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                <S.CheckboxContainer style={{ marginTop: '20px', border: '1px solid white', 
+                  maxWidth: '300px', padding: '5px' }}>
+                  <label htmlFor="skipTutorial" >다음부터 튜토리얼 건너뛰기</label>
+                  <input 
+                    type="checkbox" 
+                    id="skipTutorial" 
+                    checked={skipTutorial} 
+                    onChange={handleSkipTutorialChange}
+                  />
+                </S.CheckboxContainer>
+              </div>
             
           </S.GuideText>
         </S.Overlay>
       </S.CameraWrapper>
-      <button onClick={onRequestClose}>Start</button>
+      <S.CircularButton onClick={onRequestClose}>Start</S.CircularButton>
     </Modal>
   );
 };
