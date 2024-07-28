@@ -16,7 +16,8 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
 
 
   useEffect(() => {
-    if (capturing) {
+    // console.log(TakePhoto);
+    if (capturing && TakePhoto) {
       console.log("Capturing processing...");
       const timer = setTimeout(() => {
         if (videoRef.current && canvasRef.current) {
@@ -44,7 +45,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
 
   const handleExpressions = (expressions) => {
     const { maxKey, maxValue } = expressions;
-    console.log(maxKey);
+    // console.log(maxKey);
     const emotionTranslate = emotionMap[maxKey];
     console.log(emotionTranslate);
     console.log(ExpressionType);
@@ -67,7 +68,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
       <FaceExpression videoRef={videoRef} onExpressions={handleExpressions} />
       <canvas ref={canvasRef} style={{ display: "none" }} />
       {imageSrc && (
-        <div>
+        <div style={{display: "none"}}>
           <h2>촬영된 사진</h2>
           <img src={imageSrc} alt="Captured" />
         </div>

@@ -39,7 +39,7 @@ const FacialStretch = ({ isOpen, onRequestClose }) => {
       <h2>표정 스트레칭</h2>
       <S.CameraWrapper style = {{position : 'relative', 
         display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <FaceStretch />
+        <FaceStretch StretchingType={"아"}/>
         <S.Overlay>
           <S.GuideText>
             <h2>표정 스트레칭하기 튜토리얼</h2>
