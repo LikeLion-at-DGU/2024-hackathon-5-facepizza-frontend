@@ -2,7 +2,7 @@
 import React, {useRef} from 'react';
 import Modal from 'react-modal';
 import * as S from '../styles/StyledComponents';
-import FaceLocation from './FaceDetection/FaceLocation';
+import FaceStretch from './FaceDetection/FaceStretch';
 
 Modal.setAppElement('#root'); // accessibility를 위한 설정
 
@@ -39,7 +39,7 @@ const FacialStretch = ({ isOpen, onRequestClose }) => {
       <h2>표정 스트레칭</h2>
       <S.CameraWrapper style = {{position : 'relative', 
         display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <FaceLocation videoRef={videoRef}/>
+        <FaceStretch />
         <S.Overlay>
           <S.GuideText>
             <h2>표정 스트레칭하기 튜토리얼</h2>

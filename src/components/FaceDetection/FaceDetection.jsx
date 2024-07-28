@@ -32,6 +32,8 @@ const FaceDetection = ({ videoRef, onDetections }) => {
                   .withFaceLandmarks()
                   .withFaceExpressions();
 
+                  // console.log(detections);
+
                 const resizedDetections = faceapi.resizeResults(
                   detections,
                   displaySize
