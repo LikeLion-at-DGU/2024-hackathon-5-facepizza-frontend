@@ -1,6 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import FaceExpression from "./FaceExpression";
 
+const emotionMap = {
+  happy: '행복',
+  sad: '슬픔',
+  angry: '분노',
+  surprised: '놀람',
+};
+
 const TakePicture = ({ ExpressionType }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -35,8 +42,12 @@ const TakePicture = ({ ExpressionType }) => {
 
   const handleExpressions = (expressions) => {
     const { maxKey, maxValue } = expressions;
-
-    if (maxKey === ExpressionType && maxValue > 0.5) {
+    console.log(maxKey);
+    const emotionTranslate = emotionMap[maxKey];
+    console.log(emotionTranslate);
+    console.log(ExpressionType);
+    // console.log(expressions);
+    if (emotionTranslate === ExpressionType && maxValue > 0.5) {
       if (!capturing) {
         setCapturing(true); // 얼굴이 맞는 경우 capturing 상태를 true로 설정
       }
