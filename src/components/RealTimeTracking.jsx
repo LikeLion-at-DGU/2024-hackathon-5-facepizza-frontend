@@ -29,17 +29,6 @@ const RealTimeTracking = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!tracking) {
-        clearInterval(interval);
-        return;
-      }
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, [tracking]);   // 0.1초마다 감정 감지
-
   const handleDetections = (resizedDetections) => {
     const currentTime = Math.floor(Date.now() / 100);
 
@@ -53,6 +42,12 @@ const RealTimeTracking = () => {
       setEmotions((prevEmotions) => {
         const newEmotions = [...prevEmotions];
         newEmotions[currentTime % newEmotions.length] = maxKey;
+
+        // 감정 배열이 꽉 찼는지 확인하고 트래킹 종료
+        if (newEmotions.every(emotion => emotion !== null)) {
+          handleEndTracking();
+        }
+
         return newEmotions;
       });
 
