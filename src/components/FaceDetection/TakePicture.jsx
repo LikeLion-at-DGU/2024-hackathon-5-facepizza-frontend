@@ -1,3 +1,4 @@
+// src/components/FaceDetection/TakePicture.jsx
 import React, { useEffect, useRef, useState } from 'react';
 import FaceDetection from './FaceDetection';
 import * as P from '../PhotoSnapModal';
@@ -6,7 +7,7 @@ const emotionMap = {
   happy: '행복',
   sad: '슬픔',
   angry: '분노',
-  surprised: '놀람'
+  surprised: '놀람',
 };
 
 const TakePicture = ({ onPhotoTaken, ExpressionType }) => {
@@ -36,18 +37,18 @@ const TakePicture = ({ onPhotoTaken, ExpressionType }) => {
         );
         // 캡처된 이미지를 데이터 URL로 변환
         const imageSrc = canvasRef.current.toDataURL('image/jpeg');
+        setImageSrc(imageSrc); // imageSrc 상태 업데이트
         onPhotoTaken(imageSrc);
-        setImageSrc(imageSrc); // 찍힌 사진 저장
         setPhotoTaken(true);
       }
     };
 
     // 추적 됐을 때만 찍기
-    if (detections === true && ExpressionType) {
+    if (detections && ExpressionType) {
       console.log(expressions, ExpressionType);
-      const emotionTranslate = emotionMap[expressions.maxKey];
+      const emotionTrnaslate = emotionMap[expressions.maxKey];
       // 감지된 표정이 지정된 표정과 일치할 경우
-      if (emotionTranslate === ExpressionType) {
+      if (emotionTrnaslate === ExpressionType) {
         console.log(`나는~${ExpressionType}합니다.`);
         const timer = setTimeout(captureImage, 3000);
         // cleanup 함수: 다음 감지 시도 전에 타이머를 클리어
@@ -61,7 +62,14 @@ const TakePicture = ({ onPhotoTaken, ExpressionType }) => {
     resizedDetections.forEach((detection) => {
       const expressions = detection.expressions;
       const [maxKey, maxValue] = Object.entries(expressions).reduce(
-        (acc, [key, value]) => (value > acc[1] ? [key, value] : acc),
+        (acc, [key, value]) => {
+          // 가장 큰 확률의 표정
+          if (value > acc[1]) {
+            return [key, value];
+          } else {
+            return acc;
+          }
+        },
         [null, -Infinity]
       );
       const faceExpression = { maxKey, maxValue };
@@ -75,33 +83,14 @@ const TakePicture = ({ onPhotoTaken, ExpressionType }) => {
     });
   };
 
-  useEffect(() => {
-    // 가로 세로 비율 유지하기
-    const handleResize = () => {
-      const modalContent = document.querySelector('.modal-content');
-      if (modalContent) {
-        const { offsetWidth: width } = modalContent;
-        const height = (width / 1500) * 1000;
-        modalContent.style.height = `${height}px`;
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
     <>
       <FaceDetection videoRef={videoRef} onDetections={handleDetections} />
       <P.CameraCanvas>
         <video ref={videoRef} autoPlay muted />
-        <canvas ref={canvasRef} style={{ display: 'none' }} /> {/* 캔버스 숨기기 */}
+        <canvas ref={canvasRef} style={{ display: 'none' }} />
       </P.CameraCanvas>
-      {photoTaken && imageSrc && (
+      {imageSrc && (
         <div>
           <h2>촬영된 사진</h2>
           <img src={imageSrc} alt="Captured" />
