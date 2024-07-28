@@ -8,7 +8,7 @@ const FaceDetection = ({ videoRef, onDetections }) => {
     // console.log(videoRef.current);
     const setupFaceDetection = async () => {
       if (!videoRef.current) {
-        console.log("FaceDetection: Video element is not ready");
+        console.error("FaceDetection: Video element is not ready");
         return;
       }
 
