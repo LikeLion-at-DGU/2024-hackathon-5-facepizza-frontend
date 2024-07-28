@@ -8,11 +8,12 @@ const emotionMap = {
   surprised: '놀람',
 };
 
-const TakePicture = ({ ExpressionType }) => {
+const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [capturing, setCapturing] = useState(false);
+
 
   useEffect(() => {
     if (capturing) {
@@ -32,13 +33,14 @@ const TakePicture = ({ ExpressionType }) => {
           );
           const imageSrc = canvasRef.current.toDataURL("image/jpeg");
           setImageSrc(imageSrc);
+          onPhotoTaken(imageSrc);
         } else {
           console.error("Video or canvas reference is null.");
         }
       }, 3000); // 3초 후 캡처
       return () => clearTimeout(timer);
     }
-  }, [capturing]);
+  }, [ExpressionType, TakePhoto, capturing]);
 
   const handleExpressions = (expressions) => {
     const { maxKey, maxValue } = expressions;
