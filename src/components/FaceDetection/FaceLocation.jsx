@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FaceDetection from "./FaceDetection";
 
 const FaceLocation = ({videoRef, onLandmarks}) => {
   const [detections, setDetections] = useState([])
 
   useEffect(() => {
+    console.log(detections);
     if(detections.length > 0){
       const landmarks = detections.map(detection => detection.landmarks);
       const mouthLandmarks = landmarks.map(lm => lm.getMouth());
