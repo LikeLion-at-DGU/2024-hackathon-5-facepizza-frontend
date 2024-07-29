@@ -9,7 +9,7 @@ const RealTimeTrackingReport = () => {
   const formatDate = (date) => {
     const d = new Date(date);
     const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+    const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
@@ -23,11 +23,26 @@ const RealTimeTrackingReport = () => {
     });
   };
 
+  const calculateElapsedTime = (start, end) => {
+    const elapsedMs = new Date(end) - new Date(start);
+    const seconds = Math.floor((elapsedMs / 1000) % 60);
+    const minutes = Math.floor((elapsedMs / (1000 * 60)) % 60);
+    // const hours = Math.floor((elapsedMs / (1000 * 60 * 60)) % 24);
+
+    if (minutes == 0)
+      return `${String(seconds)}초`
+    else
+      return `${String(minutes)}분 ${String(seconds)}초`;
+  };
+
+  const elapsedTime = calculateElapsedTime(startTime, endTime);
+
   return (
     <Container>
       <Section>
         <h2>트래킹 기록</h2>
         <h3>시작 {formatDate(startTime)} {formatTime(startTime)}&nbsp;&nbsp; 종료 {formatDate(endTime)} {formatTime(endTime)}</h3>
+        <h3>총 {elapsedTime} 트래킹</h3>
         <div>
           <h3>하이라이트 사진</h3>
           {emotionPics && Object.entries(emotionPics).map(([emotion, { img }]) => (

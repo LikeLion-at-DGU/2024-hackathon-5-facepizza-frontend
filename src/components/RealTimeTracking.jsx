@@ -7,7 +7,8 @@ import axios from 'axios';
 const RealTimeTracking = () => {
   const videoRef = useRef(null);
   const [tracking, setTracking] = useState(true);
-  const [emotions, setEmotions] = useState(Array(5 * 120).fill(null));  // 최대 5분 0.5초 간격으로 감정 저장할 수 있는 배열
+  const [emotions, setEmotions] = useState(Array(0.5 * 120).fill(null));  // 최대 5분 0.5초 간격으로 감정 저장할 수 있는 배열
+  const [currentEmotion, setCurrentEmotion] = useState({ key: '', value: 0 });
   const [emotionCounts, setEmotionCounts] = useState({
     happy: 0,
     sad: 0,
@@ -34,7 +35,7 @@ const RealTimeTracking = () => {
   const formatDate = (date) => {
     const d = new Date(date);
     const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+    const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
@@ -60,6 +61,7 @@ const RealTimeTracking = () => {
         (acc, [key, value]) => (value > acc[1] ? [key, value] : acc),
         [null, -Infinity]
       );    // maxKey, maxValue 탐지
+      setCurrentEmotion({key: maxKey, value: maxValue});
 
       setEmotions((prevEmotions) => {
         const newEmotions = [...prevEmotions];
@@ -95,16 +97,24 @@ const RealTimeTracking = () => {
     });
   };
 
+  // 감정 비율 계산 함수
+  const calculateEmotionPercentages = () => {
+    const totalEmotions = Object.values(emotionCounts).reduce((a, b) => a + b, 0);
+    if (totalEmotions === 0) return {};
+    return Object.keys(emotionCounts).reduce((obj, key) => {
+      obj[key] = ((emotionCounts[key] / totalEmotions) * 100).toFixed(2);
+      return obj;
+    }, {});
+  };
+
+  const emotionPercentages = calculateEmotionPercentages();
+
   // 트래킹 종료 함수
   const handleEndTracking = () => {
     setTracking(false);
     endTime.current = new Date();
 
-    const totalEmotions = Object.values(emotionCounts).reduce((a, b) => a + b, 0);
-    const emotionPercentages = Object.keys(emotionCounts).reduce((obj, key) => {
-      obj[key] = ((emotionCounts[key] / totalEmotions) * 100).toFixed(2);
-      return obj;
-    }, {});
+    const emotionPercentages = calculateEmotionPercentages();
 
     console.log('Emotion Percentages:', emotionPercentages);
 
@@ -118,16 +128,16 @@ const RealTimeTracking = () => {
         <h2>실시간 표정 트래킹하기</h2>
         <h3>{startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h3>
         <FaceDetection videoRef={videoRef} onDetections={handleDetections} />
-        <button onClick={handleEndTracking}>트래킹 종료</button>
+        <h3>data</h3>
+        <h4>{currentEmotion.key} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+        <button onClick={handleEndTracking}>종료하기</button>
         <div>
-          <h3>Emotion Counts:</h3>
-          <pre>{JSON.stringify(emotionCounts, null, 2)}</pre>
-          <h3>Emotion Pictures:</h3>
+          <h3>하이라이트 사진:</h3>
           {Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
             img ? (
               <div key={emotion}>
-                <p>{emotion} (max value: {maxValue.toFixed(10)})</p>
-                <img src={img} alt={emotion} width="100" />
+                <img src={img} alt={emotion} width="300" />
+                <p>{emotion} {emotionPercentages[emotion]}%</p><br/>
               </div>
             ) : null
           ))}
