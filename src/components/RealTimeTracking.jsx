@@ -7,7 +7,7 @@ import axios from 'axios';
 const RealTimeTracking = () => {
   const videoRef = useRef(null);
   const [tracking, setTracking] = useState(true);
-  const [emotions, setEmotions] = useState(Array(5 * 600).fill(null));  // 최대 5분 0.1초 간격으로 감정 저장할 수 있는 배열
+  const [emotions, setEmotions] = useState(Array(5 * 120).fill(null));  // 최대 5분 0.5초 간격으로 감정 저장할 수 있는 배열
   const [emotionCounts, setEmotionCounts] = useState({
     happy: 0,
     sad: 0,
@@ -28,8 +28,30 @@ const RealTimeTracking = () => {
   });
 
   const navigate = useNavigate();
+  const startTime = useRef(null);
+  const endTime = useRef(null);
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const formatTime = (date) => {
+    return new Date(date).toLocaleTimeString('ko-KR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+  };
 
   const handleDetections = (resizedDetections) => {
+    if (!startTime.current) {
+      startTime.current = new Date();
+    }
     const currentTime = Math.floor(Date.now() / 100);
 
     resizedDetections.forEach((detection) => {
@@ -73,8 +95,10 @@ const RealTimeTracking = () => {
     });
   };
 
+  // 트래킹 종료 함수
   const handleEndTracking = () => {
     setTracking(false);
+    endTime.current = new Date();
 
     const totalEmotions = Object.values(emotionCounts).reduce((a, b) => a + b, 0);
     const emotionPercentages = Object.keys(emotionCounts).reduce((obj, key) => {
@@ -85,13 +109,14 @@ const RealTimeTracking = () => {
     console.log('Emotion Percentages:', emotionPercentages);
 
     // 트래킹 종료 후 결과 페이지로 이동
-    navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages } });
+    navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
   };
 
   return (
     <Container>
       <Section>
         <h2>실시간 표정 트래킹하기</h2>
+        <h3>{startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h3>
         <FaceDetection videoRef={videoRef} onDetections={handleDetections} />
         <button onClick={handleEndTracking}>트래킹 종료</button>
         <div>
