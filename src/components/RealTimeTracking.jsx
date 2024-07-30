@@ -7,7 +7,6 @@ import axios from 'axios';
 const RealTimeTracking = () => {
   const videoRef = useRef(null);
   const [tracking, setTracking] = useState(true);
-  const [emotions, setEmotions] = useState(Array(0.5 * 120).fill(null));  // 최대 5분 0.5초 간격으로 감정 저장할 수 있는 배열
   const [currentEmotion, setCurrentEmotion] = useState({ key: '', value: 0 });
   const [emotionCounts, setEmotionCounts] = useState({
     happy: 0,
@@ -31,6 +30,7 @@ const RealTimeTracking = () => {
   const navigate = useNavigate();
   const startTime = useRef(null);
   const endTime = useRef(null);
+  const timerRef = useRef(null);
 
   const formatDate = (date) => {
     const d = new Date(date);
@@ -52,8 +52,10 @@ const RealTimeTracking = () => {
   const handleDetections = (resizedDetections) => {
     if (!startTime.current) {
       startTime.current = new Date();
+      timerRef.current = setTimeout(() => {
+        handleEndTracking();
+      }, 5*60000); // 5분 후 트래킹 종료
     }
-    const currentTime = Math.floor(Date.now() / 100);
 
     resizedDetections.forEach((detection) => {
       const expressions = detection.expressions;
@@ -61,19 +63,7 @@ const RealTimeTracking = () => {
         (acc, [key, value]) => (value > acc[1] ? [key, value] : acc),
         [null, -Infinity]
       );    // maxKey, maxValue 탐지
-      setCurrentEmotion({key: maxKey, value: maxValue});
-
-      setEmotions((prevEmotions) => {
-        const newEmotions = [...prevEmotions];
-        newEmotions[currentTime % newEmotions.length] = maxKey;
-
-        // 감정 배열이 꽉 찼는지 확인하고 트래킹 종료
-        if (newEmotions.every(emotion => emotion !== null)) {
-          handleEndTracking();
-        }
-
-        return newEmotions;
-      });
+      setCurrentEmotion({ key: maxKey, value: maxValue });
 
       setEmotionCounts((prevCounts) => {
         const newCounts = { ...prevCounts };
@@ -113,14 +103,28 @@ const RealTimeTracking = () => {
   const handleEndTracking = () => {
     setTracking(false);
     endTime.current = new Date();
-
-    const emotionPercentages = calculateEmotionPercentages();
-
-    console.log('Emotion Percentages:', emotionPercentages);
-
-    // 트래킹 종료 후 결과 페이지로 이동
-    navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
   };
+
+  // 상태가 변경된 후에 navigate 호출
+  useEffect(() => {
+    if (!tracking && endTime.current) {
+      const emotionPercentages = calculateEmotionPercentages();
+
+      console.log('Emotion Percentages:', emotionPercentages);
+
+      // 트래킹 종료 후 결과 페이지로 이동
+      navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
+    }
+  }, [tracking]);
+
+  // 타이머와 상태 업데이트 동기화
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <Container>
