@@ -409,7 +409,9 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   width: 60vw;
+  max-width: 800px;
   margin-bottom: 20px;
   background: #FFFFFF;
   padding: 15px 40px;
@@ -420,6 +422,7 @@ export const InputContainer = styled.div`
   }
 
   .terms-content{
+    width: 95%;
     padding: 15px;
     background-color: #E9E9E9;
     border-radius: 5px;
@@ -440,7 +443,8 @@ export const InputContainer = styled.div`
     margin: 0;
   }
 
-  input {
+  .Login_Input {
+    width: 100%;
     height: 40px;
     border: none;
     border-bottom: 2px solid #FFCD82;
@@ -482,8 +486,6 @@ export const Left_align = styled.div`
 p{
   display: inline;
   justify-self: left;
-  /* border: 1px solid black; */
-  /* width: 100%; */
   text-align: left;
 }
 input{
@@ -491,6 +493,7 @@ input{
   border: 1px solid #B9B9B9;
   margin: 0px;
   margin-bottom: 10px;
+  padding-left: 10px;
   width: 98%;
   height: 50px;
 }

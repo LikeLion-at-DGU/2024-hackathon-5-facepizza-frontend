@@ -20,8 +20,8 @@ const Login = () => {
         <S.LoginContainer>
             <h1>로그인하기</h1>
             <S.InputContainer>
-                <input type="text" placeholder='아이디를 입력해주세요.' />
-                <input type="password" placeholder='비밀번호를 입력해주세요.' />
+                <input type="text" class='Login_Input' placeholder='아이디를 입력해주세요.' />
+                <input type="password" class='Login_Input' placeholder='비밀번호를 입력해주세요.' />
             </S.InputContainer>
             <S.LoginButton>로그인</S.LoginButton>
             <S.Links>
