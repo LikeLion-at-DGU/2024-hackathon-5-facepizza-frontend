@@ -54,7 +54,7 @@ const RealTimeTracking = () => {
       startTime.current = new Date();
       timerRef.current = setTimeout(() => {
         handleEndTracking();
-      }, 5*60000); // 5분 후 트래킹 종료
+      }, 5 * 60000); // 5분 후 트래킹 종료
     }
 
     resizedDetections.forEach((detection) => {
@@ -100,20 +100,48 @@ const RealTimeTracking = () => {
   const emotionPercentages = calculateEmotionPercentages();
 
   // 트래킹 종료 함수
-  const handleEndTracking = () => {
+  const handleEndTracking = async () => {
     setTracking(false);
     endTime.current = new Date();
+
+    try {
+      const reportData = {
+        happy: parseFloat(emotionPercentages.happy),
+        sad: parseFloat(emotionPercentages.sad),
+        angry: parseFloat(emotionPercentages.angry),
+        surprised: parseFloat(emotionPercentages.surprised),
+        disgusted: parseFloat(emotionPercentages.disgusted),
+        fearful: parseFloat(emotionPercentages.fearful),
+        neutral: parseFloat(emotionPercentages.neutral),
+        created_at: startTime.current.toISOString(),
+        highlights: Object.entries(emotionPics).map(([emotion, { img }]) => ({
+          image: img,
+          emotion: emotion,
+        })),
+      };
+
+      console.log('Sending Report Data:', reportData);
+
+      // Report와 Highlights 데이터 전송
+      const response = await axios.post('http://127.0.0.1:8000/api/report', reportData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Response from server:', response.data); // 디버깅용 로그
+
+      //navigate('/tracking/report', { state: { ...reportData, startTime: startTime.current, endTime: endTime.current } });
+      navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
+    } catch (error) {
+      console.error('Error saving report:', error);
+    }
   };
 
   // 상태가 변경된 후에 navigate 호출
   useEffect(() => {
     if (!tracking && endTime.current) {
-      const emotionPercentages = calculateEmotionPercentages();
-
-      console.log('Emotion Percentages:', emotionPercentages);
-
-      // 트래킹 종료 후 결과 페이지로 이동
-      navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
+      handleEndTracking();
     }
   }, [tracking]);
 
