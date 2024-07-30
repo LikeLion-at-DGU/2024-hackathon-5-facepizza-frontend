@@ -1,3 +1,4 @@
+//VideoComponent 기존 정상 코드
 import React, { useEffect } from "react";
 
 const VideoComponent = ({ videoRef }) => {
@@ -23,7 +24,13 @@ const VideoComponent = ({ videoRef }) => {
     <video
       ref={videoRef}
       autoPlay={true}
-      style={{ width: "60%", height: "auto", borderRadius: "8px" }}
+      style={{
+        width: "100%",
+        height: '46vw',
+        objectFit: 'cover',
+        maxHeight: '630px',
+        transform: 'rotateY(180deg)'
+      }}
     />
   );
 };
