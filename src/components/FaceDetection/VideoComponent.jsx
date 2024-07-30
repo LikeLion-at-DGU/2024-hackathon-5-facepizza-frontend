@@ -26,9 +26,9 @@ const VideoComponent = ({ videoRef }) => {
       autoPlay={true}
       style={{
         width: "100%",
-        height: '57vw',
+        height: '46vw',
         objectFit: 'cover',
-        maxHeight: '900px',
+        maxHeight: '630px',
         transform: 'rotateY(180deg)'
       }}
     />

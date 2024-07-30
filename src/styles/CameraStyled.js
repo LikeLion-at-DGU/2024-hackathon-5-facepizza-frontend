@@ -19,9 +19,9 @@ export const ModalContent = styled.div`
   /* background-color: transparent; */
   display: flex;
   flex-direction: column;
-  width: 95vw;
-  max-width: 1500px;
-  max-height: 1200px; /* 반응형 높이 */
+  width: 75vw;
+  max-width: 1000px;
+  max-height: 690px; /* 반응형 높이 */
   align-items: center;
 `;
 
@@ -30,23 +30,23 @@ export const TopBar = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 40px; 
+  height: 30px; 
   width: 100%;
   background-color: #f0f0f0;
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
   cursor: move; /* 드래그 가능하도록 커서 변경 */
 
   button{
   border: none;
   background-color: transparent;
   margin-right: 20px;
-  font-size: 25px;
+  font-size: 20px;
 }
 `;
 
 export const BottomBar = styled.div`
-  height: 120px; /* 비율에 따른 높이 */
+  height: 80px; /* 비율에 따른 높이 */
   width: 100%;
   display: flex;
   justify-content: center;
@@ -56,8 +56,8 @@ export const BottomBar = styled.div`
 `;
 
 export const CaptureButton = styled.button`
-  width: 80px;
-  height: 80px;
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
   background-color: #554E4E;
   background-image: url('../assets/Logo_Smile.png');
@@ -73,16 +73,17 @@ export const Snap_Container = styled.div` /// 카메라 창과 바텀 바를 연
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 57vw;
+  height: 45vw;
   max-height: 900px;
   justify-content: center;
 `
 export const CameraView = styled.div`
   flex: 1;
   display: flex;
-  width: 76vw;
-  height: 57vw;
-  max-height: 900px;
+  width: 75vw;
+  height: 45vw;
+  max-height: 600px;
+  /* background: transparent; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -99,9 +100,9 @@ export const RightPanel = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 17vw;
-  height: 57vw;
-  max-height: 900px;
+  width: 13vw;
+  /* height: 45vw; */
+  max-height: 590px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
   
@@ -112,7 +113,7 @@ export const RightPanel = styled.div`
 `;
 
 export const EmotionButton = styled.button`
-  width: 16vw;
+  width: 13vw;
   margin: 10px 0;
   padding: 10px;
   background-color: ${({ selected }) => (selected ? '#FFD700' : '#f0f0f0')};
@@ -123,11 +124,11 @@ export const EmotionButton = styled.button`
 
 export const Thumbnail = styled.div`
     position: relative;
-    width: 12vw;
-    bottom: 50px;
+    width: 10vw;
+    bottom: 10px;
 
   img {
-    width: 12vw;
+    width: 10vw;
     height: auto;
     border: 4px solid #8181F7;
     border-radius: 5px;
@@ -159,7 +160,7 @@ export const Button = styled.button`
 export const CameraContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 57vw; /* 비율에 따른 높이 */
+  height: 45vw; /* 비율에 따른 높이 */
   background-color: white;
   position: relative;
 `;

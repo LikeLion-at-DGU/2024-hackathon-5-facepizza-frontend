@@ -51,7 +51,7 @@ const FaceDetection = ({ videoRef, onDetections }) => {
 
           // videoRef.current이 null이 아닌지 확인
           if (videoRef.current) {
-            const intervalId = setInterval(detectFaces, 1000); // 1초마다 얼굴 탐지
+            const intervalId = setInterval(detectFaces, 500); // 0.5초마다 얼굴 탐지
 
             // Cleanup function
             return () => clearInterval(intervalId);
