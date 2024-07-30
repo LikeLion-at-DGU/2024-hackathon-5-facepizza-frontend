@@ -1,3 +1,4 @@
+//FaceDetection 기존 정상코드 
 import React, { useEffect } from "react";
 import LoadApiModels from "./LoadApiModels"; // 얼굴 인식 모델을 로드하는 함수
 import VideoComponent from "./VideoComponent"; // 비디오 스트림을 렌더링하는 컴포넌트

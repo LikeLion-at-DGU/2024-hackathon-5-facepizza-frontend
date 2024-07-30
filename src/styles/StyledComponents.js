@@ -261,13 +261,6 @@ export const CameraWrapper = styled.div`
   height: 100%;
 `;
 
-export const PicModal_Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-`
-
 
 // Section, Image 스타일
 export const Section = styled.section`
