@@ -50,14 +50,16 @@ const Login = () => {
         <S.LoginContainer>
             <h1>로그인하기</h1>
             <S.InputContainer>
-                <input
+            <input
                     type="email"
+                    class='Login_Input'
                     placeholder="이메일을 입력해주세요."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                     type="password"
+                    class='Login_Input'
                     placeholder='비밀번호를 입력해주세요.'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
