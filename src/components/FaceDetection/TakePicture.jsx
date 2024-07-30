@@ -38,7 +38,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
         } else {
           console.error("Video or canvas reference is null.");
         }
-      }, 3000); // 3초 후 캡처
+      }, 500); // 0.5초 후 캡처
       return () => clearTimeout(timer);
     }
   }, [ExpressionType, TakePhoto, capturing]);
@@ -47,9 +47,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
     const { maxKey, maxValue } = expressions;
     // console.log(maxKey);
     const emotionTranslate = emotionMap[maxKey];
-    console.log(emotionTranslate);
-    console.log(ExpressionType);
-    // console.log(expressions);
+    console.log('현재 표정 :', emotionTranslate); //현재 감지되고 있는 표정 출력
     if (emotionTranslate === ExpressionType && maxValue > 0.5) {
       if (!capturing) {
         setCapturing(true); // 얼굴이 맞는 경우 capturing 상태를 true로 설정
@@ -60,7 +58,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
       }
     }
 
-    console.log("Capturing state:", capturing);
+    console.log("캡쳐 진행 상태:", capturing);
   };
 
   return (
