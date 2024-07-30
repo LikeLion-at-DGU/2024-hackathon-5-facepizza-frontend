@@ -72,6 +72,7 @@ export const CameraView = styled.div`
 export const CameraCanvas = styled.div`
   width: 100%;
   padding-bottom: 66.67%; /* 1500:1000 비율 유지 */
+  object-fit: cover;
   height: 0;
   position: relative;
 
@@ -87,6 +88,7 @@ export const CameraCanvas = styled.div`
 
 export const RightPanel = styled.div`
   width: 250px;
+  padding-bottom: 66.67%; /* 1500:1000 비율 유지 */
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
