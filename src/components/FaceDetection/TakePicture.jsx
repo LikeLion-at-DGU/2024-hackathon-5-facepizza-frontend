@@ -1,7 +1,5 @@
-// src/components/FaceDetection/TakePicture.jsx
-import React, { useEffect, useRef, useState } from 'react';
-import FaceDetection from './FaceDetection';
-import * as P from '../PhotoSnapModal';
+import React, { useRef, useState, useEffect } from "react";
+import FaceExpression from "./FaceExpression";
 
 const emotionMap = {
   happy: '행복',
@@ -10,86 +8,61 @@ const emotionMap = {
   surprised: '놀람',
 };
 
-const TakePicture = ({ onPhotoTaken, ExpressionType }) => {
-  const videoRef = useRef(); // videoRef 생성
-  const canvasRef = useRef();
+const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
-  const [photoTaken, setPhotoTaken] = useState(false);
-  const [detections, setDetections] = useState(false);
-  const [expressions, setExpressions] = useState({ maxKey: null, maxValue: 0 });
+  const [capturing, setCapturing] = useState(false);
+
 
   useEffect(() => {
-    // 이미지를 캡처하는 함수 정의
-    const captureImage = () => {
-      if (videoRef.current && canvasRef.current) {
-        // 캔버스 크기를 비디오 크기로 설정
-        canvasRef.current.width = videoRef.current.videoWidth;
-        canvasRef.current.height = videoRef.current.videoHeight;
+    if (capturing) {
+      console.log("촬영이 진행되고있습니다.");
+      const timer = setTimeout(() => {
+        if (videoRef.current && canvasRef.current) {
+          canvasRef.current.width = videoRef.current.videoWidth;
+          canvasRef.current.height = videoRef.current.videoHeight;
 
-        // 캔버스에 비디오 프레임을 그리기
-        const context = canvasRef.current.getContext('2d');
-        context.drawImage(
-          videoRef.current,
-          0,
-          0,
-          videoRef.current.videoWidth,
-          videoRef.current.videoHeight
-        );
-        // 캡처된 이미지를 데이터 URL로 변환
-        const imageSrc = canvasRef.current.toDataURL('image/jpeg');
-        setImageSrc(imageSrc); // imageSrc 상태 업데이트
-        onPhotoTaken(imageSrc);
-        setPhotoTaken(true);
+          const context = canvasRef.current.getContext("2d");
+          context.drawImage(
+            videoRef.current,
+            0,
+            0,
+            videoRef.current.videoWidth,
+            videoRef.current.videoHeight
+          );
+          const imageSrc = canvasRef.current.toDataURL("image/jpeg");
+          setImageSrc(imageSrc);
+          onPhotoTaken(imageSrc);
+        } else {
+          console.error("Video or canvas reference is null.");
+        }
+      }, 500); // 0.5초 후 캡처
+      return () => clearTimeout(timer);
+    }
+  }, [ExpressionType, TakePhoto, capturing]);
+
+  const handleExpressions = (expressions) => {
+    const { maxKey, maxValue } = expressions;
+    const emotionTranslate = emotionMap[maxKey];
+    console.log('현재 표정 :', emotionTranslate); //현재 감지되고 있는 표정 출력
+    if (emotionTranslate === ExpressionType && maxValue > 0.5) {
+      if (!capturing) {
+        setCapturing(true); // 얼굴이 맞는 경우 capturing 상태를 true로 설정
       }
-    };
-
-    // 추적 됐을 때만 찍기
-    if (detections && ExpressionType) {
-      console.log(expressions, ExpressionType);
-      const emotionTrnaslate = emotionMap[expressions.maxKey];
-      // 감지된 표정이 지정된 표정과 일치할 경우
-      if (emotionTrnaslate === ExpressionType) {
-        console.log(`나는~${ExpressionType}합니다.`);
-        const timer = setTimeout(captureImage, 3000);
-        // cleanup 함수: 다음 감지 시도 전에 타이머를 클리어
-        return () => clearTimeout(timer);
+    } else {
+      if (capturing) {
+        setCapturing(false); // 얼굴이 맞지 않는 경우 capturing 상태를 false로 설정
       }
     }
-  }, [detections, expressions.maxKey, onPhotoTaken, ExpressionType]);
-  // [ 감지여부, 감지된표정.맥스키, 사진전달함수, 목표표정]
 
-  const handleDetections = (resizedDetections) => {
-    resizedDetections.forEach((detection) => {
-      const expressions = detection.expressions;
-      const [maxKey, maxValue] = Object.entries(expressions).reduce(
-        (acc, [key, value]) => {
-          // 가장 큰 확률의 표정
-          if (value > acc[1]) {
-            return [key, value];
-          } else {
-            return acc;
-          }
-        },
-        [null, -Infinity]
-      );
-      const faceExpression = { maxKey, maxValue };
-      if (maxValue > 0.5) {
-        // 0.5 이상일 때 추적 상태 true로 변경
-        setDetections(true);
-        setExpressions(faceExpression);
-      } else {
-        setDetections(false);
-      }
-    });
+    console.log("캡쳐 진행 상태:", capturing);
   };
 
   return (
     <>
-      <FaceDetection videoRef={videoRef} onDetections={handleDetections} />
-      <P.CameraCanvas>
-        <video ref={videoRef} autoPlay muted />
-        <canvas ref={canvasRef} style={{ display: 'none' }} />
-      </P.CameraCanvas>
+      <FaceExpression videoRef={videoRef} onExpressions={handleExpressions} />
+      <canvas ref={canvasRef} style={{ display: "none" }} />
       {imageSrc && (
         <div>
           <h2>촬영된 사진</h2>

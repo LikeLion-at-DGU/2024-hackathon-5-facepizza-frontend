@@ -9,6 +9,7 @@ const PhotoSnap = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEmotion, setSelectedEmotion] = useState('행복');
   const [capturedPhotos, setCapturedPhotos] = useState([]);
+  const [TakePhoto, setTakePhoto] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -28,6 +29,7 @@ const PhotoSnap = () => {
 
   const handlePhotoTaken = (newPhoto) => {
     setCapturedPhotos([...capturedPhotos, newPhoto]);
+    setTakePhoto(false);
   };
 
   return (
@@ -48,6 +50,7 @@ const PhotoSnap = () => {
                   id="take-picture-component"
                   onPhotoTaken={handlePhotoTaken}
                   ExpressionType={selectedEmotion}
+                  TakePhoto={TakePhoto}
                 />
               </P.CameraView>
               <P.RightPanel>
@@ -63,7 +66,7 @@ const PhotoSnap = () => {
               </P.RightPanel>
             </P.CameraContainer>
             <P.BottomBar>
-              <P.CaptureButton onClick={() => { /* Capture logic here */ }}>
+              <P.CaptureButton onClick={() => setTakePhoto(true)}>
                 촬영
               </P.CaptureButton>
             </P.BottomBar>

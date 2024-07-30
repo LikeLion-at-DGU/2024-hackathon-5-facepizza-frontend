@@ -408,10 +408,11 @@ export const LoginContainer = styled.div`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   width: 60vw;
   margin-bottom: 20px;
-  background: #F8F8F8;
-  padding: 30px 80px;
+  background: #FFFFFF;
+  padding: 15px 40px;
   border-radius: 20px;
 
   h3{
@@ -424,9 +425,11 @@ export const InputContainer = styled.div`
     border-radius: 5px;
     color: #616161;
     text-align: start;
+    margin:0px;
   }
   #agree_box{
     display: flex;
+    width: 100%;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
@@ -454,26 +457,44 @@ export const InputContainer = styled.div`
   input::placeholder {
     color: #C7C7C7;
   }
-
-  div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-
-    input[type='checkbox'] {
-      margin-right: 10px;
+  input[type='checkbox'] {
+    margin-right: 10px;
     }
 
-    label {
-      font-family: NanumSquare_ac;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      color: #8D8D8D;
-    }
+  label {
+    font-family: NanumSquare_ac;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #8D8D8D;
   }
-`;
+  
+`
+
+export const Left_align = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  /* background-color: pink; */
+
+p{
+  display: inline;
+  justify-self: left;
+  /* border: 1px solid black; */
+  /* width: 100%; */
+  text-align: left;
+}
+input{
+  border-radius: 20px;
+  border: 1px solid #B9B9B9;
+  margin: 0px;
+  margin-bottom: 10px;
+  width: 98%;
+  height: 50px;
+}
+`
 
 export const LoginButton = styled.button`
   width: 300px;
@@ -527,7 +548,7 @@ export const SignUpContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5%;
+  padding-top: 10px;
 
   h1 {
     font-family: NanumSquare_ac;
@@ -539,8 +560,8 @@ export const SignUpContainer = styled.div`
 
 export const SignUpButton = styled.button`
   width: 300px;
-  height: 40px;
-  background: ${props => props.isAgreed ? '#000000' : '#8D8D8D'};
+  height: 50px;
+  background-color: ${props => props.disabled ? '#D3D3D3' : 'black'};
   color: #FFFFFF;
   border: none;
   border-radius: 5px;
@@ -549,13 +570,27 @@ export const SignUpButton = styled.button`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  cursor: ${props => props.isAgreed ? 'pointer' : 'not-allowed'};
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   margin-bottom: 20px;
 
   &:hover {
-    background: ${props => props.isAgreed ? '#333333' : '#8D8D8D'};
+    background: ${props => props.disabled ? '#D3D3D3' : '#1C1C1C'};
   }
 `;
+export const CheckIcon = styled.img`
+  background: ${props => props.isPasswordMatch && props.isPasswordValid ? '#FFCF55' : '#D3D3D3'};
+  height: 20px;
+  width: 20px;
+  border-radius: 40px;
+`
+export const Password_Ck = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  gap: 10px;
+`
 
 //Modal start
 export const CircularButton = styled.button`
