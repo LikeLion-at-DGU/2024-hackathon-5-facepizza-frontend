@@ -14,7 +14,6 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
   const [imageSrc, setImageSrc] = useState(null);
   const [capturing, setCapturing] = useState(false);
 
-
   useEffect(() => {
     if (capturing) {
       console.log("촬영이 진행되고있습니다.");
@@ -63,12 +62,6 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
     <>
       <FaceExpression videoRef={videoRef} onExpressions={handleExpressions} />
       <canvas ref={canvasRef} style={{ display: "none" }} />
-      {imageSrc && (
-        <div>
-          <h2>촬영된 사진</h2>
-          <img src={imageSrc} alt="Captured" />
-        </div>
-      )}
     </>
   );
 };
