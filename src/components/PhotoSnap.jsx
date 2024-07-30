@@ -18,14 +18,6 @@ const PhotoSnap = () => {
     setIsModalOpen(false);
   };
 
-  const handleMinimizeModal = () => {
-    // Minimize logic here
-  };
-
-  const handleMaximizeModal = () => {
-    // Maximize logic here
-  };
-
   const handlePhotoTaken = (newPhoto) => {
     setCapturedPhotos([...capturedPhotos, newPhoto]);
     setTakePhoto(false);
@@ -39,8 +31,6 @@ const PhotoSnap = () => {
       {isModalOpen && (
         <PhotoSnapModal
           onClose={handleCloseModal}
-          onMinimize={handleMinimizeModal}
-          onMaximize={handleMaximizeModal}
           setTakePhoto={setTakePhoto}
         >
           <C.Snap_Container>
@@ -79,7 +69,9 @@ const PhotoSnap = () => {
       )}
       <div>
         {capturedPhotos.map((photo, index) => (
-          <img key={index} src={photo} alt={`Captured ${index}`} style={{ width: '400px', height: '300px', margin: '10px' }} />
+          <img key={index} 
+          src={photo} alt={`Captured ${index}`} 
+          style={{ width: '400px', height: '300px', margin: '10px' }} />
         ))}
       </div>
     </Container>

@@ -83,6 +83,7 @@ export const CameraView = styled.div`
   width: 76vw;
   height: 57vw;
   max-height: 900px;
+  background: transparent;
   flex-direction: column;
   justify-content: center;
   align-items: center;
