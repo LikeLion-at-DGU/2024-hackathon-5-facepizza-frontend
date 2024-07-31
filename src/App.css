@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: rgba(255, 246, 212, 0.60);
 }
 
 header {
@@ -27,4 +28,11 @@ main {
 
 h1, h2 {
   color: #333;
+}
+
+@media only screen and (max-width: 1920px) {
+  #Container {
+    width: 1619px;
+    margin: 0 auto; /* 화면 중앙에 배치 */
+  }
 }
