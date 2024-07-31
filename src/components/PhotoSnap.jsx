@@ -1,3 +1,4 @@
+//정상코드
 import React, { useState } from 'react';
 import { Container } from '../styles/StyledComponents';
 import PhotoSnapModal from './PhotoSnapModal';
@@ -9,6 +10,7 @@ const PhotoSnap = () => {
   const [selectedEmotion, setSelectedEmotion] = useState('행복');
   const [capturedPhotos, setCapturedPhotos] = useState([]);
   const [TakePhoto, setTakePhoto] = useState(false);
+  const [isDetecting, setIsDetecting] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -32,15 +34,18 @@ const PhotoSnap = () => {
         <PhotoSnapModal
           onClose={handleCloseModal}
           setTakePhoto={setTakePhoto}
+          isDetecting={isDetecting}
         >
           <C.Snap_Container>
             <C.CameraView>
               <h3>{selectedEmotion} 표정을 지어주세요</h3>
               <TakePicture
+                isModalOpen={isModalOpen}
                 id="take-picture-component"
                 onPhotoTaken={handlePhotoTaken}
                 ExpressionType={selectedEmotion}
                 TakePhoto={TakePhoto}
+                setDetectionStatus={setIsDetecting} // 탐지 상태 설정
               />
             </C.CameraView>
             <C.RightPanel>
@@ -69,7 +74,8 @@ const PhotoSnap = () => {
       )}
       <div>
         {capturedPhotos.map((photo, index) => (
-          <img key={index} 
+          <img 
+          key={index} 
           src={photo} alt={`Captured ${index}`} 
           style={{ width: '400px', height: '300px', margin: '10px' }} />
         ))}
