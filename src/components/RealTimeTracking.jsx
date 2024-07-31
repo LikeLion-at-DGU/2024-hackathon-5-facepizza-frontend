@@ -27,6 +27,9 @@ const RealTimeTracking = () => {
     neutral: { img: null, maxValue: -Infinity },
   });
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 상태 관리
+  const [userId, setUserId] = useState(null);  // 유저 ID 관리
+
   const navigate = useNavigate();
   const startTime = useRef(null);
   const endTime = useRef(null);
@@ -58,6 +61,28 @@ const RealTimeTracking = () => {
     fearful: '두려움',
     neutral: '무표정',
   };  // 감정 출력시 이름 변경
+
+  // 유저 로그인 상태와 정보 가져오기
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile');  // 배포 후 api 주소 수정
+        if (response.data.id) {
+          setIsLoggedIn(true);
+          setUserId(response.data.id);
+        } else {
+          setIsLoggedIn(false);
+          setUserId(null);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        setIsLoggedIn(false);
+        setUserId(null);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleDetections = (resizedDetections) => {
     if (!startTime.current) {
@@ -116,40 +141,43 @@ const RealTimeTracking = () => {
     setTracking(false);
     endTime.current = new Date();
 
-    try {
-      const reportData = {
-        happy: parseFloat(emotionPercentages.happy),
-        sad: parseFloat(emotionPercentages.sad),
-        angry: parseFloat(emotionPercentages.angry),
-        surprised: parseFloat(emotionPercentages.surprised),
-        disgusted: parseFloat(emotionPercentages.disgusted),
-        fearful: parseFloat(emotionPercentages.fearful),
-        neutral: parseFloat(emotionPercentages.neutral),
-        created_at: startTime.current.toISOString(),
-        ended_at: endTime.current.toISOString(),
-        title: startTime.current.toISOString(),
-        highlights: Object.entries(emotionPics).map(([emotion, { img }]) => ({
-          image: img,
-          emotion: emotion,
-        })),
-      };
-
-      console.log('Sending Report Data:', reportData);
-
-      // Report 데이터 전송
-      // 배포 후 api 주소 변경
-      const response = await axios.post('http://127.0.0.1:8000/api/report', reportData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      console.log('Response from server:', response.data); // 디버깅용 로그
-
-      navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
-    } catch (error) {
-      console.error('Error saving report:', error);
+    if (isLoggedIn) {
+      try {
+        const reportData = {
+          happy: parseFloat(emotionPercentages.happy),
+          sad: parseFloat(emotionPercentages.sad),
+          angry: parseFloat(emotionPercentages.angry),
+          surprised: parseFloat(emotionPercentages.surprised),
+          disgusted: parseFloat(emotionPercentages.disgusted),
+          fearful: parseFloat(emotionPercentages.fearful),
+          neutral: parseFloat(emotionPercentages.neutral),
+          created_at: startTime.current.toISOString(),
+          ended_at: endTime.current.toISOString(),
+          title: startTime.current.toISOString(),
+          highlights: Object.entries(emotionPics).map(([emotion, { img }]) => ({
+            image: img,
+            emotion: emotion,
+          })),
+        };
+  
+        console.log('Sending Report Data:', reportData);
+  
+        // Report 데이터 전송
+        // 배포 후 api 주소 변경
+        const response = await axios.post('http://127.0.0.1:8000/api/report', reportData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        console.log('Response from server:', response.data); // 디버깅용 로그
+  
+      } catch (error) {
+        console.error('Error saving report:', error);
+      }
     }
+    
+    navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
   };
 
   // 상태가 변경된 후에 navigate 호출
