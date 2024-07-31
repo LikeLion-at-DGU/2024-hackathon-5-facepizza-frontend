@@ -101,6 +101,8 @@ const RealTimeTracking = () => {
 
   // 트래킹 종료 함수
   const handleEndTracking = async () => {
+    if (!tracking) return;
+    
     setTracking(false);
     endTime.current = new Date();
 
