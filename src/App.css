@@ -29,3 +29,10 @@ main {
 h1, h2 {
   color: #333;
 }
+
+@media only screen and (max-width: 1920px) {
+  #Container {
+    width: 1619px;
+    margin: 0 auto; /* 화면 중앙에 배치 */
+  }
+}

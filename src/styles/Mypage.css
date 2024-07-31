@@ -1,0 +1,10 @@
+.Border{
+    border-radius: 10px;
+    border: 0.95px solid #6D6D6D;
+}
+.Chracter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
