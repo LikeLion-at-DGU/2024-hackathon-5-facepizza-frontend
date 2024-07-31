@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 /////포토스냅모달
 export const ModalBackground = styled.div`
@@ -28,7 +28,7 @@ export const ModalContent = styled.div`
 export const TopBar = styled.div`
   /* padding: 0 15px; */
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   height: 30px; 
   width: 100%;
@@ -43,6 +43,33 @@ export const TopBar = styled.div`
   margin-right: 20px;
   font-size: 20px;
 }
+`;
+
+const spin = keyframes`
+  to { transform: rotate(360deg); }
+`;
+
+export const Feedback = styled.div`
+  margin-left: 20px;
+  background-color: black;
+  border-radius: 13px;
+  color: ${({ $isDetecting }) => ($isDetecting ? 'white' : 'black')};
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 11px;
+
+  .spinner {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: ${({ $isDetecting }) => ($isDetecting ? 'white' : 'black')};
+    margin-left: 10px;
+    margin-bottom: 0;
+    animation: ${({ $isDetecting }) => ($isDetecting ? css`${spin} 1s linear infinite` : 'none')};
+  }
 `;
 
 export const BottomBar = styled.div`

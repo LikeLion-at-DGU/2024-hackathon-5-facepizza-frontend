@@ -7,15 +7,19 @@ import * as C from '../styles/CameraStyled';
 
 
 //수정코드
-const PhotoSnapModal = ({ onClose, children, setTakePhoto }) => {
+const PhotoSnapModal = ({ onClose, children, setTakePhoto, isDetecting }) => {
   const nodeRef = useRef(null);
-  
+
   return (
     <C.ModalBackground onClick={onClose}>
-      <Draggable  handle=".handle" nodeRef={nodeRef}>
+      <Draggable handle=".handle" nodeRef={nodeRef}>
         <C.ModalContent ref={nodeRef} onClick={(e) => e.stopPropagation()}>
           {/* 내부를 클릭했을 때 닫히지 않게 함 */}
           <C.TopBar className="handle">
+            <C.Feedback $isDetecting={isDetecting}>
+              탐지 진행중
+              <div className="spinner" />
+            </C.Feedback>
             <button onClick={onClose}> ✕ </button>
           </C.TopBar>
           {children}
