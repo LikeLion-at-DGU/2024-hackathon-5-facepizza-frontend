@@ -5,7 +5,9 @@ const FaceStretch = ({ StretchingType }) => {
   const videoRef = useRef(null);
   const pronounce = useState(null);
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, [
+    
+  // ],[pronounce]);
 
   const handleLocations = (locations) => {
     const { mouth, eyes, brows } = locations;

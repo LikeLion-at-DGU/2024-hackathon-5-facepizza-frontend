@@ -17,8 +17,9 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto}) => {
   // console.log(isModalOpen);
 
   useEffect(() => {
-    if (capturing) {
-      console.log("촬영이 진행되고있습니다.");
+    // console.log(TakePhoto);
+    if (capturing && TakePhoto) {
+      console.log("Capturing processing...");
       const timer = setTimeout(() => {
         if (videoRef.current && canvasRef.current) {
           canvasRef.current.width = videoRef.current.videoWidth;
@@ -45,6 +46,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto}) => {
 
   const handleExpressions = (expressions) => {  
     const { maxKey, maxValue } = expressions;
+    // console.log(maxKey);
     const emotionTranslate = emotionMap[maxKey];
     console.log('현재 표정 :', emotionTranslate); //현재 감지되고 있는 표정 출력
     if (emotionTranslate === ExpressionType && maxValue > 0.5) {
