@@ -12,7 +12,7 @@ const RealTimeTrackingReport = () => {
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
-  };
+  };  // 날짜 출력 형식
 
   const formatTime = (date) => {
     return new Date(date).toLocaleTimeString('ko-KR', {
@@ -21,7 +21,7 @@ const RealTimeTrackingReport = () => {
       second: '2-digit',
       hour12: false,
     });
-  };
+  };  // 시간 출력 형식
 
   const calculateElapsedTime = (start, end) => {
     const elapsedMs = new Date(end) - new Date(start);
@@ -33,7 +33,7 @@ const RealTimeTrackingReport = () => {
       return `${String(seconds)}초`
     else
       return `${String(minutes)}분 ${String(seconds)}초`;
-  };
+  };  // 총 트래킹 한 시간
 
   const elapsedTime = calculateElapsedTime(startTime, endTime);
 

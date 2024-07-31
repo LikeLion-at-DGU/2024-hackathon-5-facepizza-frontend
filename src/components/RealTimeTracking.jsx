@@ -38,7 +38,7 @@ const RealTimeTracking = () => {
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
-  };
+  };  // 날짜 출력 형식
 
   const formatTime = (date) => {
     return new Date(date).toLocaleTimeString('ko-KR', {
@@ -47,7 +47,7 @@ const RealTimeTracking = () => {
       second: '2-digit',
       hour12: false,
     });
-  };
+  };  // 시간 출력 형식
 
   const handleDetections = (resizedDetections) => {
     if (!startTime.current) {
@@ -114,6 +114,8 @@ const RealTimeTracking = () => {
         fearful: parseFloat(emotionPercentages.fearful),
         neutral: parseFloat(emotionPercentages.neutral),
         created_at: startTime.current.toISOString(),
+        ended_at: endTime.current.toISOString(),
+        title: startTime.current.toISOString(),
         highlights: Object.entries(emotionPics).map(([emotion, { img }]) => ({
           image: img,
           emotion: emotion,
@@ -122,7 +124,8 @@ const RealTimeTracking = () => {
 
       console.log('Sending Report Data:', reportData);
 
-      // Report와 Highlights 데이터 전송
+      // Report 데이터 전송
+      // 배포 후 api 주소 변경
       const response = await axios.post('http://127.0.0.1:8000/api/report', reportData, {
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +134,6 @@ const RealTimeTracking = () => {
 
       console.log('Response from server:', response.data); // 디버깅용 로그
 
-      //navigate('/tracking/report', { state: { ...reportData, startTime: startTime.current, endTime: endTime.current } });
       navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
     } catch (error) {
       console.error('Error saving report:', error);
