@@ -7,7 +7,7 @@ import axios from 'axios';
 const RealTimeTracking = () => {
   const videoRef = useRef(null);
   const [tracking, setTracking] = useState(true);
-  const [emotions, setEmotions] = useState(Array(5 * 600).fill(null));  // 최대 5분 0.1초 간격으로 감정 저장할 수 있는 배열
+  const [currentEmotion, setCurrentEmotion] = useState({ key: '', value: 0 });
   const [emotionCounts, setEmotionCounts] = useState({
     happy: 0,
     sad: 0,
@@ -27,10 +27,70 @@ const RealTimeTracking = () => {
     neutral: { img: null, maxValue: -Infinity },
   });
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 상태 관리
+  const [userId, setUserId] = useState(null);  // 유저 ID 관리
+
   const navigate = useNavigate();
+  const startTime = useRef(null);
+  const endTime = useRef(null);
+  const timerRef = useRef(null);
+
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };  // 날짜 출력 형식
+
+  const formatTime = (date) => {
+    return new Date(date).toLocaleTimeString('ko-KR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+  };  // 시간 출력 형식
+
+  const emotionTranslations = {
+    happy: '행복',
+    sad: '슬픔',
+    angry: '화남',
+    surprised: '놀람',
+    disgusted: '혐오',
+    fearful: '두려움',
+    neutral: '무표정',
+  };  // 감정 출력시 이름 변경
+
+  // 유저 로그인 상태와 정보 가져오기
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile');  // 배포 후 api 주소 수정
+        if (response.data.id) {
+          setIsLoggedIn(true);
+          setUserId(response.data.id);
+        } else {
+          setIsLoggedIn(false);
+          setUserId(null);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        setIsLoggedIn(false);
+        setUserId(null);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleDetections = (resizedDetections) => {
-    const currentTime = Math.floor(Date.now() / 100);
+    if (!startTime.current) {
+      startTime.current = new Date();
+      timerRef.current = setTimeout(() => {
+        handleEndTracking();
+      }, 5 * 60000); // 5분 후 트래킹 종료
+    }
 
     resizedDetections.forEach((detection) => {
       const expressions = detection.expressions;
@@ -38,18 +98,7 @@ const RealTimeTracking = () => {
         (acc, [key, value]) => (value > acc[1] ? [key, value] : acc),
         [null, -Infinity]
       );    // maxKey, maxValue 탐지
-
-      setEmotions((prevEmotions) => {
-        const newEmotions = [...prevEmotions];
-        newEmotions[currentTime % newEmotions.length] = maxKey;
-
-        // 감정 배열이 꽉 찼는지 확인하고 트래킹 종료
-        if (newEmotions.every(emotion => emotion !== null)) {
-          handleEndTracking();
-        }
-
-        return newEmotions;
-      });
+      setCurrentEmotion({ key: maxKey, value: maxValue });
 
       setEmotionCounts((prevCounts) => {
         const newCounts = { ...prevCounts };
@@ -73,36 +122,96 @@ const RealTimeTracking = () => {
     });
   };
 
-  const handleEndTracking = () => {
-    setTracking(false);
-
+  // 감정 비율 계산 함수
+  const calculateEmotionPercentages = () => {
     const totalEmotions = Object.values(emotionCounts).reduce((a, b) => a + b, 0);
-    const emotionPercentages = Object.keys(emotionCounts).reduce((obj, key) => {
+    if (totalEmotions === 0) return {};
+    return Object.keys(emotionCounts).reduce((obj, key) => {
       obj[key] = ((emotionCounts[key] / totalEmotions) * 100).toFixed(2);
       return obj;
     }, {});
-
-    console.log('Emotion Percentages:', emotionPercentages);
-
-    // 트래킹 종료 후 결과 페이지로 이동
-    navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages } });
   };
+
+  const emotionPercentages = calculateEmotionPercentages();
+
+  // 트래킹 종료 함수
+  const handleEndTracking = async () => {
+    if (!tracking) return;
+
+    setTracking(false);
+    endTime.current = new Date();
+
+    if (isLoggedIn) {
+      try {
+        const reportData = {
+          happy: parseFloat(emotionPercentages.happy),
+          sad: parseFloat(emotionPercentages.sad),
+          angry: parseFloat(emotionPercentages.angry),
+          surprised: parseFloat(emotionPercentages.surprised),
+          disgusted: parseFloat(emotionPercentages.disgusted),
+          fearful: parseFloat(emotionPercentages.fearful),
+          neutral: parseFloat(emotionPercentages.neutral),
+          created_at: startTime.current.toISOString(),
+          ended_at: endTime.current.toISOString(),
+          title: startTime.current.toISOString(),
+          highlights: Object.entries(emotionPics).map(([emotion, { img }]) => ({
+            image: img,
+            emotion: emotion,
+          })),
+        };
+  
+        console.log('Sending Report Data:', reportData);
+  
+        // Report 데이터 전송
+        // 배포 후 api 주소 변경
+        const response = await axios.post('http://127.0.0.1:8000/api/report', reportData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        console.log('Response from server:', response.data); // 디버깅용 로그
+  
+      } catch (error) {
+        console.error('Error saving report:', error);
+      }
+    }
+    
+    navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
+  };
+
+  // 상태가 변경된 후에 navigate 호출
+  useEffect(() => {
+    if (!tracking && endTime.current) {
+      handleEndTracking();
+    }
+  }, [tracking]);
+
+  // 타이머와 상태 업데이트 동기화
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   return (
     <Container>
       <Section>
         <h2>실시간 표정 트래킹하기</h2>
+        <h3>{startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h3>
         <FaceDetection videoRef={videoRef} onDetections={handleDetections} />
-        <button onClick={handleEndTracking}>트래킹 종료</button>
+        <h3>data</h3>
+        <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+        <button onClick={handleEndTracking}>종료하기</button>
         <div>
-          <h3>Emotion Counts:</h3>
-          <pre>{JSON.stringify(emotionCounts, null, 2)}</pre>
-          <h3>Emotion Pictures:</h3>
+          <h3>하이라이트 사진:</h3>
           {Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
             img ? (
               <div key={emotion}>
-                <p>{emotion} (max value: {maxValue.toFixed(10)})</p>
-                <img src={img} alt={emotion} width="100" />
+                <img src={img} alt={emotion} width="300" />
+                <p>{emotionTranslations[emotion]} {emotionPercentages[emotion]}%</p><br/>
               </div>
             ) : null
           ))}
