@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: rgba(255, 246, 212, 0.60);
+  /* background: rgba(255, 246, 212, 0.60); */
 }
 
 header {
