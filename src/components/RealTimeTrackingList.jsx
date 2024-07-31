@@ -1,12 +1,15 @@
-// RealTimeTrackingList.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // useNavigate import 추가
 import axios from 'axios';
 import { Container, Section } from '../styles/StyledComponents';
+import FaceDetection from "./FaceDetection/FaceDetection";
 
 const RealTimeTrackingList = () => {
+  const videoRef = useRef(null);
   const [trackingReports, setTrackingReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   useEffect(() => {
     const fetchTrackingReports = async () => {
@@ -29,6 +32,10 @@ const RealTimeTrackingList = () => {
   return (
     <Container>
       <Section>
+        <h2>표정 트래킹하기</h2>
+        <FaceDetection videoRef={videoRef} />
+        <button onClick={() => navigate('/tracking')}>표정 트래킹 진행하기</button> {/* 버튼 클릭 시 페이지 이동 */}
+
         <h2>트래킹 기록 리스트</h2>
         <ul>
           {trackingReports.map((report) => (

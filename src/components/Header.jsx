@@ -18,7 +18,7 @@ const Header = ({ openStretchModal, openExerciseModal }) => {
           <div class="right_box">
             <button onClick={openStretchModal}>표정 스트레칭</button>
             <button onClick={openExerciseModal}>표정 연습</button>
-            <S.Blink to="/tracking">실시간 표정 트래킹</S.Blink>
+            <S.Blink to="/tracking/list">실시간 표정 트래킹</S.Blink>
           </div>
         </div>
         <div id="Head_Right">
