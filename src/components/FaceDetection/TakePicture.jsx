@@ -8,11 +8,13 @@ const emotionMap = {
   surprised: '놀람',
 };
 
-const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, isModalOpen, setDetectionStatus }) => {
+const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto}) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [capturing, setCapturing] = useState(false);
+
+  // console.log(isModalOpen);
 
   useEffect(() => {
     if (capturing) {
@@ -41,26 +43,17 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, isModalOpen, set
     }
   }, [ExpressionType, TakePhoto, capturing]);
 
-  useEffect(() => {
-    setCapturing(false);
-    setDetectionStatus(false); // 초기화 시 탐지 상태를 false로 설정
-  }, [isModalOpen]);
-
-  const handleExpressions = (expressions) => {
+  const handleExpressions = (expressions) => {  
     const { maxKey, maxValue } = expressions;
     const emotionTranslate = emotionMap[maxKey];
     console.log('현재 표정 :', emotionTranslate); //현재 감지되고 있는 표정 출력
     if (emotionTranslate === ExpressionType && maxValue > 0.5) {
-      if (!capturing) {
         setCapturing(true);   //얼굴이 맞는 경우 capturing 상태를 true로 설정
-      }
-      setDetectionStatus(true); // 탐지 진행 중
+        console.log(capturing);
     } else {
-      if (capturing) {
         setCapturing(false);  //얼굴이 맞지 않는 경우 capturing 상태를 false로 설정
+        console.log(capturing);
       }
-      setDetectionStatus(false); //탐지 중지
-    }
     console.log("캡쳐 진행 상태:", capturing);
   };
 
