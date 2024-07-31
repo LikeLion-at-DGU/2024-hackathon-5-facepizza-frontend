@@ -49,6 +49,16 @@ const RealTimeTracking = () => {
     });
   };  // 시간 출력 형식
 
+  const emotionTranslations = {
+    happy: '행복',
+    sad: '슬픔',
+    angry: '화남',
+    surprised: '놀람',
+    disgusted: '혐오',
+    fearful: '두려움',
+    neutral: '무표정',
+  };  // 감정 출력시 이름 변경
+
   const handleDetections = (resizedDetections) => {
     if (!startTime.current) {
       startTime.current = new Date();
@@ -102,7 +112,7 @@ const RealTimeTracking = () => {
   // 트래킹 종료 함수
   const handleEndTracking = async () => {
     if (!tracking) return;
-    
+
     setTracking(false);
     endTime.current = new Date();
 
@@ -165,7 +175,7 @@ const RealTimeTracking = () => {
         <h3>{startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h3>
         <FaceDetection videoRef={videoRef} onDetections={handleDetections} />
         <h3>data</h3>
-        <h4>{currentEmotion.key} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+        <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
         <button onClick={handleEndTracking}>종료하기</button>
         <div>
           <h3>하이라이트 사진:</h3>
@@ -173,7 +183,7 @@ const RealTimeTracking = () => {
             img ? (
               <div key={emotion}>
                 <img src={img} alt={emotion} width="300" />
-                <p>{emotion} {emotionPercentages[emotion]}%</p><br/>
+                <p>{emotionTranslations[emotion]} {emotionPercentages[emotion]}%</p><br/>
               </div>
             ) : null
           ))}
