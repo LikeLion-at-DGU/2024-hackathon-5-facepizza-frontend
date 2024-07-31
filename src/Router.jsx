@@ -7,6 +7,7 @@ import FacialStretch from './components/FacialStretch';
 import FacialExercise from './components/FacialExercise';
 import RealTimeTracking from './components/RealTimeTracking';
 import RealTimeTrackingReport from './components/RealTimeTrackingReport';
+import RealTimeTrackingList from './components/RealTimeTrackingList';
 import PhotoSnap from './components/PhotoSnap';
 import PhotoAlbum from './components/PhotoAlbum';
 import FacialChallenge from './components/FacialChallenge';
@@ -23,6 +24,7 @@ const AppRouter = () => {
       <Route path="/exercise" element={<FacialExercise />} />
       <Route path="/tracking" element={<RealTimeTracking />} />
       <Route path="/tracking/report" element={<RealTimeTrackingReport />} />
+      <Route path="/tracking/list" element={<RealTimeTrackingList />} />
       <Route path="/snap" element={<PhotoSnap />} />
       <Route path="/album" element={<PhotoAlbum />} />
       <Route path="/challenge" element={<FacialChallenge />} />
