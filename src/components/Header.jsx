@@ -24,7 +24,7 @@ const Header = () => {
         <T.Hlink to="/Magzine" active={currentPath.includes('/Magzine')}>
           인사이트 창고
         </T.Hlink>
-        <T.Hlink to="/mypage" active={currentPath === '/mypage'}>
+        <T.Hlink to="/Mypage" active={currentPath === '/Mypage'}>
           마이페이지
         </T.Hlink>
         </div>

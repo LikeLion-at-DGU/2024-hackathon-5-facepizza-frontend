@@ -12,11 +12,11 @@ const Home_Content = () => {
   return (
     <>
       <Facial_Character />
-      <div style={{display: 'flex', flexDirection: 'row', gap: '20px'}}>
+      <div style={{display: 'flex', flexDirection: 'row', gap: '30px'}}>
         <Tracking_Home />
         <Face_Camera_Home />
       </div>
-      <div style={{display: 'flex', flexDirection: 'row', gap: '20px'}}>
+      <div style={{display: 'flex', flexDirection: 'row', gap: '30px'}}>
         <Magazine_Home/>
         <AboutUs_Home/>
       </div>

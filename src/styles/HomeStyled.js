@@ -36,7 +36,7 @@ export const Sectin_G = styled.section`
 
 // Facial_Character_Home 에서 쓰이는 스타일
 export const Facial_Character_Home = styled.div`
-  /* padding: 20px; */
+  width: 100%;
   h2{
     text-align: start;
     padding-left: 10px;

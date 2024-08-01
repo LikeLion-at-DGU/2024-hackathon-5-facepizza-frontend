@@ -1,10 +1,119 @@
-.Border{
-    border-radius: 10px;
-    border: 0.95px solid #6D6D6D;
+.Border {
+  width: 1619px;
+  border-radius: 10px;
+  border: 0.95px solid #6d6d6d;
 }
-.Chracter{
-    display: flex;
+.Character {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Guage {
+  display: flex;
+  justify-content: center;
+  margin-top: 20.78px;
+  padding-left: 218px;
+}
+
+.GuageInfo {
+  margin: 0px 14px 0px 19.75px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  background: #9e9e9e;
+}
+
+.DetailContent{
+    display:flex;
+}
+
+.Attendence {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 557px;
+  height: 411px;
+  border-right: 1px solid #000;
+  margin: 49px 0px;
+}
+
+.DdayDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 49px 89px;
+  margin-right: 0px;
+}
+
+.AccountDetail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 29px;
+  gap: 59px;
+}
+
+.ThinDefault {
+  margin-right: 24px;
+}
+
+.Block {
+  margin-top: 26px;
+}
+
+.Exit {
+  width: 120.349px;
+  height: 49.286px;
+  flex-shrink: 0;
+  border-radius: 22.924px;
+  background: #e2e2e2;
+  border: none;
+  margin-top: 40px;
+  color: #6d6d6d;
+  font-family: IM_Hyemin;
+  font-size: 20.924px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+#Date{
+    margin-bottom: 41px;
+}
+
+#Point{
+    margin-bottom: 44px;
+}
+
+#OtherExpression{
+    display:flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.OtherExpression{
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.DetailTracking{
+    margin-top: 135px;
+}
+
+.TrackingTitle{
+    margin-left: 16px;
+}
+
+.TrackingContent{
+    display: flex;
+    margin-top: 7px;
+    margin-left: 30px;
 }
