@@ -12,13 +12,13 @@ const Tracking_Home = () => {
                 <p>내 평소 표정을 체크해보세요</p>
             </H.ComponentName>
             <H.Sectin_Y>
-                <H.Example />
-                <S.Blink to="/tracking">
+                <H.Blink to="/RealTimeTrackingList">
+                    <H.Example />
                     <H.Description>
-                    카메라를 통해 내가 평소 짓는 표정의 비율을 체크해볼 수 있는 기능입니다.
-                    행복, 놀람, 슬픔 등 다양한 감정이 표정에 드러나는 실시간 비율을 측정해 보세요!
+                        카메라를 통해 내가 평소 짓는 표정의 비율을 체크해볼 수 있는 기능입니다.
+                        행복, 놀람, 슬픔 등 다양한 감정이 표정에 드러나는 실시간 비율을 측정해 보세요!
                     </H.Description>
-                </S.Blink>
+                </H.Blink>
                 <H.Child_ComponentName>
                     <h2>최근 트래킹 보러가기</h2>
                 </H.Child_ComponentName>

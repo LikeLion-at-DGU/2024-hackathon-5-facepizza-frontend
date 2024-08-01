@@ -15,7 +15,7 @@ import DetailTracking from "./Mypage/DetailTracking";
 const Mypage = () => {
   return (
     <>
-      <Home_Title/>
+      {/* <Home_Title/> */}
       <Subname>마이페이지</Subname>
       <Container className="Border">
         {/* 캐릭터 정보가 들어간 창 */}

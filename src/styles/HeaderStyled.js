@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 // Header에서 쓰이는 스타일
 export const HeaderContainer = styled.header`
-  /* border: 1px solid black; */
+  width: 100%;
   background-color: white;
   display: flex;
   flex-direction: row;
