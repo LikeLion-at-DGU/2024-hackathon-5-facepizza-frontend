@@ -1,7 +1,7 @@
 //VideoComponent 기존 정상 코드
 import React, { useEffect } from "react";
 
-const VideoComponent = ({ videoRef }) => {
+const VideoComponent = ({ videoRef, style  }) => {
   useEffect(() => {
     if (!videoRef || !videoRef.current) {
       console.log("videoRef가 전달되지 않았습니다.");
@@ -26,10 +26,11 @@ const VideoComponent = ({ videoRef }) => {
       autoPlay={true}
       style={{
         width: "100%",
-        height: '46vw',
+        height: 'auto', // 기본값은 auto로 설정
         objectFit: 'cover',
-        maxHeight: '630px',
-        transform: 'rotateY(180deg)'
+        maxHeight: '100%', // 기본값을 비율에 맞게 설정
+        transform: 'rotateY(180deg)',
+        ...style, // 외부에서 전달된 스타일을 병합
       }}
     />
   );

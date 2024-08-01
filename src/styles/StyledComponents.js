@@ -11,20 +11,9 @@ export const Container = styled.div`
   }
 `;
 
-export const desc = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: self-start;
-  gap: 5px;
-  padding-left: 15px;
-`;
-export const Main = styled.main`
-  /* padding: 20px; */
-`;
-
 export const Section = styled.section`
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -36,6 +25,25 @@ export const Section = styled.section`
   }
 `;
 
+export const desc = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  gap: 5px;
+  padding-left: 15px;
+`;
+export const Main = styled.main`
+  /* padding: 20px; */
+`;
+
+////Title_Home에서 쓰이는 스타일 (로고)
+export const Logo = styled.img`
+  width: 80px;
+  height: auto;
+  margin: 0px 0 5px 0;
+  margin-left: auto;
+  margin-right: auto
+`
 
 // PhotoAlbum.jsx에서 쓰이는 스타일
 export const Album = styled.div`
@@ -89,29 +97,6 @@ export const Iner_Section = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
-// Header에서 쓰이는 스타일
-export const HeaderContainer = styled.header`
-  /* $background-color: {({ isNotHome }) => (isNotHome ? 'black' : '#FFC42B')}; */
-  /* $color: {({ isNotHome }) => (isNotHome ? '#FFC42B' : 'black')}; */
-  background: linear-gradient(90deg, #FFC42B 0%, #FFD25F 100%);
-  display: flex;
-  flex-direction: row;
-  border-radius: 10px;
-  padding: 10px;
-  height: 60px;
-
-  button{
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 20px;
-  }
-
-  button:hover{
-    background: #FAB400;
-    border-radius: 10px;
-  }
-`;
 
 export const Blink = styled(NavLink)`
   display: flex;
@@ -124,11 +109,11 @@ export const Blink = styled(NavLink)`
   color: black;
 
   &:hover {
-    background-color: #ffd966;
+    /* background-color: #ffd966; */
   }
 
   &.active {
-    background-color: #FAB400;
+    /* background-color: #FAB400; */
   }
 `;
 
@@ -196,9 +181,6 @@ export const CameraWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
-
-
-// Section, Image 스타일
 
 export const Image = styled.img`
   width: 70%;
