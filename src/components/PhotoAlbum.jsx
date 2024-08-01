@@ -1,10 +1,22 @@
 // src/components/PhotoAlbum.jsx
-import React from 'react';
-import album from '../assets/album.jpg'; // 사진 경로 수정 필요
+import React, {useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from '../styles/StyledComponents';
 
 
 const PhotoAlbum = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('로그인이 필요합니다.');
+      navigate('/login'); // 로그인 페이지로 이동
+    }
+    console.log('로그인 유지중');
+    console.log(token);
+  }, [navigate]);
+
   return (
     <S.Album>
       <S.Iner_Section>

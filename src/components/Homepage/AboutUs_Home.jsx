@@ -1,6 +1,6 @@
 import React from "react";
 import * as H from '../../styles/HomeStyled';
-
+import * as S from '../../styles/StyledComponents';
 
 const AboutUs_Home = () => {
 
@@ -10,11 +10,13 @@ const AboutUs_Home = () => {
                 <h2>about 얼굴피자</h2>
             </H.ComponentName>
             <H.Sectin_G>
-            <H.FlexRow>
-                    <H.Example />
-                    <H.Example />
-                    <H.Example />
-                </H.FlexRow>
+                <S.Blink to='/aboutus'>
+                    <H.FlexRow>
+                        <H.Example />
+                        <H.Example />
+                        {/* <H.Example /> */}
+                    </H.FlexRow>
+                </S.Blink>
             </H.Sectin_G>
         </H.Magazine_Home>
     );

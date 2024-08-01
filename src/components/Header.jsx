@@ -1,39 +1,38 @@
-// src/components/Header.jsx
 import React from 'react';
 import * as S from '../styles/StyledComponents';
+import * as T from '../styles/HeaderStyled';
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import Logo_Cheese from '../assets/Logo_Cheese.png';
 
-
-const Header = ({ openStretchModal, openExerciseModal }) => {
+const Header = () => {
   const location = useLocation();
+  const currentPath = location.pathname;
 
   return (
-    <S.HeaderContainer>
-      <S.Nav>
-        <div id="Head_Left">
-          <div class="left_box">
-            <S.Blink to="/aboutus">team 얼굴피자</S.Blink>
-          </div>
-          <div class="right_box">
-            
-            
-          </div>
+    <T.HeaderContainer>
+      <T.Nav>
+        <S.Blink to="/">
+          <T.Logo src={Logo_Cheese} alt="Logo" id="Logo_Cheese" />
+        </S.Blink>
+        <div id="center_box">
+        <T.Hlink to="/tracking" active={currentPath === '/tracking'}>
+          표정 트래킹
+        </T.Hlink>
+        <T.Hlink to="/snap" active={currentPath === '/snap'}>
+          표정 스냅
+        </T.Hlink>
+        <T.Hlink to="/Magzine" active={currentPath.includes('/Magzine')}>
+          인사이트 창고
+        </T.Hlink>
+        <T.Hlink to="/Mypage" active={currentPath === '/Mypage'}>
+          마이페이지
+        </T.Hlink>
         </div>
-        <div id="Head_Right">
-          <div class="left_box">
-          <S.Blink to="/tracking/list">실시간 표정 트래킹</S.Blink>
-            <S.Blink to="/snap">표정 스냅 찍기</S.Blink>
-            <S.Blink to="/magazine">인사이트 창고</S.Blink>
-            <S.Blink to="/mypage">마이페이지</S.Blink>
-          </div>
-          <div class="right_box">
-            <S.Blink to="/Login">로그인</S.Blink>
-            <S.Blink to="/Acount">회원가입</S.Blink>
-          </div>
-        </div>
-      </S.Nav>
-    </S.HeaderContainer>
+        <T.Hlink to="/Login" active={currentPath === '/Login'}>
+          로그인
+        </T.Hlink>
+      </T.Nav>
+    </T.HeaderContainer>
   );
 };
 

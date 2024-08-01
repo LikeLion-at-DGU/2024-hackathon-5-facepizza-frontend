@@ -6,25 +6,18 @@ import { NavLink } from 'react-router-dom';
 export const Container = styled.div`
   padding: 50px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   h1 {
     margin: 0 0 10px 0;
   }
 `;
 
-export const desc = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: self-start;
-  gap: 5px;
-  padding-left: 15px;
-`;
-export const Main = styled.main`
-  /* padding: 20px; */
-`;
-
 export const Section = styled.section`
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -36,6 +29,38 @@ export const Section = styled.section`
   }
 `;
 
+export const Deps = styled.div`
+  display: flex;
+`
+
+export const H2_title = styled.h2`
+  color: var(--, #000);
+  margin: 0;
+  font-family: IM_Hyemin;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`
+export const desc = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  gap: 5px;
+  padding-left: 15px;
+`;
+export const Main = styled.main`
+  /* padding: 20px; */
+`;
+
+////Title_Home에서 쓰이는 스타일 (로고)
+export const Logo = styled.img`
+  width: 150px;
+  height: auto;
+  margin: 0px 0 5px 0;
+  margin-left: auto;
+  margin-right: auto
+`
 
 // PhotoAlbum.jsx에서 쓰이는 스타일
 export const Album = styled.div`
@@ -89,29 +114,6 @@ export const Iner_Section = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
-// Header에서 쓰이는 스타일
-export const HeaderContainer = styled.header`
-  /* $background-color: {({ isNotHome }) => (isNotHome ? 'black' : '#FFC42B')}; */
-  /* $color: {({ isNotHome }) => (isNotHome ? '#FFC42B' : 'black')}; */
-  background: linear-gradient(90deg, #FFC42B 0%, #FFD25F 100%);
-  display: flex;
-  flex-direction: row;
-  border-radius: 10px;
-  padding: 10px;
-  height: 60px;
-
-  button{
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 20px;
-  }
-
-  button:hover{
-    background: #FAB400;
-    border-radius: 10px;
-  }
-`;
 
 export const Blink = styled(NavLink)`
   display: flex;
@@ -124,11 +126,11 @@ export const Blink = styled(NavLink)`
   color: black;
 
   &:hover {
-    background-color: #ffd966;
+    /* background-color: #ffd966; */
   }
 
   &.active {
-    background-color: #FAB400;
+    /* background-color: #FAB400; */
   }
 `;
 
@@ -141,33 +143,21 @@ export const Nav = styled.nav`
 
   #Head_Left {
     display: flex;
-    width: 50%;
+    width: 225px;
     justify-content: space-between;
-    padding: 0 1em;
     padding-top: 10px;
-    border-right: 2px solid white;
+    font-size: 26px;
   }
 
   #Head_Right {
     display: flex;
-    width: 50%;
+    width: 225px;
     padding-top: 10px;
     justify-content: flex-end;
-    padding: 0 1em;
-  }
-
-  .left_box {
-    display: flex;
-    gap: 1em;
-    margin: 0 6px;
-  }
-  .right_box {
-    display: flex;
-    gap: 1em;
-    margin: 0 6px;
+    font-size: 26px;
   }
 `;
-
+/*  
 // FacialStretch.jsx 팝업 스타일 추가
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -192,13 +182,11 @@ export const ModalContent = styled.div`
   align-items: center;
 `;
 
+
 export const CameraWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
-
-
-// Section, Image 스타일
 
 export const Image = styled.img`
   width: 70%;
@@ -261,7 +249,7 @@ export const EmotionButton = styled.button`
 export const CheckboxContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center; /* 텍스트와 체크박스를 수평으로 가운데 정렬 */
+  justify-content: center; 
 
   input[type='checkbox'] {
     width: 20px;
@@ -270,8 +258,8 @@ export const CheckboxContainer = styled.div`
   }
 
   p {
-    margin: 0; /* 텍스트의 여백을 제거 */
-    text-align: center; /* 텍스트를 수평으로 가운데 정렬 */
+    margin: 0; 
+    text-align: center; 
   }
 `;
 
@@ -289,7 +277,7 @@ export const PracticeNum = styled.button`
   font-size: '1.3em';
   outline: 'none';
 `
-
+*/
 
 // 로그인 페이지에 쓰이는 스타일
 export const LoginContainer = styled.div`
@@ -435,31 +423,6 @@ export const LoginButton = styled.button`
   }
 `;
 
-export const Links = styled.div`
-  text-align: center;
-
-  p {
-    display: inline-block;
-    color: #8D8D8D;
-    font-family: NanumSquare_ac;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
-    margin: 0 5px;
-
-    &:hover {
-      color: #000000;
-    }
-
-    p:last-child {
-    color: #8D8D8D; /* 회원가입 버튼 색 고정 */
-    cursor: pointer;
-  }
-  }
-`;
-
 
 // 회원가입 페이지에 쓰이는 스타일
 export const SignUpContainer = styled.div`
@@ -511,22 +474,4 @@ export const Password_Ck = styled.div`
   gap: 10px;
 `
 
-//Modal start
-export const CircularButton = styled.button`
-  width: 50px;
-  height: 50px;
-  background-color: black;
-  border: none;
-  border-radius: 50%;
-  color: white;
-  font-size: 1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
 
-  &:hover {
-    background-color: darkgray;
-  }
-`;

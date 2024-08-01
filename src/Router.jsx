@@ -12,6 +12,8 @@ import About from './components/About';
 import Login from './components/Login';
 import Acount from './components/Acount';
 import Mypage from './components/Mypage';
+import Magzine from './components/Magzine';
+import MagzineDetail from './components/MagzineDetail';
 
 const AppRouter = () => {
   return (
@@ -26,8 +28,11 @@ const AppRouter = () => {
       <Route path="/Login" element={<Login/>} />
       <Route path="/Acount" element={<Acount/>} />
       <Route path="/Mypage" element={<Mypage/>} />
+      <Route path="/Magzine" element={<Magzine/>} />  
+      <Route path="/Magzine/detail/:postID" element={<MagzineDetail />} />    
     </Routes>
   );
 };
 
 export default AppRouter;
+

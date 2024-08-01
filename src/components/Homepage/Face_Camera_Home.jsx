@@ -17,10 +17,17 @@ const Face_Camera_Home = () => {
         <H.Face_Camera_Home>
             <H.ComponentName>
                 <h2>표정 스냅 찍기</h2>
-                주어진 표정을 지어야만 찍히는 특별한 카메라!
+                <p>내 다양한 표정을 기록해보세요</p>
             </H.ComponentName>
             <H.Sectin_Y>
-                <FaceDetection videoRef={videoRef} onClick={handleOpenModal} />
+                <H.Component_Card>
+                    <div id="video_box">
+                        <FaceDetection videoRef={videoRef} onClick={handleOpenModal} />
+                    </div>
+                    <div id="illust_box">
+                        <H.Example100 />
+                    </div>
+                </H.Component_Card>
                 <H.FlexRow>
                     <button onClick={handleOpenModal}>사진 찍기</button>
                     <H.Hlink to="/snap">
