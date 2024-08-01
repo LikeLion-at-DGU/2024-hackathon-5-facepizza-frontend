@@ -12,14 +12,14 @@ const Home_Content = () => {
   return (
     <>
       <Facial_Character />
-      <H.FlexRow>
+      <div style={{display: 'flex', flexDirection: 'row', gap: '20px'}}>
         <Tracking_Home />
         <Face_Camera_Home />
-      </H.FlexRow>
-      <H.FlexRow>
+      </div>
+      <div style={{display: 'flex', flexDirection: 'row', gap: '20px'}}>
         <Magazine_Home/>
         <AboutUs_Home/>
-      </H.FlexRow>
+      </div>
     </>
   );
 };
