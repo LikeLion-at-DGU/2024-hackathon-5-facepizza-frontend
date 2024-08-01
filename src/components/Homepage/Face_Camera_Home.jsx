@@ -1,50 +1,52 @@
-import React, {useRef} from "react";
+import React, { useRef, useState } from "react";
 import * as S from '../../styles/StyledComponents';
-import photo from '../../assets/photo.jpg'; // 사진 경로 수정 필요
-import album from '../../assets/album.jpg'; // 사진 경로 수정 필요
-import calendar from '../../assets/calrender.png';
-import bedge from '../../assets/bedge.png';
+import * as H from '../../styles/HomeStyled';
 import VideoComponent from "./../FaceDetection/VideoComponent";
 import FaceDetection from "./../FaceDetection/FaceDetection";
 
 const Face_Camera_Home = () => {
     const videoRef = useRef(null);
-    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+
     return (
-        <S.Face_Camera_Home>
-            <S.Section>
-                <h2>내 표정 기록하기</h2>
-                <div id="cont_box">
-                    <div id="left_box">
-                        <FaceDetection videoRef={videoRef}/>
-                        <S.desc>
-                            <h3>표정 사진 찍기</h3>
-                            설명
-                        </S.desc>
-                    </div>
-                    <div id="right_box">
-                        <div id="face_album">
-                            <S.Image src={album} alt="Album" id="album_cover" />
-                            <S.desc>
-                                <h3>표정 앨범</h3>
-                                설명
-                            </S.desc>
+        <H.Face_Camera_Home>
+            <H.ComponentName>
+                <h2>표정 스냅 찍기</h2>
+                주어진 표정을 지어야만 찍히는 특별한 카메라!
+            </H.ComponentName>
+            <H.Sectin_Y>
+                <FaceDetection videoRef={videoRef} onClick={handleOpenModal} />
+                <H.FlexRow>
+                    <button onClick={handleOpenModal}>사진 찍기</button>
+                    <H.Hlink to="/snap">
+                        <H.Description>
+                            특정 표정을 지을 시에만 사진이 촬영되는 카메라입니다.
+                        </H.Description>
+                        <div>
+                            더보기 <br />▶
                         </div>
-                        <div id="face_calendar">
-                            <div id="icon_box">
-                                <img src={calendar} id="calendar_icon"/>
-                                <img src={bedge} class="bedge_icon"/>
-                                <img src={bedge} class="bedge_icon"/>
-                            </div>
-                            <S.desc>
-                                <h3>표정 챌린지</h3>
-                                도전해 보세요
-                            </S.desc>
-                        </div>
+                    </H.Hlink>
+                </H.FlexRow>
+                <H.Child_ComponentName>
+                    <h2>표정 앨범</h2>
+                </H.Child_ComponentName>
+                <H.Hlink to="/album">
+                    <H.FlexRow>
+                        <H.Example />
+                        <H.Example />
+                        <H.Example />
+                    </H.FlexRow>
+                    <div>
+                        더보기 <br />▶
                     </div>
-                </div>
-            </S.Section>
-        </S.Face_Camera_Home>
+                </H.Hlink>
+            </H.Sectin_Y>
+        </H.Face_Camera_Home>
     ); r
 };
 
