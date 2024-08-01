@@ -1,33 +1,45 @@
 import React from "react";
 import "../styles/Mypage.css";
 import { Container } from "../styles/StyledComponents";
-import { Account, Boldsmall, Character, Default, DetailContent, Profile, Subname } from "../styles/MypageStyled";
+import { Account, BoldBig, Boldsmall, Character, Default, DetailContent, Subname } from "../styles/MypageStyled";
 import Home_Title from "./Homepage/Home_Title";
 import Gauge from "./Mypage/Gauge";
 import Tracking from "./Mypage/Tracking";
 import Attendence from "./Mypage/Attendance";
+import AccountDetail from "./Mypage/AccountDetail";
+import DdayDetail from "./Mypage/DdayDetail";
+import Profile from "./Mypage/Profile";
+import DetailTracking from "./Mypage/DetailTracking";
+
 
 const Mypage = () => {
   return (
     <>
-      <Home_Title></Home_Title>
+      <Home_Title/>
       <Subname>마이페이지</Subname>
       <Container className="Border">
+        {/* 캐릭터 정보가 들어간 창 */}
         <Character className="Character">
           <img src="src\assets\Polygon.svg" style={{ marginBottom: "23px" }} />
           <hr />
-          <Profile>
-            <Default>1살 김치즈</Default>
-            <img src="src\assets\rename.svg" className="rename" />
-          </Profile>
-          <Gauge />
+          <Profile/>
+          <Gauge /> {/*게이지*/}
         </Character>
+        {/* 트래킹 정보가 들어간 창 */}
         <Tracking/>
-        <DetailContent>
-          <Attendence/>
+        {/* 출석과 1/1 기록이 들어간 창 */}
+        <DetailContent className="DetailContent">
+          <Attendence/> {/*출석*/}
+          <DdayDetail/>
+          <DetailTracking/>
         </DetailContent>
-        <Account></Account>
+        {/* 계정 정보가 들어간 창 */}
+        <Account>
+          <BoldBig>계정 정보</BoldBig>
+          <AccountDetail/>
+        </Account>
       </Container>
+      <button className="Exit">계정 탈퇴</button>
     </>
   );
 };
