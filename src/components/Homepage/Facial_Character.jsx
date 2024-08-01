@@ -7,7 +7,9 @@ const Facial_Character = () => {
     return (
         <H.Facial_Character_Home>
             <S.Section>
-                <h2>내 키릭터 가꾸기</h2>
+                <S.Blink to="/Mypage">
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                <h2>내 캐릭터 가꾸기</h2>
                 <div id='content_wrraper'>
                     <div class="cont_box">
                         <H.Example/>
@@ -21,6 +23,8 @@ const Facial_Character = () => {
                         <H.Example/>
                     </div>
                 </div>
+                </div>
+                </S.Blink>
             </S.Section>
         </H.Facial_Character_Home>
     );

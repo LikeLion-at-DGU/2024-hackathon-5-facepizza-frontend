@@ -23,6 +23,12 @@ const PhotoSnap = () => {
     setTakePhoto(false);
   };
 
+  const modalVideoStyle = {  //모달창 카메라 스타일
+    width: "100%",
+    height: '46vw',
+    maxHeight: '630px',
+  };
+
   return (
     <Container>
       <h2>표정 사진 찍기</h2>
@@ -37,10 +43,10 @@ const PhotoSnap = () => {
             <C.CameraView>
               <h3>{selectedEmotion} 표정을 지어주세요</h3>
               <TakePicture
-                id="take-picture-component"
                 onPhotoTaken={handlePhotoTaken}
                 ExpressionType={selectedEmotion}
                 TakePhoto={TakePhoto}
+                style={modalVideoStyle}
               />
             </C.CameraView>
             <C.RightPanel>

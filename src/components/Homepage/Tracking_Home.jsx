@@ -9,7 +9,7 @@ const Tracking_Home = () => {
         <H.Tracking_Home>
             <H.ComponentName>
                 <h2>표정 트래킹하기</h2>
-                내 평소 표정을 체크해보세요
+                <p>내 평소 표정을 체크해보세요</p>
             </H.ComponentName>
             <H.Sectin_Y>
                 <H.Example />

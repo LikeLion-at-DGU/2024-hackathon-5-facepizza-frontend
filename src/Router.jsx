@@ -12,6 +12,7 @@ import About from './components/About';
 import Login from './components/Login';
 import Acount from './components/Acount';
 import Mypage from './components/Mypage';
+import Magzine from './components/Magzine';
 
 const AppRouter = () => {
   return (
@@ -26,6 +27,7 @@ const AppRouter = () => {
       <Route path="/Login" element={<Login/>} />
       <Route path="/Acount" element={<Acount/>} />
       <Route path="/Mypage" element={<Mypage/>} />
+      <Route path="/Magzine" element={<Magzine/>} />      
     </Routes>
   );
 };

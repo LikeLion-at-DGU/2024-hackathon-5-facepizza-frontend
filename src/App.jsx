@@ -16,7 +16,7 @@ const AppContent = () => {
   return (
     <>
       {isHome && <Home_Title />}
-      {/* <Header /> */}
+      {!isHome && <Header />}
       <Main>
         <AppRouter />
       </Main>
