@@ -7,11 +7,12 @@ export const Character = styled.div`
   height: 346px;
 `;
 
-export const Profile = styled.div`
+export const ProfileBox = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
   margin-top: 38px;
+  gap: 15px;
 `;
 
 //최근 표정 트래킹 비율
@@ -22,14 +23,14 @@ export const TrackingBox = styled.div`
   border: 1px solid #9e9e9e;
   margin-top: 42.95px;
   padding: 34px 0px;
-  .detail{
+  .detail {
     margin-left: 57px;
     margin-bottom: 27px;
-    display:inline-block;
+    display: inline-block;
     gap: 50px;
   }
 
-  .detail div{
+  .detail div {
     display: flex;
     gap: 50px;
   }
@@ -48,6 +49,7 @@ export const Account = styled.div`
   border: 1px solid #9e9e9e;
   margin-top: 40px;
   background: #f4f4f4;
+  padding: 39px 0px;
 `;
 
 export const Default = styled.span`
@@ -57,6 +59,15 @@ export const Default = styled.span`
   font-size: 28.5px;
   font-style: normal;
   font-weight: 700;
+  line-height: normal;
+`;
+
+export const ThinDefault = styled.span`
+  color: var(--, #000);
+  font-family: IM_Hyemin;
+  font-size: 28.5px;
+  font-style: normal;
+  font-weight: 400;
   line-height: normal;
 `;
 
@@ -106,7 +117,7 @@ export const BoldTiny = styled.span`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-`
+`;
 
 export const BoldBig = styled.span`
   color: #000;
@@ -115,4 +126,13 @@ export const BoldBig = styled.span`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-`
+`;
+
+export const ThinTiny = styled.span`
+  color: #6d6d6d;
+  font-family: IM_Hyemin;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;
