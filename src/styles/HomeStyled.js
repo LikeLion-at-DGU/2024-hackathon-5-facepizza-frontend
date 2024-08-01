@@ -127,6 +127,38 @@ export const Example100 = styled.div`
   background-color: lightgray; /* 시각적으로 확인하기 위한 배경색 */
   object-fit: cover;
 `
+
+export const Description = styled.div`
+    display: flex;
+    text-align: justify;
+    justify-content: center;
+    align-items: flex-start;
+`
+
+// Tracking_Home 에서 쓰이는 스타일
+export const Tracking_Home = styled.div`
+   display: flex;
+   width: 50%;
+   flex-direction: column;
+   border-radius: 10px;
+`
+
+export const Blink = styled(NavLink)`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  text-decoration: none;
+  font-family: Inter;
+  color: white;
+  border-radius: 10px;
+  padding: 0.3em;
+  color: black;
+
+  &:hover {
+    background-color: #E0F8EC;
+  }
+`
+
 export const Hlink = styled(NavLink)`
   display: flex;
   width: 100%;
@@ -141,27 +173,9 @@ export const Hlink = styled(NavLink)`
   color: black;
 
   &:hover {
-    background-color: #ffd966;
-  }
-
-  &.active {
-    background-color: #FAB400;
+    background-color: #E0F8EC;
   }
 `;
-
-export const Description = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-`
-
-// Tracking_Home 에서 쓰이는 스타일
-export const Tracking_Home = styled.div`
-   display: flex;
-   width: 50%;
-   flex-direction: column;
-   border-radius: 10px;
-`
 
 // Face_Camera_Home 에서 쓰이는 스타일
 export const Face_Camera_Home = styled.div`

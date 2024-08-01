@@ -21,7 +21,7 @@ const Header = () => {
         <T.Hlink to="/snap" active={currentPath === '/snap'}>
           표정 스냅
         </T.Hlink>
-        <T.Hlink to="/Magzine" active={currentPath === '/Magzine'}>
+        <T.Hlink to="/Magzine" active={currentPath.includes('/Magzine')}>
           인사이트 창고
         </T.Hlink>
         <T.Hlink to="/mypage" active={currentPath === '/mypage'}>

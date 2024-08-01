@@ -1,6 +1,5 @@
 // src/components/PhotoAlbum.jsx
 import React from 'react';
-import album from '../assets/album.jpg'; // 사진 경로 수정 필요
 import * as S from '../styles/StyledComponents';
 
 
