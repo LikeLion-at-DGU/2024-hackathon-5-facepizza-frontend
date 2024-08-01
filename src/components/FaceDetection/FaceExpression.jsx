@@ -1,3 +1,4 @@
+//FaceExpression.jsx 기존 정상코드
 import React, { useRef, useState, useEffect } from "react";
 import FaceDetection from "./FaceDetection";
 

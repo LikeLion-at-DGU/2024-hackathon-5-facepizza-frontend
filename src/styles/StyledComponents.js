@@ -2,13 +2,15 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 // App.jsx에서 쓰이는 스타일
+//젤 처음 콘테이너 : 기본 바탕 패딩 주기
 export const Container = styled.div`
-  padding: 20px;
+  padding: 50px;
   text-align: center;
   h1 {
     margin: 0 0 10px 0;
   }
 `;
+
 export const desc = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,93 +19,23 @@ export const desc = styled.div`
   padding-left: 15px;
 `;
 export const Main = styled.main`
+  /* padding: 20px; */
+`;
+
+export const Section = styled.section`
+  margin-bottom: 20px;
   padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: transform 0.2s;
+  }
 `;
 
-
-// Face_Health_Home 에서 쓰이는 스타일
-export const Face_Health_Home = styled.div`
-  /* padding: 20px; */
-  h2{
-    text-align: start;
-    padding-left: 10px;
-  }
-  h3{
-    margin: 0;
-  }
-  #content_wrraper {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  .cont_box {
-    display: flex;
-    gap: 10px;
-  }
-  .example {
-    width: 15vw;
-    aspect-ratio: 1 / 1; /* 가로 세로 비율 1:1 */
-    background-color: lightgray; /* 시각적으로 확인하기 위한 배경색 */
-  }
-`
-
-// Face_Camera_Home 에서 쓰이는 스타일
-export const Face_Camera_Home = styled.div`
-  /* padding: 20px; */
-  text-align: center;
-  h2 {
-    text-align: start;
-    padding-left: 10px;
-  }
-  h3 {
-    margin: 0;
-  }
-  #cont_box {
-    display: flex;
-    flex-direction: row;
-    padding: 0 10px;
-  }
-  #left_box {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    width: 50%;
-  }
-  #camera_cover {
-    height: 70%;
-    object-fit: cover;
-  }
-  #right_box {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-  }
-  #face_album {
-    display: flex;
-    flex-direction: row;
-    height: 50%;
-  }
-  #album_cover {
-    width: 50%;
-    height: 80%;
-    object-fit: cover;
-  }
-  #face_calendar {
-    display: flex;
-    flex-direction: row;
-    background-color: #FFF6E4;
-    padding: 30px;
-    border-radius: 8px;
-  }
-  #icon_box {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-  }
-  img {
-    height: 50px;
-  }
-`;
 
 // PhotoAlbum.jsx에서 쓰이는 스타일
 export const Album = styled.div`
@@ -182,12 +114,14 @@ export const HeaderContainer = styled.header`
 `;
 
 export const Blink = styled(NavLink)`
+  display: flex;
   text-align: center;
   text-decoration: none;
   font-family: Inter;
   color: white;
   border-radius: 10px;
   padding: 0.3em;
+  color: black;
 
   &:hover {
     background-color: #ffd966;
@@ -202,7 +136,7 @@ export const Nav = styled.nav`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   font-size: 20px;
 
   #Head_Left {
@@ -210,13 +144,15 @@ export const Nav = styled.nav`
     width: 50%;
     justify-content: space-between;
     padding: 0 1em;
+    padding-top: 10px;
     border-right: 2px solid white;
   }
 
   #Head_Right {
     display: flex;
     width: 50%;
-    justify-content: space-between;
+    padding-top: 10px;
+    justify-content: flex-end;
     padding: 0 1em;
   }
 
@@ -261,29 +197,8 @@ export const CameraWrapper = styled.div`
   height: 100%;
 `;
 
-export const PicModal_Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-`
-
 
 // Section, Image 스타일
-export const Section = styled.section`
-  margin-bottom: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.02);
-    transition: transform 0.2s;
-  }
-`;
 
 export const Image = styled.img`
   width: 70%;
@@ -382,6 +297,7 @@ export const LoginContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* background: #FFFAE8; */
 
   h1 {
     font-family: NanumSquare_ac;
