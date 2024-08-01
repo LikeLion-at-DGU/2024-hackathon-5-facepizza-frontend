@@ -6,6 +6,10 @@ import { NavLink } from 'react-router-dom';
 export const Container = styled.div`
   padding: 50px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   h1 {
     margin: 0 0 10px 0;
   }
