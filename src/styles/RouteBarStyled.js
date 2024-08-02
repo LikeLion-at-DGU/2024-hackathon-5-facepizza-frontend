@@ -24,7 +24,7 @@ export const Breadcrumb = styled.span`
 
 export const RLink = styled(Link)`
   padding: 0 10px;
-  padding-bottom: 5px;
+  /* padding-bottom: 5px;s */
   text-decoration: none;
   color: inherit;
 
