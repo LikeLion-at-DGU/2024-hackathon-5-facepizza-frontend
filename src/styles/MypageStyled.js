@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+export const WidthBox = styled.div`
+  width: 1620px;
+`
 // 캐릭터 정보
 
 export const Character = styled.div`
