@@ -42,7 +42,6 @@ const Home_Title = () => {
       if (response.ok) {
         localStorage.removeItem('token');
         alert('로그아웃 성공');
-        navigate('/');
       } else {
         const errorData = await response.json();
         alert('로그아웃 실패: ' + errorData.detail);
