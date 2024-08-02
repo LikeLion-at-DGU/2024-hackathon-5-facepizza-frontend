@@ -365,6 +365,7 @@ export const H2_title = styled.h2` // 페이지 제목
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  text-align: left;
 `
 export const Example100 = styled.div`
   width: 100%;
