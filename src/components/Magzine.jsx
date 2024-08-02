@@ -6,7 +6,11 @@ import { Magajine_data } from "../data/Magajine_data";
 
 
 const Magzine = () => {
-
+  // 최신 글 두 개를 가져오는 함수
+  const getLatestPosts = () => {
+    return [...Magajine_data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 2);
+  };
+  
   // Card 컴포넌트 정의
   const Card = ({ post }) => {
     const navigate = useNavigate();
