@@ -6,6 +6,7 @@ import AppRouter from './Router';
 import Home_Title from './components/Homepage/Home_Title';
 import Home_Content from './components/Homepage/Home_Content';
 import RouteBar from './components/RouteBar';
+import './App.css';
 // 스타일 컴포넌트 불러오기
 import { Main, Container } from './styles/StyledComponents';
 

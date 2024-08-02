@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import * as S from '../../styles/StyledComponents';
 import * as H from '../../styles/HomeStyled';
 
 
 const Tracking_Home = () => {
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        setToken(storedToken);
+        console.log('토큰:', storedToken);
+    }, []);
+
     return (
         <H.Tracking_Home>
             <H.ComponentName>
