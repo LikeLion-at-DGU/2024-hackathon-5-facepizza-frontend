@@ -1,5 +1,7 @@
+///연속으로 캡쳐되는 문제 해결 필요
 import React, { useRef, useState, useEffect } from "react";
 import FaceExpression from "./FaceExpression";
+import * as C from '../../styles/CameraStyled';
 
 const emotionMap = {
   happy: "행복",
@@ -16,6 +18,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
   const canvasRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [capturing, setCapturing] = useState(false);
+  const [flash, setFlash] = useState(false); // 깜빡이기 위한 상태 추가
   const [photoTaken, setPhotoTaken] = useState(false);
 
   // console.log(isModalOpen);
@@ -45,6 +48,9 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
           const imageSrc = canvasRef.current.toDataURL("image/jpeg");
           setImageSrc(imageSrc);
           onPhotoTaken(imageSrc);
+          setCapturing(false); // 캡처 후 상태를 다시 false로 설정
+          setFlash(true); // 캡처 후 flash 상태를 true로 설정
+          setTimeout(() => setFlash(false), 200);
         } else {
           console.error("Video or canvas reference is null.");
         }
@@ -75,6 +81,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
     <>
       <FaceExpression videoRef={videoRef} onExpressions={handleExpressions} />
       <canvas ref={canvasRef} style={{ display: "none" }} />
+      <C.FlashOverlay flash={flash} /> {/* 깜빡이는 효과를 위한 div */}
     </>
   );
 };

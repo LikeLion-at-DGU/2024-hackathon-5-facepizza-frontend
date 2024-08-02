@@ -89,6 +89,7 @@ export const SubTitle = styled.div`
   white-space: nowrap;
   width: 10%;
   color: #6D6D6D;
+
   button {
     margin-top: 20px;
     border: none;
@@ -98,5 +99,43 @@ export const SubTitle = styled.div`
     color: #6D6D6D;
     align-items: flex-start;
     width: 0;
+  }
+
+  #instructions{
+    width: 100%;
+    border-radius: 10px;
+    /* background-color: #FFFCF0 */
+    background-color: blueviolet;
+  }
+`;
+
+// RealTimeTracking.jsx
+export const TrackingContainer = styled.div`
+  text-align: left;
+  width: 100%;
+
+  #trackingData {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .dataContainer {
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 350px;
+  }
+
+  .dataContainer h3 {
+    text-align: center;
+    margin-top: 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+  }
+
+  .dataContainer h4 {
+    margin: 5px 0;
   }
 `;
