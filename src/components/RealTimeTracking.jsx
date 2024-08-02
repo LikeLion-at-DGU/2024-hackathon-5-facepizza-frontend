@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Section, Container } from '../styles/StyledComponents';
 import FaceDetection from "./FaceDetection/FaceDetection";
+import * as S from '../styles/StyledComponents';
+import * as M from '../styles/RealTimeTrackingStyled';
 import axios from 'axios';
 
 const RealTimeTracking = () => {
@@ -76,12 +77,14 @@ const RealTimeTracking = () => {
           }
         });
         console.log('User data response:', response); // 응답 확인용 콘솔 로그 추가
-        if (response.data.id) {
+        if (response.data.user.id) {
           setIsLoggedIn(true);
-          setUserId(response.data.id);
+          setUserId(response.data.user.id);
+          console.log('유저 아이디: ', response.data.user.id);
         } else {
           setIsLoggedIn(false);
           setUserId(null);
+          console.log('유저 아이디 없음');
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -156,6 +159,7 @@ const RealTimeTracking = () => {
     if (isLoggedIn) {
       try {
         const reportData = {
+          user: userId,
           happy: parseFloat(emotionPercentages.happy),
           sad: parseFloat(emotionPercentages.sad),
           angry: parseFloat(emotionPercentages.angry),
@@ -179,6 +183,7 @@ const RealTimeTracking = () => {
         const response = await axios.post('http://127.0.0.1:8000/api/report', reportData, {
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Token ${token}`,
           },
         });
   
@@ -209,13 +214,27 @@ const RealTimeTracking = () => {
   }, []);
 
   return (
-    <Container>
-      <Section>
-        <h2>실시간 표정 트래킹하기</h2>
+    <M.TrackingContainer>
         <h3>{startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h3>
-        <FaceDetection videoRef={videoRef} onDetections={handleDetections} />
-        <h3>data</h3>
-        <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+        <div id='trackingData'>
+          <div style={{width: '40%'}}>
+            <FaceDetection videoRef={videoRef} onDetections={handleDetections}/>
+          </div>
+          <div className='dataContainer'>
+            <div className='data'>
+              <h3>data</h3><br/>
+              실시간 표정 데이터<br/>
+              <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+            </div>
+            <div className='data'>
+              <h3>data</h3><br/>
+              누적 표정 데이터<br/>
+              <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+            </div>
+          </div>
+        </div>
+        <h4>시작 {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h4>
+
         <button onClick={handleEndTracking}>종료하기</button>
         <div>
           <h3>하이라이트 사진:</h3>
@@ -228,8 +247,7 @@ const RealTimeTracking = () => {
             ) : null
           ))}
         </div>
-      </Section>
-    </Container>
+    </M.TrackingContainer>
   );
 };
 
