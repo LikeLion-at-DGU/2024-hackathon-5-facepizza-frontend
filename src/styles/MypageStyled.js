@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 // 캐릭터 정보
 
-export const Character = styled.div`
+export const CharacterBox = styled.div`
   width: 100%;
   height: 346px;
 `;
