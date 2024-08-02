@@ -80,7 +80,7 @@ export const ComponentName = styled.div`
     gap: 5px;
 
    h2{
-    margin: 10px 0 0 0px;
+    margin: 10px 0 10px 0px;
    }
    p{
     margin: 0 0 5px 0px;

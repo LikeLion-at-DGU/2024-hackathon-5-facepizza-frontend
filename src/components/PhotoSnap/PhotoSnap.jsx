@@ -3,6 +3,7 @@ import PhotoSnapModal from './PhotoSnapModal';
 import TakePicture from '../FaceDetection/TakePicture';
 import * as C from '../../styles/CameraStyled';
 import * as S from '../../styles/StyledComponents';
+import SelectPhoto from './SelectPhoto';
 
 const PhotoSnap = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +19,8 @@ const PhotoSnap = () => {
     setIsModalOpen(false);
   };
   const handlePhotoTaken = (newPhoto) => {
-    setCapturedPhotos([...capturedPhotos, newPhoto]);
+    console.log('New photo taken:', newPhoto);
+    setCapturedPhotos((prevPhotos) => [...prevPhotos, newPhoto]);
     setTakePhoto(false);
   };
   const modalVideoStyle = {  //모달창 카메라 스타일
@@ -32,7 +34,7 @@ const PhotoSnap = () => {
   return (
     <C.Main_Container>
       <div id="title_bar">
-        <S.H2_title>표정 스냅사진 찍기</S.H2_title>
+        <S.H2_title>표정 스냅사진 찍기📸</S.H2_title>
       </div>
       <div class='box'>
         <S.Example100 style={{ width: '500px' }} />
@@ -106,29 +108,10 @@ const PhotoSnap = () => {
         </PhotoSnapModal>
       )}
 
-      <C.SeletPhoto>
-        <div id="title_bar" style={{ borderBottom: 'none' }}>
-          <S.H2_title>찍힌 사진</S.H2_title>
-
-        </div>
-        <C.Gallery photoCount={capturedPhotos.length}>
-          {capturedPhotos.length === 0 ? (
-            <div id="zero"><p>여기에 찍힌 사진이 표시됩니다📸</p></div>
-          ) : (
-            capturedPhotos.map((photo, index) => (
-              <img key={index}
-                src={photo} alt={`Captured ${index}`}
-                style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
-            ))
-          )}
-        </C.Gallery>
-      </C.SeletPhoto>
-      <C.GotoAlbum>
-        <S.Blink to='/album'>
-        <S.Example100/>
-          앨범 보러가기
-        </S.Blink>
-      </C.GotoAlbum>
+      <SelectPhoto
+        capturedPhotos={capturedPhotos}
+        setCapturedPhotos={setCapturedPhotos}
+      />
     </C.Main_Container>
 
   );
