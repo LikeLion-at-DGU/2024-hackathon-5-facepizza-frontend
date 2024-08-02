@@ -304,12 +304,52 @@ export const SeletPhoto = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 40px 0;
+  #topbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  #galleryBtn{
+    display: flex;
+    padding: 5px 10px;;
+    gap: 16px;
+  }
+
+  button{
+    border: 0px;
+    color: #FFFFFF;
+    background-color: #6D6D6D;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    &:hover{
+      background-color: #848484;
+  }}
+  #save{
+    background-color: #FFB700;
+  }
 `
+export const PhotoWrapper = styled.div`
+  position: relative;
+  height: auto;
+  border: 3px solid transparent;
+
+  ${({ isSelected }) => isSelected && css`
+    box-shadow: 0 0 0 2px #2E2E2E;
+    border-radius: 4px;
+  `}
+
+  img{
+
+  }
+`;
+
 export const Gallery = styled.div`
   display: grid;
   grid-template-columns: ${props => {
     const count = props.photoCount;
-    if (count === 0) return '1fr'; // 0장일 때 1개의 칸
+    if (count === 0 ) return '1fr'; // 0장일 때 1개의 칸
     if (count === 1) return '1fr'; // 1장일 때 1개의 칸
     if (count === 2) return 'repeat(2, 1fr)'; // 2장일 때 2개의 칸
     return 'repeat(5, 1fr)'; // 3장 이상일 때 5개의 칸
@@ -317,9 +357,10 @@ export const Gallery = styled.div`
   gap: 10px;
   max-width: 1600px;
   min-height: 150px;
-  margin: 20px 0;
+  margin: 0px 0 0 0;
+  padding: 10px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
   @media (max-width: 1300px) {
     grid-template-columns: ${props => {
@@ -348,6 +389,7 @@ export const Gallery = styled.div`
       if (count === 1) return '1fr';
       return '1fr';
     }};
+  }
 
   #zero{
     display: flex;
@@ -355,10 +397,10 @@ export const Gallery = styled.div`
     justify-content: center;
   }
   p{
-    margin-top: 50%;
     text-align: center;
-    font-size: 50px;
+    font-size: 20px;
   }
+
 `;
 
 export const GotoAlbum = styled.div`
