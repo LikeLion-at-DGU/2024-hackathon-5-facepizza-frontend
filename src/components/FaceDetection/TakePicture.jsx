@@ -1,5 +1,7 @@
+///연속으로 캡쳐되는 문제 해결 필요
 import React, { useRef, useState, useEffect } from "react";
 import FaceExpression from "./FaceExpression";
+import * as C from '../../styles/CameraStyled';
 
 const emotionMap = {
   happy: '행복',
@@ -13,13 +15,13 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto}) => {
   const canvasRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [capturing, setCapturing] = useState(false);
+  const [flash, setFlash] = useState(false); // 깜빡이기 위한 상태 추가
 
   // console.log(isModalOpen);
 
   useEffect(() => {
-    // console.log(TakePhoto);
-    if (capturing && TakePhoto) {
-      console.log("Capturing processing...");
+    if (capturing) {
+      console.log("Capturing 진행중...");
       const timer = setTimeout(() => {
         if (videoRef.current && canvasRef.current) {
           canvasRef.current.width = videoRef.current.videoWidth;
@@ -36,6 +38,9 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto}) => {
           const imageSrc = canvasRef.current.toDataURL("image/jpeg");
           setImageSrc(imageSrc);
           onPhotoTaken(imageSrc);
+          setCapturing(false); // 캡처 후 상태를 다시 false로 설정
+          setFlash(true); // 캡처 후 flash 상태를 true로 설정
+          setTimeout(() => setFlash(false), 200);
         } else {
           console.error("Video or canvas reference is null.");
         }
@@ -44,25 +49,34 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto}) => {
     }
   }, [ExpressionType, TakePhoto, capturing]);
 
-  const handleExpressions = (expressions) => {  
+  const handleExpressions = (expressions) => {    //인식된감정이 0.5이상이면 캡처해주는 함수 (언제실행됨?)
     const { maxKey, maxValue } = expressions;
     // console.log(maxKey);
     const emotionTranslate = emotionMap[maxKey];
     console.log('현재 표정 :', emotionTranslate); //현재 감지되고 있는 표정 출력
     if (emotionTranslate === ExpressionType && maxValue > 0.5) {
-        setCapturing(true);   //얼굴이 맞는 경우 capturing 상태를 true로 설정
-        console.log(capturing);
-    } else {
-        setCapturing(false);  //얼굴이 맞지 않는 경우 capturing 상태를 false로 설정
-        console.log(capturing);
-      }
-    console.log("캡쳐 진행 상태:", capturing);
-  };
+        setCapturing((prevCapturing) => { // 콜백 함수로 상태 업데이트
+          if (!prevCapturing) {
+              console.log("Capturing started");
+          }
+          return true;   ///captureing 상태를 true로 반환
+      }); 
+  } else {
+      setCapturing((prevCapturing) => { // 콜백 함수로 상태 업데이트
+          if (prevCapturing) {
+              console.log("Capturing stopped");
+          }
+          return false;
+      }); 
+  }
+  console.log("캡쳐 진행 상태:", capturing);
+};
 
   return (
     <>
       <FaceExpression videoRef={videoRef} onExpressions={handleExpressions} />
       <canvas ref={canvasRef} style={{ display: "none" }} />
+      <C.FlashOverlay flash={flash} /> {/* 깜빡이는 효과를 위한 div */}
     </>
   );
 };
