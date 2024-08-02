@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Section, Container } from '../styles/StyledComponents';
 import FaceDetection from "./FaceDetection/FaceDetection";
+import * as S from '../styles/StyledComponents';
+import * as M from '../styles/RealTimeTrackingStyled';
 import axios from 'axios';
 
 const RealTimeTracking = () => {
@@ -197,13 +198,18 @@ const RealTimeTracking = () => {
   }, []);
 
   return (
-    <Container>
-      <Section>
-        <h2>실시간 표정 트래킹하기</h2>
+    <M.TrackingContainer>
         <h3>{startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h3>
-        <FaceDetection videoRef={videoRef} onDetections={handleDetections} />
-        <h3>data</h3>
-        <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+        <div id='trackingData'>
+          <div style={{width: '40%'}}>
+            <FaceDetection videoRef={videoRef} onDetections={handleDetections}/>
+          </div>
+          <div className='dataContainer'>
+            <h3>data</h3><br/>
+            <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+          </div>
+        </div>
+
         <button onClick={handleEndTracking}>종료하기</button>
         <div>
           <h3>하이라이트 사진:</h3>
@@ -216,8 +222,7 @@ const RealTimeTracking = () => {
             ) : null
           ))}
         </div>
-      </Section>
-    </Container>
+    </M.TrackingContainer>
   );
 };
 
