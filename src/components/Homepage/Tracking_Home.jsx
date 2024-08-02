@@ -12,7 +12,7 @@ const Tracking_Home = () => {
                 <p>내 평소 표정을 체크해보세요</p>
             </H.ComponentName>
             <H.Sectin_Y>
-                <H.Blink to="/RealTimeTrackingList">
+                <H.Blink to="/tracking/list">
                     <H.Example />
                     <H.Description>
                         카메라를 통해 내가 평소 짓는 표정의 비율을 체크해볼 수 있는 기능입니다.
