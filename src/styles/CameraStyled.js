@@ -12,7 +12,6 @@ export const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 export const ModalContent = styled.div`
   /* border: 1px solid black; */
   /* background-color: yellow; */
@@ -24,7 +23,6 @@ export const ModalContent = styled.div`
   max-height: 690px; /* 반응형 높이 */
   align-items: center;
 `;
-
 export const TopBar = styled.div`
   /* padding: 0 15px; */
   display: flex;
@@ -44,7 +42,6 @@ export const TopBar = styled.div`
   font-size: 20px;
 }
 `;
-
 const spin = keyframes`
   to { transform: rotate(360deg); }
 `;
@@ -174,8 +171,6 @@ export const Thumbnail_Count = styled.div`
   justify-content: center;
   align-items: center;
 `
-
-///////////////////////////////////
 export const Button = styled.button`
   margin-left: 10px;
   background: none;
@@ -193,3 +188,20 @@ export const CameraContainer = styled.div`
 `;
 
 
+//////////포토스냅 내부 페이지////////////////
+export const Main_Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+  text-align: center;
+  
+  #title_bar{
+    display: flex;
+    width: 100%;
+    padding: 0px 0px 15px 0px;
+    border-bottom: 2px solid #C5C5C5;
+  }
+`

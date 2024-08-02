@@ -56,6 +56,7 @@ export const FlexRow = styled.div`
 `
 export const FlexCol = styled.div`
   display: flex;
+  /* width: 100%; */
   flex-direction: column;
   align-items: center;
   gap: 15px;
@@ -131,13 +132,6 @@ export const Example = styled.div`
   background-color: lightgray; /* 시각적으로 확인하기 위한 배경색 */
   object-fit: cover;
   `
-export const Example100 = styled.div`
-  width: 100%;
-  /* height: 100%; */
-  aspect-ratio: 5.4 / 3.1; //가로 세로 비율 1:1
-  background-color: lightgray; /* 시각적으로 확인하기 위한 배경색 */
-  object-fit: cover;
-`
 
 export const Description = styled.div`
     display: flex;
