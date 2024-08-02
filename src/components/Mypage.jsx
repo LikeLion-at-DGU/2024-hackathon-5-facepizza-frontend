@@ -19,7 +19,7 @@ import AccountDetail from "./Mypage/AccountDetail";
 import DdayDetail from "./Mypage/DdayDetail";
 import Profile from "./Mypage/Profile";
 import DetailTracking from "./Mypage/DetailTracking";
-import Character from "./Mypage/Chracter";
+import Character from "./Character/Chracter";
 
 const Mypage = () => {
   return (

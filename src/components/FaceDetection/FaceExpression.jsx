@@ -10,6 +10,7 @@ const FaceExpression = ({ videoRef, onExpressions }) => {
     // console.log(videoRef.current);
     if (detections && videoRef.current) {
       setExpressions(expressions);
+      // console.log(expressions);
       if (onExpressions) {
         onExpressions(expressions); // onExpressions 콜백 호출
       }
