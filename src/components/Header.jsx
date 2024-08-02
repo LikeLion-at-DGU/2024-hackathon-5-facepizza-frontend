@@ -15,7 +15,7 @@ const Header = () => {
           <T.Logo src={Logo_Cheese} alt="Logo" id="Logo_Cheese" />
         </S.Blink>
         <div id="center_box">
-        <T.Hlink to="/tracking" active={currentPath === '/tracking'}>
+        <T.Hlink to="/tracking" active={currentPath.includes('/tracking')}>
           표정 트래킹
         </T.Hlink>
         <T.Hlink to="/snap" active={currentPath === '/snap'}>

@@ -46,7 +46,7 @@ const Face_Camera_Home = () => {
                     <H.FlexRow>
                         <H.Example />
                         <H.Example />
-                        <H.Example />
+                        {/* <H.Example /> */}
                     </H.FlexRow>
                     <div>
                         더보기 <br />▶
