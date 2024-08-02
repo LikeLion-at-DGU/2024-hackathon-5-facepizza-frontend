@@ -75,14 +75,27 @@ export const ComponentName = styled.div`
   align-items: flex-end;
   gap: 20px;
 
+  @media (max-width: 1260px) {
+    flex-direction: column;  //넓이 감소시 반응형
+    align-items: flex-start;
+    gap: 5px;
+
+   h2{
+    margin: 10px 0 0 0px;
+   }
+   p{
+    margin: 0 0 5px 0px;
+   }
+  }
+
   h2{
     color: var(--, #000);
-/* 디폴트 1 */
-  font-family: IM_Hyemin;
-  font-size: 28.5px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+  /* 디폴트 1 */
+    font-family: IM_Hyemin;
+    font-size: 28.5px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
   }
   p{
     color: #393939;
