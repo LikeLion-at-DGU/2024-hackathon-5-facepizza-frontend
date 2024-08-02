@@ -66,7 +66,7 @@ const Login = () => {
                 />
             </S.InputContainer>
             <S.LoginButton onClick={handleLogin}>로그인</S.LoginButton>
-            <S.Blink>
+            <S.Blink style={{gap: "20px"}}>
                 <p onClick={handlePwClick}>{pwFindText}</p>
                 <p onClick={handleIdClick}>{idFindText}</p>
                 <p onClick={() => navigate('/Acount')}>회원가입</p>

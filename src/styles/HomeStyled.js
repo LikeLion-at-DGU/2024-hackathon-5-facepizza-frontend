@@ -16,21 +16,6 @@ export const Sectin_Y = styled.section`
   }
 `;
 
-export const Sectin_G = styled.section`
-  margin-bottom: 20px;
-  padding: 30px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #9E9E9E;
-
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.02);
-    transition: transform 0.2s;
-  }
-`;
-
 //Home_Title에서 쓰이는 스타일
 
 
@@ -69,20 +54,46 @@ export const FlexRow = styled.div`
     height: 40px;
   }
 `
+export const FlexCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  #last{
+    text-align: left;
+    width: 100%;
+  }
+
+`
+
 export const ComponentName = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
   gap: 20px;
 
+  @media (max-width: 1260px) {
+    flex-direction: column;  //넓이 감소시 반응형
+    align-items: flex-start;
+    gap: 5px;
+
+   h2{
+    margin: 10px 0 0 0px;
+   }
+   p{
+    margin: 0 0 5px 0px;
+   }
+  }
+
   h2{
     color: var(--, #000);
-/* 디폴트 1 */
-  font-family: IM_Hyemin;
-  font-size: 28.5px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+  /* 디폴트 1 */
+    font-family: IM_Hyemin;
+    font-size: 28.5px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
   }
   p{
     color: #393939;
@@ -146,9 +157,9 @@ export const Tracking_Home = styled.div`
 export const Blink = styled(NavLink)`
   display: flex;
   flex-direction: column;
-  text-align: center;
+  text-align: left;
+  font-size: 20px;  
   text-decoration: none;
-  font-family: Inter;
   color: white;
   border-radius: 10px;
   padding: 0.3em;
@@ -190,13 +201,77 @@ export const AboutUs_Home = styled.div`
    display: flex;
    width: 50%;
    flex-direction: column;
-   border-radius: 10px; 
-`
+   border-radius: 10px;
+   `
 
 ///Magazine_Home 에서 쓰이는 스타일
+export const Sectin_G = styled.section`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0.5, 0, 0.3);
+  border-radius: 10px;
+  border: 1px solid var(--, #9E9E9E);
+  background: #F4F4F4;
+  
+  #more{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    /* padding-left: 20px; */
+  }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: transform 0.2s;
+  }
+`;
+export const Clink = styled(NavLink)`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-size: 20px;  
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 0.3em;
+  color: black;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 export const Magazine_Home = styled.div`
    display: flex;
    width: 50%;
    flex-direction: column;
    border-radius: 10px; 
 `
+
+export const Example_mag = styled.div`
+  display: flex;
+  width: 100%;
+  height: 135px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #FFF;
+  margin: 0px;
+  gap: 10px;
+
+  img{
+    padding: 10px;
+    width: 35%;
+    object-fit: cover;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: transform 0.2s;
+  }
+  `
+

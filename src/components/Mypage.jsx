@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../styles/Mypage.css";
 import { Container } from "../styles/StyledComponents";
-import { Account, BoldBig, Boldsmall, Character, Default, DetailContent, Subname } from "../styles/MypageStyled";
+import { WidthBox, Account, BoldBig, Boldsmall, Character, Default, DetailContent, Subname } from "../styles/MypageStyled";
 import Home_Title from "./Homepage/Home_Title";
 import Gauge from "./Mypage/Gauge";
 import Tracking from "./Mypage/Tracking";
@@ -22,7 +22,7 @@ const Mypage = () => {
   }, []);
   
   return (
-    <>
+    <WidthBox>
       {/* <Home_Title/> */}
       <Subname>마이페이지</Subname>
       <Container className="Border">
@@ -48,7 +48,7 @@ const Mypage = () => {
         </Account>
       </Container>
       <button className="Exit">계정 탈퇴</button>
-    </>
+    </WidthBox>
   );
 };
 
