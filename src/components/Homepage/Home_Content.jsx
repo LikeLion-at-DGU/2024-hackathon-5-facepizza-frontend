@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as S from '../../styles/StyledComponents';
 import * as H from '../../styles/HomeStyled';
 import Facial_Character from './Facial_Character';
@@ -9,6 +9,14 @@ import AboutUs_Home from './AboutUs_Home';
 
 
 const Home_Content = () => {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+    console.log('토큰:', storedToken);
+  }, []);
+  
   return (
     <>
       <Facial_Character />

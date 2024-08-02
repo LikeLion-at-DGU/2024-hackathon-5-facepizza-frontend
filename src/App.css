@@ -1,9 +1,18 @@
-body {
+/* body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* background: rgba(255, 246, 212, 0.60); */
+  // background: rgba(255, 246, 212, 0.60);
+} */
+@font-face {
+  font-family: "NanumSquareR";
+  font-weight: 10;
+  src: url("./fonts/NanumSquareR.otf") format("opentype");
+}
+
+body {
+  font-family: "NanumSquareR", sans-serif;
 }
 
 header {
@@ -29,7 +38,7 @@ h1, h2 {
 
 @media only screen and (max-width: 1920px) {
   #Container {
-    width: 1619px;
+    width: 80%;
     margin: 0 auto; /* 화면 중앙에 배치 */
   }
 }

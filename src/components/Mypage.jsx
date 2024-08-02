@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import "../styles/Mypage.css";
 import { Container } from "../styles/StyledComponents";
 import { Account, BoldBig, Boldsmall, Character, Default, DetailContent, Subname } from "../styles/MypageStyled";
@@ -13,6 +13,14 @@ import DetailTracking from "./Mypage/DetailTracking";
 
 
 const Mypage = () => {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+    console.log('토큰:', storedToken);
+  }, []);
+  
   return (
     <>
       {/* <Home_Title/> */}
