@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Container } from '../styles/StyledComponents';
+import { Container } from '../../styles/StyledComponents';
 import PhotoSnapModal from './PhotoSnapModal';
-import TakePicture from './FaceDetection/TakePicture';
-import * as C from '../styles/CameraStyled';
+import TakePicture from '../FaceDetection/TakePicture';
+import * as C from '../../styles/CameraStyled';
+import * as S from '../../styles/StyledComponents'
 
 const PhotoSnap = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,16 +14,13 @@ const PhotoSnap = () => {
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
-
-  const handleCloseModal = () => {
+  const handleCloseModal = () => {  //창 밖클릭하면 닫히게
     setIsModalOpen(false);
   };
-
   const handlePhotoTaken = (newPhoto) => {
     setCapturedPhotos([...capturedPhotos, newPhoto]);
     setTakePhoto(false);
   };
-
   const modalVideoStyle = {  //모달창 카메라 스타일
     width: "100%",
     height: '46vw',
@@ -30,10 +28,21 @@ const PhotoSnap = () => {
   };
 
   return (
-    <Container>
-      <h2>표정 사진 찍기</h2>
+    <C.Main_Container>
+      <div id="title_bar">
+        <S.H2_title>표정 스냅사진 찍기</S.H2_title>
+      </div>
+      <S.Example100 style={{width: '500px'}}>
+      </S.Example100>
+      <div></div>
       <button onClick={handleOpenModal}>찍으러 가기</button>
-      {/* 모달창 칠드런 */}
+      
+      
+      
+      
+      
+      
+  {/* 모달창 칠드런 */}
       {isModalOpen && (
         <PhotoSnapModal
           onClose={handleCloseModal}
@@ -63,7 +72,7 @@ const PhotoSnap = () => {
               </div>
               {capturedPhotos.length > 0 && (
                 <C.Thumbnail>
-                  <img src={capturedPhotos[capturedPhotos.length - 1]} alt="Captured"/>
+                  <img src={capturedPhotos[capturedPhotos.length - 1]} alt="Captured" />
                   <C.Thumbnail_Count>
                     {capturedPhotos.length}
                   </C.Thumbnail_Count>
@@ -75,12 +84,12 @@ const PhotoSnap = () => {
       )}
       <div>
         {capturedPhotos.map((photo, index) => (
-          <img key={index} 
-          src={photo} alt={`Captured ${index}`} 
-          style={{ width: '400px', height: '300px', margin: '10px' }} />
+          <img key={index}
+            src={photo} alt={`Captured ${index}`}
+            style={{ width: '400px', height: '300px', margin: '10px' }} />
         ))}
       </div>
-    </Container>
+    </C.Main_Container>
   );
 };
 

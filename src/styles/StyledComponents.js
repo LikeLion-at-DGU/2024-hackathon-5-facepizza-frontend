@@ -14,6 +14,9 @@ export const Container = styled.div`
     margin: 0 0 10px 0;
   }
 `;
+export const Main = styled.main`
+  width: 100%;
+`;
 
 export const Section = styled.section`
   margin-bottom: 20px;
@@ -32,25 +35,12 @@ export const Section = styled.section`
 export const Deps = styled.div`
   display: flex;
 `
-
-export const H2_title = styled.h2`
-  color: var(--, #000);
-  margin: 0;
-  font-family: IM_Hyemin;
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`
 export const desc = styled.div`
   display: flex;
   flex-direction: column;
   align-items: self-start;
   gap: 5px;
   padding-left: 15px;
-`;
-export const Main = styled.main`
-  /* padding: 20px; */
 `;
 
 ////Title_Home에서 쓰이는 스타일 (로고)
@@ -62,7 +52,7 @@ export const Logo = styled.img`
   margin-right: auto
 `
 
-// PhotoAlbum.jsx에서 쓰이는 스타일
+//PhotoAlbum.jsx에서 쓰이는 스타일
 export const Album = styled.div`
   padding: 20px;
   text-align: center;
@@ -114,7 +104,6 @@ export const Iner_Section = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
-
 export const Blink = styled(NavLink)`
   display: flex;
   text-align: center;
@@ -157,131 +146,11 @@ export const Nav = styled.nav`
     font-size: 26px;
   }
 `;
-/*  
-// FacialStretch.jsx 팝업 스타일 추가
-export const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ModalContent = styled.div`
-  width: 80%;
-  height: 80%;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-
-export const CameraWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-export const Image = styled.img`
-  width: 70%;
-  border-radius: 8px;
-`;
-
-export const Overlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-`;
-
-export const GuideText = styled.div`
-  text-align: center;
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  line-height: 1.5;
-  h2 {
-    margin-bottom: 10px;
-  }
-
-  p {
-    margin: 5px 0;
-  }
-`;
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin: 20px 20px;
-`;
-
-export const EmotionButton = styled.button`
-  padding: 10px 40px;
-  font-size: 1.1em;
-  border-radius: 8px;
-  border: none;
-  background-color: ${(props) => (props.selected ? '#FFC700' : '#7A7A7A')};
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  margin: 0 20px; // 버튼 사이의 간격을 위한 margin 추가
-
-
-  &:hover {
-    background-color: #FFC700;
-    color: white;
-  }
-`;
-
-export const CheckboxContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center; 
-
-  input[type='checkbox'] {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-  }
-
-  p {
-    margin: 0; 
-    text-align: center; 
-  }
-`;
-
-export const PracticeNum = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: '#7A7A7A';
-  padding: 10px 20px;
-  margin: 0 20px;
-  color: 'white';
-  border: 'none';
-  border-radius: '5px';
-  cursor: 'pointer';
-  font-size: '1.3em';
-  outline: 'none';
-`
-*/
 
 // 로그인 페이지에 쓰이는 스타일
 export const LoginContainer = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -379,7 +248,6 @@ export const InputContainer = styled.div`
   }
   
 `
-
 export const Left_align = styled.div`
   display: flex;
   flex-direction: column;
@@ -402,7 +270,6 @@ input{
   height: 50px;
 }
 `
-
 export const LoginButton = styled.button`
   width: 300px;
   height: 40px;
@@ -423,7 +290,6 @@ export const LoginButton = styled.button`
   }
 `;
 
-
 // 회원가입 페이지에 쓰이는 스타일
 export const SignUpContainer = styled.div`
   display: flex;
@@ -439,7 +305,6 @@ export const SignUpContainer = styled.div`
     margin-bottom: 20px;
   }
 `;
-
 export const SignUpButton = styled.button`
   width: 300px;
   height: 50px;
@@ -474,4 +339,37 @@ export const Password_Ck = styled.div`
   gap: 10px;
 `
 
-
+//////일반적인페이지 구성 툴
+//Magazine, snap
+export const Main_Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+  text-align: center;
+  
+  #title_bar{
+    display: flex;
+    width: 100%;
+    padding: 0px 0px 15px 0px;
+    border-bottom: 2px solid #C5C5C5;
+  }
+`
+export const H2_title = styled.h2` // 페이지 제목
+  color: var(--, #000);
+  margin: 0;
+  font-family: IM_Hyemin;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`
+export const Example100 = styled.div`
+  width: 100%;
+  /* height: 100%; */
+  aspect-ratio: 5.4 / 3.1; //가로 세로 비율 1:1
+  background-color: lightgray; /* 시각적으로 확인하기 위한 배경색 */
+  object-fit: cover;
+`

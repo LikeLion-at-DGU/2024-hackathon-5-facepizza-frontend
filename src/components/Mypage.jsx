@@ -22,7 +22,7 @@ import Character from "./Mypage/Chracter";
 
 const Mypage = () => {
   return (
-    <>
+    <WidthBox>
       {/* <Home_Title/> */}
       <Subname>마이페이지</Subname>
       <Container className="Border">
@@ -48,7 +48,7 @@ const Mypage = () => {
         </Account>
       </Container>
       <button className="Exit">계정 탈퇴</button>
-    </>
+    </WidthBox>
   );
 };
 

@@ -1,9 +1,7 @@
 // src/components/PhotoSnapModal.jsx  정상코드
 import React, { useRef } from 'react';
 import Draggable from 'react-draggable';
-import * as C from '../styles/CameraStyled';
-//import Logo_Smile from '../assets/Logo_Smile.png'; // 사진 경로 수정 필요
-
+import * as C from '../../styles/CameraStyled';
 
 
 //수정코드

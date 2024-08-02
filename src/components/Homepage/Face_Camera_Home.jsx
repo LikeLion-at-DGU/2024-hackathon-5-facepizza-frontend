@@ -34,9 +34,9 @@ const Face_Camera_Home = () => {
                         <H.Description>
                             특정 표정을 지을 시에만 사진이 촬영되는 카메라입니다.
                         </H.Description>
-                        <div>
+                        {/* <div id="more">
                             더보기 <br />▶
-                        </div>
+                        </div> */}
                     </H.Hlink>
                 </H.FlexRow>
                 <H.Child_ComponentName>
@@ -46,7 +46,7 @@ const Face_Camera_Home = () => {
                     <H.FlexRow>
                         <H.Example />
                         <H.Example />
-                        <H.Example />
+                        {/* <H.Example /> */}
                     </H.FlexRow>
                     <div>
                         더보기 <br />▶

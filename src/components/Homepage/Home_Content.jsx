@@ -16,7 +16,7 @@ const Home_Content = () => {
         <Tracking_Home />
         <Face_Camera_Home />
       </div>
-      <div style={{display: 'flex', flexDirection: 'row', gap: '30px'}}>
+      <div style={{display: 'flex', flexDirection: 'row', gap: '30px', width: '100%'}}>
         <Magazine_Home/>
         <AboutUs_Home/>
       </div>
