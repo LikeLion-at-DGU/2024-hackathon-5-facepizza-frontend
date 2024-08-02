@@ -8,6 +8,7 @@ export const Breadcrumb = styled.span`
   justify-content: flex-start;
   width: 100%;
   padding: 10px 15px;
+  margin-bottom: 20px;
   font-size: 14px;
   color: #555;
   text-align: left;

@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const WidthBox = styled.div`
   width: 1620px;
-`
+`;
 // 캐릭터 정보
 
-export const Character = styled.div`
+export const CharacterBox = styled.div`
   width: 100%;
   height: 346px;
 `;
@@ -138,4 +138,19 @@ export const ThinTiny = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+`;
+
+export const BaseGauge = styled.div`
+  width: 508.25px;
+  height: 18.05px;
+  flex-shrink: 0;
+  border-radius: 19.95px;
+  background: #d9d9d9;
+`;
+
+export const StyledGauge = styled.div`
+  width: ${({ width }) => `${width}%`};
+  height: 18.05px;
+  border-radius: 19.95px;
+  background: #ffcf55;
 `;

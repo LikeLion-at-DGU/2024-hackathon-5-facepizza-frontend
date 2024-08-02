@@ -42,9 +42,8 @@ export const Hlink = styled(NavLink)`
   font-family: Inter;
   font-size: 26px;
   border-bottom: ${(props) => (props.active ? '4px solid black' : 'none')};
-  color: ${(props) => (props.active ? 'black' : 'grey')};
+  color: ${(props) => (props.active ? 'black' : '#6D6D6D')};
   padding-bottom: 0.2em;
-  color: black;
 
   &:hover {
     color: black;

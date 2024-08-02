@@ -1,7 +1,7 @@
 // src/components/PhotoAlbum.jsx
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from '../styles/StyledComponents';
+import * as S from '../../styles/StyledComponents';
 import axios from 'axios';
 
 const PhotoAlbum = () => {
@@ -44,7 +44,6 @@ const PhotoAlbum = () => {
 
     fetchUserData();
   }, [navigate]);
-
 
   return (
     <S.Album>

@@ -18,8 +18,8 @@ const AppContent = () => {
 
   return (
     <>
-      {( isHome || isMyapge ) && <Home_Title />}
-      {!isHome && !isMyapge && <Header />}
+      { isHome && <Home_Title />}
+      {!isHome && <Header />}
       {!isHome && <RouteBar />}
       <Main>
         <AppRouter />

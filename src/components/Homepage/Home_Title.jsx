@@ -55,7 +55,7 @@ const Home_Title = () => {
   let subtitle;
   switch (location.pathname) {
     case '/':
-      subtitle = '풍부한 표정을 위한 치즈의 여정'
+      subtitle = '풍부한 표정을 위한 냉동 치즈의 치즈의 여정'
       break;
     case '/mypage':
       subtitle = '마이페이지';

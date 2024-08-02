@@ -14,6 +14,9 @@ export const Container = styled.div`
     margin: 0 0 10px 0;
   }
 `;
+export const Main = styled.main`
+  width: 100%;
+`;
 
 export const Section = styled.section`
   margin-bottom: 20px;
@@ -32,25 +35,12 @@ export const Section = styled.section`
 export const Deps = styled.div`
   display: flex;
 `
-
-export const H2_title = styled.h2`
-  color: var(--, #000);
-  margin: 0;
-  font-family: IM_Hyemin;
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`
 export const desc = styled.div`
   display: flex;
   flex-direction: column;
   align-items: self-start;
   gap: 5px;
   padding-left: 15px;
-`;
-export const Main = styled.main`
-  /* padding: 20px; */
 `;
 
 ////Title_Home에서 쓰이는 스타일 (로고)
@@ -62,7 +52,7 @@ export const Logo = styled.img`
   margin-right: auto
 `
 
-// PhotoAlbum.jsx에서 쓰이는 스타일
+//PhotoAlbum.jsx에서 쓰이는 스타일
 export const Album = styled.div`
   padding: 20px;
   text-align: center;
@@ -113,7 +103,6 @@ export const Iner_Section = styled.div`
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
-
 
 export const Blink = styled(NavLink)`
   display: flex;
@@ -259,7 +248,6 @@ export const InputContainer = styled.div`
   }
   
 `
-
 export const Left_align = styled.div`
   display: flex;
   flex-direction: column;
@@ -282,7 +270,6 @@ input{
   height: 50px;
 }
 `
-
 export const LoginButton = styled.button`
   width: 300px;
   height: 40px;
@@ -303,7 +290,6 @@ export const LoginButton = styled.button`
   }
 `;
 
-
 // 회원가입 페이지에 쓰이는 스타일
 export const SignUpContainer = styled.div`
   display: flex;
@@ -319,7 +305,6 @@ export const SignUpContainer = styled.div`
     margin-bottom: 20px;
   }
 `;
-
 export const SignUpButton = styled.button`
   width: 300px;
   height: 50px;
@@ -354,4 +339,37 @@ export const Password_Ck = styled.div`
   gap: 10px;
 `
 
-
+//////일반적인페이지 구성 툴
+//Magazine, snap
+export const Main_Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px;
+  text-align: center;
+  
+  #title_bar{
+    display: flex;
+    width: 100%;
+    padding: 0px 0px 15px 0px;
+    border-bottom: 2px solid #C5C5C5;
+  }
+`
+export const H2_title = styled.h2` // 페이지 제목
+  color: var(--, #000);
+  margin: 0;
+  font-family: IM_Hyemin;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`
+export const Example100 = styled.div`
+  width: 100%;
+  /* height: 100%; */
+  aspect-ratio: 5.4 / 3.1; //가로 세로 비율 1:1
+  background-color: lightgray; /* 시각적으로 확인하기 위한 배경색 */
+  object-fit: cover;
+`

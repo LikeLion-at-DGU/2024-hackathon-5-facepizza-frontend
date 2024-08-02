@@ -3,11 +3,12 @@
   border-radius: 10px;
   border: 0.95px solid #6d6d6d;
 }
-.Character {
+.CharacterBox {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .Guage {
@@ -27,8 +28,8 @@ hr {
   background: #9e9e9e;
 }
 
-.DetailContent{
-    display:flex;
+.DetailContent {
+  display: flex;
 }
 
 .Attendence {
@@ -83,37 +84,72 @@ hr {
   line-height: normal;
 }
 
-#Date{
-    margin-bottom: 41px;
+#Date {
+  margin-bottom: 41px;
 }
 
-#Point{
-    margin-bottom: 44px;
+#Point {
+  margin-bottom: 44px;
 }
 
-#OtherExpression{
-    display:flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
+#OtherExpression {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px
 }
 
-.OtherExpression{
-    display: flex;
-    align-items: flex-start;
-    gap: 30px;
+.OtherExpression {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
 }
 
-.DetailTracking{
-    margin-top: 135px;
+.DetailTracking {
+  margin-top: 135px;
 }
 
-.TrackingTitle{
-    margin-left: 16px;
+.TrackingTitle {
+  margin-left: 16px;
 }
 
-.TrackingContent{
-    display: flex;
-    margin-top: 7px;
-    margin-left: 30px;
+.TrackingContent {
+  display: flex;
+  margin-top: 7px;
+  margin-left: 30px;
+}
+
+#Character {
+  width: 300px;
+  height: 334px;
+  margin-bottom: -35px;
+  margin-top: -35px;
+}
+
+.rename:hover {
+  cursor: pointer;
+}
+
+.inputName{
+  color: #000;
+  font-family: IM_Hyemin;
+  font-size: 28.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 10px;
+  height: 100%;
+  border: none;
+  background-color: #FFF;
+  width:fit-content;
+  max-width: 300px;
+}
+
+.inputName::placeholder {
+  color: #000;
+  font-family: IM_Hyemin;
+  font-size: 28.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
