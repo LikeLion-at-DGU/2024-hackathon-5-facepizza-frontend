@@ -25,7 +25,7 @@ const Face_Camera_Home = () => {
                         <FaceDetection videoRef={videoRef} onClick={handleOpenModal} />
                     </div>
                     <div id="illust_box">
-                        <H.Example100 />
+                        <S.Example100 />
                     </div>
                 </H.Component_Card>
                 <H.FlexRow>
