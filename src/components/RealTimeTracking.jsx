@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const RealTimeTracking = () => {
   const videoRef = useRef(null);
+  const [token, setToken] = useState(null);
   const [tracking, setTracking] = useState(true);
   const [currentEmotion, setCurrentEmotion] = useState({ key: '', value: 0 });
   const [emotionCounts, setEmotionCounts] = useState({
@@ -67,7 +68,15 @@ const RealTimeTracking = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile');  // 배포 후 api 주소 수정
+        const token = localStorage.getItem('token'); // 토큰을 로컬 스토리지에서 가져옵니다.
+        setToken(token);
+        console.log('Token:', token); // 토큰 값 확인용 콘솔 로그 추가
+        const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile', {
+          headers: {
+            Authorization: `Token ${token}`  // 인증 헤더에 토큰을 추가합니다.
+          }
+        });
+        console.log('User data response:', response); // 응답 확인용 콘솔 로그 추가
         if (response.data.id) {
           setIsLoggedIn(true);
           setUserId(response.data.id);
@@ -79,6 +88,9 @@ const RealTimeTracking = () => {
         console.error('Error fetching user data:', error);
         setIsLoggedIn(false);
         setUserId(null);
+        if (error.response && error.response.status === 401) {
+          console.error('Unauthorized: Token might be invalid or expired.');
+        }
       }
     };
 
