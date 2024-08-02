@@ -141,6 +141,8 @@ hr {
   height: 100%;
   border: none;
   background-color: #FFF;
+  width:fit-content;
+  max-width: 300px;
 }
 
 .inputName::placeholder {

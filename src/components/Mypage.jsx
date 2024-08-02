@@ -9,6 +9,7 @@ import {
   DetailContent,
   Subname,
   CharacterBox,
+  WidthBox,
 } from "../styles/MypageStyled";
 import Home_Title from "./Homepage/Home_Title";
 import Gauge from "./Mypage/Gauge";
