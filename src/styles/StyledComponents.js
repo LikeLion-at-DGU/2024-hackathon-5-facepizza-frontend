@@ -49,7 +49,8 @@ export const Logo = styled.img`
   height: auto;
   margin: 0px 0 5px 0;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+  padding: 0 8px;
 `
 
 //PhotoAlbum.jsx에서 쓰이는 스타일

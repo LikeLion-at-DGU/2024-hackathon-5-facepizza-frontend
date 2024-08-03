@@ -7,7 +7,6 @@ const FaceExpression = ({ videoRef, onExpressions }) => {
   const [expressions, setExpressions] = useState({ maxKey: "start", maxValue: 0 });   //인식된 감정 객체 {감정, 강도}
 
   useEffect(() => {
-    // console.log(videoRef.current);
     if (detections && videoRef.current) {
       setExpressions(expressions);
       // console.log(expressions);

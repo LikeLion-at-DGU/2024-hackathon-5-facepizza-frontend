@@ -269,7 +269,7 @@ export const Main_Container = styled.div`
     border-bottom: 2px solid #C5C5C5;
   }
 
-  .box{
+  .rowBox{
     display: flex;
     width: 100%;
     padding: 20px;
@@ -319,7 +319,7 @@ align-items: center;
 white-space: nowrap;
 width: 100%;
 /* color: #6D6D6D; */
-background-color: #FFFCF0;
+background-color: #FFF;
 
 button {
   margin-top: 20px;
@@ -349,6 +349,14 @@ p{
   font-size: 20px; 
   font-weight: bold;
   }
+
+  .face_example{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+  }
+  
 `;
 
 /////////PhotoSnanp 사진 고르는 칸
@@ -408,6 +416,7 @@ export const Gallery = styled.div`
     return 'repeat(5, 1fr)'; // 3장 이상일 때 5개의 칸
   }};
   gap: 10px;
+  width: 100%;
   max-width: 1600px;
   min-height: 150px;
   margin: 0px 0 0 0;

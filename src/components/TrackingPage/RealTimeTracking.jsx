@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FaceDetection from "./FaceDetection/FaceDetection";
-import * as S from '../styles/StyledComponents';
-import * as M from '../styles/RealTimeTrackingStyled';
+import FaceDetection from "../FaceDetection/FaceDetection";
+import * as S from '../../styles/StyledComponents';
+import * as RT from '../../styles/RealTimeTrackingStyled';
+import * as C from '../../styles/CameraStyled';
 import axios from 'axios';
 
 const RealTimeTracking = () => {
@@ -175,9 +176,9 @@ const RealTimeTracking = () => {
             emotion: emotion,
           })),
         };
-  
+
         console.log('Sending Report Data:', reportData);
-  
+
         // Report 데이터 전송
         // 배포 후 api 주소 변경
         const response = await axios.post('http://127.0.0.1:8000/api/report', reportData, {
@@ -186,14 +187,14 @@ const RealTimeTracking = () => {
             Authorization: `Token ${token}`,
           },
         });
-  
+
         console.log('Response from server:', response.data); // 디버깅용 로그
-  
+
       } catch (error) {
         console.error('Error saving report:', error);
       }
     }
-    
+
     navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
   };
 
@@ -214,40 +215,59 @@ const RealTimeTracking = () => {
   }, []);
 
   return (
-    <M.TrackingContainer>
-        <h3>{startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h3>
-        <div id='trackingData'>
-          <div style={{width: '40%'}}>
-            <FaceDetection videoRef={videoRef} onDetections={handleDetections}/>
+    <RT.TrackingContainer>
+      <C.Main_Container>
+        <div id='title_bar'>
+          <S.H2_title>{startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</S.H2_title>
+        </div>
+        <div className='rowBox' style={{ height: '370px' }}>
+          <div id='videoDeo'>
+            {/* <div style={{ display: 'felx', flexDirection: 'column' }}>
+              <div id='topbar'></div> */}
+              <FaceDetection videoRef={videoRef} onDetections={handleDetections} style={{ height: '350px' }} />
+              {/* <div id='bottombar'></div>
+            </div> */}
           </div>
-          <div className='dataContainer'>
-            <div className='data'>
-              <h3>data</h3><br/>
-              실시간 표정 데이터<br/>
+
+          <div className='description' style={{ width: '50%', gap: '15px' }}>
+            <div className='dataContainer'>
+              <p>data</p>
+              <h3>실시간 표정 데이터</h3>
               <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
             </div>
-            <div className='data'>
-              <h3>data</h3><br/>
-              누적 표정 데이터<br/>
+            <div className='dataContainer'>
+              <p>data</p>
+              <h3>누적 표정 데이터</h3>
               <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
             </div>
           </div>
         </div>
-        <h4>시작 {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h4>
+        <RT.Sspan>시작 {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</RT.Sspan>
+        <RT.FinBtn onClick={handleEndTracking}>종료하기</RT.FinBtn>
 
-        <button onClick={handleEndTracking}>종료하기</button>
-        <div>
-          <h3>하이라이트 사진:</h3>
-          {Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
+        <div id='title_bar'>
+          <S.H2_title>하이라이트 사진 :</S.H2_title>
+        </div>
+                <C.Gallery photoCount={Object.entries(emotionPics).length}>
+                {Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
             img ? (
               <div key={emotion}>
-                <img src={img} alt={emotion} width="300" />
-                <p>{emotionTranslations[emotion]} {emotionPercentages[emotion]}%</p><br/>
+                <img src={img} alt={emotion} width="300" style={{objectFit: 'cover'}} />
+                <p>{emotionTranslations[emotion]} {emotionPercentages[emotion]}%</p><br />
               </div>
             ) : null
           ))}
+                </C.Gallery>
+        
+        
+        
+        
+        <div>
+          <h3>하이라이트 사진:</h3>
+          
         </div>
-    </M.TrackingContainer>
+      </C.Main_Container>
+    </RT.TrackingContainer>
   );
 };
 
