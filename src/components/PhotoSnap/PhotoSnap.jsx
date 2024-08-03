@@ -11,6 +11,7 @@ const PhotoSnap = () => {
   const [capturedPhotos, setCapturedPhotos] = useState([]);
   const [TakePhoto, setTakePhoto] = useState(false);
   const [isExplainOpen, setIsExplainOpen] = useState(true);
+  const [yourEmotion, setYourEmotion] = useState('미감지'); //현재 감정 출력을 위한 상태
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -19,7 +20,7 @@ const PhotoSnap = () => {
     setIsModalOpen(false);
   };
   const handlePhotoTaken = (newPhoto) => {
-    console.log('New photo taken:', newPhoto);
+    // console.log('New photo taken:', newPhoto);
     setCapturedPhotos((prevPhotos) => [...prevPhotos, newPhoto]);
     setTakePhoto(false);
   };
@@ -72,6 +73,7 @@ const PhotoSnap = () => {
         <PhotoSnapModal
           onClose={handleCloseModal}
           setTakePhoto={setTakePhoto}
+          yourEmotion={yourEmotion}
         >
           <C.Snap_Container>
             <C.CameraView>
@@ -81,6 +83,7 @@ const PhotoSnap = () => {
                 ExpressionType={selectedEmotion}
                 TakePhoto={TakePhoto}
                 style={modalVideoStyle}
+                setYourEmotion={setYourEmotion}
               />
             </C.CameraView>
             <C.RightPanel>
