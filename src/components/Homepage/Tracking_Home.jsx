@@ -23,8 +23,8 @@ const Tracking_Home = () => {
                 <H.Blink to="/tracking/list">
                     <H.Example />
                     <H.Description>
-                        카메라를 통해 내가 평소 짓는 표정의 비율을 체크해볼 수 있는 기능입니다.
-                        행복, 놀람, 슬픔 등 다양한 감정이 표정에 드러나는 실시간 비율을 측정해 보세요!
+                        <b>나는 평소에 어떤 표정일까?</b>
+                        카메라를 통해 내가 평소 짓는 표정을 실제 비율로 체크할 수 있습니다.
                     </H.Description>
                 </H.Blink>
                 <H.Child_ComponentName>

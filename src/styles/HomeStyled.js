@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export const Sectin_Y = styled.section`
   margin-bottom: 20px;
-  padding: 30px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -135,6 +135,7 @@ export const Example = styled.div`
 
 export const Description = styled.div`
     display: flex;
+    flex-direction: column;
     text-align: justify;
     justify-content: center;
     align-items: flex-start;
@@ -203,7 +204,7 @@ export const Sectin_G = styled.section`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  padding: 30px;
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0.5, 0, 0.3);
   border-radius: 10px;
