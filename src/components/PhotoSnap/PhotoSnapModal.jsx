@@ -16,7 +16,6 @@ const PhotoSnapModal = ({ onClose, children, setTakePhoto, yourEmotion, selected
           <C.TopBar className="handle">
             <C.Feedback $yourEmotion={yourEmotion}>
               감지된 표정 : {yourEmotion}
-              <div className="spinner" />
             </C.Feedback>
             <button onClick={onClose}> ✕ </button>
           </C.TopBar>
