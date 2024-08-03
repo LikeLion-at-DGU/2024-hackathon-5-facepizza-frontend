@@ -1,5 +1,5 @@
 import React from 'react';
-import { Section, Container } from '../styles/StyledComponents';
+import { Section, Container } from '../../styles/StyledComponents';
 import { useLocation } from 'react-router-dom';
 
 const RealTimeTrackingReport = () => {

@@ -114,6 +114,13 @@ export const TrackingContainer = styled.div`
   text-align: left;
   width: 100%;
 
+  #title_bar{
+    display: flex;
+    width: 100%;
+    padding: 0px 0px 15px 0px;
+    border-bottom: 2px solid #C5C5C5;
+  }
+
   #trackingData {
     display: flex;
     align-items: flex-start;
@@ -121,21 +128,58 @@ export const TrackingContainer = styled.div`
   }
 
   .dataContainer {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    height: 350px;
+    /* height: 350px; */
   }
 
   .dataContainer h3 {
     text-align: center;
-    margin-top: 0;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 5px;
+    padding: 10px 20px;
+    margin: 0px;
   }
 
   .dataContainer h4 {
-    margin: 5px 0;
+    padding: 10px 20px;
+    margin: 0px;
+  }
+  .dataContainer p {
+    margin: 0px;
+    padding: 3px 0;
+    width: 100%;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-bottom: 1px solid #ccc;
+    background-color: #FFF0B6;
+  }
+
+  #videoDeo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 380px;
+    background-color: #F1EFF4;
+    border-radius: 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
 `;
+
+export const Sspan = styled.span`
+width: 100%;
+text-align: left;
+padding: 5px;
+`
+export const FinBtn = styled.button`
+font-size: 20px;
+color: #FFF;
+padding: 6px 20px;
+border-radius: 20px;
+background: #554E4E;
+border: none;
+`
