@@ -75,6 +75,7 @@ const PhotoSnap = () => {
           setTakePhoto={setTakePhoto}
           yourEmotion={yourEmotion}
           selectedEmotion={selectedEmotion}
+
         >
           <C.Snap_Container>
             <C.CameraView>
