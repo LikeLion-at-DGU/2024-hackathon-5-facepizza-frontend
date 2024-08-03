@@ -74,6 +74,7 @@ const PhotoSnap = () => {
           onClose={handleCloseModal}
           setTakePhoto={setTakePhoto}
           yourEmotion={yourEmotion}
+          selectedEmotion={selectedEmotion}
         >
           <C.Snap_Container>
             <C.CameraView>
@@ -93,6 +94,7 @@ const PhotoSnap = () => {
                     key={emotion}
                     selected={emotion === selectedEmotion}
                     onClick={() => setSelectedEmotion(emotion)}
+                    selectedEmotion={selectedEmotion}
                   >
                     {emotion}
                   </C.EmotionButton>

@@ -54,6 +54,7 @@ const spin = keyframes`
 
 export const Feedback = styled.div`
   margin-left: 20px;
+  width:90px;
   background-color: black;
   border-radius: 13px;
   color: #FFFFFF;
@@ -62,7 +63,7 @@ export const Feedback = styled.div`
   padding: 4px 8px;
   font-size: 11px;
 
-  .spinner {
+  /* .spinner {
     display: inline-block;
     width: 13px;
     height: 13px;
@@ -72,7 +73,7 @@ export const Feedback = styled.div`
     margin-left: 10px;
     margin-bottom: 0;
     animation: ${({ $isDetecting }) => ($isDetecting ? css`${spin} 1s linear infinite` : 'none')};
-  }
+  } */
 `;
 //////촬영 효과 
 const flashAnimation = keyframes`
@@ -131,6 +132,11 @@ export const CaptureButton = styled.button`
     }
   }};
 
+  &:hover{
+    transform: scale(1.03);
+    transition: 0.2s;
+  }
+
   color: white;
   font-size: 16px;
 `;
@@ -181,9 +187,24 @@ export const RightPanel = styled.div`
 
 export const EmotionButton = styled.button`
   width: 13vw;
-  margin: 10px 0;
+  margin: 5px 0;
   padding: 10px;
-  background-color: ${({ selected }) => (selected ? '#FFD700' : '#f0f0f0')};
+  color: #FFFFFF;
+  background-color: ${({ selected, selectedEmotion }) => {
+    if (!selected) return '#554E4E';
+    switch (selectedEmotion) {
+      case '행복':
+        return '#FFCF55'; // 빨강
+      case '슬픔':
+        return '#5EBBFF'; // 주황
+      case '분노':
+        return '#FF9472'; // 노랑
+      case '놀람':
+        return '#84DE5A'; // 초록
+      default:
+        return '#554E4E'; // 기본값
+    }
+  }};
   border: none;
   border-radius: 5px;
   cursor: pointer;
