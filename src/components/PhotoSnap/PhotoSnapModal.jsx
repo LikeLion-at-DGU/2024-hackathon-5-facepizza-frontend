@@ -5,7 +5,7 @@ import * as C from '../../styles/CameraStyled';
 
 
 //수정코드
-const PhotoSnapModal = ({ onClose, children, setTakePhoto, isDetecting }) => {
+const PhotoSnapModal = ({ onClose, children, setTakePhoto, yourEmotion, selectedEmotion}) => {
   const nodeRef = useRef(null);
 
   return (
@@ -14,17 +14,17 @@ const PhotoSnapModal = ({ onClose, children, setTakePhoto, isDetecting }) => {
         <C.ModalContent ref={nodeRef} onClick={(e) => e.stopPropagation()}>
           {/* 내부를 클릭했을 때 닫히지 않게 함 */}
           <C.TopBar className="handle">
-            <C.Feedback $isDetecting={isDetecting}>
-              탐지 진행중
+            <C.Feedback $yourEmotion={yourEmotion}>
+              감지된 표정 : {yourEmotion}
               <div className="spinner" />
             </C.Feedback>
             <button onClick={onClose}> ✕ </button>
           </C.TopBar>
+          
           {children}
+          
           <C.BottomBar>
-            <C.CaptureButton onClick={() => setTakePhoto(true)}>
-              촬영
-              {/* <img src={Logo_Smile} alt="Logo" id="Logo_Smile" /> */}
+            <C.CaptureButton onClick={() => setTakePhoto(true)} emotion={selectedEmotion}>
             </C.CaptureButton>
           </C.BottomBar>
         </C.ModalContent>

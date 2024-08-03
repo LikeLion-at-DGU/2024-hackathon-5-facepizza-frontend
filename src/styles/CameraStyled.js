@@ -1,4 +1,10 @@
 import styled, { keyframes, css } from 'styled-components';
+import smileLogo from '../assets/Logo_happy.png';
+import sadLogo from '../assets/Logo_sad.png';
+import angryLogo from '../assets/Logo_angry.png';
+import supriseLogo from '../assets/Logo_suprise.png';
+
+
 
 /////포토스냅모달
 export const ModalBackground = styled.div`
@@ -50,7 +56,7 @@ export const Feedback = styled.div`
   margin-left: 20px;
   background-color: black;
   border-radius: 13px;
-  color: ${({ $isDetecting }) => ($isDetecting ? 'white' : 'black')};
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   padding: 4px 8px;
@@ -104,10 +110,26 @@ export const CaptureButton = styled.button`
   width: 65px;
   height: 65px;
   border-radius: 33px;
-  background-color: #554E4E;
-  background-image: url('../assets/Logo_Smile.png');
+  background-size: cover; /* 필요에 따라 조정 */
+  background-color: transparent;
+  background-position: center; /* 필요에 따라 조정 */
   border: none;
   cursor: pointer;
+
+  background-image: ${({emotion}) => {
+    switch (emotion) {
+      case '행복':
+        return `url(${smileLogo})`;
+      case '슬픔':
+        return `url(${sadLogo})`;
+      case '분노':
+        return `url(${angryLogo})`;
+      case '놀람':
+        return `url(${supriseLogo})`;
+      default:
+        return 'none';
+    }
+  }};
 
   color: white;
   font-size: 16px;
