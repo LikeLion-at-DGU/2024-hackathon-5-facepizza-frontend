@@ -20,7 +20,7 @@ export const Main = styled.main`
 
 export const Section = styled.section`
   margin-bottom: 20px;
-  padding: 30px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

@@ -117,7 +117,7 @@ export const CaptureButton = styled.button`
   border: none;
   cursor: pointer;
 
-  background-image: ${({emotion}) => {
+  background-image: ${({ emotion }) => {
     switch (emotion) {
       case '행복':
         return `url(${smileLogo})`;
@@ -277,7 +277,7 @@ export const Main_Container = styled.div`
   }
 
   .description{
-  display: flex;
+    display: flex;
     flex-direction: column;
     width: 100%;
     padding: 0 40px;
@@ -295,13 +295,23 @@ export const Main_Container = styled.div`
   
 `
 export const LetPhoto = styled.button`
+    display: inline-block;
     background-color: #2E2E2E;
     color: #FFFFFF;
-    width: 220px;
+    width: 180px;
     padding: 9px 25px;
     border-radius: 20px;
-    font-size: 25px;
+    font-size: 20px;
   `
+  export const LetTracking = styled.button`
+  display: inline-block;
+  background-color: #2E2E2E;
+  color: #FFFFFF;
+  width: 250px;
+  padding: 9px 25px;
+  border-radius: 20px;
+  font-size: 20px;
+`
 export const SubTitle = styled.div`
 margin: 0px 0px;
 display: flex;
@@ -392,7 +402,7 @@ export const Gallery = styled.div`
   display: grid;
   grid-template-columns: ${props => {
     const count = props.photoCount;
-    if (count === 0 ) return '1fr'; // 0장일 때 1개의 칸
+    if (count === 0) return '1fr'; // 0장일 때 1개의 칸
     if (count === 1) return '1fr'; // 1장일 때 1개의 칸
     if (count === 2) return 'repeat(2, 1fr)'; // 2장일 때 2개의 칸
     return 'repeat(5, 1fr)'; // 3장 이상일 때 5개의 칸
@@ -407,31 +417,31 @@ export const Gallery = styled.div`
 
   @media (max-width: 1300px) {
     grid-template-columns: ${props => {
-      const count = props.photoCount;
-      if (count === 0) return '1fr';
-      if (count === 1) return '1fr';
-      if (count === 2) return 'repeat(2, 1fr)';
-      return 'repeat(4, 1fr)';
-    }};
+    const count = props.photoCount;
+    if (count === 0) return '1fr';
+    if (count === 1) return '1fr';
+    if (count === 2) return 'repeat(2, 1fr)';
+    return 'repeat(4, 1fr)';
+  }};
   }
 
   @media (max-width: 900px) {
     grid-template-columns: ${props => {
-      const count = props.photoCount;
-      if (count === 0) return '1fr';
-      if (count === 1) return '1fr';
-      if (count === 2) return 'repeat(2, 1fr)';
-      return 'repeat(2, 1fr)';
-    }};
+    const count = props.photoCount;
+    if (count === 0) return '1fr';
+    if (count === 1) return '1fr';
+    if (count === 2) return 'repeat(2, 1fr)';
+    return 'repeat(2, 1fr)';
+  }};
   }
 
   @media (max-width: 450px) {
     grid-template-columns: ${props => {
-      const count = props.photoCount;
-      if (count === 0) return '1fr';
-      if (count === 1) return '1fr';
-      return '1fr';
-    }};
+    const count = props.photoCount;
+    if (count === 0) return '1fr';
+    if (count === 1) return '1fr';
+    return '1fr';
+  }};
   }
 
   #zero{

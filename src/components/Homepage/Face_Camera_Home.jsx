@@ -32,7 +32,8 @@ const Face_Camera_Home = () => {
                     <button onClick={handleOpenModal}>사진 찍기</button>
                     <H.Hlink to="/snap">
                         <H.Description>
-                            특정 표정을 지을 시에만 사진이 촬영되는 카메라입니다.
+                            <b>정해진 표정을 지어야지만 사진이 촬영되는 특별한 카메라!</b>
+                            풍부한 표정과 함꼐 치즈의 스냅사진을 촬영해보세요
                         </H.Description>
                         {/* <div id="more">
                             더보기 <br />▶
@@ -46,7 +47,6 @@ const Face_Camera_Home = () => {
                     <H.FlexRow>
                         <H.Example />
                         <H.Example />
-                        {/* <H.Example /> */}
                     </H.FlexRow>
                     <div>
                         더보기 <br />▶

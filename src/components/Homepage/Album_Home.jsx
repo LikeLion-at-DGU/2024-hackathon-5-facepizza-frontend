@@ -2,15 +2,15 @@ import React from "react";
 import * as H from '../../styles/HomeStyled';
 import * as S from '../../styles/StyledComponents';
 
-const AboutUs_Home = () => {
+const Album_Home = () => {
 
     return (
         <H.Magazine_Home>
             <H.ComponentName>
-                <h2>about 얼굴피자</h2>
+                <h2>표정 앨범</h2>
             </H.ComponentName>
             <H.Sectin_G>
-                <S.Blink to='/aboutus'>
+                <S.Blink to='/album'>
                     <H.FlexRow>
                         <H.Example />
                         <H.Example />
@@ -22,4 +22,4 @@ const AboutUs_Home = () => {
     );
 }
 
-export default AboutUs_Home;
+export default Album_Home;
