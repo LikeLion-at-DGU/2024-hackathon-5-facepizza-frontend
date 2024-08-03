@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BaseGauge, StyledGauge } from "../../styles/MypageStyled";
+import { BaseGauge, EndPoint, PointFont, StartPoint, StyledGauge } from "../../styles/MypageStyled";
 
 const Gauge = ({ level }) => {
   const [exp, setExp] = useState(0);
@@ -23,9 +23,11 @@ const Gauge = ({ level }) => {
     <div className="Guage">
       <BaseGauge>
         <StyledGauge width={ratio} />
+        <StartPoint><PointFont>0p</PointFont></StartPoint>
+        <PointFont>{age}까지 {maxExp - exp}P 더!</PointFont>
+        <EndPoint><PointFont>10p</PointFont></EndPoint>
       </BaseGauge>
-      <span className="GuageInfo">{age+1}살까지 경험치 {maxExp - exp}p더!</span>
-      <img src="src\assets\MoreInfo.svg" />
+      <img src="src\assets\MoreInfo.svg" style={{marginLeft:"10px"}}/>
     </div>
   );
 };

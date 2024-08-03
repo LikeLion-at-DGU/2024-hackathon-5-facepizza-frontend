@@ -6,8 +6,9 @@ export const WidthBox = styled.div`
 // 캐릭터 정보
 
 export const CharacterBox = styled.div`
-  width: 100%;
+  width: 1502px;
   height: 346px;
+  margin-top: 30px;
 `;
 
 export const ProfileBox = styled.div`
@@ -153,4 +154,23 @@ export const StyledGauge = styled.div`
   height: 18.05px;
   border-radius: 19.95px;
   background: #ffcf55;
+`;
+
+export const StartPoint = styled.span`
+  position: relative;
+  right: 190px;
+`;
+
+export const EndPoint = styled.span`
+  position: relative;
+  left: 190px;
+`;
+
+export const PointFont = styled.span`
+  color: #6d6d6d;
+  font-family: IM_Hyemin;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;

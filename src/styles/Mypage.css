@@ -1,8 +1,14 @@
-.Border {
+#Border {
   width: 1619px;
   border-radius: 10px;
   border: 0.95px solid #6d6d6d;
+  padding: 0px;
 }
+
+#Subname{
+  width: 1619px;
+}
+
 .CharacterBox {
   display: flex;
   flex-direction: column;
@@ -15,7 +21,6 @@
   display: flex;
   justify-content: center;
   margin-top: 20.78px;
-  padding-left: 218px;
 }
 
 .GuageInfo {

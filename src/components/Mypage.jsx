@@ -60,8 +60,8 @@ const Mypage = () => {
   return (
     <WidthBox>
       {/* <Home_Title/> */}
-      <Subname>마이페이지</Subname>
-      <Container className="Border">
+      <Subname id='Subname'>마이페이지</Subname>
+      <Container id="Border">
         {/* 캐릭터 정보가 들어간 창 */}
         <CharacterBox className="CharacterBox">
           <Character />

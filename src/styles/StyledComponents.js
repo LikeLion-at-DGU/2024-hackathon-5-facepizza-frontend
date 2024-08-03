@@ -16,6 +16,8 @@ export const Container = styled.div`
 `;
 export const Main = styled.main`
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 export const Section = styled.section`
