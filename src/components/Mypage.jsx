@@ -20,7 +20,7 @@ import DdayDetail from "./Mypage/DdayDetail";
 import Profile from "./Mypage/Profile";
 import DetailTracking from "./Mypage/DetailTracking";
 import axios from 'axios';
-import Character from "./Mypage/Chracter";
+import Character from "./Character/Chracter";
 
 const Mypage = () => {
   const [token, setToken] = useState(null);

@@ -89,6 +89,7 @@ export const SubTitle = styled.div`
   white-space: nowrap;
   width: 10%;
   color: #6D6D6D;
+
   button {
     margin-top: 20px;
     border: none;
@@ -98,6 +99,13 @@ export const SubTitle = styled.div`
     color: #6D6D6D;
     align-items: flex-start;
     width: 0;
+  }
+
+  #instructions{
+    width: 100%;
+    border-radius: 10px;
+    /* background-color: #FFFCF0 */
+    background-color: blueviolet;
   }
 `;
 
