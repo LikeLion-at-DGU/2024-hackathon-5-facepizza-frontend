@@ -112,22 +112,29 @@ export const TrackingContainer = styled.div`
     gap: 20px;
   }
 
-  .dataContainer {
-    padding: 10px;
+  .data {
+    padding: 25px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    height: 350px;
+    width: 96%;
+    height: 30%;
+    margin: 20px 0px;
   }
 
-  .dataContainer h3 {
+  .data h3 {
     text-align: center;
     margin-top: 0;
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
   }
 
-  .dataContainer h4 {
+  .data h4 {
     margin: 5px 0;
+  }
+
+  .dataContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 `;
