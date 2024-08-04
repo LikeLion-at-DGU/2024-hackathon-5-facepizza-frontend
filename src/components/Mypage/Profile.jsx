@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Default, ProfileBox } from "../../styles/MypageStyled";
+import rename from "../../assets/rename.png";
 
 const Profile = () => {
   const [age, setAge] = useState(1);
@@ -71,21 +72,22 @@ const Profile = () => {
         {age}살
         <input
           type="text"
-          placeholder="New Nickname"
+          placeholder="닉네임"
           onChange={handleInputChange}
           value={newName}
           className="inputName"
           ref={inputRef}
           disabled={!isEditing} // isEditing 상태에 따라 입력 필드 비활성화
           onFocus={handleFocus} // 포커스 시 커서를 맨 뒤로 이동
-          maxLength={10}
+          maxLength={3}
         />
       </Default>
       <img
-        src="src/assets/rename.svg"
+        src={rename}
         className="rename"
         alt="Rename Icon"
         onClick={handleImageClick} // 이미지 클릭 시 handleImageClick 호출
+        style={{width:"24px", height:"27.5px"}}
       />
     </ProfileBox>
   );

@@ -9,7 +9,7 @@ const RealTimeTracking = () => {
   const videoRef = useRef(null);
   const [token, setToken] = useState(null);
   const [tracking, setTracking] = useState(true);
-  const [currentEmotion, setCurrentEmotion] = useState({});
+  const [currentEmotion, setCurrentEmotion] = useState({ key: '', value: 0 });
   const [emotionCounts, setEmotionCounts] = useState({
     happy: 0,
     sad: 0,
@@ -109,13 +109,11 @@ const RealTimeTracking = () => {
 
     resizedDetections.forEach((detection) => {
       const expressions = detection.expressions;
-      setCurrentEmotion(expressions); // 탐지된 현재 표정 데이터 저장
-
       const [maxKey, maxValue] = Object.entries(expressions).reduce(
         (acc, [key, value]) => (value > acc[1] ? [key, value] : acc),
         [null, -Infinity]
       );    // maxKey, maxValue 탐지
-      // setCurrentEmotion({ key: maxKey, value: maxValue });
+      setCurrentEmotion({ key: maxKey, value: maxValue });
 
       setEmotionCounts((prevCounts) => {
         const newCounts = { ...prevCounts };
@@ -226,28 +224,16 @@ const RealTimeTracking = () => {
             <div className='data'>
               <h3>data</h3><br/>
               실시간 표정 데이터<br/>
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              {Object.entries(currentEmotion).map(([emotion, value]) => (
-                <div key={emotion} style={{ marginRight: '10px' }}>
-                  <h4>{emotionTranslations[emotion]}: {(value * 100).toFixed(2)}%</h4>
-                </div>
-              ))}
-            </div>
+              <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
             </div>
             <div className='data'>
               <h3>data</h3><br/>
               누적 표정 데이터<br/>
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              {Object.entries(emotionPercentages).map(([emotion, percentage]) => (
-                <div key={emotion} style={{ marginRight: '10px' }}>
-                  <h4>{emotionTranslations[emotion]}: {percentage}%</h4>
-                </div>
-              ))}
-            </div>
+              <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
             </div>
           </div>
         </div>
-        <h4>{startTime.current && '시작'} {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h4>
+        <h4>시작 {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</h4>
 
         <button onClick={handleEndTracking}>종료하기</button>
         <div>
@@ -256,7 +242,7 @@ const RealTimeTracking = () => {
             img ? (
               <div key={emotion}>
                 <img src={img} alt={emotion} width="300" />
-                <p>{emotionTranslations[emotion]} {maxValue}%</p><br/>
+                <p>{emotionTranslations[emotion]} {emotionPercentages[emotion]}%</p><br/>
               </div>
             ) : null
           ))}

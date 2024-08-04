@@ -6,14 +6,16 @@ export const WidthBox = styled.div`
 // 캐릭터 정보
 
 export const CharacterBox = styled.div`
-  width: 100%;
+  width: 1502px;
   height: 346px;
+  margin-top: 30px;
 `;
 
 export const ProfileBox = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
   margin-top: 38px;
   gap: 15px;
 `;
@@ -21,7 +23,7 @@ export const ProfileBox = styled.div`
 //최근 표정 트래킹 비율
 
 export const TrackingBox = styled.div`
-  width: 100%;
+  width: 1488px;
   border-radius: 5px;
   border: 1px solid #9e9e9e;
   margin-top: 42.95px;
@@ -40,17 +42,20 @@ export const TrackingBox = styled.div`
 `;
 
 export const DetailContent = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 1488px;
   border-radius: 5px;
   border: 1px solid #9e9e9e;
   margin-top: 40px;
 `;
 
 export const Account = styled.div`
-  width: 100%;
+  width: 1488px;
   border-radius: 5px;
   border: 1px solid #9e9e9e;
-  margin-top: 40px;
+  margin: 40px 0px;
   background: #f4f4f4;
   padding: 39px 0px;
 `;
@@ -154,3 +159,32 @@ export const StyledGauge = styled.div`
   border-radius: 19.95px;
   background: #ffcf55;
 `;
+
+export const StartPoint = styled.span`
+  position: relative;
+  right: 190px;
+`;
+
+export const EndPoint = styled.span`
+  position: relative;
+  left: 190px;
+`;
+
+export const PointFont = styled.span`
+  color: #6d6d6d;
+  font-family: IM_Hyemin;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+export const AccountModalBox = styled.div`
+  width: 663.195px;
+  height: 391.86px;
+  flex-shrink: 0;
+  border-radius: 12.113px;
+  background: #fff;
+  box-shadow: 0px 1.8px 90px 0px rgba(0, 0, 0, 0.2);
+`;
+

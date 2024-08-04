@@ -3,24 +3,36 @@ import { NavLink } from 'react-router-dom';
 
 // App.jsx에서 쓰이는 스타일
 //젤 처음 콘테이너 : 기본 바탕 패딩 주기
+export const Align = styled.div`
+display: flex;
+width: 90%;
+margin-left: auto;
+margin-right: auto;
+flex-direction: column;
+align-items: center;
+`
 export const Container = styled.div`
-  padding: 50px;
+  padding: 20px 40px;
+  width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 1600px;
   h1 {
     margin: 0 0 10px 0;
   }
 `;
 export const Main = styled.main`
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 export const Section = styled.section`
   margin-bottom: 20px;
-  padding: 30px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -47,9 +59,10 @@ export const desc = styled.div`
 export const Logo = styled.img`
   width: 150px;
   height: auto;
-  margin: 0px 0 5px 0;
+  margin: 0px 0 0px 0;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+  padding: 0 8px;
 `
 
 //PhotoAlbum.jsx에서 쓰이는 스타일
@@ -135,7 +148,7 @@ export const Nav = styled.nav`
     width: 225px;
     justify-content: space-between;
     padding-top: 10px;
-    font-size: 26px;
+    /* font-size: 26px; */
   }
 
   #Head_Right {
@@ -143,7 +156,7 @@ export const Nav = styled.nav`
     width: 225px;
     padding-top: 10px;
     justify-content: flex-end;
-    font-size: 26px;
+    /* font-size: 26px; */
   }
 `;
 
@@ -171,10 +184,34 @@ export const LoginContainer = styled.div`
     color: #8D8D8D;
     text-align: center;
     font-family: NanumSquare_ac;
-    font-size: 24.392px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+  #RowBox{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #8D8D8D;
+  }
+`;
+
+export const LoginFind = styled(NavLink)`
+  display: flex;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 0.3em;
+  color: #8D8D8D;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.active {
+    /* background-color: #FAB400; */
   }
 `;
 
@@ -246,8 +283,15 @@ export const InputContainer = styled.div`
     line-height: normal;
     color: #8D8D8D;
   }
-  
 `
+export const ErrorMessage = styled.div`
+  font-size: 14px;
+  padding: 0 6px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  color: #FE2E2E;
+`;
+
 export const Left_align = styled.div`
   display: flex;
   flex-direction: column;

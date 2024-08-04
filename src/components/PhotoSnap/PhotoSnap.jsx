@@ -37,11 +37,11 @@ const PhotoSnap = () => {
       <div id="title_bar">
         <S.H2_title>표정 스냅사진 찍기📸</S.H2_title>
       </div>
-      <div class='box'>
+      <div class='rowBox'>
         <S.Example100 style={{ width: '500px' }} />
         <div class='description'>   {/* 설명박스 (새로)*/}
           <C.LetPhoto onClick={handleOpenModal}>사진 촬영하기</C.LetPhoto>
-          <p style={{ textAlign: 'left' }}>친구와 함께 찍어보아요~</p>
+          <p style={{ textAlign: 'left', paddingLeft: '7px' }}>친구와 함께 찍어보아요~</p>
         </div>
       </div>
 

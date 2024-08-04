@@ -5,7 +5,7 @@ import Facial_Character from './Facial_Character';
 import Face_Camera_Home from './Face_Camera_Home';
 import Tracking_Home from './Tracking_Home';
 import Magazine_Home from './Magazine_Home';
-import AboutUs_Home from './AboutUs_Home';
+import Album_Home from './Album_Home';
 import axios from 'axios';
 
 const Home_Content = () => {
@@ -51,7 +51,7 @@ const Home_Content = () => {
       </div>
       <div style={{display: 'flex', flexDirection: 'row', gap: '30px', width: '100%'}}>
         <Magazine_Home/>
-        <AboutUs_Home/>
+        <Album_Home/>
       </div>
     </>
   );
