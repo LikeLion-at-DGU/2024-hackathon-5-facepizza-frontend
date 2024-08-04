@@ -10,7 +10,7 @@ const RealTimeTracking = () => {
   const videoRef = useRef(null);
   const [token, setToken] = useState(null);
   const [tracking, setTracking] = useState(true);
-  const [currentEmotion, setCurrentEmotion] = useState({ key: '', value: 0 });
+  const [currentEmotion, setCurrentEmotion] = useState();
   const [emotionCounts, setEmotionCounts] = useState({
     happy: 0,
     sad: 0,
@@ -72,28 +72,28 @@ const RealTimeTracking = () => {
         const token = localStorage.getItem('token'); // 토큰을 로컬 스토리지에서 가져옵니다.
         setToken(token);
         console.log('Token:', token); // 토큰 값 확인용 콘솔 로그 추가
-        const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile', {
-          headers: {
-            Authorization: `Token ${token}`  // 인증 헤더에 토큰을 추가합니다.
+        if (token) {
+          const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile', {
+            headers: {
+              Authorization: `Token ${token}`,  // 인증 헤더에 토큰을 추가합니다.
+            }
+          });
+          if (response.data.user.id) {
+            setIsLoggedIn(true);
+            setUserId(response.data.user.id);
+            console.log('유저 아이디: ', response.data.user.id);
+          } else {
+            setIsLoggedIn(false);
+            setUserId(null);
           }
-        });
-        console.log('User data response:', response); // 응답 확인용 콘솔 로그 추가
-        if (response.data.user.id) {
-          setIsLoggedIn(true);
-          setUserId(response.data.user.id);
-          console.log('유저 아이디: ', response.data.user.id);
         } else {
           setIsLoggedIn(false);
           setUserId(null);
-          console.log('유저 아이디 없음');
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
         setIsLoggedIn(false);
         setUserId(null);
-        if (error.response && error.response.status === 401) {
-          console.error('Unauthorized: Token might be invalid or expired.');
-        }
       }
     };
 
@@ -110,11 +110,13 @@ const RealTimeTracking = () => {
 
     resizedDetections.forEach((detection) => {
       const expressions = detection.expressions;
+      setCurrentEmotion(expressions);   // 탐지된 현재 표정 데이터 저장
+
       const [maxKey, maxValue] = Object.entries(expressions).reduce(
         (acc, [key, value]) => (value > acc[1] ? [key, value] : acc),
         [null, -Infinity]
       );    // maxKey, maxValue 탐지
-      setCurrentEmotion({ key: maxKey, value: maxValue });
+      // setCurrentEmotion({ key: maxKey, value: maxValue });
 
       setEmotionCounts((prevCounts) => {
         const newCounts = { ...prevCounts };
@@ -170,7 +172,7 @@ const RealTimeTracking = () => {
           neutral: parseFloat(emotionPercentages.neutral),
           created_at: startTime.current.toISOString(),
           ended_at: endTime.current.toISOString(),
-          title: startTime.current.toISOString(),
+          title: `${formatDate(startTime.current)} ${formatTime(startTime.current)}`,
           highlights: Object.entries(emotionPics).map(([emotion, { img }]) => ({
             image: img,
             emotion: emotion,
@@ -190,12 +192,15 @@ const RealTimeTracking = () => {
 
         console.log('Response from server:', response.data); // 디버깅용 로그
 
+        navigate('/tracking/reportdata'); // 로그인 했을 때는 /tracking/reportdata로 이동
       } catch (error) {
         console.error('Error saving report:', error);
       }
+    } else {
+      navigate('/tracking/report', {
+        state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current }
+      }); // 로그인 안 했을 때는 /tracking/report로 이동
     }
-
-    navigate('/tracking/report', { state: { emotionCounts, emotionPics, emotionPercentages, startTime: startTime.current, endTime: endTime.current } });
   };
 
   // 상태가 변경된 후에 navigate 호출
@@ -224,8 +229,8 @@ const RealTimeTracking = () => {
           <div id='videoDeo'>
             {/* <div style={{ display: 'felx', flexDirection: 'column' }}>
               <div id='topbar'></div> */}
-              <FaceDetection videoRef={videoRef} onDetections={handleDetections} style={{ height: '350px' }} />
-              {/* <div id='bottombar'></div>
+            <FaceDetection videoRef={videoRef} onDetections={handleDetections} style={{ height: '350px' }} />
+            {/* <div id='bottombar'></div>
             </div> */}
           </div>
 
@@ -233,39 +238,39 @@ const RealTimeTracking = () => {
             <div className='dataContainer'>
               <p>data</p>
               <h3>실시간 표정 데이터</h3>
-              <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+              {currentEmotion && Object.entries(currentEmotion).map(([emotion, value]) => (
+                <div key={emotion} style={{ marginRight: '10px' }}>
+                  <h4>{emotionTranslations[emotion]}: {(value * 100).toFixed(2)}%</h4>
+                </div>
+              ))}
             </div>
             <div className='dataContainer'>
               <p>data</p>
               <h3>누적 표정 데이터</h3>
-              <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+              {Object.entries(emotionPercentages).map(([emotion, percentage]) => (
+                <div key={emotion} style={{ marginRight: '10px' }}>
+                  <h4>{emotionTranslations[emotion]}: {percentage}%</h4>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <RT.Sspan>시작 {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</RT.Sspan>
+        <RT.Sspan>{startTime.current && '시작'} {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</RT.Sspan>
         <RT.FinBtn onClick={handleEndTracking}>종료하기</RT.FinBtn>
 
         <div id='title_bar'>
           <S.H2_title>하이라이트 사진 :</S.H2_title>
         </div>
-                <C.Gallery photoCount={Object.entries(emotionPics).length}>
-                {Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
+        <C.Gallery photoCount={Object.entries(emotionPics).length}>
+          {Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
             img ? (
               <div key={emotion}>
-                <img src={img} alt={emotion} width="300" style={{objectFit: 'cover'}} />
-                <p>{emotionTranslations[emotion]} {emotionPercentages[emotion]}%</p><br />
+                <img src={img} alt={emotion} width="300" style={{ objectFit: 'cover' }} />
+                <p>{emotionTranslations[emotion]} {(maxValue * 100).toFixed(5)}%</p><br />
               </div>
             ) : null
           ))}
-                </C.Gallery>
-        
-        
-        
-        
-        <div>
-          <h3>하이라이트 사진:</h3>
-          
-        </div>
+        </C.Gallery>
       </C.Main_Container>
     </RT.TrackingContainer>
   );

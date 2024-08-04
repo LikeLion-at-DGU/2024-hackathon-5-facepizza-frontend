@@ -35,9 +35,11 @@ const Magazine_Home = () => {
             </H.ComponentName>
             <H.Sectin_G>
                 <H.FlexCol>
-                    <H.Clink to='/Magzine' style={{width: '100%'}}>
-                            자세히 보기 ▶
-                    </H.Clink>
+                    <H.ToMagLink to='/Magzine'>
+                    <H.FakeBtn>
+                            목록<span> ☰</span>
+                            </H.FakeBtn>
+                    </H.ToMagLink>
                     {latestPosts.map(post => (
                         <Example_mag key={post.postID} post={post} />
                     ))}

@@ -137,7 +137,7 @@ export const TrackingContainer = styled.div`
     /* height: 350px; */
   }
 
-  .dataContainer h3 {
+  .data h3 {
     text-align: center;
     padding: 10px 20px;
     margin: 0px;
