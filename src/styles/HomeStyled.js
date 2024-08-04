@@ -11,7 +11,7 @@ export const Sectin_Y = styled.section`
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.02);
+    transform: scale(1.01);
     transition: transform 0.2s;
   }
 `;
@@ -45,14 +45,6 @@ export const FlexRow = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
-
-  button{
-    background-color: black;
-    color: white;
-    border-radius: 25px;
-    width: 115px;
-    height: 40px;
-  }
 `
 export const FlexCol = styled.div`
   display: flex;
@@ -65,7 +57,20 @@ export const FlexCol = styled.div`
     text-align: left;
     width: 100%;
   }
+`
+export const GoPhotoBtn = styled.button`
+    background-color: black;
+    font-size: 16px;
+    color: white;
+    border-radius: 25px;
+    padding: 0 16px;
+    height: 40px;
 
+    &:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: transform 0.2s;
+   }
 `
 
 export const ComponentName = styled.div`
@@ -114,11 +119,11 @@ export const Component_Card = styled.div`
 
   #video_box {
     width: 40%;
-    height: 31%
+    /* height: 80% */
   }
   #illust_box {
-    width: 54%;
-    height: 31%;
+    width: 57%;
+    /* height: 80%; */
   }
 `
 
@@ -149,11 +154,11 @@ export const Tracking_Home = styled.div`
    border-radius: 10px;
 `
 
-export const Blink = styled(NavLink)`
+export const Blink = styled(NavLink)` //해더, 로그인
   display: flex;
   flex-direction: column;
   text-align: left;
-  font-size: 20px;  
+  font-size: 15px;
   text-decoration: none;
   color: white;
   border-radius: 10px;
@@ -185,11 +190,17 @@ export const Hlink = styled(NavLink)`
 
 // Face_Camera_Home 에서 쓰이는 스타일
 export const Face_Camera_Home = styled.div`
-   width: 50%;
+  width: 50%;
   text-align: center;
   border-radius: 10px;
   border: 1px solid var(--, #9E9E9E);
 `;
+
+export const Camera_illrust = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
 
 ///AboutUs_Home에서 쓰이는 스타일
 export const AboutUs_Home = styled.div`

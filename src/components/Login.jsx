@@ -11,6 +11,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(''); //로그인 실패시 에러메세지
     const navigate = useNavigate();
 
     const handleIdClick = () => {
@@ -25,7 +26,7 @@ const Login = () => {
         try {
             //axios를 사용하여 POST 요청을 보냄
             const response = await axios.post('http://127.0.0.1:8000/api/accounts/login', {
-                email, 
+                email,
                 password // 요청 바디에 password 추가
             }, {
                 headers: {
@@ -40,39 +41,44 @@ const Login = () => {
             // 성공적으로 로그인한 후 홈 페이지로 이동
             navigate('/');
         } catch (error) {
-            // 로그인 실패 시 오류 메시지 표시
+            // 로그인 실패 시 오류 메시지 표시/ 수정필요
             console.error('로그인 실패:', error.response ? error.response.data : error.message);
             setError(error.response ? error.response.data.error : '로그인 실패');
+            setErrorMessage('이메일 또는 비밀번호를 확인해주세요');
         }
-    };
+    
+};
 
-    return (
-        <S.LoginContainer>
-            <h1>로그인하기</h1>
-            <S.InputContainer>
+return (
+    <S.LoginContainer>
+        <h1>로그인하기</h1>
+        <S.InputContainer>
             <input
-                    type="email"
-                    class='Login_Input'
-                    placeholder="이메일을 입력해주세요."
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    class='Login_Input'
-                    placeholder='비밀번호를 입력해주세요.'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </S.InputContainer>
-            <S.LoginButton onClick={handleLogin}>로그인</S.LoginButton>
-            <S.Blink style={{gap: "20px"}}>
-                <p onClick={handlePwClick}>{pwFindText}</p>
-                <p onClick={handleIdClick}>{idFindText}</p>
-                <p onClick={() => navigate('/Acount')}>회원가입</p>
-            </S.Blink>
-        </S.LoginContainer>
-    );
+                type="email"
+                class='Login_Input'
+                placeholder="이메일을 입력해주세요."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+                type="password"
+                class='Login_Input'
+                placeholder='비밀번호를 입력해주세요.'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            {errorMessage && <S.ErrorMessage>* {errorMessage}</S.ErrorMessage>}
+        </S.InputContainer>
+        <S.LoginButton onClick={handleLogin}>로그인</S.LoginButton>
+        <div id='RowBox'>
+            <S.LoginFind onClick={handleIdClick}>{idFindText}</S.LoginFind>
+            |
+            <S.LoginFind onClick={handlePwClick}>{pwFindText}</S.LoginFind>
+            |
+            <S.LoginFind to='/Acount'>회원가입</S.LoginFind>
+        </div>
+    </S.LoginContainer>
+);
 };
 
 export default Login;
