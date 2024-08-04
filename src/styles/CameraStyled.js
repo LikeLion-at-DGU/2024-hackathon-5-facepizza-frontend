@@ -17,6 +17,7 @@ export const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000; //창의 위치 인덱스
 `;
 export const ModalContent = styled.div`
   /* border: 1px solid black; */
@@ -217,6 +218,7 @@ export const Thumbnail = styled.div`
 
   img {
     width: 10vw;
+    object-fit: cover;
     height: auto;
     border: 4px solid #8181F7;
     border-radius: 5px;
@@ -285,6 +287,7 @@ export const Main_Container = styled.div`
 
   #descriptionBtn {
     border: none;
+    width: 100%;
     background: none;
     cursor: pointer;
     font-size: 18px;
@@ -358,13 +361,20 @@ p{
   }
   
 `;
+export const IllustInPage = styled.img`
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 35vw;
+  height: auto;
+  min-height: 200px;
+  object-fit: cover;
+`
 
 /////////PhotoSnanp 사진 고르는 칸
 export const SeletPhoto = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 40px 0;
+  margin: 40px 0 20px 0;
   #topbar{
     display: flex;
     flex-direction: row;
@@ -401,10 +411,21 @@ export const PhotoWrapper = styled.div`
     border-radius: 4px;
   `}
 
-  img{
-
+  p{
+    margin: 0px;
   }
 `;
+
+export const CapturedPhoto = styled.img`
+  width: 100%;
+  object-fit: cover;
+  height: ${props => {
+    const count = props.photoCount;
+    if (count === 1) return '600px';
+    if (count === 2 ) return '350px';
+    return '180px';
+  }};
+`
 
 export const Gallery = styled.div`
   display: grid;
@@ -423,6 +444,7 @@ export const Gallery = styled.div`
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 10; // 모달 창보다 낮게 설정
 
   @media (max-width: 1300px) {
     grid-template-columns: ${props => {
@@ -465,9 +487,20 @@ export const Gallery = styled.div`
 
 `;
 
-export const GotoAlbum = styled.div`
+export const FlexRow = styled.div`
 display: flex;
 flex-direction: row;
-border: 1px solid black;
-border-radius: 8px;
+`
+
+export const FakeEndBtn = styled.div`
+  padding: 4px 20px;
+  border-radius: 12px;
+  margin: 10px;
+  margin-bottom: 30px;
+
+  &:hover{
+    cursor: pointer;
+    transform: scale(1.01);
+    transition: transform 0.2s;
+  }
 `

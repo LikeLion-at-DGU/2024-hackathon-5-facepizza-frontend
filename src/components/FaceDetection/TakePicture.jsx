@@ -28,10 +28,8 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, setYourEmotion }
   }, [ExpressionType]);
 
   useEffect(() => {
-    // console.log(TakePhoto);
     if (capturing || TakePhoto) {
-      //또는으로 변경
-      console.log(TakePhoto);
+      // console.log(TakePhoto);
       console.log("Capturing processing...");
       const timer = setTimeout(() => {
         if (videoRef.current && canvasRef.current) {
@@ -48,7 +46,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, setYourEmotion }
           );
           const imageSrc = canvasRef.current.toDataURL("image/jpeg");
           setImageSrc(imageSrc);
-          onPhotoTaken(imageSrc);
+          onPhotoTaken(imageSrc, emotionTranslate);
           setCapturing(false); // 캡처 후 상태를 다시 false로 설정
           setFlash(true); // 캡처 후 flash 상태를 true로 설정
           setTimeout(() => setFlash(false), 200);

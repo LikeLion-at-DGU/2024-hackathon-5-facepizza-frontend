@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { NavLink, useNavigate  } from 'react-router-dom';
+import axios from 'axios';
 import * as C from '../../styles/CameraStyled';
 import * as S from '../../styles/StyledComponents';
 //Snap 페이지 찍힌 사진 컴포넌트
 
-const SelectPhoto = ({ capturedPhotos }) => {
+const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
     const [selectedPhotos, setSelectedPhotos] = useState([]);
     const [isSelectionMode, setIsSelectionMode] = useState(false); // 선택 모드 상태 추가
+    const navigate = useNavigate(); // 추가
 
     // 선택 모드 토글 함수
     const toggleSelectionMode = (isSelectionMode, setIsSelectionMode) => {
@@ -30,7 +33,8 @@ const SelectPhoto = ({ capturedPhotos }) => {
         if (selectedPhotos.length === capturedPhotos.length) {
             setSelectedPhotos([]); // 모든 사진이 이미 선택된 경우, 선택 해제
         } else {
-            setSelectedPhotos(capturedPhotos); // 그렇지 않으면, 모든 사진 선택
+            const allPhotos = capturedPhotos.map(item => item.photo);
+            setSelectedPhotos(allPhotos); // 그렇지 않으면, 모든 사진 선택
         }
     };
 
@@ -42,6 +46,15 @@ const SelectPhoto = ({ capturedPhotos }) => {
             link.download = 'photo.jpg';
             link.click();
         });
+    };
+
+    // 종료 버튼 클릭 시 경고 메시지 표시 함수
+    const handleExit = (event, path) => {
+        if (capturedPhotos.length > 0 && !window.confirm('정말 나가시겠습니까?\n앨범에 저장하지 않은 스냅은 그대로 삭제됩니다')) {
+            event.preventDefault();
+        } else {
+            navigate(path);
+        }
     };
 
     return (
@@ -62,16 +75,17 @@ const SelectPhoto = ({ capturedPhotos }) => {
                 </div>
                 <C.Gallery photoCount={capturedPhotos.length}>
                     {capturedPhotos && capturedPhotos.length > 0 ? (
-                        capturedPhotos.map((photo, index) => (
+                        capturedPhotos.map((item, index) => (
                             <C.PhotoWrapper
                                 key={index}
-                                isSelected={selectedPhotos.includes(photo)}
-                                onClick={() => toggleSelectPhoto(photo, isSelectionMode, selectedPhotos, setSelectedPhotos)} >
-                                <img
+                                isSelected={selectedPhotos.includes(item.photo)}
+                                onClick={() => toggleSelectPhoto(item.photo, isSelectionMode, selectedPhotos, setSelectedPhotos)} >
+                                <C.CapturedPhoto
                                     key={index}
-                                    src={photo} alt={`Captured ${index}`}
-                                    style={{ width: '100%', height: '180px', objectFit: 'cover' }}
+                                    src={item.photo} alt={`Captured ${index}`}
+                                    photoCount={capturedPhotos.length}
                                 />
+                                <p>{item.emotion}</p> {/* 감정 표시 */}
                             </C.PhotoWrapper>
                         ))
                     ) : (
@@ -79,12 +93,18 @@ const SelectPhoto = ({ capturedPhotos }) => {
                     )}
                 </C.Gallery>
             </C.SeletPhoto>
-            <C.GotoAlbum>
-                <S.Blink to='/album'>
-                    <S.Example100 />
-                    앨범 보러가기 ▶
-                </S.Blink>
-            </C.GotoAlbum>
+            <C.FlexRow>
+                <C.FakeEndBtn style={{backgroundColor: '#E77474'}}>
+                    <S.Blink to='/' style={{color: 'white'}} onClick={(event) => handleExit(event, '/')}>
+                        종료하기
+                    </S.Blink>
+                </C.FakeEndBtn>
+                <C.FakeEndBtn style={{backgroundColor: '#7C7C7C'}}>
+                    <S.Blink to='/album' style={{color: 'white'}} onClick={(event) => handleExit(event, '/album')}>
+                        종료 후 스냅앨범 보러가기
+                    </S.Blink>
+                </C.FakeEndBtn>
+            </C.FlexRow>
         </>
     )
 }
