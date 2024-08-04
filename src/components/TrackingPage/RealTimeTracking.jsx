@@ -10,7 +10,7 @@ const RealTimeTracking = () => {
   const videoRef = useRef(null);
   const [token, setToken] = useState(null);
   const [tracking, setTracking] = useState(true);
-  const [currentEmotion, setCurrentEmotion] = useState({ key: '', value: 0 });
+  const [currentEmotion, setCurrentEmotion] = useState();
   const [emotionCounts, setEmotionCounts] = useState({
     happy: 0,
     sad: 0,
@@ -110,11 +110,13 @@ const RealTimeTracking = () => {
 
     resizedDetections.forEach((detection) => {
       const expressions = detection.expressions;
+      setCurrentEmotion(expressions);   // 탐지된 현재 표정 데이터 저장
+
       const [maxKey, maxValue] = Object.entries(expressions).reduce(
         (acc, [key, value]) => (value > acc[1] ? [key, value] : acc),
         [null, -Infinity]
       );    // maxKey, maxValue 탐지
-      setCurrentEmotion({ key: maxKey, value: maxValue });
+      // setCurrentEmotion({ key: maxKey, value: maxValue });
 
       setEmotionCounts((prevCounts) => {
         const newCounts = { ...prevCounts };
@@ -170,7 +172,7 @@ const RealTimeTracking = () => {
           neutral: parseFloat(emotionPercentages.neutral),
           created_at: startTime.current.toISOString(),
           ended_at: endTime.current.toISOString(),
-          title: startTime.current.toISOString(),
+          title: `${formatDate(startTime.current)} ${formatTime(startTime.current)}`,
           highlights: Object.entries(emotionPics).map(([emotion, { img }]) => ({
             image: img,
             emotion: emotion,
@@ -233,16 +235,24 @@ const RealTimeTracking = () => {
             <div className='dataContainer'>
               <p>data</p>
               <h3>실시간 표정 데이터</h3>
-              <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+              {currentEmotion && Object.entries(currentEmotion).map(([emotion, value]) => (
+                <div key={emotion} style={{ marginRight: '10px' }}>
+                  <h4>{emotionTranslations[emotion]}: {(value * 100).toFixed(2)}%</h4>
+                </div>
+              ))}
             </div>
             <div className='dataContainer'>
               <p>data</p>
               <h3>누적 표정 데이터</h3>
-              <h4>{emotionTranslations[currentEmotion.key]} {(currentEmotion.value * 100).toFixed(7)}%</h4>
+              {Object.entries(emotionPercentages).map(([emotion, percentage]) => (
+                <div key={emotion} style={{ marginRight: '10px' }}>
+                  <h4>{emotionTranslations[emotion]}: {percentage}%</h4>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <RT.Sspan>시작 {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</RT.Sspan>
+        <RT.Sspan>{startTime.current && '시작'} {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</RT.Sspan>
         <RT.FinBtn onClick={handleEndTracking}>종료하기</RT.FinBtn>
 
         <div id='title_bar'>
@@ -253,7 +263,7 @@ const RealTimeTracking = () => {
             img ? (
               <div key={emotion}>
                 <img src={img} alt={emotion} width="300" style={{objectFit: 'cover'}} />
-                <p>{emotionTranslations[emotion]} {emotionPercentages[emotion]}%</p><br />
+                <p>{emotionTranslations[emotion]} {(maxValue * 100).toFixed(5)}%</p><br />
               </div>
             ) : null
           ))}
@@ -263,8 +273,6 @@ const RealTimeTracking = () => {
         
         
         <div>
-          <h3>하이라이트 사진:</h3>
-          
         </div>
       </C.Main_Container>
     </RT.TrackingContainer>
