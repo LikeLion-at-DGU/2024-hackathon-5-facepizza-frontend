@@ -170,7 +170,7 @@ const RealTimeTracking = () => {
           neutral: parseFloat(emotionPercentages.neutral),
           created_at: startTime.current.toISOString(),
           ended_at: endTime.current.toISOString(),
-          title: startTime.current.toISOString(),
+          title: `${formatDate(startTime.current)} ${formatTime(startTime.current)}`,
           highlights: Object.entries(emotionPics).map(([emotion, { img }]) => ({
             image: img,
             emotion: emotion,
