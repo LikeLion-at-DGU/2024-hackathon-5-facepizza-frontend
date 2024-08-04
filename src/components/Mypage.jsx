@@ -21,6 +21,7 @@ import Profile from "./Mypage/Profile";
 import DetailTracking from "./Mypage/DetailTracking";
 import axios from "axios";
 import Character from "./Character/Chracter";
+import AccountModal from "./Mypage/AccountModal";
 
 const Mypage = () => {
   const [token, setToken] = useState(null);
@@ -99,7 +100,7 @@ const Mypage = () => {
             <AccountDetail />
           </Account>
         </Container>
-        <button className="Exit">계정 탈퇴</button>
+        <AccountModal/>
       </WidthBox>
     </>
   );

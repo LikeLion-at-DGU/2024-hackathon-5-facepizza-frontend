@@ -15,6 +15,7 @@ export const ProfileBox = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
   margin-top: 38px;
   gap: 15px;
 `;
@@ -177,3 +178,13 @@ export const PointFont = styled.span`
   font-weight: 700;
   line-height: normal;
 `;
+
+export const AccountModalBox = styled.div`
+  width: 663.195px;
+  height: 391.86px;
+  flex-shrink: 0;
+  border-radius: 12.113px;
+  background: #fff;
+  box-shadow: 0px 1.8px 90px 0px rgba(0, 0, 0, 0.2);
+`;
+
