@@ -1,5 +1,5 @@
 import React from "react";
-import EmptySpace from 'src/assets/EmptySpace.svg'
+// import EmptySpace from 'src/assets/EmptySpace.svg'
 
 const AttendanceBlock = () => {
   var now = new Date();
