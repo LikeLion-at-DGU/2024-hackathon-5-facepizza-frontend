@@ -22,7 +22,7 @@ export const ProfileBox = styled.div`
 //최근 표정 트래킹 비율
 
 export const TrackingBox = styled.div`
-  width: 100%;
+  width: 1488px;
   border-radius: 5px;
   border: 1px solid #9e9e9e;
   margin-top: 42.95px;
@@ -41,17 +41,20 @@ export const TrackingBox = styled.div`
 `;
 
 export const DetailContent = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 1488px;
   border-radius: 5px;
   border: 1px solid #9e9e9e;
   margin-top: 40px;
 `;
 
 export const Account = styled.div`
-  width: 100%;
+  width: 1488px;
   border-radius: 5px;
   border: 1px solid #9e9e9e;
-  margin-top: 40px;
+  margin: 40px 0px;
   background: #f4f4f4;
   padding: 39px 0px;
 `;

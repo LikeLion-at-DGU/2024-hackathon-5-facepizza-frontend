@@ -1,4 +1,5 @@
 import React from "react";
+import EmptySpace from 'src/assets/EmptySpace.svg'
 
 const AttendanceBlock = () => {
   var now = new Date();
@@ -8,7 +9,7 @@ const AttendanceBlock = () => {
   const cols = 6;
   let rows = Math.ceil(date / cols); // 필요한 행의 수를 계산함
   const Calendar = [];
-  const EmptyBox = <img src="src/assets/EmptySpace.svg" />;
+  const EmptyBox = <img src={EmptySpace}/>;
   
   // 날짜에 맞는 아이템 생성
   for (let i = 0; i < rows; i++) {
