@@ -3,9 +3,9 @@ import { Default, Explanation, ThinTiny } from "../../styles/MypageStyled";
 
 const DdayDetail = () => {
   return (
-    <span>
+    <div style={{display: "inline-block"}}>
       <div className="DdayDetail">
-        <Default id="Date">1/1 기록</Default>
+        
         <Explanation>이만큼 성장했어요!</Explanation>
         <br />
         <Default id="Point">
@@ -31,7 +31,7 @@ const DdayDetail = () => {
           <ThinTiny>표정 트래킹과 표정 스냅에서 측정된 모든 표정을 합산한 결과입니다.</ThinTiny>
         </div>
       </div>
-    </span>
+    </div>
   );
 };
 export default DdayDetail;
