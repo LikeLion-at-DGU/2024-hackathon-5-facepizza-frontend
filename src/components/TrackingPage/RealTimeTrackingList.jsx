@@ -84,8 +84,8 @@ const RealTimeTrackingList = () => {
         <S.H2_title>표정 트래킹 개요</S.H2_title>
       </div>
       <div className='rowBox'>
-          <VideoComponent videoRef={videoRef} />
-        <div className='description' style={{width: 'auto'}}>   {/* 설명박스 (새로)*/}
+        <VideoComponent videoRef={videoRef} />
+        <div className='description' style={{ width: 'auto' }}>   {/* 설명박스 (새로)*/}
           <C.LetTracking onClick={() => navigate('/tracking')}>표정 트래킹 진행하기</C.LetTracking>
           <p style={{ textAlign: 'left', paddingLeft: '7px' }}>표정 트래킹이란?</p>
         </div>
@@ -93,7 +93,9 @@ const RealTimeTrackingList = () => {
 
       <div className='description' style={{ margin: '20px 0' }} > {/* 설명박스 (새로)*/}
         <div id='title_bar' style={{ borderBottom: 'none' }}>
-          <S.H2_title style={{ color: '#6D6D6D' }}>표정 트래킹 이용방법</S.H2_title>
+          <S.H2_title style={{ color: '#6D6D6D', fontSize: '20px'}} onClick={handleToggle}>
+            표정 트래킹 이용방법
+          </S.H2_title>
           <button id="descriptionBtn" onClick={handleToggle}>
             {isExplainOpen ? '▲' : '▼'}
           </button>
@@ -110,31 +112,31 @@ const RealTimeTrackingList = () => {
             </ol>
             <div className='rowBox'>
               <div className='face_example'>
-                <S.Logo src={face_smail} style={{width: '40px'}}/>
+                <S.Logo src={face_smail} style={{ width: '40px' }} />
                 행복
               </div>
               <div className='face_example'>
-                <S.Logo src={face_sad} style={{width: '40px'}}/>
+                <S.Logo src={face_sad} style={{ width: '40px' }} />
                 슬픔
               </div>
               <div className='face_example'>
-                <S.Logo src={face_angry} style={{width: '40px'}}/>
+                <S.Logo src={face_angry} style={{ width: '40px' }} />
                 분노
               </div>
               <div className='face_example'>
-                <S.Logo src={face_suprise} style={{width: '40px'}}/>
+                <S.Logo src={face_suprise} style={{ width: '40px' }} />
                 놀람
               </div>
               <div className='face_example'>
-                <S.Logo src={face_disgusting} style={{width: '40px'}}/>
+                <S.Logo src={face_disgusting} style={{ width: '40px' }} />
                 혐오
               </div>
               <div className='face_example'>
-                <S.Logo src={face_fear} style={{width: '40px'}}/>
+                <S.Logo src={face_fear} style={{ width: '40px' }} />
                 두려움
               </div>
               <div className='face_example'>
-                <S.Logo src={face_natural} style={{width: '40px'}}/>
+                <S.Logo src={face_natural} style={{ width: '40px' }} />
                 중립
               </div>
             </div>
@@ -142,8 +144,8 @@ const RealTimeTrackingList = () => {
         </C.SubTitle>
       </div>
 
-      <TrackingReportcard trackingReports={trackingReports}/>
-      
+      <TrackingReportcard trackingReports={trackingReports} />
+
     </C.Main_Container>
   );
 };

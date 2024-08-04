@@ -28,7 +28,7 @@ export const Nav = styled.nav`
 `;
 
 export const Logo = styled.img`
-  width: 80px;
+  width: 95px;
   height: auto;
   margin: 0px 0 5px 0;
   margin-left: auto;

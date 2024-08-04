@@ -238,20 +238,24 @@ const RealTimeTracking = () => {
             <div className='dataContainer'>
               <p>data</p>
               <h3>실시간 표정 데이터</h3>
+              <RT.Data1>
               {currentEmotion && Object.entries(currentEmotion).map(([emotion, value]) => (
                 <div key={emotion} style={{ marginRight: '10px' }}>
                   <h4>{emotionTranslations[emotion]}: {(value * 100).toFixed(2)}%</h4>
                 </div>
               ))}
+              </RT.Data1>
             </div>
             <div className='dataContainer'>
               <p>data</p>
               <h3>누적 표정 데이터</h3>
+              <RT.Data1>
               {Object.entries(emotionPercentages).map(([emotion, percentage]) => (
                 <div key={emotion} style={{ marginRight: '10px' }}>
                   <h4>{emotionTranslations[emotion]}: {percentage}%</h4>
                 </div>
               ))}
+              </RT.Data1>
             </div>
           </div>
         </div>
@@ -261,7 +265,7 @@ const RealTimeTracking = () => {
         <div id='title_bar'>
           <S.H2_title>하이라이트 사진 :</S.H2_title>
         </div>
-        <C.Gallery photoCount={Object.entries(emotionPics).length}>
+        <RT.Gallery photoCount={Object.entries(emotionPics).length}>
           {Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
             img ? (
               <div key={emotion}>
@@ -270,7 +274,7 @@ const RealTimeTracking = () => {
               </div>
             ) : null
           ))}
-        </C.Gallery>
+        </RT.Gallery>
       </C.Main_Container>
     </RT.TrackingContainer>
   );

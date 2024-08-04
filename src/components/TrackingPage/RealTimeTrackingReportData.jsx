@@ -105,7 +105,9 @@ const RealTimeTrackingReportData = () => {
           <p>{`종료: ${formatDate(report.ended_at)} ${formatTime(report.ended_at)}`}</p>
           {Object.entries(report).map(([key, value]) => (
             emotionTranslations[key] && (
+              <RT.EmotionText key={key} className={key}>
               <p key={key}>{`${emotionTranslations[key]}: ${value}%`}</p>
+              </RT.EmotionText>
             )
           ))}
         </div>
