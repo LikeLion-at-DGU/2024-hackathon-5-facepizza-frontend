@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "../../styles/StyledComponents";
 import axios from "axios";
-import {EmotionAlbum} from "../../styles/PhotoAlbumStyle";
+import EmotionalAlbum from "./EmotionalAlbum";
+
 
 const PhotoAlbum = () => {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ const PhotoAlbum = () => {
       <S.Container style={{display:"flex", alignItems:"flex-start", width:"100%", padding:"15px"}}>
         <S.Default>스냅 앨범</S.Default>
         <hr style={{background:"#C5C5C5"}}/>
-        <EmotionAlbum>행복</EmotionAlbum>
+        <EmotionalAlbum Emotion={happy}>행복</EmotionalAlbum>
       </S.Container>
     </>
   );
