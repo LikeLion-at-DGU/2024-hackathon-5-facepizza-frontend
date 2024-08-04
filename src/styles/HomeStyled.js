@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Sectin_Y = styled.section`
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -48,10 +48,10 @@ export const FlexRow = styled.div`
 `
 export const FlexCol = styled.div`
   display: flex;
-  /* width: 100%; */
+  width: 100%;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
 
   #last{
     text-align: left;
@@ -82,10 +82,10 @@ export const ComponentName = styled.div`
   @media (max-width: 1260px) {
     flex-direction: column;  //넓이 감소시 반응형
     align-items: flex-start;
-    gap: 5px;
+    gap: 2px;
 
    h2{
-    margin: 10px 0 10px 0px;
+    margin: 10px 0 0px 0px;
    }
    p{
     margin: 0 0 5px 0px;
@@ -215,7 +215,7 @@ export const Sectin_G = styled.section`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  padding: 15px;
+  padding: 8px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0.5, 0, 0.3);
   border-radius: 10px;
@@ -234,19 +234,33 @@ export const Sectin_G = styled.section`
     transition: transform 0.2s;
   }
 `;
-export const Clink = styled(NavLink)`
+export const ToMagLink = styled(NavLink)`
   display: flex;
-  flex-direction: column;
-  text-align: left;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
   font-size: 20px;  
   text-decoration: none;
   color: white;
   border-radius: 10px;
-  padding: 0.3em;
   color: black;
 
+  span{
+    display: inline-block;
+    font-weight: bold;
+    padding: 0 4px;
+  }
+`
+export const FakeBtn = styled.div`
+  padding: 4px 12px;
+  border-radius: 20px;
+  
   &:hover {
-    text-decoration: underline;
+    background-color: #EFFBFB;
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: transform 0.2s;
+    border: 1px solid #58D3F7;
   }
 `
 
@@ -260,13 +274,13 @@ export const Magazine_Home = styled.div`
 export const Example_mag = styled.div`
   display: flex;
   width: 100%;
-  height: 135px;
+  height: 100px;
   max-height: 200px;
   object-fit: cover;
   border-radius: 10px;
   background: #FFF;
   margin: 0px;
-  gap: 10px;
+  gap: 6px;
 
   img{
     padding: 10px;
@@ -278,6 +292,10 @@ export const Example_mag = styled.div`
     cursor: pointer;
     transform: scale(1.02);
     transition: transform 0.2s;
+  }
+
+  h3{ 
+    text-align: left;
   }
   `
 
