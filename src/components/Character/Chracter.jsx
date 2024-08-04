@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Character from "../../assets/character/"
+import ImportCharacter from "./ImportCharacter";
 
 const Character = () => {
   const [level, setLevel] = useState("f");
@@ -8,7 +8,9 @@ const Character = () => {
   const [trackingReports, setTrackingReports] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const emoticonsrc = {Character}`${level}_${emotion}.png`;
+
+  const emoticonKey = `${level}_${emotion}`;
+  const emoticonsrc = ImportCharacter[emoticonKey] || images['f_neutral'];
   
   useEffect(() => {
     const fetchTrackingReports = async () => {
