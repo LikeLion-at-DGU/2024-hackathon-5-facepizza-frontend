@@ -4,6 +4,70 @@ import * as C from '../../styles/CameraStyled';
 
 
 const TrackingReportcard = ({trackingReports}) => {
+    const formatDate = (date) => {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };  // 날짜 출력 형식
+    
+      const formatTime = (date) => {
+        return new Date(date).toLocaleTimeString('ko-KR', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        });
+      };  // 시간 출력 형식
+
+      const bestEmotion = (report) => {
+        let bestEmotion = report.happy;
+        let emotion = '행복한 표정을 가장 많이 지었어요!';
+        if (report.sad > bestEmotion) {
+            bestEmotion = report.sad;
+            emotion = '슬픔 표정을 가장 많이 지었어요!';
+        }
+            
+        if (report.angry > bestEmotion) {
+            bestEmotion = report.angry;
+            emotion = '분노 표정을 가장 많이 지었어요!';
+        }            
+        if (report.surprised > bestEmotion) {
+            bestEmotion = report.surprised;
+            emotion = '놀람 표정을 가장 많이 지었어요!';
+        }
+            
+        if (report.disgusted > bestEmotion) {
+            bestEmotion = report.disgusted;
+            emotion = '혐오 표정을 가장 많이 지었어요!';
+        }
+            
+        if (report.fearful > bestEmotion) {
+            bestEmotion = report.fearful;
+            emotion = '두려움 표정을 가장 많이 지었어요!';
+        }
+            
+        if (report.neutral > bestEmotion) {
+            bestEmotion = report.neutral;
+            emotion = '중립 표정을 가장 많이 지었어요!';
+        }
+            
+        return { bestEmotion, emotion };
+      };
+
+      const calculateElapsedTime = (start, end) => {
+        const elapsedMs = new Date(end) - new Date(start);
+        const seconds = Math.floor((elapsedMs / 1000) % 60);
+        const minutes = Math.floor((elapsedMs / (1000 * 60)) % 60);
+        // const hours = Math.floor((elapsedMs / (1000 * 60 * 60)) % 24);
+    
+        if (minutes == 0)
+          return `${String(seconds)}초`
+        else
+          return `${String(minutes)}분 ${String(seconds)}초`;
+      };  // 총 트래킹 한 시간
+      
 
     return (
         <>
@@ -12,14 +76,15 @@ const TrackingReportcard = ({trackingReports}) => {
             </div>
 
 
-            <ul>
+            <li>
                 {trackingReports && trackingReports.map((report) => (
-                    <li key={report.id}>
+                    <ul key={report.id}>
                         <h3>{report.title}</h3>
-                        <p>시작 시간: {new Date(report.created_at).toLocaleString()}</p>
-                        <p>종료 시간: {new Date(report.ended_at).toLocaleString()}</p>
+                        <p>{`${formatDate(report.created_at)} ${formatTime(report.created_at)}`}</p>
+                        <p>총 {calculateElapsedTime(report.created_at, report.ended_at)} 트래킹</p>
+                        
                         <div>
-                            <h4>감정 비율:</h4>
+                            <h4>{bestEmotion(report).emotion} | 누적 표정 데이터</h4>
                             <p>행복: {report.happy}%</p>
                             <p>슬픔: {report.sad}%</p>
                             <p>화남: {report.angry}%</p>
@@ -28,54 +93,9 @@ const TrackingReportcard = ({trackingReports}) => {
                             <p>두려움: {report.fearful}%</p>
                             <p>중립: {report.neutral}%</p>
                         </div>
-                        <div>
-                            <h4>하이라이트 이미지:</h4>
-                            {report.happy_highlight && (
-                                <div>
-                                    <h5>행복</h5>
-                                    <img src={report.happy_highlight} alt="happy" width="200" />
-                                </div>
-                            )}
-                            {report.sad_highlight && (
-                                <div>
-                                    <h5>슬픔</h5>
-                                    <img src={report.sad_highlight} alt="sad" width="200" />
-                                </div>
-                            )}
-                            {report.angry_highlight && (
-                                <div>
-                                    <h5>화남</h5>
-                                    <img src={report.angry_highlight} alt="angry" width="200" />
-                                </div>
-                            )}
-                            {report.surprised_highlight && (
-                                <div>
-                                    <h5>놀람</h5>
-                                    <img src={report.surprised_highlight} alt="surprised" width="200" />
-                                </div>
-                            )}
-                            {report.disgusted_highlight && (
-                                <div>
-                                    <h5>혐오</h5>
-                                    <img src={report.disgusted_highlight} alt="disgusted" width="200" />
-                                </div>
-                            )}
-                            {report.fearful_highlight && (
-                                <div>
-                                    <h5>두려움</h5>
-                                    <img src={report.fearful_highlight} alt="fearful" width="200" />
-                                </div>
-                            )}
-                            {report.neutral_highlight && (
-                                <div>
-                                    <h5>중립</h5>
-                                    <img src={report.neutral_highlight} alt="neutral" width="200" />
-                                </div>
-                            )}
-                        </div>
-                    </li>
+                    </ul>
                 ))}
-            </ul>
+            </li>
         </>
     );
 }
