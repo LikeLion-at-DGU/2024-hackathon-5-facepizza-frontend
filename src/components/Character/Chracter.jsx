@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 
 const Character = () => {
   const [level, setLevel] = useState("f");
-  const [emotion, setEmotion] = useState("무표정");
+  const [emotion, setEmotion] = useState("neutral");
   const [trackingReports, setTrackingReports] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const emoticonsrc = `src/assets/character/${level}_${emotion}.png`;
+  
   useEffect(() => {
     const fetchTrackingReports = async () => {
       try {
