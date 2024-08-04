@@ -26,9 +26,8 @@ const VideoComponent = ({ videoRef, style  }) => {
       autoPlay={true}
       style={{
         width: "100%",
-        height: 'auto', // 기본값은 auto로 설정
+        height: 'auto',
         objectFit: 'cover',
-        maxHeight: '100%', // 기본값을 비율에 맞게 설정
         transform: 'rotateY(180deg)',
         ...style, // 외부에서 전달된 스타일을 병합
       }}

@@ -3,9 +3,9 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 //컴포넌트 파일 임포트
 import Header from './components/Header';
-import RealTimeTracking from './components/RealTimeTracking';
-import RealTimeTrackingReport from './components/RealTimeTrackingReport';
-import RealTimeTrackingList from './components/RealTimeTrackingList';
+import RealTimeTracking from './components/TrackingPage/RealTimeTracking';
+import RealTimeTrackingReport from './components/TrackingPage/RealTimeTrackingReport';
+import RealTimeTrackingList from './components/TrackingPage/RealTimeTrackingList';
 import PhotoSnap from './components/PhotoSnap/PhotoSnap';
 import PhotoAlbum from './components/PhotoSnap/PhotoAlbum';
 import About from './components/About';

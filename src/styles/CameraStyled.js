@@ -1,4 +1,10 @@
 import styled, { keyframes, css } from 'styled-components';
+import smileLogo from '../assets/Logo_happy.png';
+import sadLogo from '../assets/Logo_sad.png';
+import angryLogo from '../assets/Logo_angry.png';
+import supriseLogo from '../assets/Logo_suprise.png';
+
+
 
 /////포토스냅모달
 export const ModalBackground = styled.div`
@@ -48,15 +54,16 @@ const spin = keyframes`
 
 export const Feedback = styled.div`
   margin-left: 20px;
+  width:90px;
   background-color: black;
   border-radius: 13px;
-  color: ${({ $isDetecting }) => ($isDetecting ? 'white' : 'black')};
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   padding: 4px 8px;
   font-size: 11px;
 
-  .spinner {
+  /* .spinner {
     display: inline-block;
     width: 13px;
     height: 13px;
@@ -66,7 +73,7 @@ export const Feedback = styled.div`
     margin-left: 10px;
     margin-bottom: 0;
     animation: ${({ $isDetecting }) => ($isDetecting ? css`${spin} 1s linear infinite` : 'none')};
-  }
+  } */
 `;
 //////촬영 효과 
 const flashAnimation = keyframes`
@@ -104,10 +111,31 @@ export const CaptureButton = styled.button`
   width: 65px;
   height: 65px;
   border-radius: 33px;
-  background-color: #554E4E;
-  background-image: url('../assets/Logo_Smile.png');
+  background-size: cover; /* 필요에 따라 조정 */
+  background-color: transparent;
+  background-position: center; /* 필요에 따라 조정 */
   border: none;
   cursor: pointer;
+
+  background-image: ${({ emotion }) => {
+    switch (emotion) {
+      case '행복':
+        return `url(${smileLogo})`;
+      case '슬픔':
+        return `url(${sadLogo})`;
+      case '분노':
+        return `url(${angryLogo})`;
+      case '놀람':
+        return `url(${supriseLogo})`;
+      default:
+        return 'none';
+    }
+  }};
+
+  &:hover{
+    transform: scale(1.03);
+    transition: 0.2s;
+  }
 
   color: white;
   font-size: 16px;
@@ -159,9 +187,24 @@ export const RightPanel = styled.div`
 
 export const EmotionButton = styled.button`
   width: 13vw;
-  margin: 10px 0;
+  margin: 5px 0;
   padding: 10px;
-  background-color: ${({ selected }) => (selected ? '#FFD700' : '#f0f0f0')};
+  color: #FFFFFF;
+  background-color: ${({ selected, selectedEmotion }) => {
+    if (!selected) return '#554E4E';
+    switch (selectedEmotion) {
+      case '행복':
+        return '#FFCF55'; // 빨강
+      case '슬픔':
+        return '#5EBBFF'; // 주황
+      case '분노':
+        return '#FF9472'; // 노랑
+      case '놀람':
+        return '#84DE5A'; // 초록
+      default:
+        return '#554E4E'; // 기본값
+    }
+  }};
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -226,7 +269,7 @@ export const Main_Container = styled.div`
     border-bottom: 2px solid #C5C5C5;
   }
 
-  .box{
+  .rowBox{
     display: flex;
     width: 100%;
     padding: 20px;
@@ -234,7 +277,7 @@ export const Main_Container = styled.div`
   }
 
   .description{
-  display: flex;
+    display: flex;
     flex-direction: column;
     width: 100%;
     padding: 0 40px;
@@ -252,13 +295,23 @@ export const Main_Container = styled.div`
   
 `
 export const LetPhoto = styled.button`
+    display: inline-block;
     background-color: #2E2E2E;
     color: #FFFFFF;
-    width: 220px;
+    width: 180px;
     padding: 9px 25px;
     border-radius: 20px;
-    font-size: 25px;
+    font-size: 20px;
   `
+  export const LetTracking = styled.button`
+  display: inline-block;
+  background-color: #2E2E2E;
+  color: #FFFFFF;
+  width: 250px;
+  padding: 9px 25px;
+  border-radius: 20px;
+  font-size: 20px;
+`
 export const SubTitle = styled.div`
 margin: 0px 0px;
 display: flex;
@@ -266,7 +319,7 @@ align-items: center;
 white-space: nowrap;
 width: 100%;
 /* color: #6D6D6D; */
-background-color: #FFFCF0;
+background-color: #FFF;
 
 button {
   margin-top: 20px;
@@ -296,6 +349,14 @@ p{
   font-size: 20px; 
   font-weight: bold;
   }
+
+  .face_example{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+  }
+  
 `;
 
 /////////PhotoSnanp 사진 고르는 칸
@@ -349,12 +410,13 @@ export const Gallery = styled.div`
   display: grid;
   grid-template-columns: ${props => {
     const count = props.photoCount;
-    if (count === 0 ) return '1fr'; // 0장일 때 1개의 칸
+    if (count === 0) return '1fr'; // 0장일 때 1개의 칸
     if (count === 1) return '1fr'; // 1장일 때 1개의 칸
     if (count === 2) return 'repeat(2, 1fr)'; // 2장일 때 2개의 칸
     return 'repeat(5, 1fr)'; // 3장 이상일 때 5개의 칸
   }};
   gap: 10px;
+  width: 100%;
   max-width: 1600px;
   min-height: 150px;
   margin: 0px 0 0 0;
@@ -364,31 +426,31 @@ export const Gallery = styled.div`
 
   @media (max-width: 1300px) {
     grid-template-columns: ${props => {
-      const count = props.photoCount;
-      if (count === 0) return '1fr';
-      if (count === 1) return '1fr';
-      if (count === 2) return 'repeat(2, 1fr)';
-      return 'repeat(4, 1fr)';
-    }};
+    const count = props.photoCount;
+    if (count === 0) return '1fr';
+    if (count === 1) return '1fr';
+    if (count === 2) return 'repeat(2, 1fr)';
+    return 'repeat(4, 1fr)';
+  }};
   }
 
   @media (max-width: 900px) {
     grid-template-columns: ${props => {
-      const count = props.photoCount;
-      if (count === 0) return '1fr';
-      if (count === 1) return '1fr';
-      if (count === 2) return 'repeat(2, 1fr)';
-      return 'repeat(2, 1fr)';
-    }};
+    const count = props.photoCount;
+    if (count === 0) return '1fr';
+    if (count === 1) return '1fr';
+    if (count === 2) return 'repeat(2, 1fr)';
+    return 'repeat(2, 1fr)';
+  }};
   }
 
   @media (max-width: 450px) {
     grid-template-columns: ${props => {
-      const count = props.photoCount;
-      if (count === 0) return '1fr';
-      if (count === 1) return '1fr';
-      return '1fr';
-    }};
+    const count = props.photoCount;
+    if (count === 0) return '1fr';
+    if (count === 1) return '1fr';
+    return '1fr';
+  }};
   }
 
   #zero{

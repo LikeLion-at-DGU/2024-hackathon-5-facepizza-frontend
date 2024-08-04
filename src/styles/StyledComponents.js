@@ -22,7 +22,7 @@ export const Main = styled.main`
 
 export const Section = styled.section`
   margin-bottom: 20px;
-  padding: 30px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -51,7 +51,8 @@ export const Logo = styled.img`
   height: auto;
   margin: 0px 0 5px 0;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+  padding: 0 8px;
 `
 
 //PhotoAlbum.jsx에서 쓰이는 스타일

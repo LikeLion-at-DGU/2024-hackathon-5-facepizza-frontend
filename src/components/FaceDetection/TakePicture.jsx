@@ -13,13 +13,14 @@ const emotionMap = {
   disgusted: "혐오",
 };
 
-const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
+const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, setYourEmotion }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [capturing, setCapturing] = useState(false);
   const [flash, setFlash] = useState(false); // 깜빡이기 위한 상태 추가
   const [photoTaken, setPhotoTaken] = useState(false);
+  const [emotionTranslate, setEmotionTranslate] = useState('');
 
   // console.log(isModalOpen);
   useEffect(() => {
@@ -63,19 +64,23 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto }) => {
   }, [TakePhoto, capturing]);
 
   const handleExpressions = (expressions) => {
-    const { maxKey, maxValue } = expressions;
-    // console.log(maxKey);
+    const { maxKey, maxValue } = expressions; 
     const emotionTranslate = emotionMap[maxKey];
     console.log("현재 표정 :", emotionTranslate); //현재 감지되고 있는 표정 출력
+
     if (emotionTranslate === ExpressionType && maxValue > 0.5 && !photoTaken) {
       setCapturing(true); //얼굴이 맞는 경우 capturing 상태를 true로 설정
-      // console.log(capturing);
     } else {
       setCapturing(false); //얼굴이 맞지 않는 경우 capturing 상태를 false로 설정
-      // console.log(capturing);
     }
     console.log("캡쳐 진행 상태:", capturing);
+    setEmotionTranslate(emotionTranslate);
   };
+
+  //yourEmotion상태를 업데이트(모달창 탑바에서 디스플레이)
+  useEffect(() => {
+    setYourEmotion(emotionTranslate);
+  }, [emotionTranslate]);
 
   return (
     <>

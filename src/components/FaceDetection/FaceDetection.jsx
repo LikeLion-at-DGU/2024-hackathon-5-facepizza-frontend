@@ -4,7 +4,7 @@ import LoadApiModels from "./LoadApiModels"; // 얼굴 인식 모델을 로드�
 import VideoComponent from "./VideoComponent"; // 비디오 스트림을 렌더링하는 컴포넌트
 import * as faceapi from "face-api.js"; // 얼굴 인식 라이브러리
 
-const FaceDetection = ({ videoRef, onDetections }) => {
+const FaceDetection = ({ videoRef, onDetections, style }) => {
   useEffect(() => {
     // console.log(videoRef.current);
     const setupFaceDetection = async () => {
@@ -68,7 +68,7 @@ const FaceDetection = ({ videoRef, onDetections }) => {
   }, [videoRef, onDetections]);   //videoRef, onDetections 변화마다 시행
 
   return (
-    <VideoComponent videoRef={videoRef} />
+    <VideoComponent videoRef={videoRef} style={style} />
   );
 };
 

@@ -18,13 +18,13 @@ const RouteBar = () => {
       breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/aboutus">team 얼굴피자</R.RLink></R.ContBar>;
       break;
     case '/tracking':
-      breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 표정 트래킹 〉 <R.RLink to="/tracking">표정 트래킹하기</R.RLink></R.ContBar>;
+      breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/tracking/list">트래킹 개요</R.RLink> 〉 <R.RLink to="/tracking">표정 트래킹하기</R.RLink></R.ContBar>;
       break;
     case '/tracking/report':
-      breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 표정 트래킹 〉 <R.RLink to="/tracking/report">레포트</R.RLink></R.ContBar>;
+      breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/tracking/list">트래킹 개요</R.RLink> 〉 <R.RLink to="/tracking/report">레포트</R.RLink></R.ContBar>;
       break;
     case '/tracking/list':
-      breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/tracking/list">표정 트래킹</R.RLink></R.ContBar>;
+      breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/tracking/list">트래킹 개요</R.RLink></R.ContBar>;
       break;
     case '/snap':
       breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/snap">표정 스냅</R.RLink></R.ContBar>;

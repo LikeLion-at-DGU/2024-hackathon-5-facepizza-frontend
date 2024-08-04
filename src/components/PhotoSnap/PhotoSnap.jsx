@@ -11,6 +11,7 @@ const PhotoSnap = () => {
   const [capturedPhotos, setCapturedPhotos] = useState([]);
   const [TakePhoto, setTakePhoto] = useState(false);
   const [isExplainOpen, setIsExplainOpen] = useState(true);
+  const [yourEmotion, setYourEmotion] = useState('미감지'); //현재 감정 출력을 위한 상태
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -19,7 +20,7 @@ const PhotoSnap = () => {
     setIsModalOpen(false);
   };
   const handlePhotoTaken = (newPhoto) => {
-    console.log('New photo taken:', newPhoto);
+    // console.log('New photo taken:', newPhoto);
     setCapturedPhotos((prevPhotos) => [...prevPhotos, newPhoto]);
     setTakePhoto(false);
   };
@@ -36,11 +37,11 @@ const PhotoSnap = () => {
       <div id="title_bar">
         <S.H2_title>표정 스냅사진 찍기📸</S.H2_title>
       </div>
-      <div class='box'>
+      <div class='rowBox'>
         <S.Example100 style={{ width: '500px' }} />
         <div class='description'>   {/* 설명박스 (새로)*/}
           <C.LetPhoto onClick={handleOpenModal}>사진 촬영하기</C.LetPhoto>
-          <p style={{ textAlign: 'left' }}>친구와 함께 찍어보아요~</p>
+          <p style={{ textAlign: 'left', paddingLeft: '7px' }}>친구와 함께 찍어보아요~</p>
         </div>
       </div>
 
@@ -72,6 +73,9 @@ const PhotoSnap = () => {
         <PhotoSnapModal
           onClose={handleCloseModal}
           setTakePhoto={setTakePhoto}
+          yourEmotion={yourEmotion}
+          selectedEmotion={selectedEmotion}
+
         >
           <C.Snap_Container>
             <C.CameraView>
@@ -81,6 +85,7 @@ const PhotoSnap = () => {
                 ExpressionType={selectedEmotion}
                 TakePhoto={TakePhoto}
                 style={modalVideoStyle}
+                setYourEmotion={setYourEmotion}
               />
             </C.CameraView>
             <C.RightPanel>
@@ -90,6 +95,7 @@ const PhotoSnap = () => {
                     key={emotion}
                     selected={emotion === selectedEmotion}
                     onClick={() => setSelectedEmotion(emotion)}
+                    selectedEmotion={selectedEmotion}
                   >
                     {emotion}
                   </C.EmotionButton>
