@@ -1,6 +1,6 @@
 import React from "react";
 import { Default, Explanation } from "../../styles/MypageStyled";
-import Ellipse from "../../assets/Ellipse.svg";
+import Ellipse from "../../assets/Ellipse.png";
 
 const DetailTracking = () => {
   return (
