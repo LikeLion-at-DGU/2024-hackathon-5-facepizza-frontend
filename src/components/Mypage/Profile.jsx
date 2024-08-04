@@ -82,7 +82,7 @@ const Profile = () => {
         />
       </Default>
       <img
-        src="src/assets/rename.png"
+        src="./src/assets/rename.png"
         className="rename"
         alt="Rename Icon"
         onClick={handleImageClick} // 이미지 클릭 시 handleImageClick 호출

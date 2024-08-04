@@ -27,7 +27,7 @@ const Gauge = ({ level }) => {
         <PointFont>{age}까지 {maxExp - exp}P 더!</PointFont>
         <EndPoint><PointFont>10p</PointFont></EndPoint>
       </BaseGauge>
-      <img src="src\assets\MoreInfo.png" style={{marginLeft:"10px"}}/>
+      <img src=".\src\assets\MoreInfo.png" style={{marginLeft:"10px"}}/>
     </div>
   );
 };

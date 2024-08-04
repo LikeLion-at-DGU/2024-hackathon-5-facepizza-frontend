@@ -7,7 +7,7 @@ const Character = () => {
   const [trackingReports, setTrackingReports] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const emoticonsrc = `src/assets/character/${level}_${emotion}.png`;
+  const emoticonsrc = `./src/assets/character/${level}_${emotion}.png`;
   
   useEffect(() => {
     const fetchTrackingReports = async () => {
