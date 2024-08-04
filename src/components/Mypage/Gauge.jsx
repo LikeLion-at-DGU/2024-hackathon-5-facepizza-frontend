@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BaseGauge, EndPoint, PointFont, StartPoint, StyledGauge } from "../../styles/MypageStyled";
+import MoreInfo from "../../assets/MoreInfo.png";
 
 const Gauge = ({ level }) => {
   const [exp, setExp] = useState(0);
@@ -27,7 +28,7 @@ const Gauge = ({ level }) => {
         <PointFont>{age}까지 {maxExp - exp}P 더!</PointFont>
         <EndPoint><PointFont>10p</PointFont></EndPoint>
       </BaseGauge>
-      <img src=".\src\assets\MoreInfo.png" style={{marginLeft:"10px"}}/>
+      <img src={MoreInfo} style={{marginLeft:"10px"}}/>
     </div>
   );
 };

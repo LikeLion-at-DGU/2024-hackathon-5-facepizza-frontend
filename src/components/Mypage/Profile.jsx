@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Default, ProfileBox } from "../../styles/MypageStyled";
+import rename from "../../assets/rename.png";
 
 const Profile = () => {
   const [age, setAge] = useState(1);
@@ -82,7 +83,7 @@ const Profile = () => {
         />
       </Default>
       <img
-        src="./src/assets/rename.png"
+        src={rename}
         className="rename"
         alt="Rename Icon"
         onClick={handleImageClick} // 이미지 클릭 시 handleImageClick 호출
