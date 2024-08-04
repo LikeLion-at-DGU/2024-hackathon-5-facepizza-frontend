@@ -237,3 +237,40 @@ hr {
   line-height: normal;
   border: none;
 }
+
+.QuestionMark {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  position: fixed;
+  top: 450px;
+  left: 1200px;
+  width: 515px;
+  height: 142px;
+  padding: 21.735px 27.531px;
+  justify-content: center;
+  align-items: center;
+  gap: 14.49px;
+  border-radius: 28.98px;
+  border: 1.449px solid #6d6d6d;
+  background: #fff;
+}
+
+.QContents {
+  color: #000;
+  font-family: IM_Hyemin;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#NextStep {
+  color: #000;
+  font-family: IM_Hyemin;
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
