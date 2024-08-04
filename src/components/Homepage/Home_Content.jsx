@@ -12,6 +12,7 @@ const Home_Content = () => {
   const [token, setToken] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 상태 관리
   const [userId, setUserId] = useState(null);  // 유저 ID 관리
+  const [cameraSectionHeight, setCameraSectionHeight] = useState(0);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -46,8 +47,8 @@ const Home_Content = () => {
     <>
       <Facial_Character />
       <div style={{display: 'flex', flexDirection: 'row', gap: '30px'}}>
-        <Tracking_Home />
-        <Face_Camera_Home />
+        <Tracking_Home sectionHeight={cameraSectionHeight}/>
+        <Face_Camera_Home onHeightChange={setCameraSectionHeight} />
       </div>
       <div style={{display: 'flex', flexDirection: 'row', gap: '30px', width: '100%'}}>
         <Magazine_Home/>
