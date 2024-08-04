@@ -50,7 +50,7 @@ const TrackingReportcard = ({trackingReports}) => {
             
         if (report.neutral > bestEmotion) {
             bestEmotion = report.neutral;
-            emotion = '중립 표정을 가장 많이 지었어요!';
+            emotion = '무표정을 가장 많이 지었어요!';
         }
             
         return { bestEmotion, emotion };
