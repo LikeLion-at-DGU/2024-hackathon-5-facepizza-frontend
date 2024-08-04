@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import * as S from '../../styles/StyledComponents';
-import * as C from '../../styles/CameraStyled';
+import * as H from '../../styles/HomeStyled';
+import * as RT from '../../styles/RealTimeTrackingStyled'
 
-const TrackingReportcard = () => {
+import face_suprise from '../../assets/face/face_suprise.png';
+import face_smail from '../../assets/face/face_smail.png';
+import face_sad from '../../assets/face/face_sad.png';
+import face_natural from '../../assets/face/face_natural.png';
+import face_fear from '../../assets/face/face_fear.png';
+import face_disgusting from '../../assets/face/face_disgusting.png';
+import face_angry from '../../assets/face/face_angry.png';
+
+const TrackingReportcard = ({ report = {} }) => {
     const [trackingReports, setTrackingReports] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userId, setUserId] = useState(null);
@@ -29,34 +38,45 @@ const TrackingReportcard = () => {
     };
 
     const bestEmotion = (report) => {
-        let bestEmotion = report.happy;
+        let bestEmotion = report.happy || 0;
         let emotion = '행복한 표정을 가장 많이 지었어요!';
-        if (report.sad > bestEmotion) {
+        let emotionClass = 'happy';
+
+        if ((report.sad || 0) > bestEmotion) {
             bestEmotion = report.sad;
             emotion = '슬픔 표정을 가장 많이 지었어요!';
+            emotionClass = 'sad';
         }
-        if (report.angry > bestEmotion) {
+        if ((report.angry || 0) > bestEmotion) {
             bestEmotion = report.angry;
             emotion = '분노 표정을 가장 많이 지었어요!';
+            emotionClass = 'angry';
         }
-        if (report.surprised > bestEmotion) {
+        if ((report.surprised || 0) > bestEmotion) {
             bestEmotion = report.surprised;
             emotion = '놀람 표정을 가장 많이 지었어요!';
+            emotionClass = 'surprised';
         }
-        if (report.disgusted > bestEmotion) {
+        if ((report.disgusted || 0) > bestEmotion) {
             bestEmotion = report.disgusted;
             emotion = '혐오 표정을 가장 많이 지었어요!';
+            emotionClass = 'disgusted';
         }
-        if (report.fearful > bestEmotion) {
+        if ((report.fearful || 0) > bestEmotion) {
             bestEmotion = report.fearful;
             emotion = '두려움 표정을 가장 많이 지었어요!';
+            emotionClass = 'fearful';
         }
-        if (report.neutral > bestEmotion) {
+        if ((report.neutral || 0) > bestEmotion) {
             bestEmotion = report.neutral;
             emotion = '무표정을 가장 많이 지었어요!';
+            emotionClass = 'neutral';
         }
         return { bestEmotion, emotion };
     };
+
+
+
 
     const calculateElapsedTime = (start, end) => {
         const elapsedMs = new Date(end) - new Date(start);
@@ -117,34 +137,50 @@ const TrackingReportcard = () => {
     if (!isLoggedIn) return <p>로그인 후에만 접근 가능합니다. 로그인 해주세요.</p>;
     if (error) return <p>Error: {error.message}</p>;
 
+
+
     return (
         <>
-            <div id='title_bar' style={{ margin: '20px 0' }}>
-                <S.H2_title>표정 트래킹 기록</S.H2_title>
+            <div id='title_bar' style={{ margin: '20px 0', alignItems:'flex-end', gap: '10px' }}>
+                <S.H2_title>표정 트래킹 기록</S.H2_title> <span>총 {trackingReports.length}개 </span>
             </div>
-            <ul>
-                {trackingReports.length > 0 ? (
-                    trackingReports.map((report) => (
-                        <li key={report.id} style={{ marginBottom: '20px' }}>
-                            <h3>{report.title}</h3>
-                            <p>{`${formatDate(report.created_at)} ${formatTime(report.created_at)}`}</p>
-                            <p>총 {calculateElapsedTime(report.created_at, report.ended_at)} 트래킹</p>
-                            <div>
-                                <h4>{bestEmotion(report).emotion} | 누적 표정 데이터</h4>
-                                <p>행복: {report.happy}%</p>
-                                <p>슬픔: {report.sad}%</p>
-                                <p>화남: {report.angry}%</p>
-                                <p>놀람: {report.surprised}%</p>
-                                <p>혐오: {report.disgusted}%</p>
-                                <p>두려움: {report.fearful}%</p>
-                                <p>중립: {report.neutral}%</p>
+
+            {trackingReports.length > 0 ? (
+                trackingReports.map((report) => (
+
+                    <RT.Card>
+                        <h3>{report.title}</h3> 
+                        <div id='FlexRow' style={{ gap: '25px' }}>
+                            <div id='leftWrapper'>  {/* 세로 */}
+                                <div class="timebox">
+                                    <p>{`${formatDate(report.created_at)} ${formatTime(report.created_at)}`}</p>
+                                    <p>총 {calculateElapsedTime(report.created_at, report.ended_at)} 트래킹</p>
+                                </div>
+                                <RT.EmotionText className={bestEmotion(report).emotion}>
+                                    <h4>{bestEmotion(report).emotion}</h4>
+                                </RT.EmotionText>
                             </div>
-                        </li>
-                    ))
-                ) : (
-                    <p>기록이 없습니다.</p>
-                )}
-            </ul>
+                            <div id='rightWrapper' > | 누적 표정 데이터
+                                <div class="facialData">
+                                    <p>행복: {report.happy.toFixed(0)}%</p>
+                                    <p>슬픔: {report.sad.toFixed(0)}%</p>
+                                    <p>화남: {report.angry.toFixed(0)}%</p>
+                                    <p>놀람: {report.surprised.toFixed(0)}%</p>
+                                    <p>혐오: {report.disgusted.toFixed(0)}%</p>
+                                    <p>두려움: {report.fearful.toFixed(0)}%</p>
+                                    <p>중립: {report.neutral.toFixed(0)}%</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </RT.Card>
+                ))
+            ) : (
+                <p>기록이 없습니다.</p>
+            )}
+
         </>
     );
 };
