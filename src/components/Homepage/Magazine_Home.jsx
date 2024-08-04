@@ -31,7 +31,7 @@ const Magazine_Home = () => {
     return (
         <H.Magazine_Home>
             <H.ComponentName>
-                <h2>인사이트 창고</h2>
+                <H.SecondH2>인사이트 창고</H.SecondH2>
             </H.ComponentName>
             <H.Sectin_G>
                 <H.FlexCol>

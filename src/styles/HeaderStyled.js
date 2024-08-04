@@ -40,7 +40,7 @@ export const Hlink = styled(NavLink)`
   text-align: center;
   text-decoration: none;
   font-family: Inter;
-  font-size: 26px;
+  font-size: 18px;
   border-bottom: ${(props) => (props.active ? '4px solid black' : 'none')};
   color: ${(props) => (props.active ? 'black' : '#6D6D6D')};
   padding-bottom: 0.2em;

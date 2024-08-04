@@ -234,6 +234,11 @@ export const Sectin_G = styled.section`
     transition: transform 0.2s;
   }
 `;
+
+export const SecondH2 = styled.h2`
+  padding: 10px 0;
+`
+
 export const ToMagLink = styled(NavLink)`
   display: flex;
   flex-direction: row;

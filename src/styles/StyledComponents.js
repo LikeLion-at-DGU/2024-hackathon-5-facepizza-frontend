@@ -121,7 +121,6 @@ export const Blink = styled(NavLink)`
   display: flex;
   text-align: center;
   text-decoration: none;
-  font-family: Inter;
   color: white;
   border-radius: 10px;
   padding: 0.3em;
@@ -156,7 +155,8 @@ export const Nav = styled.nav`
     width: 225px;
     padding-top: 10px;
     justify-content: flex-end;
-    /* font-size: 26px; */
+    font-size: 18px;
+    color: #6D6D6D;
   }
 `;
 
