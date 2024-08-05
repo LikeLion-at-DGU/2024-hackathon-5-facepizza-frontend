@@ -28,7 +28,7 @@ const PhotoElement = ({Emotion}) => {
 
     return(
         <ElementBox id="ElementBox">
-            <div>Image</div>
+            <div></div>
             <div>Date</div>
         </ElementBox>
     )
