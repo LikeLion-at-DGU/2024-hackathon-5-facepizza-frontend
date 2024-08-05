@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import FaceDetection from "./FaceDetection";
 
-const FaceExpression = ({ videoRef, onExpressions }) => {
+const FaceExpression = ({ videoRef, onExpressions, style }) => {
   const [detections, setDetections] = useState(false);  ///인식이 성공적으로 이뤄졌는지 여부
   const [expressions, setExpressions] = useState({ maxKey: "start", maxValue: 0 });   //인식된 감정 객체 {감정, 강도}
 
@@ -36,7 +36,7 @@ const FaceExpression = ({ videoRef, onExpressions }) => {
   };
 
   return (
-    <FaceDetection videoRef={videoRef} onDetections={handleDetections} /> //FaceDetection에서 얼굴을 탐지할 때마다 handleDetections 호출
+    <FaceDetection videoRef={videoRef} onDetections={handleDetections} style={style} /> //FaceDetection에서 얼굴을 탐지할 때마다 handleDetections 호출
   );
 };
 
