@@ -13,7 +13,7 @@ const emotionMap = {
   disgusted: "혐오",
 };
 
-const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, setYourEmotion }) => {
+const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, setYourEmotion, style }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
@@ -82,7 +82,7 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, setYourEmotion }
 
   return (
     <>
-      <FaceExpression videoRef={videoRef} onExpressions={handleExpressions} />
+      <FaceExpression videoRef={videoRef} onExpressions={handleExpressions} style={style}/>
       <canvas ref={canvasRef} style={{ display: "none" }} />
       <C.FlashOverlay flash={flash} /> {/* 깜빡이는 효과를 위한 div */}
     </>

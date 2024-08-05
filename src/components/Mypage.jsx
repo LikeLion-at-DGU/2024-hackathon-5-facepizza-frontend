@@ -21,6 +21,7 @@ import DetailTracking from "./Mypage/DetailTracking";
 import axios from "axios";
 import Character from "./Character/Chracter";
 import AccountModal from "./Mypage/AccountModal";
+import { API } from '../api';
 
 const Mypage = () => {
   const [token, setToken] = useState(null);
@@ -39,8 +40,8 @@ const Mypage = () => {
         const token = localStorage.getItem("token"); // 토큰을 로컬 스토리지에서 가져옵니다.
         setToken(token);
         console.log("Token:", token); // 토큰 값 확인용 콘솔 로그 추가
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/mypage/profile",
+        const response = await API.get(
+          "/api/mypage/profile",
           {
             headers: {
               Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.

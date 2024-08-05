@@ -1,8 +1,8 @@
-// src/components/PhotoSnap/PhotoAlbum.jsx
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import * as S from "../../styles/StyledComponents";
-import axios from "axios";
+// src/components/PhotoAlbum.jsx
+import React, {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as S from '../../styles/StyledComponents';
+import axios from 'axios';
 import EmotionalAlbum from "./EmotionalAlbum";
 
 const PhotoAlbum = () => {
@@ -10,6 +10,7 @@ const PhotoAlbum = () => {
   const [token, setToken] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -22,15 +23,14 @@ const PhotoAlbum = () => {
           navigate("/login");
         }
 
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/mypage/profile",
-          {
-            headers: {
-              Authorization: `Token ${token}`,
-            },
+        const response = await API.get('/api/albums', {
+          headers: {
+            Authorization: `Token ${token}`  // 인증 헤더에 토큰을 추가합니다.
           }
-        );
-        if (response.data.id) {
+        });
+        console.log('album data response:', response); // 응답 확인용 콘솔 로그 추가
+        if (response.data) {
+          setData(response.data);
           setIsLoggedIn(true);
           setUserId(response.data.id);
         } else {
