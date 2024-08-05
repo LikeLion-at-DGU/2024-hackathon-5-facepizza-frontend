@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const API = axios.create({
-    baseURL: 'https://facepizza-cheese.site',
+    baseURL: 'http://localhost:5173/',
     headers: {
         'Content-Type': 'application/json',
     },

@@ -10,7 +10,7 @@ const Profile = ({data}) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    //console.log(data);
+    console.log(data.user);
     setName(data.user.first_name);
     console.log(data.characters[0]);
     setAge(data.characters[0].level);
