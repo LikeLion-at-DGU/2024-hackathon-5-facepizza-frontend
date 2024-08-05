@@ -11,7 +11,7 @@ const Album_Home = () => {
 
     const fetchData = async () => {
         try {
-            const response = await API.get('api/albums');
+            const response = await API.get('/api/albums');
             setData(response.data);
         } catch (error) {
             console.log(error);

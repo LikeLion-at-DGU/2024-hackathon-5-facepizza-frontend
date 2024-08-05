@@ -49,11 +49,16 @@ const DdayDetail = ({ character }) => {
   ];
 
   function getEmotionElements(data) {
-    return data.map((entry, index) => (
-      <span key={index} style={{ color: Interpret[entry.emotion].color }}>
-        {`${Interpret[entry.emotion].name} ${entry.value.toFixed(2)}%`}
-      </span>
-    ));
+    return data.map((entry, index) => {
+      // `entry.value`가 숫자인지 확인 후 `toFixed` 호출
+      console.log(entry.value);
+      const value = typeof entry.value === 'number' ? entry.value.toFixed(2) : '0.00';
+      return (
+        <span key={index} style={{ color: Interpret[entry.emotion].color }}>
+          {`${Interpret[entry.emotion].name} ${value}%`}
+        </span>
+      );
+    });
   }
 
   return (
@@ -68,7 +73,7 @@ const DdayDetail = ({ character }) => {
         <div id="OtherExpression">
           <Explanation>오늘 어떤 표정을 가장 많이 지었을까요?</Explanation>
           <Default style={{ color: Interpret[maxEmotion.emotion]?.color || "#000000" }}>
-            {Interpret[maxEmotion.emotion]?.name || "없음"} {maxEmotion.value.toFixed(2)}%
+            {Interpret[maxEmotion.emotion]?.name || "없음"} {typeof maxEmotion.value === 'number' ? maxEmotion.value.toFixed(2) : '0.00'}%
           </Default>
           <Explanation>
             <div style={{ gap: "15px;" }}>
