@@ -60,10 +60,10 @@ const Mypage = () => {
           }),
         ]);
 
-        console.log("Profile response:", profileResponse);
-        console.log("Character response:", characterResponse);
-        console.log("Number response:", numberResponse);
-        console.log("Report response:", reportResponse);
+        console.log("Profile response:", profileResponse.data);
+        console.log("Character response:", characterResponse.data);
+        console.log("Number response:", numberResponse.data);
+        console.log("Report response:", reportResponse.data);
 
         // 상태 업데이트
         setResponse(profileResponse.data);
