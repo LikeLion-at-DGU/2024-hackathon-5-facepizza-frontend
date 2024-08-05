@@ -65,6 +65,16 @@ const RealTimeTracking = () => {
     neutral: '무표정',
   };  // 감정 출력시 이름 변경
 
+  const emotionColors = {
+    happy: '#FFB700',
+    sad: '#5DBBFF',
+    angry: '#FF9472',
+    surprised: '#40C700',
+    disgusted: '#9621CC',
+    fearful: '#0FBED6',
+    neutral: '#6D6D6D',
+  };  // 감정마다 색상 지정
+
   // 유저 로그인 상태와 정보 가져오기
   useEffect(() => {
     const fetchUserData = async () => {
@@ -219,6 +229,8 @@ const RealTimeTracking = () => {
     };
   }, []);
 
+  const maxEmotionKey = currentEmotion ? Object.keys(currentEmotion).reduce((a, b) => currentEmotion[a] > currentEmotion[b] ? a : b) : null;
+
   return (
     <RT.TrackingContainer>
       <C.Main_Container>
@@ -227,11 +239,7 @@ const RealTimeTracking = () => {
         </div>
         <div className='rowBox' style={{ height: '370px' }}>
           <div id='videoDeo'>
-            {/* <div style={{ display: 'felx', flexDirection: 'column' }}>
-              <div id='topbar'></div> */}
             <FaceDetection videoRef={videoRef} onDetections={handleDetections} style={{ height: '350px' }} />
-            {/* <div id='bottombar'></div>
-            </div> */}
           </div>
 
           <div className='description' style={{ width: '50%', gap: '15px' }}>
@@ -240,7 +248,7 @@ const RealTimeTracking = () => {
               <h3>실시간 표정 데이터</h3>
               <RT.Data1>
               {currentEmotion && Object.entries(currentEmotion).map(([emotion, value]) => (
-                <div key={emotion} style={{ marginRight: '10px' }}>
+                <div key={emotion} style={{ marginRight: '10px', color: emotion === maxEmotionKey ? emotionColors[emotion] : 'black' }}>
                   <h4>{emotionTranslations[emotion]}: {(value * 100).toFixed(2)}%</h4>
                 </div>
               ))}
