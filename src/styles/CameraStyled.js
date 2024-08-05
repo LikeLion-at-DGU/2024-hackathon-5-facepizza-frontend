@@ -313,6 +313,13 @@ export const Main_Container = styled.div`
     align-items: flex-start;
     width: 0;
   }
+
+  #BTNBOX {
+    display: flex;
+    padding: 0 15px;
+    margin: 0px;
+    gap: 5px;
+  }
   
 `
 export const LetPhoto = styled.button`
@@ -528,3 +535,56 @@ export const FakeEndBtn = styled.div`
     transition: transform 0.2s;
   }
 `
+export const FourFrame = styled.div`
+  position: relative;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background-color: black;
+  grid-template-columns: repeat(2, 300px);
+  grid-template-rows: repeat(2, 400px);
+  grid-auto-flow: row dense;
+  padding: 37px 37px 137px 37px;
+  row-gap: 18px;
+  column-gap: 18px;
+`
+export const EXPhoto = styled.div`
+  background-color: white;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 101%;
+    height: 101%;
+    object-fit: cover;
+  }
+`;
+
+export const Frame = styled.img`
+  position: absolute;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+`
+
+export const FrameChoice = styled.button`
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 2px 10px;
+  margin: 0 5px;
+  /* border: ${(props) => (props.isSelected ? '2px solid blue' : 'none')}; */
+  background-color: ${(props) => (props.isSelected ? '#610B38' : 'white')};
+  color: ${(props) => (props.isSelected ? '#FFFFFF' : 'black')};
+  
+  &:hover{
+    transform: scale(1.03);
+    transition: 0.2s;
+  }
+
+&:active{
+  background-color: #610B38;
+  color: #FFFFFF;
+}
+  `
+

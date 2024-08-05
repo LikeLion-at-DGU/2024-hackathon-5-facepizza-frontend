@@ -3,6 +3,7 @@ import { NavLink, useNavigate  } from 'react-router-dom';
 import * as C from '../../styles/CameraStyled';
 import * as S from '../../styles/StyledComponents';
 import { API } from '../../api'; // 정의한 API 인스턴스를 가져오기
+import axios from 'axios';
 
 //Snap 페이지 찍힌 사진 컴포넌트
 
@@ -50,25 +51,22 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
     };
 
     // 종료 버튼 클릭 시 경고 메시지 표시 함수
-    const handleExit = (event, path) => {
-        if (capturedPhotos.length > 0 && !window.confirm('정말 나가시겠습니까?\n앨범에 저장하지 않은 스냅은 그대로 삭제됩니다')) {
-            event.preventDefault();
-        } else {
-            navigate(path);
-        }
-    };
-
-    const PostPhoto = async () => {
+    const postSelectedPhotos = async () => {
         try {
-        const response = await API.post('/api/snaps', {
-            image: "image",
-            emotion: "emotion"
-        });
-        alert("사진이 저장되었습니다.");
-      } catch (error) {
-        alert('사진 저장 실패');
-      }
-    };
+          const promises = selectedPhotos.map(photo => {
+            return axios.post('/api/snaps', {
+              image: photo, // 이미지 데이터
+              emotion: "emotion" // 감정 데이터는 상황에 맞게 추가
+            });
+          });
+          await Promise.all(promises);
+          alert("선택한 사진이 저장되었습니다.");
+        } catch (error) {
+          alert('사진 저장 실패');
+        }
+      };
+
+      
     
 
     return (
@@ -84,7 +82,7 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
                             선택</button>
                         <button onClick={() => selectAllPhotos(capturedPhotos, setSelectedPhotos, selectedPhotos)}>전체 선택</button>
                         <button onClick={() => downloadSelectedPhotos(selectedPhotos)}>다운로드</button>
-                        <button id="save" onClick={PostPhoto}>앨범에 저장</button>
+                        <button id="save" >앨범에 저장</button>
                     </div>
                 </div>
                 <C.Gallery photoCount={capturedPhotos.length}>
