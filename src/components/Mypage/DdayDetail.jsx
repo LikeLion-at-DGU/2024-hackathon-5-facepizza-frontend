@@ -14,13 +14,13 @@ const Interpret = {
 const DdayDetail = ({ character }) => {
   function getMaxEmotionValue(character) {
     const emotions = {
-      happy: character.happy,
-      sad: character.sad,
-      angry: character.angry,
-      surprised: character.surprised,
-      disgusted: character.disgusted,
-      fearful: character.fearful,
-      neutral: character.neutral,
+      happy: character.reports[0].happy,
+      sad: character.reports[0].sad,
+      angry: character.reports[0].angry,
+      surprised: character.reports[0].surprised,
+      disgusted: character.reports[0].disgusted,
+      fearful: character.reports[0].fearful,
+      neutral: character.reports[0].neutral,
     };
 
     // 배열로 변환하여 최대값 찾기
@@ -37,16 +37,16 @@ const DdayDetail = ({ character }) => {
   // `character`가 정의된 경우 감정 값을 가져오기
   const maxEmotion = character ? getMaxEmotionValue(character) : { emotion: "None", value: 0 };
 
-  // 감정 데이터를 배열로 변환하여 정렬
+  // 감정 데이터를 배열로 변환
   const emotionData = [
-    { emotion: 'happy', value: character.happy },
-    { emotion: 'sad', value: character.sad },
-    { emotion: 'angry', value: character.angry },
-    { emotion: 'surprised', value: character.surprised },
-    { emotion: 'disgusted', value: character.disgusted },
-    { emotion: 'fearful', value: character.fearful },
-    { emotion: 'neutral', value: character.neutral },
-  ].sort((a, b) => b.value - a.value); // 값 기준 내림차순 정렬
+    { emotion: 'happy', value: character.reports[0].happy },
+    { emotion: 'sad', value: character.reports[0].sad },
+    { emotion: 'angry', value: character.reports[0].angry },
+    { emotion: 'surprised', value: character.reports[0].surprised },
+    { emotion: 'disgusted', value: character.reports[0].disgusted },
+    { emotion: 'fearful', value: character.reports[0].fearful },
+    { emotion: 'neutral', value: character.reports[0].neutral },
+  ];
 
   function getEmotionElements(data) {
     return data.map((entry, index) => (

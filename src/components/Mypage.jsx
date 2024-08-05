@@ -122,14 +122,14 @@ const Mypage = () => {
                 padding: "0px 200px",
               }}
             >
-              <DdayDetail character={response}/>
-              <DetailTracking character={response} count={number}/>
+              <DdayDetail character={character}/>
+              <DetailTracking character={character} count={number.count}/>
             </div>
           </DetailContent>
           {/* 계정 정보가 들어간 창 */}
           <Account>
             <BoldBig>계정 정보</BoldBig>
-            <AccountDetail user={response.data.user}/>
+            <AccountDetail user={response.user}/>
           </Account>
         </Container>
         <AccountModal />
