@@ -88,7 +88,7 @@ const Mypage = () => {
           ];
         }
 
-        if (!reportResponse || reportResponse.reports.length === 0) {
+        if (!reportResponse || reportResponse.length === 0) {
           reportResponse = [
             {
               happy: 0,
