@@ -6,3 +6,4 @@ npm install react-modal  <br>
 react-webcam face-api.js <br>
 npm install react-draggable <br>
  npm install react-icons  <br>
+ npm install html2canvas <br>
