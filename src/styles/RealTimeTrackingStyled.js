@@ -74,7 +74,7 @@ export const Tracking = styled.div`
 export const H2_title = styled.h2`
   color: var(--, #000);
   margin: 0;
-  font-family: IM_Hyemin;
+  ;
   font-size: 25px;
   font-style: normal;
   font-weight: 700;

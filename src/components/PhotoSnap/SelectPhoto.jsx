@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate  } from 'react-router-dom';
-import axios from 'axios';
 import * as C from '../../styles/CameraStyled';
 import * as S from '../../styles/StyledComponents';
 //Snap 페이지 찍힌 사진 컴포넌트

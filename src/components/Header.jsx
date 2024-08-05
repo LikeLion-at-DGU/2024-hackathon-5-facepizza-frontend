@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '../styles/StyledComponents';
 import * as T from '../styles/HeaderStyled';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Logo_Cheese from '../assets/Logo_Cheese.png';
 import { API } from '../api';
 
 const Header = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,8 +21,7 @@ const Header = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await API.fetch('http://127.0.0.1:8000/api/accounts/logout', {
-        method: 'POST',
+      const response = await API.post('/api/accounts/logout', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Token ${token}`,

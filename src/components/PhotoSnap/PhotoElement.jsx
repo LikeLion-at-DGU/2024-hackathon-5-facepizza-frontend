@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ElementBox } from "../../styles/PhotoAlbumStyle";
-import { API } from "./API";
+import { API } from "../../api";
 
 const PhotoElement = ({ Emotion }) => {
   const [token, setToken] = useState(null);
