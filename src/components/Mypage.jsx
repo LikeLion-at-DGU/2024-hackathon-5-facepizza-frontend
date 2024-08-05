@@ -72,6 +72,7 @@ const Mypage = () => {
 
         // 상태 업데이트
         const characterData = characterResponse.data;
+        const reportData = reportResponse.data;
 
         // reports가 null인 경우 감정 값들을 0으로 설정
         if (!characterData.reports || characterData.reports.length === 0) {
@@ -88,8 +89,8 @@ const Mypage = () => {
           ];
         }
 
-        if (!reportResponse || reportResponse.length === 0) {
-          reportResponse = [
+        if (!reportResponse || reportData.length === 0) {
+          reportData = [
             {
               happy: 0,
               sad: 0,
@@ -106,7 +107,7 @@ const Mypage = () => {
         setResponse(profileResponse.data);
         setCharacter(characterResponse.data);
         setNumber(numberResponse.data);
-        setReport(reportResponse);
+        setReport(reportResponse.data);
 
         if (profileResponse.data.user.id) {
           setIsLoggedIn(true);
