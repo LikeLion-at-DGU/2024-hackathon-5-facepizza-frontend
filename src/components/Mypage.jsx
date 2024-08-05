@@ -106,7 +106,7 @@ const Mypage = () => {
         setResponse(profileResponse.data);
         setCharacter(characterResponse.data);
         setNumber(numberResponse.data);
-        setReport(reportResponse.data);
+        setReport(reportResponse);
 
         if (profileResponse.data.user.id) {
           setIsLoggedIn(true);
