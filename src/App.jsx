@@ -21,7 +21,7 @@ const AppContent = () => {
       {isHome && <Home_Title />}
       {!isHome && <Header />}
       {!isHome && <RouteBar />}
-      <Main>
+      <Main id='main'>
         <AppRouter />
       </Main>
       {isHome && <Home_Content />}

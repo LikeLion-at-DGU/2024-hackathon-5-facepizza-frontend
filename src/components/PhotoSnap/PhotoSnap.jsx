@@ -40,7 +40,7 @@ const PhotoSnap = () => {
     objectFit: 'cover'
   };
   const handleToggle = () => { setIsExplainOpen(!isExplainOpen); }
-
+  const goToFourCut = () => { navigate('/snap/FourCut')}
   usePrompt('정말 나가시겠습니까?\n앨범에 저장하지 않은 스냅은 그대로 삭제됩니다', isFormDirty);
 
 
@@ -53,6 +53,7 @@ const PhotoSnap = () => {
           <C.IllustInPage src={illust_Snap} />
         <div class='description'>   {/* 설명박스 (새로)*/}
           <C.LetPhoto onClick={handleOpenModal}>사진 촬영하기</C.LetPhoto>
+          <C.LetPhoto onClick ={goToFourCut}>치즈 네컷</C.LetPhoto>
           <p style={{ textAlign: 'left', paddingLeft: '7px' }}>친구와 함께 찍어보아요~</p>
         </div>
       </div>
@@ -81,7 +82,7 @@ const PhotoSnap = () => {
       </div>
 
 
-      {/* 모달창 칠드런 */}
+      {/* 포토스냅 모달창 칠드런 */}
       {isModalOpen && (
         <PhotoSnapModal
           onClose={handleCloseModal}
@@ -95,10 +96,10 @@ const PhotoSnap = () => {
               {/* <h3>{selectedEmotion} 표정을 지어주세요</h3> */}
               <TakePicture
                 onPhotoTaken={handlePhotoTaken}
-                ExpressionType={selectedEmotion}
+                ExpressionType={selectedEmotion}//선택된 목표 감정 상태
                 TakePhoto={TakePhoto}
                 style={modalVideoStyle}
-                setYourEmotion={setYourEmotion}
+                setYourEmotion={setYourEmotion}//현재 감지된 상태
               />
             </C.CameraView>
             <C.RightPanel>

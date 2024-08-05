@@ -2,12 +2,19 @@ import React, { useState, useRef, useEffect } from "react";
 import { Default, ProfileBox } from "../../styles/MypageStyled";
 import rename from "../../assets/rename.png";
 
-const Profile = () => {
+const Profile = ({data}) => {
   const [age, setAge] = useState(1);
   const [name, setName] = useState("김치즈");
   const [newName, setNewName] = useState("");
   const [isEditing, setIsEditing] = useState(false); // 입력 필드 활성화 상태
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    //console.log(data);
+    setName(data.user.first_name);
+    console.log(data.characters[0]);
+    setAge(data.characters[0].level);
+  },[])
 
   useEffect(() => {
     // if (inputRef.current) {

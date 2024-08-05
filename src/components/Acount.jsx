@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as S from '../styles/StyledComponents';
 import check from '../assets/Icon_check.png';
+import { API } from '../api';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Account = () => {
@@ -70,7 +70,7 @@ const Account = () => {
         };
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/accounts/register', userData, {
+            const response = await API.post('/api/accounts/register', userData, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
