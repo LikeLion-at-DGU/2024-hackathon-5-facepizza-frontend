@@ -3,6 +3,7 @@ import * as H from '../../styles/HomeStyled';
 import * as S from '../../styles/StyledComponents';
 import Locked from '../../assets/Locked.png';
 import { API } from '../../api';
+import F_sad from '../../assets/character/f_sad.png'
 
 const Album_Home = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,12 +31,19 @@ const Album_Home = () => {
             </H.ComponentName>
             <H.Sectin_G>  {/* 안애 내용이 로그인여부에따라 변경 */}
                 {isLoggedIn ? (
-                    <S.Blink to='/album'>
-                        <H.FlexRow>
-                            {data.map(data => (
-                                <H.Example key={data.id} data={data} />
-                            ))}
-                        </H.FlexRow>
+                    <S.Blink to='/album' style={{ width: '100%' }}>
+                        {data.length === 0 ? (
+                            <H.NoImg>
+                                <h2>아직 사진이 없습니다</h2>
+                                <p>포토스냅에서 사진을 찍어보세요!</p>
+                            </H.NoImg>
+                        ) : (
+                            <H.FlexRow>
+                                {data.map(data => (
+                                    <H.Example key={data.id} data={data} />
+                                ))}
+                            </H.FlexRow>
+                        )}
                     </S.Blink>
                 ) : (
                     <H.FlexCol style={{ padding: '20px 0 10px 0' }}>

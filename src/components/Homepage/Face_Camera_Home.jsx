@@ -40,8 +40,8 @@ const Face_Camera_Home = ({ onHeightChange }) => {
                         </div>
                     </H.Component_Card>
                     <H.Description>
-                        <b>정해진 표정을 지어야지만 사진이 촬영되는 특별한 카메라!</b>
-                        풍부한 표정과 함꼐 치즈의 스냅사진을 촬영해보세요
+                        <p><b>정해진 표정을 지어야지만 사진이 촬영되는 특별한 카메라!</b></p>
+                        <span>풍부한 표정과 함꼐 치즈의 스냅사진을 촬영해보세요</span>
                     </H.Description>
                     {/* <H.FlexRow style={{padding: '15px 6px 10px 6px'}}>
                     <H.GoPhotoBtn >사진 찍기</H.GoPhotoBtn>
