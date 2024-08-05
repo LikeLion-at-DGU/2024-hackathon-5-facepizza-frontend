@@ -406,7 +406,7 @@ export const H2_title = styled.h2`
   // 페이지 제목
   color: var(--, #000);
   margin: 0;
-  font-family: IM_Hyemin;
+  ;
   font-size: 25px;
   font-style: normal;
   font-weight: 700;
@@ -425,7 +425,7 @@ export const Default = styled.span`
   color: #000;
 
   /* 디폴트 1 */
-  font-family: IM_Hyemin;
+  ;
   font-size: 28.5px;
   font-style: normal;
   font-weight: 700;

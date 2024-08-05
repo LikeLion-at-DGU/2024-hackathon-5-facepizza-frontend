@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import * as S from '../../styles/StyledComponents';
 import Logo_Cheese from '../../assets/Logo_Cheese.png';
 import styled from 'styled-components';
-
+import { API } from '../../api';
 
 const Title = styled.div`
   display: flex;

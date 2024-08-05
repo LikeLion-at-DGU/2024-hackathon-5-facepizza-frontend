@@ -49,8 +49,7 @@ const PhotoAlbumDetail = () => {
           <Default>{Interpret[emotion]}</Default>
         </div>
       </div>
-      <PhotoAlbumDetailEelement/>
-      <PhotoAlbumDetailEelement/>
+      <PhotoAlbumDetailEelement emotion={emotion}/>
     </>
   );
 };

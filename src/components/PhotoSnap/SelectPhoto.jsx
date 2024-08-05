@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate  } from 'react-router-dom';
-import axios from 'axios';
 import * as C from '../../styles/CameraStyled';
 import * as S from '../../styles/StyledComponents';
 import { API } from '../../api'; // 정의한 API 인스턴스를 가져오기
