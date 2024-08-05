@@ -29,7 +29,7 @@ const PhotoSnap = () => {
   };
   const handlePhotoTaken = (newPhoto, emotion) => {
     // console.log('New photo taken:', newPhoto);
-    setCapturedPhotos((prevPhotos) => [...prevPhotos, { photo: newPhoto, emotion }]); //캡처 정보에 감정 추가
+    setCapturedPhotos((prevPhotos) => [...prevPhotos, { photo: newPhoto, emotion: selectedEmotion }]);
     setTakePhoto(false);
     setIsFormDirty(true); // 사진이 찍혔을 때 페이지 이동 경고 준비
   };
@@ -52,8 +52,10 @@ const PhotoSnap = () => {
       <div class='rowBox' >
           <C.IllustInPage src={illust_Snap} />
         <div class='description'>   {/* 설명박스 (새로)*/}
+          <div id='twoBtn'>
           <C.LetPhoto onClick={handleOpenModal}>사진 촬영하기</C.LetPhoto>
           <C.LetPhoto onClick ={goToFourCut}>치즈 네컷</C.LetPhoto>
+          </div>
           <p style={{ textAlign: 'left', paddingLeft: '7px' }}>친구와 함께 찍어보아요~</p>
         </div>
       </div>

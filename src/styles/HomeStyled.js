@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import F_sad from '../assets/character/f_sad.png'
+
 
 export const Sectin_Y = styled.section`
   /* margin-bottom: 20px; */
-  padding: 15px;
+  padding: 10px 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -144,6 +146,15 @@ export const Description = styled.div`
     text-align: justify;
     justify-content: center;
     align-items: flex-start;
+    padding: 0 10px 10px 10px;
+    p{
+      font-size: 18px;
+      margin: 4px 0px;
+    }
+    span{
+      font-size: 15px;
+    }
+    
 `
 
 // Tracking_Home 에서 쓰이는 스타일
@@ -215,7 +226,7 @@ export const Sectin_G = styled.section`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  padding: 8px;
+  padding: 7px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0.5, 0, 0.3);
   border-radius: 10px;
@@ -233,6 +244,7 @@ export const Sectin_G = styled.section`
     transform: scale(1.02);
     transition: transform 0.2s;
   }
+
 `;
 
 export const SecondH2 = styled.h2`
@@ -302,5 +314,19 @@ export const Example_mag = styled.div`
   h3{ 
     text-align: left;
   }
+  `
+  //HomeAlbum스타일
+  export const NoImg = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;  
+    justify-content: center;
+    background-image: url(${F_sad});
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5;
+    padding: 60px 0;
   `
 

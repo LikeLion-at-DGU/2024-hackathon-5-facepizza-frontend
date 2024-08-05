@@ -25,9 +25,9 @@ const Tracking_Home = ({sectionHeight }) => {
             <NavLink to='/tracking/list' style={{textDecoration: 'none'}}>
                 <H.Blink to="/tracking/list">
                     <H.Camera_illrust src={illust_Tracking} />
-                    <H.Description style={{padding: '13px 0 0px 0'}}>
-                        <b>나는 평소에 어떤 표정일까?</b>
-                        카메라를 통해 내가 평소 짓는 표정을 실제 비율로 체크할 수 있습니다.
+                    <H.Description style={{padding: '13px 0 10px 0'}}>
+                        <p><b>나는 평소에 어떤 표정일까?</b></p>
+                        <span>카메라를 통해 내가 평소 짓는 표정을 실제 비율로 체크할 수 있습니다.</span>
                     </H.Description>
                 </H.Blink>
                 {/* <H.FlexRow style={{ padding: '15px 6px 10px 6px' }}>
