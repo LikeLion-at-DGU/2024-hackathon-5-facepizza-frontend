@@ -40,55 +40,37 @@ const Mypage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("token"); // 토큰을 로컬 스토리지에서 가져옵니다.
+        const token = localStorage.getItem("token");
         setToken(token);
-        console.log("Token:", token); // 토큰 값 확인용 콘솔 로그 추가
-    
-        // API 요청
-        const profileResponse = await API.get(
-          "/api/mypage/profile",
-          {
-            headers: {
-              Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.
-            },
-          }
-        );
-        const characterResponse = await API.get(
-          "/api/characters/tracktime",
-          {
-            headers: {
-              Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.
-            },
-          }
-        );
-        const numberResponse = await API.get(
-          "/api/albums/count",
-          {
-            headers: {
-              Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.
-            },
-          }
-        );
-        const reportResponse = await API.get(
-          "/api/report",
-          {
-            headers: {
-              Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.
-            },
-          }
-        );
-    
-        console.log("Profile response:", profileResponse); // 응답 확인용 콘솔 로그 추가
-        console.log("Character response:", characterResponse); // 응답 확인용 콘솔 로그 추가
-        console.log("Number response:", numberResponse); // 응답 확인용 콘솔 로그 추가
-        console.log("Report response:", reportResponse); // 응답 확인용 콘솔 로그 추가
-    
+        console.log("Token:", token);
+        
+        // 여러 요청을 병렬로 처리합니다.
+        const [profileResponse, characterResponse, numberResponse, reportResponse] = await Promise.all([
+          API.get("/api/mypage/profile", {
+            headers: { Authorization: `Token ${token}` },
+          }),
+          API.get("/api/characters/tracktime", {
+            headers: { Authorization: `Token ${token}` },
+          }),
+          API.get("/api/albums/count", {
+            headers: { Authorization: `Token ${token}` },
+          }),
+          API.get("/api/report", {
+            headers: { Authorization: `Token ${token}` },
+          }),
+        ]);
+
+        console.log("Profile response:", profileResponse);
+        console.log("Character response:", characterResponse);
+        console.log("Number response:", numberResponse);
+        console.log("Report response:", reportResponse);
+
         // 상태 업데이트
         setResponse(profileResponse.data);
         setCharacter(characterResponse.data);
         setNumber(numberResponse.data);
         setReport(reportResponse.data);
-    
+
         if (profileResponse.data.id) {
           setIsLoggedIn(true);
           setUserId(profileResponse.data.id);
