@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import * as S from '../../styles/StyledComponents';
-import * as H from '../../styles/HomeStyled';
-import * as RT from '../../styles/RealTimeTrackingStyled'
+import * as RT from '../../styles/RealTimeTrackingStyled';
 
-import face_suprise from '../../assets/face/face_suprise.png';
-import face_smail from '../../assets/face/face_smail.png';
-import face_sad from '../../assets/face/face_sad.png';
-import face_natural from '../../assets/face/face_natural.png';
-import face_fear from '../../assets/face/face_fear.png';
-import face_disgusting from '../../assets/face/face_disgusting.png';
-import face_angry from '../../assets/face/face_angry.png';
-
-const TrackingReportcard = ({ report = {} }) => {
+const TrackingReportcard = () => {
     const [trackingReports, setTrackingReports] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userId, setUserId] = useState(null);
@@ -20,6 +11,7 @@ const TrackingReportcard = ({ report = {} }) => {
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(null);
 
+    // 날짜 형식 변환 함수
     const formatDate = (date) => {
         const d = new Date(date);
         const year = d.getFullYear();
@@ -28,6 +20,7 @@ const TrackingReportcard = ({ report = {} }) => {
         return `${year}-${month}-${day}`;
     };
 
+    // 시간 형식 변환 함수
     const formatTime = (date) => {
         return new Date(date).toLocaleTimeString('ko-KR', {
             hour: '2-digit',
@@ -37,47 +30,39 @@ const TrackingReportcard = ({ report = {} }) => {
         });
     };
 
+    // 가장 많이 표현된 감정 계산 함수
     const bestEmotion = (report) => {
         let bestEmotion = report.happy || 0;
         let emotion = '행복한 표정을 가장 많이 지었어요!';
-        let emotionClass = 'happy';
 
         if ((report.sad || 0) > bestEmotion) {
             bestEmotion = report.sad;
             emotion = '슬픔 표정을 가장 많이 지었어요!';
-            emotionClass = 'sad';
         }
         if ((report.angry || 0) > bestEmotion) {
             bestEmotion = report.angry;
             emotion = '분노 표정을 가장 많이 지었어요!';
-            emotionClass = 'angry';
         }
         if ((report.surprised || 0) > bestEmotion) {
             bestEmotion = report.surprised;
             emotion = '놀람 표정을 가장 많이 지었어요!';
-            emotionClass = 'surprised';
         }
         if ((report.disgusted || 0) > bestEmotion) {
             bestEmotion = report.disgusted;
             emotion = '혐오 표정을 가장 많이 지었어요!';
-            emotionClass = 'disgusted';
         }
         if ((report.fearful || 0) > bestEmotion) {
             bestEmotion = report.fearful;
             emotion = '두려움 표정을 가장 많이 지었어요!';
-            emotionClass = 'fearful';
         }
         if ((report.neutral || 0) > bestEmotion) {
             bestEmotion = report.neutral;
             emotion = '무표정을 가장 많이 지었어요!';
-            emotionClass = 'neutral';
         }
         return { bestEmotion, emotion };
     };
 
-
-
-
+    // 경과 시간 계산 함수
     const calculateElapsedTime = (start, end) => {
         const elapsedMs = new Date(end) - new Date(start);
         const seconds = Math.floor((elapsedMs / 1000) % 60);
@@ -126,6 +111,7 @@ const TrackingReportcard = ({ report = {} }) => {
                 const userReports = response.data.filter(report => report.user === userId);
                 setTrackingReports(userReports);
             } catch (error) {
+                console.error('Error fetching reports:', error);
                 setError(error);
             }
         };
@@ -137,8 +123,6 @@ const TrackingReportcard = ({ report = {} }) => {
     if (!isLoggedIn) return <p>로그인 후에만 접근 가능합니다. 로그인 해주세요.</p>;
     if (error) return <p>Error: {error.message}</p>;
 
-
-
     return (
         <>
             <div id='title_bar' style={{ margin: '20px 0', alignItems:'flex-end', gap: '10px' }}>
@@ -147,12 +131,11 @@ const TrackingReportcard = ({ report = {} }) => {
 
             {trackingReports.length > 0 ? (
                 trackingReports.map((report) => (
-
-                    <RT.Card>
+                    <RT.Card key={report.id}>
                         <h3>{report.title}</h3> 
                         <div id='FlexRow' style={{ gap: '25px' }}>
-                            <div id='leftWrapper'>  {/* 세로 */}
-                                <div class="timebox">
+                            <div id='leftWrapper'>
+                                <div className="timebox">
                                     <p>{`${formatDate(report.created_at)} ${formatTime(report.created_at)}`}</p>
                                     <p>총 {calculateElapsedTime(report.created_at, report.ended_at)} 트래킹</p>
                                 </div>
@@ -160,8 +143,8 @@ const TrackingReportcard = ({ report = {} }) => {
                                     <h4>{bestEmotion(report).emotion}</h4>
                                 </RT.EmotionText>
                             </div>
-                            <div id='rightWrapper' > | 누적 표정 데이터
-                                <div class="facialData">
+                            <div id='rightWrapper'> | 누적 표정 데이터
+                                <div className="facialData">
                                     <p>행복: {report.happy.toFixed(0)}%</p>
                                     <p>슬픔: {report.sad.toFixed(0)}%</p>
                                     <p>화남: {report.angry.toFixed(0)}%</p>
@@ -172,15 +155,11 @@ const TrackingReportcard = ({ report = {} }) => {
                                 </div>
                             </div>
                         </div>
-
-
-
                     </RT.Card>
                 ))
             ) : (
                 <p>기록이 없습니다.</p>
             )}
-
         </>
     );
 };

@@ -13,7 +13,6 @@ import face_fear from '../../assets/face/face_fear.png';
 import face_disgusting from '../../assets/face/face_disgusting.png';
 import face_angry from '../../assets/face/face_angry.png';
 
-
 const RealTimeTrackingList = () => {
   const videoRef = useRef(null);
   const [trackingReports, setTrackingReports] = useState([]);
@@ -27,7 +26,12 @@ const RealTimeTrackingList = () => {
   useEffect(() => {
     const fetchTrackingReports = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/report');
+        const token = localStorage.getItem('token'); // 토큰을 가져옵니다
+        const response = await axios.get('http://127.0.0.1:8000/api/report', {
+          headers: {
+            Authorization: `Token ${token}` // 헤더에 인증 토큰을 추가합니다
+          }
+        });
         setTrackingReports(response.data);
       } catch (error) {
         setError(error);
@@ -72,8 +76,7 @@ const RealTimeTrackingList = () => {
         }}
       />
     );
-  };  // 비디오
-
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;

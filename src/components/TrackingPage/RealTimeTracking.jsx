@@ -32,6 +32,7 @@ const RealTimeTracking = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 상태 관리
   const [userId, setUserId] = useState(null);  // 유저 ID 관리
+  const [reportId, setReportId] = useState(null);  // 현재 보고서 ID 관리
 
   const navigate = useNavigate();
   const startTime = useRef(null);
@@ -200,9 +201,14 @@ const RealTimeTracking = () => {
           },
         });
 
+        // reportId를 API 응답에서 받아옴
+        const { id } = response.data;  // 여기에 맞게 응답에서 report_id를 가져오세요
+        setReportId(id);
+
         console.log('Response from server:', response.data); // 디버깅용 로그
 
-        navigate('/tracking/reportdata'); // 로그인 했을 때는 /tracking/reportdata로 이동
+        // reportId를 사용하여 리디렉션
+        navigate(`/tracking/report/${id}`); // 로그인 했을 때는 /tracking/report/report_id로 이동
       } catch (error) {
         console.error('Error saving report:', error);
       }
