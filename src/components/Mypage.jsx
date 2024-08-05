@@ -72,7 +72,7 @@ const Mypage = () => {
 
         // 상태 업데이트
         const characterData = characterResponse.data;
-        const reportData = reportResponse.data;
+        let reportData = reportResponse.data;
 
         // reports가 null인 경우 감정 값들을 0으로 설정
         if (!characterData.reports || characterData.reports.length === 0) {
