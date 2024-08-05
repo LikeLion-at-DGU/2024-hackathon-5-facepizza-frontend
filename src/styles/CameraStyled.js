@@ -296,6 +296,12 @@ export const Main_Container = styled.div`
     align-items: flex-start;
   }
 
+  #twoBtn{
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
   .description{
     display: flex;
     flex-direction: column;
@@ -326,7 +332,7 @@ export const LetPhoto = styled.button`
     display: inline-block;
     background-color: #2E2E2E;
     color: #FFFFFF;
-    width: 180px;
+    /* width: 180px; */
     padding: 10px 25px;
     border-radius: 20px;
     font-size: 20px;
@@ -335,6 +341,7 @@ export const LetPhoto = styled.button`
     &:hover{
        transition: 0.2s;
        transform: scale(1.02);
+       background-color: #292A0A;
     }
   `
   export const LetTracking = styled.button`

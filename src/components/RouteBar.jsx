@@ -58,7 +58,7 @@ const RouteBar = () => {
           </R.ContBar>
         );
       } else {
-        breadcrumb = <R.RLink to="/">홈</R.RLink>;
+        breadcrumb = <></>;
       }
   }
 
