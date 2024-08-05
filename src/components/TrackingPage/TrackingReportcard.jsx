@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import * as S from '../../styles/StyledComponents';
 import * as RT from '../../styles/RealTimeTrackingStyled';
 
@@ -10,6 +11,8 @@ const TrackingReportcard = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState(null);
+
+    const navigate = useNavigate();
 
     // 날짜 형식 변환 함수
     const formatDate = (date) => {
@@ -108,7 +111,9 @@ const TrackingReportcard = () => {
                         Authorization: `Token ${token}`,
                     },
                 });
+                // 사용자 레포트 필터링 및 최신순으로 정렬
                 const userReports = response.data.filter(report => report.user === userId);
+                userReports.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                 setTrackingReports(userReports);
             } catch (error) {
                 console.error('Error fetching reports:', error);
@@ -118,6 +123,11 @@ const TrackingReportcard = () => {
 
         fetchUserData().then(fetchReports);
     }, [isLoggedIn, userId, token]);
+
+    // 레포트 클릭 핸들러
+    const handleReportClick = (reportId) => {
+        navigate(`/tracking/report/${reportId}`);
+    };
 
     if (loading) return <p>Loading...</p>;
     if (!isLoggedIn) return <p>로그인 후에만 접근 가능합니다. 로그인 해주세요.</p>;
@@ -131,8 +141,8 @@ const TrackingReportcard = () => {
 
             {trackingReports.length > 0 ? (
                 trackingReports.map((report) => (
-                    <RT.Card key={report.id}>
-                        <h3>{report.title}</h3> 
+                    <RT.Card key={report.id} onClick={() => handleReportClick(report.id)}>
+                        <h3>{report.title}</h3>
                         <div id='FlexRow' style={{ gap: '25px' }}>
                             <div id='leftWrapper'>
                                 <div className="timebox">
