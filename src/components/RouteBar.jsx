@@ -5,7 +5,7 @@ import * as R from '../styles/RouteBarStyled'
 
 const Breadcrumb = styled.div`
   margin: 20px;
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 const RouteBar = () => {
@@ -31,6 +31,9 @@ const RouteBar = () => {
       break;
     case '/snap':
       breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/snap">표정 스냅</R.RLink></R.ContBar>;
+      break;
+      case '/snap/FourCut':
+      breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/snap">표정 스냅</R.RLink> 〉 <R.RLink to="/snap">치즈 네컷</R.RLink></R.ContBar>;
       break;
     case '/album':
       breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/album">표정 앨범</R.RLink></R.ContBar>;

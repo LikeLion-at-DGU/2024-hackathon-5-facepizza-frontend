@@ -7,8 +7,9 @@ export const Breadcrumb = styled.span`
   align-self: center;
   justify-content: flex-start;
   width: 100%;
-  padding: 10px 15px;
-  margin-bottom: 20px;
+  padding: 0px 15px;
+  margin-bottom: 25px;
+  /* margin-top: 20px; */
   font-size: 14px;
   color: #555;
   text-align: left;
@@ -37,5 +38,5 @@ export const RLink = styled(Link)`
 export const ContBar =styled.div`
   display: flex;
   align-items: center;
-  font-size: 20px;
+  font-size: 15px;
 `
