@@ -12,12 +12,6 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
         console.error("FaceDetection: 비디오가 준비되지 않았습니다.");
         return;
       }
-    const loadModels = async () => {
-      await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-      await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
-      await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
-      await faceapi.nets.faceExpressionNet.loadFromUri('/models');
-    };
 
       try {
         await LoadApiModels(); // 모델 로드
