@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import * as S from '../../styles/StyledComponents';
 import * as C from '../../styles/CameraStyled';
 import TrackingReportcard from './TrackingReportcard';
@@ -12,6 +11,7 @@ import face_natural from '../../assets/face/face_natural.png';
 import face_fear from '../../assets/face/face_fear.png';
 import face_disgusting from '../../assets/face/face_disgusting.png';
 import face_angry from '../../assets/face/face_angry.png';
+import { API } from '../../api';
 
 const RealTimeTrackingList = () => {
   const videoRef = useRef(null);
@@ -28,7 +28,7 @@ const RealTimeTrackingList = () => {
       try {
         const token = localStorage.getItem('token'); // 토큰을 가져옵니다
         if (token != null) {
-          const response = await axios.get('http://127.0.0.1:8000/api/report', {
+          const response = await API.get('/api/report', {
             headers: {
               Authorization: `Token ${token}` // 헤더에 인증 토큰을 추가합니다
             }

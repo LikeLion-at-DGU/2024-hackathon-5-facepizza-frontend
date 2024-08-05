@@ -1,4 +1,4 @@
-import axios from "axios";
+import { API } from '../../api';
 import React, { useEffect, useState } from "react";
 import ImportCharacter from "./ImportCharacter";
 
@@ -15,7 +15,7 @@ const Character = () => {
   useEffect(() => {
     const fetchTrackingReports = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/report");
+        const response = await API.get("/api/report");
         setTrackingReports(response.data);
       } catch (error) {
         setError(error);

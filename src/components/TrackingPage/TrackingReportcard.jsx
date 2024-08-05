@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as S from '../../styles/StyledComponents';
 import * as RT from '../../styles/RealTimeTrackingStyled';
+import { API } from '../../api';
 
 const TrackingReportcard = () => {
     const [trackingReports, setTrackingReports] = useState([]);
@@ -81,7 +81,7 @@ const TrackingReportcard = () => {
                 const token = localStorage.getItem('token');
                 setToken(token);
                 if (token) {
-                    const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile', {
+                    const response = await API.get('/api/mypage/profile', {
                         headers: {
                             Authorization: `Token ${token}`,
                         },
@@ -106,7 +106,7 @@ const TrackingReportcard = () => {
         const fetchReports = async () => {
             if (!isLoggedIn || !userId || !token) return;
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/report', {
+                const response = await API.get('/api/report', {
                     headers: {
                         Authorization: `Token ${token}`,
                     },

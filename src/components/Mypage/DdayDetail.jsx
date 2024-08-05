@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Default, Explanation, ThinTiny } from "../../styles/MypageStyled";
-import axios from "axios";
+import { API } from '../../api';
 
 const DdayDetail = () => {
   const [token, setToken] = useState(null);
@@ -13,9 +13,8 @@ const DdayDetail = () => {
         const token = localStorage.getItem("token"); // 토큰을 로컬 스토리지에서 가져옵니다.
         setToken(token);
         //console.log("Token:", token); // 토큰 값 확인용 콘솔 로그 추가
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/characters/tracking-time",
-          "http://127.0.0.1:8000/api/characters/tracking-time",
+        const response = await API.get(
+          "/api/characters/tracking-time",
           {
             headers: {
               Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.

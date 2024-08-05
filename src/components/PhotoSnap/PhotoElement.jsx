@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ElementBox } from "../../styles/PhotoAlbumStyle";
-import { API } from "./API";
+import { API } from "../../api";
 
 const PhotoElement = ({Emotion}) => {
     // console.log("PhotoElement");
@@ -28,7 +28,9 @@ const PhotoElement = ({Emotion}) => {
 
     return(
         <ElementBox id="ElementBox">
-            <div></div>
+            <div>Image
+                <img src=""/>
+            </div>
             <div>Date</div>
         </ElementBox>
     )
