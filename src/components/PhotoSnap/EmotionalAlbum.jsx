@@ -19,8 +19,10 @@ const EmotionalAlbum = ({ Emotion, onClick }) => {
     return null;
   }
 
+  // console.log(Emotion);
+
   return (
-    <EmotionAlbumBox onClick={onClick} style={{ cursor: 'pointer' }}>
+    <EmotionAlbumBox id="EmotionAlbumBox" onClick={onClick} style={{ cursor: 'pointer' }}>
       <div style={{ display: "inline-block" }}>
         <div
           style={{

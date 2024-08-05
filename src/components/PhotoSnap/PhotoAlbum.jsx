@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from '../../styles/StyledComponents';
 import axios from 'axios';
 import EmotionalAlbum from "./EmotionalAlbum";
+import { API } from './API';
 
 const PhotoAlbum = () => {
   const navigate = useNavigate();
