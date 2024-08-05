@@ -20,9 +20,6 @@ export const ModalBackground = styled.div`
   z-index: 1000; //창의 위치 인덱스
 `;
 export const ModalContent = styled.div`
-  /* border: 1px solid black; */
-  /* background-color: yellow; */
-  /* background-color: transparent; */
   display: flex;
   flex-direction: column;
   width: 75vw;
@@ -49,10 +46,6 @@ export const TopBar = styled.div`
   font-size: 20px;
 }
 `;
-const spin = keyframes`
-  to { transform: rotate(360deg); }
-`;
-
 export const Feedback = styled.div`
   margin-left: 20px;
   width:90px;
@@ -63,41 +56,7 @@ export const Feedback = styled.div`
   align-items: center;
   padding: 4px 8px;
   font-size: 11px;
-
-  /* .spinner {
-    display: inline-block;
-    width: 13px;
-    height: 13px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top-color: ${({ $isDetecting }) => ($isDetecting ? 'white' : 'black')};
-    margin-left: 10px;
-    margin-bottom: 0;
-    animation: ${({ $isDetecting }) => ($isDetecting ? css`${spin} 1s linear infinite` : 'none')};
-  } */
 `;
-//////촬영 효과 
-const flashAnimation = keyframes`
-  0% { background-color: transparent; }
-  50% { background-color: rgba(255, 255, 255, 0.7); }
-  100% { background-color: transparent; }
-`;
-
-// 깜빡이는 오버레이를 위한 styled div
-export const FlashOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 93%;
-  border-radius: 30px;
-  pointer-events: none;
-  z-index: 1000;
-  ${props => props.flash && css`
-    animation: ${flashAnimation} 0.2s;
-  `}
-  `;
-
 export const BottomBar = styled.div`
   height: 80px; 
   width: 100%;
@@ -141,13 +100,46 @@ export const CaptureButton = styled.button`
   color: white;
   font-size: 16px;
 `;
+export const FourModalContain = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* height: 90vh; */
+  width: 60vh;
+  margin-bottom: 5vh;
+  align-items: center;
+`;
+
+
+
+//////촬영 효과 
+const flashAnimation = keyframes`
+  0% { background-color: transparent; }
+  50% { background-color: rgba(255, 255, 255, 0.7); }
+  100% { background-color: transparent; }
+`;
+
+// 깜빡이는 오버레이를 위한 styled div
+export const FlashOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 93%;
+  border-radius: 30px;
+  pointer-events: none;
+  z-index: 1000;
+  ${props => props.flash && css`
+    animation: ${flashAnimation} 0.2s;
+  `}
+  `;
+
+
 
 //////////////포토스냅(모달창 칠드런)
 export const Snap_Container = styled.div` /// 카메라 창과 바텀 바를 연결
   display: flex;
   flex-direction: row;
   width: 100%;
-  /* height: 44vw; */
   max-height: 900px;
   justify-content: center;
 `
@@ -166,6 +158,32 @@ export const CameraView = styled.div`
     top: 100px;
     color: white;
     margin: 0;
+  }
+`;
+
+export const FourCutCameraView = styled.div`
+  display: flex;
+  height: 80vh;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h3 {
+    position: absolute;
+    top: 100px;
+    color: white;
+    margin: 0;
+  }
+`;
+export const FourCutImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+  img {
+    width: 300px; // 원하는 크기로 설정
+    height: auto;
   }
 `;
 
@@ -302,9 +320,15 @@ export const LetPhoto = styled.button`
     background-color: #2E2E2E;
     color: #FFFFFF;
     width: 180px;
-    padding: 9px 25px;
+    padding: 10px 25px;
     border-radius: 20px;
     font-size: 20px;
+    border: none;
+
+    &:hover{
+       transition: 0.2s;
+       transform: scale(1.02);
+    }
   `
   export const LetTracking = styled.button`
   display: inline-block;

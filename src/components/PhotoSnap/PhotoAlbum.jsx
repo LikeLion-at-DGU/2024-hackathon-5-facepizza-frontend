@@ -3,32 +3,34 @@ import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from '../../styles/StyledComponents';
 import axios from 'axios';
+import EmotionalAlbum from "./EmotionalAlbum";
 
 const PhotoAlbum = () => {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 상태 관리
-  const [userId, setUserId] = useState(null);  // 유저 ID 관리
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem('token'); // 토큰을 로컬 스토리지에서 가져옵니다.
+        const token = localStorage.getItem("token");
         setToken(token);
-        console.log('Token:', token); // 토큰 값 확인용 콘솔 로그 추가
 
         if (!token) {
-          alert('로그인이 필요합니다.');
-          navigate('/login'); // 로그인 페이지로 이동
+          alert("로그인이 필요합니다.");
+          navigate("/login");
         }
 
-        const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile', {
+        const response = await API.get('/api/albums', {
           headers: {
             Authorization: `Token ${token}`  // 인증 헤더에 토큰을 추가합니다.
           }
         });
-        console.log('User data response:', response); // 응답 확인용 콘솔 로그 추가
-        if (response.data.id) {
+        console.log('album data response:', response); // 응답 확인용 콘솔 로그 추가
+        if (response.data) {
+          setData(response.data);
           setIsLoggedIn(true);
           setUserId(response.data.id);
         } else {
@@ -36,7 +38,7 @@ const PhotoAlbum = () => {
           setUserId(null);
         }
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error("Error fetching user data:", error);
         setIsLoggedIn(false);
         setUserId(null);
       }
@@ -45,22 +47,21 @@ const PhotoAlbum = () => {
     fetchUserData();
   }, [navigate]);
 
+  const handleEmotionClick = (emotion) => {
+    navigate(`/album/${emotion}`);
+  };
+
   return (
-    <S.Album>
-      <S.Iner_Section>
-        <div id="title_bar">
-          <h2>내 표정 앨범</h2>
-        </div>
-        <div id="album_content">
-          <h3>행복</h3>
-          <div id="photo_warpper">
-            <div class="example"></div>
-            <div class="example"></div>
-          </div>
-        </div>
-        {/* <S.Image src={album} alt="Album" /> */}
-      </S.Iner_Section>
-    </S.Album>
+    <>
+      <S.Container style={{display:"flex", alignItems:"flex-start", width:"100%", padding:"15px"}}>
+        <S.Default>스냅 앨범</S.Default>
+        <hr style={{background:"#C5C5C5"}}/>
+        <EmotionalAlbum Emotion={'happy'} onClick={() => handleEmotionClick('happy')} />
+        <EmotionalAlbum Emotion={'sad'} onClick={() => handleEmotionClick('sad')} />
+        <EmotionalAlbum Emotion={'angry'} onClick={() => handleEmotionClick('angry')} />
+        <EmotionalAlbum Emotion={'surprised'} onClick={() => handleEmotionClick('surprised')} />
+      </S.Container>
+    </>
   );
 };
 

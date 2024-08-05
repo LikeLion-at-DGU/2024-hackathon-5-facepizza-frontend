@@ -27,7 +27,7 @@ const Character = () => {
     fetchTrackingReports();
   }, []);
 
-  console.log(trackingReports);
+  // console.log(trackingReports);
 
   return (
     <>
