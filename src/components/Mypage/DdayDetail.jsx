@@ -14,13 +14,13 @@ const Interpret = {
 const DdayDetail = ({ character }) => {
   function getMaxEmotionValue(character) {
     const emotions = {
-      happy: character.reports[0].happy,
-      sad: character.reports[0].sad,
-      angry: character.reports[0].angry,
-      surprised: character.reports[0].surprised,
-      disgusted: character.reports[0].disgusted,
-      fearful: character.reports[0].fearful,
-      neutral: character.reports[0].neutral,
+      happy: character.reports[0]?.happy ?? 0,
+      sad: character.reports[0]?.sad ?? 0,
+      angry: character.reports[0]?.angry ?? 0,
+      surprised: character.reports[0]?.surprised ?? 0,
+      disgusted: character.reports[0]?.disgusted ?? 0,
+      fearful: character.reports[0]?.fearful ?? 0,
+      neutral: character.reports[0]?.neutral ?? 0,
     };
 
     // 배열로 변환하여 최대값 찾기
@@ -37,15 +37,15 @@ const DdayDetail = ({ character }) => {
   // `character`가 정의된 경우 감정 값을 가져오기
   const maxEmotion = character ? getMaxEmotionValue(character) : { emotion: "None", value: 0 };
 
-  // 감정 데이터를 배열로 변환
+  // 감정 데이터를 배열로 변환, 값이 undefined인 경우 0으로 설정
   const emotionData = [
-    { emotion: 'happy', value: character.reports[0].happy },
-    { emotion: 'sad', value: character.reports[0].sad },
-    { emotion: 'angry', value: character.reports[0].angry },
-    { emotion: 'surprised', value: character.reports[0].surprised },
-    { emotion: 'disgusted', value: character.reports[0].disgusted },
-    { emotion: 'fearful', value: character.reports[0].fearful },
-    { emotion: 'neutral', value: character.reports[0].neutral },
+    { emotion: 'happy', value: character.reports[0]?.happy ?? 0 },
+    { emotion: 'sad', value: character.reports[0]?.sad ?? 0 },
+    { emotion: 'angry', value: character.reports[0]?.angry ?? 0 },
+    { emotion: 'surprised', value: character.reports[0]?.surprised ?? 0 },
+    { emotion: 'disgusted', value: character.reports[0]?.disgusted ?? 0 },
+    { emotion: 'fearful', value: character.reports[0]?.fearful ?? 0 },
+    { emotion: 'neutral', value: character.reports[0]?.neutral ?? 0 },
   ];
 
   function getEmotionElements(data) {
@@ -67,8 +67,8 @@ const DdayDetail = ({ character }) => {
         </Default>
         <div id="OtherExpression">
           <Explanation>오늘 어떤 표정을 가장 많이 지었을까요?</Explanation>
-          <Default style={{ color: Interpret[maxEmotion.emotion].color }}>
-            {Interpret[maxEmotion.emotion].name} {maxEmotion.value.toFixed(2)}%
+          <Default style={{ color: Interpret[maxEmotion.emotion]?.color || "#000000" }}>
+            {Interpret[maxEmotion.emotion]?.name || "없음"} {maxEmotion.value.toFixed(2)}%
           </Default>
           <Explanation>
             <div style={{ gap: "15px;" }}>
