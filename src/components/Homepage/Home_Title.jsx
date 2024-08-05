@@ -33,8 +33,7 @@ const Home_Title = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/logout', {
-        method: 'POST',
+      const response = await API.post('/api/accounts/logout', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Token ${token}`,

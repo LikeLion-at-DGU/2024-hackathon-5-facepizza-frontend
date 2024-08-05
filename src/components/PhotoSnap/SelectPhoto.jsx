@@ -3,6 +3,8 @@ import { NavLink, useNavigate  } from 'react-router-dom';
 import axios from 'axios';
 import * as C from '../../styles/CameraStyled';
 import * as S from '../../styles/StyledComponents';
+import { API } from '../../api'; // 정의한 API 인스턴스를 가져오기
+
 //Snap 페이지 찍힌 사진 컴포넌트
 
 const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
@@ -57,6 +59,19 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
         }
     };
 
+    const PostPhoto = async () => {
+        try {
+        const response = await API.post('/api/snaps', {
+            image: "image",
+            emotion: "emotion"
+        });
+        alert("사진이 저장되었습니다.");
+      } catch (error) {
+        alert('사진 저장 실패');
+      }
+    };
+    
+
     return (
         <>
             <C.SeletPhoto>
@@ -70,7 +85,7 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
                             선택</button>
                         <button onClick={() => selectAllPhotos(capturedPhotos, setSelectedPhotos, selectedPhotos)}>전체 선택</button>
                         <button onClick={() => downloadSelectedPhotos(selectedPhotos)}>다운로드</button>
-                        <button id="save">앨범에 저장</button>
+                        <button id="save" onClick={PostPhoto}>앨범에 저장</button>
                     </div>
                 </div>
                 <C.Gallery photoCount={capturedPhotos.length}>
