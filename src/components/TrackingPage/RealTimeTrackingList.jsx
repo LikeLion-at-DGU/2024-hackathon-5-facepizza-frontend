@@ -13,7 +13,6 @@ import face_fear from '../../assets/face/face_fear.png';
 import face_disgusting from '../../assets/face/face_disgusting.png';
 import face_angry from '../../assets/face/face_angry.png';
 
-
 const RealTimeTrackingList = () => {
   const videoRef = useRef(null);
   const [trackingReports, setTrackingReports] = useState([]);
@@ -27,8 +26,15 @@ const RealTimeTrackingList = () => {
   useEffect(() => {
     const fetchTrackingReports = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/report');
-        setTrackingReports(response.data);
+        const token = localStorage.getItem('token'); // 토큰을 가져옵니다
+        if (token != null) {
+          const response = await axios.get('http://127.0.0.1:8000/api/report', {
+            headers: {
+              Authorization: `Token ${token}` // 헤더에 인증 토큰을 추가합니다
+            }
+          });
+          setTrackingReports(response.data);
+        }
       } catch (error) {
         setError(error);
       } finally {
@@ -72,8 +78,7 @@ const RealTimeTrackingList = () => {
         }}
       />
     );
-  };  // 비디오
-
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -85,13 +90,13 @@ const RealTimeTrackingList = () => {
       </div>
       <div className='rowBox'>
         <VideoComponent videoRef={videoRef} />
-        <div className='description' style={{ width: 'auto' }}>   {/* 설명박스 (새로)*/}
+        <div className='description' style={{ width: 'auto' }}>
           <C.LetTracking onClick={() => navigate('/tracking')}>표정 트래킹 진행하기</C.LetTracking>
           <p style={{ textAlign: 'left', paddingLeft: '7px' }}>표정 트래킹이란?</p>
         </div>
       </div>
 
-      <div className='description' style={{ margin: '20px 0' }} > {/* 설명박스 (새로)*/}
+      <div className='description' style={{ margin: '20px 0' }} >
         <div id='title_bar' style={{ borderBottom: 'none' }}>
           <S.H2_title style={{ color: '#6D6D6D', fontSize: '20px'}} onClick={handleToggle}>
             표정 트래킹 이용방법
