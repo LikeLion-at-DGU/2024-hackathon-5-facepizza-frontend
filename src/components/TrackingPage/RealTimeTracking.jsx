@@ -141,6 +141,9 @@ const RealTimeTracking = () => {
             const context = canvas.getContext('2d');
             canvas.width = videoRef.current.videoWidth;
             canvas.height = videoRef.current.videoHeight;
+            // 좌우 반전 적용
+            context.translate(canvas.width, 0); // 캔버스의 오른쪽으로 이동
+            context.scale(-1, 1); // x축을 기준으로 스케일을 -1로 설정
             context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
             const img = canvas.toDataURL('image/jpeg');
             newPics[maxKey] = { img, maxValue };
