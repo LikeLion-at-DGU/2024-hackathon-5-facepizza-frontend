@@ -42,6 +42,26 @@ export const Facial_Character_Home = styled.div`
     gap: 10px;
   }
 `
+
+export const characterLogin = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  img{
+    height: 200px;
+    width: auto;
+    opacity: 0.4;
+  }
+  h2{
+    font-weight: bold;
+  }
+  p{
+    font-size: 18px;
+  }
+`
+
 //Home_Content에서 쓰이는 스타일
 export const FlexRow = styled.div`
   display: flex;
