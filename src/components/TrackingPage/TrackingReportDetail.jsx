@@ -32,6 +32,16 @@ const TrackingReportDetail = () => {
     neutral: 'neutral_highlight',
   };
 
+  const emotionMaxValueFields = {
+    happy: 'happy_maxValue',
+    sad: 'sad_maxValue',
+    angry: 'angry_maxValue',
+    surprised: 'surprised_maxValue',
+    disgusted: 'disgusted_maxValue',
+    fearful: 'fearful_maxValue',
+    neutral: 'neutral_maxValue',
+  };
+
   const formatDate = (date) => {
     const d = new Date(date);
     const year = d.getFullYear();
@@ -99,7 +109,7 @@ const TrackingReportDetail = () => {
     if (window.confirm("정말로 이 레포트를 삭제하시겠습니까?")) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://127.0.0.1:8000/api/report/${reportid}`, {
+        await API.delete(`/api/report/${reportid}`, {
           headers: {
             Authorization: `Token ${token}`,
           },
@@ -152,7 +162,7 @@ const TrackingReportDetail = () => {
           report[field] ? (
             <div key={emotion}>
               <img src={report[field]} alt={emotion} width="300" />
-              <p>{`${emotionTranslations[emotion]}`}</p><br />
+              <p>{`${emotionTranslations[emotion]}`} |{`${(report[emotionMaxValueFields[emotion]] * 100).toFixed(5)}`}%</p>
             </div>
           ) : null
         ))}
