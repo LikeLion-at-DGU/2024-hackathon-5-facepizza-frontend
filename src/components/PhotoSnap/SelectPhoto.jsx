@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate  } from 'react-router-dom';
 import * as C from '../../styles/CameraStyled';
 import * as S from '../../styles/StyledComponents';
-<<<<<<< HEAD
-import { API } from '../../api'; // 정의한 API 인스턴스를 가져오기
-import axios from 'axios';
-=======
 import { API } from '../../api';
->>>>>>> 5f5d56181690e9bdf87bd5f86578b73b05a05fb7
 
 //Snap 페이지 찍힌 사진 컴포넌트
 
