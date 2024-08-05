@@ -50,13 +50,23 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
     };
 
     // 종료 버튼 클릭 시 경고 메시지 표시 함수
-    const handleExit = (event, path) => {
-        if (capturedPhotos.length > 0 && !window.confirm('정말 나가시겠습니까?\n앨범에 저장하지 않은 스냅은 그대로 삭제됩니다')) {
-            event.preventDefault();
-        } else {
-            navigate(path);
+    const postSelectedPhotos = async () => {
+        try {
+          const promises = selectedPhotos.map(photo => {
+            return axios.post('/api/snaps', {
+              image: photo, // 이미지 데이터
+              emotion: "emotion" // 감정 데이터는 상황에 맞게 추가
+            });
+          });
+          await Promise.all(promises);
+          alert("선택한 사진이 저장되었습니다.");
+        } catch (error) {
+          alert('사진 저장 실패');
         }
-    };
+      };
+
+      
+    
 
     // 선택된 사진을 앨범에 저장하는 함수
     const postPhoto = async (selectedPhotos) => {

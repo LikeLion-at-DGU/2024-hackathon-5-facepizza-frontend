@@ -21,6 +21,7 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
 
       try {
         await LoadApiModels(); // 모델 로드
+        if (videoRef.current){
         videoRef.current.onloadedmetadata = () => {
           const displaySize = {
             width: videoRef.current.videoWidth,
@@ -59,12 +60,20 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
             return () => clearInterval(intervalId);     // Cleanup function
           
         };
+      }
       } catch (error) {
         console.error("Error가 감지되었습니다(FaceDetection.jsx):", error);
       }
     };
 
     setupFaceDetection();
+
+    // Cleanup function for useEffect
+    return () => {
+      if (videoRef.current) {
+        videoRef.current.onloadedmetadata = null;
+      }
+    };
   }, [videoRef, onDetections]);   //videoRef, onDetections 변화마다 시행
 
   return (
