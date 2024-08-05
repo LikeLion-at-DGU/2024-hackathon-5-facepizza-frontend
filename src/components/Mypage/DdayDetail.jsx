@@ -1,7 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Default, Explanation, ThinTiny } from "../../styles/MypageStyled";
+import axios from "axios";
 
 const DdayDetail = () => {
+  const [token, setToken] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+  const [response, setResponse] = useState([]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token"); // 토큰을 로컬 스토리지에서 가져옵니다.
+        setToken(token);
+        //console.log("Token:", token); // 토큰 값 확인용 콘솔 로그 추가
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/characters/tracking-time",
+          "http://127.0.0.1:8000/api/characters/tracking-time",
+          {
+            headers: {
+              Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.
+            },
+          }
+        );
+        
+        console.log("User data response:", response); // 응답 확인용 콘솔 로그 추가
+        setResponse(response.data); // response.data만 설정합니다.
+        if (response.data.id) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setIsLoggedIn(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+
   return (
     <div style={{display: "inline-block"}}>
       <div className="DdayDetail">

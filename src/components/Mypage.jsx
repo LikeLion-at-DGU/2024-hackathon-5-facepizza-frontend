@@ -4,7 +4,6 @@ import { Container } from "../styles/StyledComponents";
 import {
   Account,
   BoldBig,
-  Boldsmall,
   Default,
   DetailContent,
   Subname,
@@ -27,6 +26,11 @@ const Mypage = () => {
   const [token, setToken] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
   const [userId, setUserId] = useState(null); // 유저 ID 관리
+  const [response, setResponse] = useState(null);
+
+  let today = new Date();
+  let month = today.getMonth();
+  let day = today.getDate();
 
   // 유저 로그인 상태와 정보 가져오기
   useEffect(() => {
@@ -43,7 +47,9 @@ const Mypage = () => {
             },
           }
         );
+        
         console.log("User data response:", response); // 응답 확인용 콘솔 로그 추가
+        setResponse(response.data); // response.data만 설정합니다.
         if (response.data.id) {
           setIsLoggedIn(true);
           setUserId(response.data.id);
@@ -61,6 +67,11 @@ const Mypage = () => {
     fetchUserData();
   }, []);
 
+  // 데이터 로딩 여부 확인
+  if (!response) {
+    return <div>Loading...</div>; // 로딩 중일 때의 표시
+  }
+
   return (
     <>
       <WidthBox>
@@ -71,8 +82,8 @@ const Mypage = () => {
           <CharacterBox className="CharacterBox">
             <Character />
             <hr />
-            <Profile /> {/*1살 김치즈*/}
-            <Gauge /> {/*게이지*/}
+            <Profile data={response} /> {/* 데이터가 로드된 후에 렌더링 */}
+            <Gauge info={response.characters[0]}/> {/*게이지*/}
           </CharacterBox>
           {/* 트래킹 정보가 들어간 창 */}
           <Tracking />
@@ -80,7 +91,7 @@ const Mypage = () => {
           <DetailContent className="DetailContent">
             {/* <Attendence /> 출석 */}
             <div style={{ marginTop: "50px" }}>
-              <Default id="Date">1/1 기록</Default>
+              <Default id="Date">{month}/{day} 기록</Default>
             </div>
             <div
               style={{
@@ -100,7 +111,7 @@ const Mypage = () => {
             <AccountDetail />
           </Account>
         </Container>
-        <AccountModal/>
+        <AccountModal />
       </WidthBox>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BaseGauge,
   EndPoint,
@@ -9,23 +9,19 @@ import {
 import MoreInfo from "../../assets/MoreInfo.png";
 import QuestionMark from "./QuestionMark";
 
-const Gauge = ({ level }) => {
+const Gauge = ({ info }) => {
   const [exp, setExp] = useState(0);
-  const [maxExp, setMaxExp] = useState(20);
+  const [maxExp, setMaxExp] = useState(10);
+  const [level, setLevel] = useState(1);
   const ratio = parseFloat(exp / maxExp) * 100;
-  let age = 1;
 
-  switch (level) {
-    case "f":
-      age = 1;
-      break;
-    case "s":
-      age = 2;
-      break;
-    case "t":
-      age = 3;
-      break;
-  }
+  useEffect(()=>{
+    if(info){
+      setExp(info.exp);
+      setMaxExp(info.max_exp);
+      setLevel(info.level);
+    }
+  },[info])
 
   const [isHovering, setIsHovering] = useState(false);
 
@@ -45,10 +41,10 @@ const Gauge = ({ level }) => {
             <PointFont>0p</PointFont>
           </StartPoint>
           <PointFont>
-            {age}까지 {maxExp - exp}P 더!
+            {level+1}까지 {maxExp - exp}P 더!
           </PointFont>
           <EndPoint>
-            <PointFont>10p</PointFont>
+            <PointFont>{maxExp}p</PointFont>
           </EndPoint>
         </BaseGauge>
         <img src={MoreInfo} style={{ marginLeft: "10px" }} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}/>
