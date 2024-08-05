@@ -13,10 +13,10 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
         return;
       }
     const loadModels = async () => {
-      await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-      await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
-      await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
-      await faceapi.nets.faceExpressionNet.loadFromUri('/models');
+      const timestamp = new Date().getTime(); // 캐시 무효화를 위한 타임스탬프 추가
+      await faceapi.nets.tinyFaceDetector.loadFromUri(`/models?${timestamp}`);
+      await faceapi.nets.faceLandmark68Net.loadFromUri(`/models?${timestamp}`);
+      await faceapi.nets.faceExpressionNet.loadFromUri(`/models?${timestamp}`);
     };
 
       try {
