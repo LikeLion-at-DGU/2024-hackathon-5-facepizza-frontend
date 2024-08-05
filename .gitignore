@@ -26,3 +26,6 @@ node_modules/
 
 #api
 .env
+
+#가상환경
+venv

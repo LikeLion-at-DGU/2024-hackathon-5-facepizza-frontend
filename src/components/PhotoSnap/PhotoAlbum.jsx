@@ -2,13 +2,14 @@
 import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from '../../styles/StyledComponents';
-import axios from 'axios';
+import { API } from '../../api';
 
 const PhotoAlbum = () => {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 상태 관리
   const [userId, setUserId] = useState(null);  // 유저 ID 관리
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -22,13 +23,14 @@ const PhotoAlbum = () => {
           navigate('/login'); // 로그인 페이지로 이동
         }
 
-        const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile', {
+        const response = await API.get('/api/albums', {
           headers: {
             Authorization: `Token ${token}`  // 인증 헤더에 토큰을 추가합니다.
           }
         });
-        console.log('User data response:', response); // 응답 확인용 콘솔 로그 추가
-        if (response.data.id) {
+        console.log('album data response:', response); // 응답 확인용 콘솔 로그 추가
+        if (response.data) {
+          setData(response.data);
           setIsLoggedIn(true);
           setUserId(response.data.id);
         } else {

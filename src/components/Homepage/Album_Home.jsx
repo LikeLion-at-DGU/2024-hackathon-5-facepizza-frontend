@@ -2,13 +2,25 @@ import React, { useState, useEffect } from "react";
 import * as H from '../../styles/HomeStyled';
 import * as S from '../../styles/StyledComponents';
 import Locked from '../../assets/Locked.png';
+import { API } from '../../api';
 
 const Album_Home = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [data, setData] = useState([]);
+
+    const fetchData = async () => {
+        try {
+            const response = await API.get('api/albums');
+            setData(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         setIsLoggedIn(!!token); //토큰이 존재하면 true값
+        fetchData();
     }, []);
 
     return (
@@ -20,9 +32,9 @@ const Album_Home = () => {
             {isLoggedIn ? (
                     <S.Blink to='/album'>
                         <H.FlexRow>
-                            <H.Example />
-                            <H.Example />
-                            {/* <H.Example /> */}
+                            {data.map(data => (
+                                <H.Example key={data.id} data={data} />
+                            ))}
                         </H.FlexRow>
                     </S.Blink>
                 ) : (

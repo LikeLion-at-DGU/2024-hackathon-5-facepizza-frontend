@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as S from '../styles/StyledComponents';
+import { API } from '../api';
 
 const Login = () => {
     const [idFindText, setIdFindText] = useState("아이디 찾기");
@@ -25,7 +26,7 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             //axios를 사용하여 POST 요청을 보냄
-            const response = await axios.post('http://127.0.0.1:8000/api/accounts/login', {
+            const response = await API.post('/api/accounts/login', {
                 email,
                 password // 요청 바디에 password 추가
             }, {
