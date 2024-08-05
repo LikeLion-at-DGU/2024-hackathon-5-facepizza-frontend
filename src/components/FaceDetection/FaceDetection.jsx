@@ -12,12 +12,6 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
         console.error("FaceDetection: 비디오가 준비되지 않았습니다.");
         return;
       }
-    const loadModels = async () => {
-      const timestamp = new Date().getTime(); // 캐시 무효화를 위한 타임스탬프 추가
-      await faceapi.nets.tinyFaceDetector.loadFromUri(`/models?${timestamp}`);
-      await faceapi.nets.faceLandmark68Net.loadFromUri(`/models?${timestamp}`);
-      await faceapi.nets.faceExpressionNet.loadFromUri(`/models?${timestamp}`);
-    };
 
       try {
         await LoadApiModels(); // 모델 로드
