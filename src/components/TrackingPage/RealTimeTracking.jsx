@@ -176,6 +176,8 @@ const RealTimeTracking = () => {
 
     if (isLoggedIn) {
       try {
+        const filterMaxValue = (value) => value !== -Infinity ? value : 0;
+
         const reportData = {
           user: userId,
           happy: parseFloat(emotionPercentages.happy),
@@ -185,6 +187,15 @@ const RealTimeTracking = () => {
           disgusted: parseFloat(emotionPercentages.disgusted),
           fearful: parseFloat(emotionPercentages.fearful),
           neutral: parseFloat(emotionPercentages.neutral),
+
+          happy_maxValue: filterMaxValue(emotionPics.happy.maxValue),
+          sad_maxValue: filterMaxValue(emotionPics.sad.maxValue),
+          angry_maxValue: filterMaxValue(emotionPics.angry.maxValue),
+          surprised_maxValue: filterMaxValue(emotionPics.surprised.maxValue),
+          disgusted_maxValue: filterMaxValue(emotionPics.disgusted.maxValue),
+          fearful_maxValue: filterMaxValue(emotionPics.fearful.maxValue),
+          neutral_maxValue: filterMaxValue(emotionPics.neutral.maxValue),
+
           created_at: startTime.current.toISOString(),
           ended_at: endTime.current.toISOString(),
           title: `${formatDate(startTime.current)} ${formatTime(startTime.current)}`, // 수정: 템플릿 리터럴 사용
@@ -193,7 +204,7 @@ const RealTimeTracking = () => {
             emotion: emotion,
           })),
         };
-
+        console.log("Report Data:", reportData);
         console.log('Sending Report Data:', reportData);
 
         // Report 데이터 전송
