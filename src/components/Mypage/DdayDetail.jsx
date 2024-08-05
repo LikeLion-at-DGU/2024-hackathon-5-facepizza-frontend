@@ -51,6 +51,7 @@ const DdayDetail = ({ character }) => {
   function getEmotionElements(data) {
     return data.map((entry, index) => {
       // `entry.value`가 숫자인지 확인 후 `toFixed` 호출
+      console.log(entry.value);
       const value = typeof entry.value === 'number' ? entry.value.toFixed(2) : '0.00';
       return (
         <span key={index} style={{ color: Interpret[entry.emotion].color }}>
