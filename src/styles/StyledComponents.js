@@ -239,6 +239,9 @@ export const InputContainer = styled.div`
     color: #616161;
     text-align: start;
     margin: 0px;
+    overflow-y: scroll;
+    height: 200px;
+
   }
   #agree_box {
     display: flex;
