@@ -113,7 +113,7 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
                             선택</button>
                         <button onClick={() => selectAllPhotos(capturedPhotos, setSelectedPhotos, selectedPhotos)}>전체 선택</button>
                         <button onClick={() => downloadSelectedPhotos(selectedPhotos)}>다운로드</button>
-                        <button onClick={() => postPhoto(selectedPhotos)}>앨범에 저장</button>
+                        <button onClick={() => postPhoto(selectedPhotos)} style={{backgroundColor: '#FFB700)'}}>앨범에 저장</button>
                     </div>
                 </div>
                 <C.Gallery photoCount={capturedPhotos.length}>
@@ -151,6 +151,5 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
         </>
     )
 }
-
 
 export default SelectPhoto;

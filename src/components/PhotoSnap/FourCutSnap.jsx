@@ -89,7 +89,7 @@ const FourCutSnap = () => {
           <div className="rowBox">
             <C.IllustInPage src={illust_Snap} />
             <div className="description">
-              <C.LetPhoto onClick={handleOpenModal}>사진 촬영하기</C.LetPhoto>
+              <C.LetPhoto onClick={handleOpenModal} style={{width: '180px'}}>네컷 촬영하기</C.LetPhoto>
               <p style={{ textAlign: 'left', paddingLeft: '7px' }}>
                 
                 네컷을 다찍으면 사진이 보여져요!<br/><br/>
