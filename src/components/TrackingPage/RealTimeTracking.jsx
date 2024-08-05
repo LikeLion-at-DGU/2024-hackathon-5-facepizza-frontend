@@ -4,7 +4,7 @@ import FaceDetection from "../FaceDetection/FaceDetection";
 import * as S from '../../styles/StyledComponents';
 import * as RT from '../../styles/RealTimeTrackingStyled';
 import * as C from '../../styles/CameraStyled';
-import axios from 'axios';
+import { API } from '../../api';
 
 const RealTimeTracking = () => {
   const videoRef = useRef(null);
@@ -85,7 +85,7 @@ const RealTimeTracking = () => {
         setToken(token);
         console.log('Token:', token); // 토큰 값 확인용 콘솔 로그 추가
         if (token) {
-          const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile', {
+          const response = await API.get('/api/mypage/profile', {
             headers: {
               Authorization: `Token ${token}`,  // 인증 헤더에 토큰을 추가합니다.
             }
@@ -195,7 +195,7 @@ const RealTimeTracking = () => {
 
         // Report 데이터 전송
         // 배포 후 api 주소 변경
-        const response = await axios.post('http://127.0.0.1:8000/api/report', reportData, {
+        const response = await API.post('/api/report', reportData, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Token ${token}`, // 수정: 템플릿 리터럴 사용
