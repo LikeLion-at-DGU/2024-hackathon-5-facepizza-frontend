@@ -2,7 +2,7 @@ import React from "react";
 import { ImageBox } from "../../styles/PhotoAlbumStyle";
 import PhotoElement from "./PhotoElement";
 
-const PhotoAlbumDetailEelement = ({emotion}) => {
+const PhotoAlbumDetailEelement = ({images}) => {
 
 
     
@@ -16,7 +16,11 @@ const PhotoAlbumDetailEelement = ({emotion}) => {
         marginBottom: "41.5px",
       }}
     >
-      <PhotoElement Emotion={emotion}/>
+      {
+        images.map(data =>
+          <PhotoElement key={data.id} data={data} />
+        )
+      }
     </ImageBox>
   );
 };
