@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate  } from 'react-router-dom';
 import * as C from '../../styles/CameraStyled';
 import * as S from '../../styles/StyledComponents';
+import { API } from '../../api';
+
 //Snap 페이지 찍힌 사진 컴포넌트
 
 const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
@@ -15,14 +17,14 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
     };
 
     // 사진 선택 상태를 업데이트하는 함수
-    const toggleSelectPhoto = (photo, isSelectionMode, selectedPhotos, setSelectedPhotos) => {
+    const toggleSelectPhoto = (item, isSelectionMode, selectedPhotos, setSelectedPhotos) => {
         if (!isSelectionMode) return; // 선택 모드가 아닌 경우, 선택 불가능
 
         setSelectedPhotos((prevSelectedPhotos) => {
-            if (prevSelectedPhotos.includes(photo)) {
-                return prevSelectedPhotos.filter(p => p !== photo);
+            if (prevSelectedPhotos.includes(item)) {
+                return prevSelectedPhotos.filter(p => p !== item);
             } else {
-                return [...prevSelectedPhotos, photo];
+                return [...prevSelectedPhotos, item];
             }
         });
     };
@@ -32,7 +34,7 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
         if (selectedPhotos.length === capturedPhotos.length) {
             setSelectedPhotos([]); // 모든 사진이 이미 선택된 경우, 선택 해제
         } else {
-            const allPhotos = capturedPhotos.map(item => item.photo);
+            const allPhotos = capturedPhotos;
             setSelectedPhotos(allPhotos); // 그렇지 않으면, 모든 사진 선택
         }
     };
@@ -56,6 +58,38 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
         }
     };
 
+    // 선택된 사진을 앨범에 저장하는 함수
+    const postPhoto = async (selectedPhotos) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('로그인이 필요합니다.');
+            }
+    
+            const uploadPromises = selectedPhotos.map(item => {
+                console.log(item.emotion);
+                return API.post('/api/snaps', {
+                    image: item.photo, // 이미지 데이터, base64 형식으로 인코딩된 문자열
+                    emotion: item.emotion // 감정 데이터
+                }, {
+                    headers: {
+                        'Authorization': `Token ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+            });
+    
+            // 모든 POST 요청이 완료될 때까지 기다립니다.
+            await Promise.all(uploadPromises);
+    
+            alert("모든 사진이 저장되었습니다.");
+        } catch (error) {
+            console.error('사진 저장 실패:', error);
+            alert('사진 저장 실패');
+        }
+    };
+    
+
     return (
         <>
             <C.SeletPhoto>
@@ -69,7 +103,7 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
                             선택</button>
                         <button onClick={() => selectAllPhotos(capturedPhotos, setSelectedPhotos, selectedPhotos)}>전체 선택</button>
                         <button onClick={() => downloadSelectedPhotos(selectedPhotos)}>다운로드</button>
-                        <button id="save">앨범에 저장</button>
+                        <button onClick={() => postPhoto(selectedPhotos)}>앨범에 저장</button>
                     </div>
                 </div>
                 <C.Gallery photoCount={capturedPhotos.length}>
@@ -77,8 +111,8 @@ const SelectPhoto = ({ capturedPhotos, setCapturedPhotos }) => {
                         capturedPhotos.map((item, index) => (
                             <C.PhotoWrapper
                                 key={index}
-                                isSelected={selectedPhotos.includes(item.photo)}
-                                onClick={() => toggleSelectPhoto(item.photo, isSelectionMode, selectedPhotos, setSelectedPhotos)} >
+                                isSelected={selectedPhotos.includes(item)}
+                                onClick={() => toggleSelectPhoto(item, isSelectionMode, selectedPhotos, setSelectedPhotos)} >
                                 <C.CapturedPhoto
                                     key={index}
                                     src={item.photo} alt={`Captured ${index}`}
