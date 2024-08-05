@@ -95,7 +95,7 @@ export const ComponentName = styled.div`
   h2{
     color: var(--, #000);
   /* 디폴트 1 */
-    font-family: IM_Hyemin;
+    ;
     font-size: 28.5px;
     font-style: normal;
     font-weight: 700;
@@ -104,7 +104,7 @@ export const ComponentName = styled.div`
   p{
     color: #393939;
   /* 설명 */
-  font-family: IM_Hyemin;
+  ;
   font-size: 23.75px;
   font-style: normal;
   font-weight: 400;
