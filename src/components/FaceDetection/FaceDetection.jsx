@@ -1,12 +1,10 @@
-//FaceDetection 정상코드 
 import React, { useRef, useState, useEffect } from "react";
-import LoadApiModels from "./LoadApiModels"; // 얼굴 인식 모델을 로드하는 함수
-import VideoComponent from "./VideoComponent"; // 비디오 스트림을 렌더링하는 컴포넌트
-import * as faceapi from "face-api.js"; // 얼굴 인식 라이브러리
+import LoadApiModels from "./LoadApiModels";
+import VideoComponent from "./VideoComponent";
+import * as faceapi from "face-api.js";
 
 const FaceDetection = ({ videoRef, onDetections, style }) => {
   useEffect(() => {
-    // console.log(videoRef.current);
     const setupFaceDetection = async () => {
       if (!videoRef.current) {
         console.error("FaceDetection: 비디오가 준비되지 않았습니다.");
@@ -14,47 +12,48 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
       }
 
       try {
-        await LoadApiModels(); // 모델 로드
+        await LoadApiModels();
         if (videoRef.current){
-        videoRef.current.onloadedmetadata = () => {
-          const displaySize = {
-            width: videoRef.current.videoWidth,
-            height: videoRef.current.videoHeight,
-          };
+          videoRef.current.onloadedmetadata = () => {
+            const displaySize = {
+              width: videoRef.current.videoWidth,
+              height: videoRef.current.videoHeight,
+            };
 
-          const detectFaces = async () => {
-            // videoRef.current이 여전히 유효한지 확인
-            if (videoRef.current && videoRef.current.readyState === 4) {
-              try {
-                const detections = await faceapi
-                  .detectAllFaces(
-                    videoRef.current,
-                    new faceapi.TinyFaceDetectorOptions()
-                  )
-                  .withFaceLandmarks()
-                  .withFaceExpressions();
+            const detectFaces = async () => {
+              // videoRef.current이 여전히 유효한지 확인
+              if (videoRef.current && videoRef.current.readyState === 4) {
+                try {
+                  const detections = await faceapi
+                    .detectAllFaces(
+                      videoRef.current,
+                      new faceapi.TinyFaceDetectorOptions()
+                    )
+                    .withFaceLandmarks()
+                    .withFaceExpressions();
 
-                  // console.log(detections);
+                  // 디버깅: 감지된 결과 로그
+                  console.log("Detected faces and expressions:", detections);
 
-                const resizedDetections = faceapi.resizeResults(
-                  detections,
-                  displaySize
-                );
+                  const resizedDetections = faceapi.resizeResults(
+                    detections,
+                    displaySize
+                  );
 
-                if (onDetections) {
-                  onDetections(resizedDetections);
+                  if (onDetections) {
+                    onDetections(resizedDetections);
+                  }
+                } catch (error) {
+                  console.error("Error during face detection:", error);
                 }
-              } catch (error) {
-                console.error("Error during face detection:", error);
               }
-            }
-          };
+            };
 
             const intervalId = setInterval(detectFaces, 500); // 0.5초마다 얼굴 탐지
-            return () => clearInterval(intervalId);     // Cleanup function
+            return () => clearInterval(intervalId); // Cleanup function
           
-        };
-      }
+          };
+        }
       } catch (error) {
         console.error("Error가 감지되었습니다(FaceDetection.jsx):", error);
       }
@@ -68,10 +67,13 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
         videoRef.current.onloadedmetadata = null;
       }
     };
-  }, [videoRef, onDetections]);   //videoRef, onDetections 변화마다 시행
+  }, [videoRef, onDetections]);
 
   return (
-    <VideoComponent videoRef={videoRef} style={style} />
+    <>
+      <VideoComponent videoRef={videoRef} style={style} />
+      <p>FaceDetection Component Loaded</p> {/* 디버깅: 컴포넌트 로드 확인 */}
+    </>
   );
 };
 
