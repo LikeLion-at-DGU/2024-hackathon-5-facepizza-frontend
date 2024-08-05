@@ -28,6 +28,9 @@ const Mypage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
   const [userId, setUserId] = useState(null); // 유저 ID 관리
   const [response, setResponse] = useState(null);
+  const [character, setCharacter] = useState(null);
+  const [number, setNumber] = useState(null);
+  const [report, setReport] = useState(null);
 
   let today = new Date();
   let month = today.getMonth();
@@ -40,7 +43,9 @@ const Mypage = () => {
         const token = localStorage.getItem("token"); // 토큰을 로컬 스토리지에서 가져옵니다.
         setToken(token);
         console.log("Token:", token); // 토큰 값 확인용 콘솔 로그 추가
-        const response = await API.get(
+    
+        // API 요청
+        const profileResponse = await API.get(
           "/api/mypage/profile",
           {
             headers: {
@@ -48,12 +53,45 @@ const Mypage = () => {
             },
           }
         );
-        
-        console.log("User data response:", response); // 응답 확인용 콘솔 로그 추가
-        setResponse(response.data); // response.data만 설정합니다.
-        if (response.data.id) {
+        const characterResponse = await API.get(
+          "/api/characters/tracktime",
+          {
+            headers: {
+              Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.
+            },
+          }
+        );
+        const numberResponse = await API.get(
+          "/api/albums/count",
+          {
+            headers: {
+              Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.
+            },
+          }
+        );
+        const reportResponse = await API.get(
+          "/api/report",
+          {
+            headers: {
+              Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.
+            },
+          }
+        );
+    
+        console.log("Profile response:", profileResponse); // 응답 확인용 콘솔 로그 추가
+        console.log("Character response:", characterResponse); // 응답 확인용 콘솔 로그 추가
+        console.log("Number response:", numberResponse); // 응답 확인용 콘솔 로그 추가
+        console.log("Report response:", reportResponse); // 응답 확인용 콘솔 로그 추가
+    
+        // 상태 업데이트
+        setResponse(profileResponse.data);
+        setCharacter(characterResponse.data);
+        setNumber(numberResponse.data);
+        setReport(reportResponse.data);
+    
+        if (profileResponse.data.id) {
           setIsLoggedIn(true);
-          setUserId(response.data.id);
+          setUserId(profileResponse.data.id);
         } else {
           setIsLoggedIn(false);
           setUserId(null);
@@ -87,7 +125,7 @@ const Mypage = () => {
             <Gauge info={response.characters[0]}/> {/*게이지*/}
           </CharacterBox>
           {/* 트래킹 정보가 들어간 창 */}
-          <Tracking />
+          <Tracking report={report}/>
           {/* 출석과 1/1 기록이 들어간 창 */}
           <DetailContent className="DetailContent">
             {/* <Attendence /> 출석 */}
@@ -102,14 +140,14 @@ const Mypage = () => {
                 padding: "0px 200px",
               }}
             >
-              <DdayDetail />
-              <DetailTracking />
+              <DdayDetail character={response}/>
+              <DetailTracking character={response} count={number}/>
             </div>
           </DetailContent>
           {/* 계정 정보가 들어간 창 */}
           <Account>
             <BoldBig>계정 정보</BoldBig>
-            <AccountDetail />
+            <AccountDetail user={response.data.user}/>
           </Account>
         </Container>
         <AccountModal />

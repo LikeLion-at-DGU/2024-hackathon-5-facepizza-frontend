@@ -34,7 +34,7 @@ const PhotoAlbumDetail = () => {
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "flex",
+            justifyContent: "space-between",
           }}
         >
           <img
@@ -49,8 +49,7 @@ const PhotoAlbumDetail = () => {
           <Default>{Interpret[emotion]}</Default>
         </div>
       </div>
-      <PhotoAlbumDetailEelement/>
-      <PhotoAlbumDetailEelement/>
+      <PhotoAlbumDetailEelement emotion={emotion}/>
     </>
   );
 };

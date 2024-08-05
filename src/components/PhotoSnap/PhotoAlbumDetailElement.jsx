@@ -2,13 +2,21 @@ import React from "react";
 import { ImageBox } from "../../styles/PhotoAlbumStyle";
 import PhotoElement from "./PhotoElement";
 
-const PhotoAlbumDetailEelement = () => {
+const PhotoAlbumDetailEelement = ({emotion}) => {
+
+
+    
   return (
     <ImageBox
-      style={{ width: "100%", justifyContent: "flex-start", gap: "44.5px", marginBottom:"41.5px" }}
+    id="ImageBox"
+      style={{
+        width: "100%",
+        justifyContent: "flex-start",
+        gap: "44.5px",
+        marginBottom: "41.5px",
+      }}
     >
-      <PhotoElement />
-      <PhotoElement />
+      <PhotoElement Emotion={emotion}/>
     </ImageBox>
   );
 };

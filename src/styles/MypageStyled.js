@@ -63,7 +63,7 @@ export const Account = styled.div`
 export const Default = styled.span`
   /* 디폴트 1 */
   color: var(--, #000);
-  font-family: IM_Hyemin;
+  ;
   font-size: 28.5px;
   font-style: normal;
   font-weight: 700;
@@ -72,7 +72,7 @@ export const Default = styled.span`
 
 export const ThinDefault = styled.span`
   color: var(--, #000);
-  font-family: IM_Hyemin;
+  ;
   font-size: 28.5px;
   font-style: normal;
   font-weight: 400;
@@ -82,7 +82,7 @@ export const ThinDefault = styled.span`
 export const Explanation = styled.span`
   /* 설명 */
   color: var(--, #000);
-  font-family: IM_Hyemin;
+  ;
   font-size: 23.75px;
   font-style: normal;
   font-weight: 400;
@@ -92,7 +92,7 @@ export const Explanation = styled.span`
 export const Subname = styled.div`
   /*부제*/
   color: var(--, #000);
-  font-family: IM_Hyemin;
+  ;
   font-size: 33.25px;
   font-style: normal;
   font-weight: 400;
@@ -102,7 +102,7 @@ export const Subname = styled.div`
 
 export const Boldsmall = styled.span`
   color: #000;
-  font-family: IM_Hyemin;
+  ;
   font-size: 25.65px;
   font-style: normal;
   font-weight: 700;
@@ -111,7 +111,7 @@ export const Boldsmall = styled.span`
 
 export const Thinsmall = styled.span`
   color: var(--, #000);
-  font-family: IM_Hyemin;
+  ;
   font-size: 25.65px;
   font-style: normal;
   font-weight: 400;
@@ -120,7 +120,7 @@ export const Thinsmall = styled.span`
 
 export const BoldTiny = styled.span`
   color: #000;
-  font-family: IM_Hyemin;
+  ;
   font-size: 25px;
   font-style: normal;
   font-weight: 700;
@@ -129,7 +129,7 @@ export const BoldTiny = styled.span`
 
 export const BoldBig = styled.span`
   color: #000;
-  font-family: IM_Hyemin;
+  ;
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
@@ -138,7 +138,7 @@ export const BoldBig = styled.span`
 
 export const ThinTiny = styled.span`
   color: #6d6d6d;
-  font-family: IM_Hyemin;
+  ;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -172,7 +172,7 @@ export const EndPoint = styled.span`
 
 export const PointFont = styled.span`
   color: #6d6d6d;
-  font-family: IM_Hyemin;
+  ;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;

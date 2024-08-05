@@ -2,7 +2,7 @@ import { API } from '../../api';
 import React, { useEffect, useState } from "react";
 import ImportCharacter from "./ImportCharacter";
 
-const Character = () => {
+const Character = ({character}) => {
   const [level, setLevel] = useState("f");
   const [emotion, setEmotion] = useState("neutral");
   const [trackingReports, setTrackingReports] = useState([]);

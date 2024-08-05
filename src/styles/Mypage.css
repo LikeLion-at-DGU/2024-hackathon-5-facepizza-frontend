@@ -82,11 +82,15 @@ hr {
   border: none;
   margin-top: 40px;
   color: #6d6d6d;
-  font-family: IM_Hyemin;
+  ;
   font-size: 20.924px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+button:hover{
+  cursor: pointer;
 }
 
 #Date {
@@ -137,7 +141,7 @@ hr {
 
 .inputName {
   color: #000;
-  font-family: IM_Hyemin;
+  ;
   font-size: 28.5px;
   font-style: normal;
   font-weight: 700;
@@ -152,7 +156,7 @@ hr {
 
 .inputName::placeholder {
   color: #000;
-  font-family: IM_Hyemin;
+  ;
   font-size: 28.5px;
   font-style: normal;
   font-weight: 700;
@@ -183,7 +187,7 @@ hr {
 
 .WarningSign {
   color: #f65151;
-  font-family: IM_Hyemin;
+  ;
   font-size: 27px;
   font-style: normal;
   font-weight: 700;
@@ -192,7 +196,7 @@ hr {
 
 .WarningContent {
   color: var(--, #000);
-  font-family: IM_Hyemin;
+  ;
   font-size: 19.919px;
   font-style: normal;
   font-weight: 400;
@@ -212,7 +216,7 @@ hr {
   background: #b6b6b6;
   border: none;
   color: #fff;
-  font-family: IM_Hyemin;
+  ;
   font-size: 19.684px;
   font-style: normal;
   font-weight: 700;
@@ -230,7 +234,7 @@ hr {
   border-radius: 9.085px;
   background: #6d6d6d;
   color: #fff;
-  font-family: IM_Hyemin;
+  ;
   font-size: 19.684px;
   font-style: normal;
   font-weight: 700;
@@ -259,7 +263,7 @@ hr {
 
 .QContents {
   color: #000;
-  font-family: IM_Hyemin;
+  ;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -268,7 +272,7 @@ hr {
 
 #NextStep {
   color: #000;
-  font-family: IM_Hyemin;
+  ;
   font-size: 21px;
   font-style: normal;
   font-weight: 700;
