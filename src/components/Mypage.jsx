@@ -43,7 +43,9 @@ const Mypage = () => {
         const token = localStorage.getItem("token"); // 토큰을 로컬 스토리지에서 가져옵니다.
         setToken(token);
         console.log("Token:", token); // 토큰 값 확인용 콘솔 로그 추가
-        const response = await API.get(
+    
+        // API 요청
+        const profileResponse = await API.get(
           "/api/mypage/profile",
           {
             headers: {
@@ -51,7 +53,7 @@ const Mypage = () => {
             },
           }
         );
-        const character = await API.get(
+        const characterResponse = await API.get(
           "/api/characters/tracktime",
           {
             headers: {
@@ -59,7 +61,7 @@ const Mypage = () => {
             },
           }
         );
-        const number = await API.get(
+        const numberResponse = await API.get(
           "/api/albums/count",
           {
             headers: {
@@ -67,22 +69,29 @@ const Mypage = () => {
             },
           }
         );
-        const report = await API.get(
+        const reportResponse = await API.get(
           "/api/report",
           {
             headers: {
               Authorization: `Token ${token}`, // 인증 헤더에 토큰을 추가합니다.
             },
           }
-        )
-        console.log("User data response:", response); // 응답 확인용 콘솔 로그 추가
-        setResponse(response.data); // response.data만 설정합니다.
-        setCharacter(character);
-        setNumber(number);
-        setReport(report);
-        if (response.data.id) {
+        );
+    
+        console.log("Profile response:", profileResponse); // 응답 확인용 콘솔 로그 추가
+        console.log("Character response:", characterResponse); // 응답 확인용 콘솔 로그 추가
+        console.log("Number response:", numberResponse); // 응답 확인용 콘솔 로그 추가
+        console.log("Report response:", reportResponse); // 응답 확인용 콘솔 로그 추가
+    
+        // 상태 업데이트
+        setResponse(profileResponse.data);
+        setCharacter(characterResponse.data);
+        setNumber(numberResponse.data);
+        setReport(reportResponse.data);
+    
+        if (profileResponse.data.id) {
           setIsLoggedIn(true);
-          setUserId(response.data.id);
+          setUserId(profileResponse.data.id);
         } else {
           setIsLoggedIn(false);
           setUserId(null);
