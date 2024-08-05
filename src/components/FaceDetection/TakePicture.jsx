@@ -1,4 +1,3 @@
-///연속으로 캡쳐되는 문제 해결 필요
 import React, { useRef, useState, useEffect } from "react";
 import FaceExpression from "./FaceExpression";
 import * as C from '../../styles/CameraStyled';
@@ -22,21 +21,26 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, setYourEmotion, 
   const [photoTaken, setPhotoTaken] = useState(false);
   const [emotionTranslate, setEmotionTranslate] = useState('');
 
-  // console.log(isModalOpen);
   useEffect(() => {
     setPhotoTaken(false);
   }, [ExpressionType]);
 
   useEffect(() => {
     if (capturing || TakePhoto) {
-      // console.log(TakePhoto);
-      console.log("Capturing processing...");
       const timer = setTimeout(() => {
         if (videoRef.current && canvasRef.current) {
-          canvasRef.current.width = videoRef.current.videoWidth;
-          canvasRef.current.height = videoRef.current.videoHeight;
+          const canvas = canvasRef.current;
+          const context = canvas.getContext("2d");
 
-          const context = canvasRef.current.getContext("2d");
+          // 캔버스 크기 설정
+          canvas.width = videoRef.current.videoWidth;
+          canvas.height = videoRef.current.videoHeight;
+
+          // 좌우 반전 적용
+          context.translate(canvas.width, 0); // 캔버스의 오른쪽으로 이동
+          context.scale(-1, 1); // x축을 기준으로 스케일을 -1로 설정
+
+          // 이미지 그리기
           context.drawImage(
             videoRef.current,
             0,
@@ -44,7 +48,9 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, setYourEmotion, 
             videoRef.current.videoWidth,
             videoRef.current.videoHeight
           );
-          const imageSrc = canvasRef.current.toDataURL("image/jpeg");
+
+          // 이미지 데이터 URL 생성
+          const imageSrc = canvas.toDataURL("image/jpeg");
           setImageSrc(imageSrc);
           onPhotoTaken(imageSrc, emotionTranslate);
           setCapturing(false); // 캡처 후 상태를 다시 false로 설정
@@ -62,20 +68,20 @@ const TakePicture = ({ onPhotoTaken, ExpressionType, TakePhoto, setYourEmotion, 
   }, [TakePhoto, capturing]);
 
   const handleExpressions = (expressions) => {
-    const { maxKey, maxValue } = expressions; 
+    const { maxKey, maxValue } = expressions;
     const emotionTranslate = emotionMap[maxKey];
-    console.log("현재 표정 :", emotionTranslate); //현재 감지되고 있는 표정 출력
+    console.log("현재 표정 :", emotionTranslate); // 현재 감지되고 있는 표정 출력
 
     if (emotionTranslate === ExpressionType && maxValue > 0.5 && !photoTaken) {
-      setCapturing(true); //얼굴이 맞는 경우 capturing 상태를 true로 설정
+      setCapturing(true); // 얼굴이 맞는 경우 capturing 상태를 true로 설정
     } else {
-      setCapturing(false); //얼굴이 맞지 않는 경우 capturing 상태를 false로 설정
+      setCapturing(false); // 얼굴이 맞지 않는 경우 capturing 상태를 false로 설정
     }
     console.log("캡쳐 진행 상태:", capturing);
     setEmotionTranslate(emotionTranslate);
   };
 
-  //yourEmotion상태를 업데이트(모달창 탑바에서 디스플레이)
+  // yourEmotion 상태를 업데이트(모달창 탑바에서 디스플레이)
   useEffect(() => {
     setYourEmotion(emotionTranslate);
   }, [emotionTranslate]);
