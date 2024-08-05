@@ -47,7 +47,8 @@ export const characterLogin = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  gap: 25px;
 
   img{
     height: 200px;
@@ -56,10 +57,37 @@ export const characterLogin = styled.div`
   }
   h2{
     font-weight: bold;
+    margin-top: 5px;
   }
   p{
     font-size: 18px;
   }
+
+  #expbar{
+    width: 200px;
+    height: 30px;
+    object-fit: contain;
+  }
+  #itembox{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+ }
+ #loginbox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+ }
+span{
+  text-align: left;
+}
+button{
+  background-color: #554E4E;
+  color: #FFFFFF;
+  font-size: 15px;
+  border-radius: 40px;
+  padding: 3px 12px;
+}
 `
 
 //Home_Content에서 쓰이는 스타일
