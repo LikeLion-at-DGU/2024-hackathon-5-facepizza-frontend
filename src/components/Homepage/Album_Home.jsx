@@ -6,23 +6,27 @@ import { API } from '../../api';
 import F_sad from '../../assets/character/f_sad.png'
 
 const Album_Home = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [data, setData] = useState([]);
+    const [token, setToken] = useState(null);
+    const [images, setImages] = useState([]);
 
-    const fetchData = async () => {
+    const getImage = async () => {
         try {
-            const response = await API.get('/api/albums');
-            setData(response.data);
+        const token = localStorage.getItem("token");
+        setToken(token);
+        const response = await API.get(`/api/albums`, {
+            headers: {
+            Authorization: `Token ${token}`,
+            },
+        });
+        setImages(response.data);
         } catch (error) {
-            console.log(error);
+        console.error(error);
         }
-    }
+    };
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        setIsLoggedIn(!!token); //토큰이 존재하면 true값
-        fetchData();
-    }, []);
+        getImage();
+    });
 
     return (
         <H.Magazine_Home>
@@ -30,16 +34,16 @@ const Album_Home = () => {
                 <H.SecondH2>표정 앨범</H.SecondH2>
             </H.ComponentName>
             <H.Sectin_G>  {/* 안애 내용이 로그인여부에따라 변경 */}
-                {isLoggedIn ? (
+                {token ? (
                     <S.Blink to='/album' style={{ width: '100%' }}>
-                        {data.length === 0 ? (
+                        {images.length === 0 ? (
                             <H.NoImg>
                                 <h2>아직 사진이 없습니다</h2>
                                 <p>포토스냅에서 사진을 찍어보세요!</p>
                             </H.NoImg>
                         ) : (
                             <H.FlexRow>
-                                {data.map(data => (
+                                {images.map(data => (
                                     <H.Example key={data.id} data={data} />
                                 ))}
                             </H.FlexRow>
