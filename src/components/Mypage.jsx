@@ -71,9 +71,9 @@ const Mypage = () => {
         setNumber(numberResponse.data);
         setReport(reportResponse.data);
 
-        if (profileResponse.data.id) {
+        if (profileResponse.data.user.id) {
           setIsLoggedIn(true);
-          setUserId(profileResponse.data.id);
+          setUserId(profileResponse.data.user.id);
         } else {
           setIsLoggedIn(false);
           setUserId(null);
