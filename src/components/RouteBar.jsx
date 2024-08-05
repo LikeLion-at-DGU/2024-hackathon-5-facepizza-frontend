@@ -13,7 +13,7 @@ const RouteBar = () => {
   const { postID } = useParams();
   let breadcrumb;
 
-  switch (location.pathname) { 
+  switch (location.pathname) {
     case '/aboutus':
       breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/aboutus">team 얼굴피자</R.RLink></R.ContBar>;
       break;
@@ -25,6 +25,9 @@ const RouteBar = () => {
       break;
     case '/tracking/list':
       breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/tracking/list">트래킹 개요</R.RLink></R.ContBar>;
+      break;
+    case '/tracking/reportdata':
+      breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/tracking/list">트래킹 개요</R.RLink> 〉 <R.RLink to="/tracking/report">레포트</R.RLink></R.ContBar>;
       break;
     case '/snap':
       breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/snap">표정 스냅</R.RLink></R.ContBar>;
