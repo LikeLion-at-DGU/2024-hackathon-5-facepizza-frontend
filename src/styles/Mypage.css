@@ -242,9 +242,9 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-end;
-  position: fixed;
-  top: 450px;
+  align-items: flex-start;
+  position: absolute;
+  top: 430px;
   left: 1200px;
   width: 515px;
   height: 142px;
