@@ -89,6 +89,10 @@ hr {
   line-height: normal;
 }
 
+button:hover{
+  cursor: pointer;
+}
+
 #Date {
   margin-bottom: 41px;
 }

@@ -34,7 +34,7 @@ const PhotoAlbumDetail = () => {
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "flex",
+            justifyContent: "space-between",
           }}
         >
           <img
