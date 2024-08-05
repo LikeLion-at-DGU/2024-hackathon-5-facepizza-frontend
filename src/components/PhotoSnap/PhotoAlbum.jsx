@@ -56,14 +56,22 @@ const PhotoAlbum = () => {
         <div id="album_content">
           <h3>행복</h3>
           <div id="photo_warpper">
-            <div class="example"></div>
-            <div class="example"></div>
+            {data.map(item => (
+              <div className="example" key={item.id}>
+              <img 
+                  src={`${API}+${item.image_url}`}
+                  alt="Album"  
+                /> 
+              {item.id}
+              </div>
+              ))
+            }
           </div>
         </div>
         {/* <S.Image src={album} alt="Album" /> */}
       </S.Iner_Section>
     </S.Album>
-  );
+  )
 };
 
 export default PhotoAlbum;

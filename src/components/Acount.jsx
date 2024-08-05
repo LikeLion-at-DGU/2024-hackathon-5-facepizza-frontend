@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from '../styles/StyledComponents';
 import check from '../assets/Icon_check.png';
 import { API } from '../api';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Account = () => {
     const [isAgreed, setIsAgreed] = useState(false);
@@ -14,6 +15,7 @@ const Account = () => {
     const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [isFormValid, setIsFormValid] = useState(false);
     const [error, setError] = useState(null);
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
 
     const handleCheckboxChange = () => {
@@ -95,56 +97,63 @@ const Account = () => {
                     할 것을 약속합니다.
                 </div>
                 <div id="agree_box">
-                    <input 
-                        type="checkbox" 
-                        id="agree" 
-                        checked={isAgreed} 
-                        onChange={handleCheckboxChange} 
+                    <input
+                        type="checkbox"
+                        id="agree"
+                        checked={isAgreed}
+                        onChange={handleCheckboxChange}
                     />
                     <label htmlFor="agree"> 동의하기</label>
                 </div>
             </S.InputContainer>
             <S.InputContainer>
-                <S.Left_align>
+                <S.Left_align style={{position: 'relative'}}>
                     <p>1. 이름을 입력해주세요.</p>
-                    <input 
-                        type="text" 
-                        placeholder="이름" 
+                    <input
+                        type="text"
+                        placeholder="이름"
                         value={name}
-                        onChange={handleNameChange} 
+                        onChange={handleNameChange}
                     />
                     <p>2. 이메일을 입력해주세요</p>
-                    <input 
-                        type="email" 
-                        placeholder="이메일" 
+                    <input
+                        type="email"
+                        placeholder="이메일"
                         value={email}
-                        onChange={handleEmailChange} 
+                        onChange={handleEmailChange}
                     />
                     <p>3. 비밀번호를 입력해주세요.</p>
-                    <input 
-                        type="password" 
-                        placeholder="8자 이상 영문자, 숫자 포함" 
+                    <input
+                        type={passwordVisible ? "text" : "password"}
+                        placeholder="8자 이상 영문자, 숫자 포함"
                         value={password}
-                        onChange={handlePasswordChange} 
+                        onChange={handlePasswordChange}
                     />
+                    <span
+                        onClick={() => setPasswordVisible(!passwordVisible)}
+                        style={{ position: 'absolute', right: 18, top: 303, cursor: 'pointer', color: 'balck', fontSize: '22px'}}
+                    >
+                        {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+
                     <S.Password_Ck>
                         <p>4. 비밀번호를 확인해주세요</p>
-                        <S.CheckIcon 
-                            isPasswordMatch={isPasswordMatch} 
-                            isPasswordValid={isPasswordValid} 
-                            src={check} 
+                        <S.CheckIcon
+                            isPasswordMatch={isPasswordMatch}
+                            isPasswordValid={isPasswordValid}
+                            src={check}
                         />
                     </S.Password_Ck>
-                    <input 
-                        type="password" 
-                        placeholder="비밀번호를 다시 입력해주세요" 
+                    <input
+                        type={passwordVisible ? "text" : "password"}
+                        placeholder="비밀번호를 다시 입력해주세요"
                         value={confirmPassword}
-                        onChange={handleConfirmPasswordChange} 
+                        onChange={handleConfirmPasswordChange}
                     />
                 </S.Left_align>
             </S.InputContainer>
-            <S.SignUpButton 
-                disabled={!isFormValid} 
+            <S.SignUpButton
+                disabled={!isFormValid}
                 isAgreed={isAgreed}
                 onClick={handleSignUp}
             >

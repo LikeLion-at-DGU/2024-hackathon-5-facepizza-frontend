@@ -26,10 +26,10 @@ const Album_Home = () => {
     return (
         <H.Magazine_Home>
             <H.ComponentName>
-                <h2>표정 앨범</h2>
+                <H.SecondH2>표정 앨범</H.SecondH2>
             </H.ComponentName>
             <H.Sectin_G>  {/* 안애 내용이 로그인여부에따라 변경 */}
-            {isLoggedIn ? (
+                {isLoggedIn ? (
                     <S.Blink to='/album'>
                         <H.FlexRow>
                             {data.map(data => (
@@ -38,7 +38,7 @@ const Album_Home = () => {
                         </H.FlexRow>
                     </S.Blink>
                 ) : (
-                    <H.FlexCol style={{padding: '20px 0 10px 0'}}>
+                    <H.FlexCol style={{ padding: '20px 0 10px 0' }}>
                         <img src={Locked} alt="Locked" />
                         <p>로그인 후 사용해주세요</p>
                     </H.FlexCol>

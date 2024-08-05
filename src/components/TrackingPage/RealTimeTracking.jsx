@@ -32,6 +32,7 @@ const RealTimeTracking = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 상태 관리
   const [userId, setUserId] = useState(null);  // 유저 ID 관리
+  const [reportId, setReportId] = useState(null);  // 현재 보고서 ID 관리
 
   const navigate = useNavigate();
   const startTime = useRef(null);
@@ -64,6 +65,16 @@ const RealTimeTracking = () => {
     fearful: '두려움',
     neutral: '무표정',
   };  // 감정 출력시 이름 변경
+
+  const emotionColors = {
+    happy: '#FFB700',
+    sad: '#5DBBFF',
+    angry: '#FF9472',
+    surprised: '#40C700',
+    disgusted: '#9621CC',
+    fearful: '#0FBED6',
+    neutral: '#6D6D6D',
+  };  // 감정마다 색상 지정
 
   // 유저 로그인 상태와 정보 가져오기
   useEffect(() => {
@@ -190,9 +201,14 @@ const RealTimeTracking = () => {
           },
         });
 
+        // reportId를 API 응답에서 받아옴
+        const { id } = response.data;  // 여기에 맞게 응답에서 report_id를 가져오세요
+        setReportId(id);
+
         console.log('Response from server:', response.data); // 디버깅용 로그
 
-        navigate('/tracking/reportdata'); // 로그인 했을 때는 /tracking/reportdata로 이동
+        // reportId를 사용하여 리디렉션
+        navigate(`/tracking/report/${id}`); // 로그인 했을 때는 /tracking/report/report_id로 이동
       } catch (error) {
         console.error('Error saving report:', error);
       }
@@ -219,6 +235,8 @@ const RealTimeTracking = () => {
     };
   }, []);
 
+  const maxEmotionKey = currentEmotion ? Object.keys(currentEmotion).reduce((a, b) => currentEmotion[a] > currentEmotion[b] ? a : b) : null;
+
   return (
     <RT.TrackingContainer>
       <C.Main_Container>
@@ -227,31 +245,31 @@ const RealTimeTracking = () => {
         </div>
         <div className='rowBox' style={{ height: '370px' }}>
           <div id='videoDeo'>
-            {/* <div style={{ display: 'felx', flexDirection: 'column' }}>
-              <div id='topbar'></div> */}
             <FaceDetection videoRef={videoRef} onDetections={handleDetections} style={{ height: '350px' }} />
-            {/* <div id='bottombar'></div>
-            </div> */}
           </div>
 
           <div className='description' style={{ width: '50%', gap: '15px' }}>
             <div className='dataContainer'>
               <p>data</p>
               <h3>실시간 표정 데이터</h3>
+              <RT.Data1>
               {currentEmotion && Object.entries(currentEmotion).map(([emotion, value]) => (
-                <div key={emotion} style={{ marginRight: '10px' }}>
+                <div key={emotion} style={{ marginRight: '10px', color: emotion === maxEmotionKey ? emotionColors[emotion] : 'black' }}>
                   <h4>{emotionTranslations[emotion]}: {(value * 100).toFixed(2)}%</h4>
                 </div>
               ))}
+              </RT.Data1>
             </div>
             <div className='dataContainer'>
               <p>data</p>
               <h3>누적 표정 데이터</h3>
+              <RT.Data1>
               {Object.entries(emotionPercentages).map(([emotion, percentage]) => (
                 <div key={emotion} style={{ marginRight: '10px' }}>
                   <h4>{emotionTranslations[emotion]}: {percentage}%</h4>
                 </div>
               ))}
+              </RT.Data1>
             </div>
           </div>
         </div>
@@ -261,7 +279,7 @@ const RealTimeTracking = () => {
         <div id='title_bar'>
           <S.H2_title>하이라이트 사진 :</S.H2_title>
         </div>
-        <C.Gallery photoCount={Object.entries(emotionPics).length}>
+        <RT.Gallery photoCount={Object.entries(emotionPics).length}>
           {Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
             img ? (
               <div key={emotion}>
@@ -270,7 +288,7 @@ const RealTimeTracking = () => {
               </div>
             ) : null
           ))}
-        </C.Gallery>
+        </RT.Gallery>
       </C.Main_Container>
     </RT.TrackingContainer>
   );

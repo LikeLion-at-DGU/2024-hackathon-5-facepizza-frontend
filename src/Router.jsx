@@ -6,8 +6,9 @@ import Header from './components/Header';
 import RealTimeTracking from './components/TrackingPage/RealTimeTracking';
 import RealTimeTrackingReport from './components/TrackingPage/RealTimeTrackingReport';
 import RealTimeTrackingList from './components/TrackingPage/RealTimeTrackingList';
-import RealTimeTrackingReportData from './components/TrackingPage/RealTimeTrackingReportData';
+import TrackingReportDetail from './components/TrackingPage/TrackingReportDetail';
 import PhotoSnap from './components/PhotoSnap/PhotoSnap';
+import FourCutSnap from './components/PhotoSnap/FourCutSnap';
 import PhotoAlbum from './components/PhotoSnap/PhotoAlbum';
 import About from './components/About';
 import Login from './components/Login';
@@ -24,8 +25,9 @@ const AppRouter = () => {
       <Route path="/tracking" element={<RealTimeTracking />} />
       <Route path="/tracking/report" element={<RealTimeTrackingReport />} />
       <Route path="/tracking/list" element={<RealTimeTrackingList />} />
-      <Route path="/tracking/reportdata" element={<RealTimeTrackingReportData />}/>
+      <Route path="/tracking/report/:reportid" element={<TrackingReportDetail />}/>
       <Route path="/snap" element={<PhotoSnap />} />
+      <Route path="/snap/FourCut" element={<FourCutSnap />} />
       <Route path="/album" element={<PhotoAlbum />} />
       <Route path="/Login" element={<Login/>} />
       <Route path="/Acount" element={<Acount/>} />
@@ -37,4 +39,3 @@ const AppRouter = () => {
 };
 
 export default AppRouter;
-
