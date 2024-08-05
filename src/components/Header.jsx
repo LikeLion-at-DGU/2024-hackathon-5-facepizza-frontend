@@ -3,6 +3,7 @@ import * as S from '../styles/StyledComponents';
 import * as T from '../styles/HeaderStyled';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Logo_Cheese from '../assets/Logo_Cheese.png';
+import { API } from '../api';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,8 +21,7 @@ const Header = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/logout', {
-        method: 'POST',
+      const response = await API.post('/api/accounts/logout', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Token ${token}`,

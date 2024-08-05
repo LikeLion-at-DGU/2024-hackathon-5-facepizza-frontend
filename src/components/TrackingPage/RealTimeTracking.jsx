@@ -4,7 +4,7 @@ import FaceDetection from "../FaceDetection/FaceDetection";
 import * as S from '../../styles/StyledComponents';
 import * as RT from '../../styles/RealTimeTrackingStyled';
 import * as C from '../../styles/CameraStyled';
-import axios from 'axios';
+import { API } from '../../api';
 
 const RealTimeTracking = () => {
   const videoRef = useRef(null);
@@ -33,6 +33,7 @@ const RealTimeTracking = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // 로그인 상태 관리
   const [userId, setUserId] = useState(null);  // 유저 ID 관리
   const [reportId, setReportId] = useState(null);  // 현재 보고서 ID 관리
+  const [faceDetectionKey, setFaceDetectionKey] = useState(Date.now()); // FaceDetection 컴포넌트의 key를 관리
 
   const navigate = useNavigate();
   const startTime = useRef(null);
@@ -84,7 +85,7 @@ const RealTimeTracking = () => {
         setToken(token);
         console.log('Token:', token); // 토큰 값 확인용 콘솔 로그 추가
         if (token) {
-          const response = await axios.get('http://127.0.0.1:8000/api/mypage/profile', {
+          const response = await API.get('/api/mypage/profile', {
             headers: {
               Authorization: `Token ${token}`,  // 인증 헤더에 토큰을 추가합니다.
             }
@@ -116,7 +117,7 @@ const RealTimeTracking = () => {
       startTime.current = new Date();
       timerRef.current = setTimeout(() => {
         handleEndTracking();
-      }, 5 * 60000); // 5분 후 트래킹 종료
+      }, 10 * 60000); // 10분 후 트래킹 종료
     }
 
     resizedDetections.forEach((detection) => {
@@ -183,7 +184,7 @@ const RealTimeTracking = () => {
           neutral: parseFloat(emotionPercentages.neutral),
           created_at: startTime.current.toISOString(),
           ended_at: endTime.current.toISOString(),
-          title: `${formatDate(startTime.current)} ${formatTime(startTime.current)}`,
+          title: `${formatDate(startTime.current)} ${formatTime(startTime.current)}`, // 수정: 템플릿 리터럴 사용
           highlights: Object.entries(emotionPics).map(([emotion, { img }]) => ({
             image: img,
             emotion: emotion,
@@ -194,10 +195,10 @@ const RealTimeTracking = () => {
 
         // Report 데이터 전송
         // 배포 후 api 주소 변경
-        const response = await axios.post('http://127.0.0.1:8000/api/report', reportData, {
+        const response = await API.post('/api/report', reportData, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Token ${token}`,
+            Authorization: `Token ${token}`, // 수정: 템플릿 리터럴 사용
           },
         });
 
@@ -218,6 +219,11 @@ const RealTimeTracking = () => {
       }); // 로그인 안 했을 때는 /tracking/report로 이동
     }
   };
+
+  // 페이지가 렌더링될 때 FaceDetection을 새로 로드하기 위해 key 값을 업데이트
+  useEffect(() => {
+    setFaceDetectionKey(Date.now()); // 페이지가 렌더링될 때마다 새로운 key를 설정
+  }, []); // 빈 배열을 의존성 배열로 설정하여 컴포넌트가 처음 렌더링될 때만 실행
 
   // 상태가 변경된 후에 navigate 호출
   useEffect(() => {
@@ -245,7 +251,7 @@ const RealTimeTracking = () => {
         </div>
         <div className='rowBox' style={{ height: '370px' }}>
           <div id='videoDeo'>
-            <FaceDetection videoRef={videoRef} onDetections={handleDetections} style={{ height: '350px' }} />
+            <FaceDetection key={faceDetectionKey} videoRef={videoRef} onDetections={handleDetections} style={{ height: '350px' }} />
           </div>
 
           <div className='description' style={{ width: '50%', gap: '15px' }}>

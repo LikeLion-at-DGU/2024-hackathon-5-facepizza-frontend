@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as S from '../../styles/StyledComponents';
 import * as RT from '../../styles/RealTimeTrackingStyled';
 import * as C from '../../styles/CameraStyled';
+import { API } from '../../api';
 
 const TrackingReportDetail = () => {
   const { reportid } = useParams();
@@ -79,7 +79,7 @@ const TrackingReportDetail = () => {
     const fetchReport = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://127.0.0.1:8000/api/report/${reportid}`, {
+        const response = await API.get(`/api/report/${reportid}`, {
           headers: {
             Authorization: `Token ${token}`,
           },
