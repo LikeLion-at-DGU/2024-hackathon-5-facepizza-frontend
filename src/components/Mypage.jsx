@@ -33,7 +33,7 @@ const Mypage = () => {
   const [report, setReport] = useState(null);
 
   let today = new Date();
-  let month = today.getMonth();
+  let month = today.getMonth() + 1; // 월은 0부터 시작하므로 +1
   let day = today.getDate();
 
   // 유저 로그인 상태와 정보 가져오기
@@ -72,7 +72,17 @@ const Mypage = () => {
 
         // 상태 업데이트
         const characterData = characterResponse.data;
-        let reportData = reportResponse.data;
+        const reportData = reportResponse.data || [
+          {
+            happy: 0,
+            sad: 0,
+            angry: 0,
+            surprised: 0,
+            disgusted: 0,
+            fearful: 0,
+            neutral: 0,
+          },
+        ]; // 초기화된 배열로 설정
 
         // reports가 null인 경우 감정 값들을 0으로 설정
         if (!characterData.reports || characterData.reports.length === 0) {
@@ -89,25 +99,11 @@ const Mypage = () => {
           ];
         }
 
-        if (!reportResponse || reportData.length === 0) {
-          reportData = [
-            {
-              happy: 0,
-              sad: 0,
-              angry: 0,
-              surprised: 0,
-              disgusted: 0,
-              fearful: 0,
-              neutral: 0,
-            },
-          ];
-        }
-
         // 상태 업데이트
         setResponse(profileResponse.data);
-        setCharacter(characterResponse.data);
+        setCharacter(characterData);
         setNumber(numberResponse.data);
-        setReport(reportResponse.data);
+        setReport(reportData);
 
         if (profileResponse.data.user.id) {
           setIsLoggedIn(true);
