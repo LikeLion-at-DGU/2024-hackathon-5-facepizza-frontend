@@ -68,7 +68,7 @@ const Mypage = () => {
         console.log("Profile response:", profileResponse.data);
         console.log("Character response:", characterResponse.data);
         console.log("Number response:", numberResponse.data);
-        console.log("Report response:", reportResponse.data);
+        console.log("Report response:", reportResponse.data.length);
 
         // 상태 업데이트
         const characterData = characterResponse.data;
