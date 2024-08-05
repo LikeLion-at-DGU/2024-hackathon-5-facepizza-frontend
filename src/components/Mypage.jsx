@@ -72,17 +72,22 @@ const Mypage = () => {
 
         // 상태 업데이트
         const characterData = characterResponse.data;
-        const reportData = reportResponse.data || [
-          {
-            happy: 0,
-            sad: 0,
-            angry: 0,
-            surprised: 0,
-            disgusted: 0,
-            fearful: 0,
-            neutral: 0,
-          },
-        ]; // 초기화된 배열로 설정
+        let reportData = reportResponse.data; // 변수를 조건문 밖에서 선언
+
+        // reportData가 빈 배열일 때 초기화된 배열로 설정
+        if (!reportData || reportData.length === 0) {
+          reportData = [
+            {
+              happy: 0,
+              sad: 0,
+              angry: 0,
+              surprised: 0,
+              disgusted: 0,
+              fearful: 0,
+              neutral: 0,
+            },
+          ];
+        }
 
         // reports가 null인 경우 감정 값들을 0으로 설정
         if (!characterData.reports || characterData.reports.length === 0) {
