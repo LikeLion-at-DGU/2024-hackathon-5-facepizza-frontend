@@ -16,7 +16,7 @@ const Facial_Character = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         setIsLoggedIn(!!token); //토큰이 존재하면 true값
-        console.log(isLoggedIn)
+        // console.log(isLoggedIn)
     }, []);
 
     return (

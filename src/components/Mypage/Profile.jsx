@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Default, ProfileBox } from "../../styles/MypageStyled";
 import rename from "../../assets/rename.png";
+import { API } from "../../api";
 
-const Profile = ({data}) => {
+const Profile = () => {
+  const [token, setToken] = useState(null);
+  const [data, setData] = useState(null);
   const [age, setAge] = useState(1);
   const [name, setName] = useState("김치즈");
   const [newName, setNewName] = useState("");
@@ -10,11 +13,26 @@ const Profile = ({data}) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    console.log(data.user);
-    setName(data.user.first_name);
-    console.log(data.characters[0]);
-    setAge(data.characters[0].level);
-  },[])
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        setToken(token);
+
+        const data = await Promise.all([
+          API.get("/api/report", {
+            headers: { Authorization: `Token ${token}` },
+          }),
+        ]);
+        console.log(data.user);
+        setName(data.user.first_name);
+        console.log(data.characters[0]);
+        setAge(data.characters[0].level);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
     // if (inputRef.current) {
@@ -54,7 +72,7 @@ const Profile = ({data}) => {
       setName(newName);
       setNewName(""); // 이름 변경 후 입력 필드 초기화
       setIsEditing(false); // 입력 필드 비활성화
-    } else{
+    } else {
       console.log(Hi);
       inputRef.current.focus();
     }
@@ -94,7 +112,7 @@ const Profile = ({data}) => {
         className="rename"
         alt="Rename Icon"
         onClick={handleImageClick} // 이미지 클릭 시 handleImageClick 호출
-        style={{width:"24px", height:"27.5px"}}
+        style={{ width: "24px", height: "27.5px" }}
       />
     </ProfileBox>
   );

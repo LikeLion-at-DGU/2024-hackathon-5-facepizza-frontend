@@ -29,7 +29,7 @@ export const TrackingBox = styled.div`
   margin-top: 42.95px;
   padding: 34px 0px;
   .detail {
-    margin-left: 57px;
+    margin-top: 27px;
     margin-bottom: 27px;
     display: inline-block;
     gap: 50px;

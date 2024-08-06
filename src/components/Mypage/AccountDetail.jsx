@@ -10,7 +10,7 @@ const AccountDetail = ({user}) => {
       </span>
       <span>
         <ThinDefault className="ThinDefault">탄생일</ThinDefault>
-        <ThinDefault>{user.date_joined}</ThinDefault>
+        <ThinDefault>{user.date_joined.split('T')[0]}</ThinDefault>
       </span>
     </div>
   );

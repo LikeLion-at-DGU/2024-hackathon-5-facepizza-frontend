@@ -52,7 +52,7 @@ const Mypage = () => {
       try {
         const token = localStorage.getItem("token");
         setToken(token);
-        console.log("Token:", token);
+        // console.log("Token:", token);
 
         // 여러 요청을 병렬로 처리합니다.
         const [
@@ -139,8 +139,8 @@ const Mypage = () => {
           <CharacterBox className="CharacterBox">
             <Character />
             <hr />
-            <Profile data={response} /> {/* 데이터가 로드된 후에 렌더링 */}
-            <Gauge info={response.characters[0]} /> {/*게이지*/}
+            <Profile /> {/* 데이터가 로드된 후에 렌더링 */}
+            <Gauge /> {/*게이지*/}
           </CharacterBox>
           {/* 트래킹 정보가 들어간 창 */}
           <Tracking report={report} />

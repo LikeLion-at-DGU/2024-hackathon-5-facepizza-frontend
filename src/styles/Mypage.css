@@ -109,8 +109,6 @@ button:hover{
 }
 
 .OtherExpression {
-  display: flex;
-  align-items: flex-start;
   gap: 30px;
 }
 
