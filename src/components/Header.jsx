@@ -21,8 +21,7 @@ const Header = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await API.post('/api/accounts/logout', {
-        
+      const response = await API.post('/api/accounts/logout',{}, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Token ${token}`,

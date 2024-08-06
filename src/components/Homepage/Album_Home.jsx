@@ -27,7 +27,7 @@ const Album_Home = () => {
 
     useEffect(() => {
         getImage();
-    });
+    }, []);
 
     return (
         <H.Magazine_Home>
