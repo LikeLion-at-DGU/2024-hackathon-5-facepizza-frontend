@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from '../../styles/StyledComponents';
 import * as C from '../../styles/CameraStyled';
-import TrackingReportcard from './TrackingReportcard';
 
 import face_suprise from '../../assets/face/face_suprise.png';
 import face_smail from '../../assets/face/face_smail.png';
@@ -11,38 +10,15 @@ import face_natural from '../../assets/face/face_natural.png';
 import face_fear from '../../assets/face/face_fear.png';
 import face_disgusting from '../../assets/face/face_disgusting.png';
 import face_angry from '../../assets/face/face_angry.png';
-import { API } from '../../api';
 
 const RealTimeTrackingList = () => {
   const videoRef = useRef(null);
-  const [trackingReports, setTrackingReports] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [isExplainOpen, setIsExplainOpen] = useState(true);
   const navigate = useNavigate();
 
-  const handleToggle = () => { setIsExplainOpen(!isExplainOpen); }
-
-  {/*useEffect(() => {
-    const fetchTrackingReports = async () => {
-      try {
-        const token = localStorage.getItem('token'); // 토큰을 가져옵니다
-        if (token != null) {
-          const response = await API.get('/api/report', {
-            headers: {
-              Authorization: `Token ${token}` // 헤더에 인증 토큰을 추가합니다
-            }
-          });
-          setTrackingReports(response.data);
-        }
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTrackingReports();
-  }, []);*/}
+  const handleToggle = () => {
+    setIsExplainOpen(!isExplainOpen);
+  };
 
   const VideoComponent = ({ videoRef }) => {
     useEffect(() => {
@@ -80,9 +56,6 @@ const RealTimeTrackingList = () => {
     );
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
     <C.Main_Container>
       <div id='title_bar'>
@@ -98,7 +71,7 @@ const RealTimeTrackingList = () => {
 
       <div className='description' style={{ margin: '20px 0' }} >
         <div id='title_bar' style={{ borderBottom: 'none' }}>
-          <S.H2_title style={{ color: '#6D6D6D', fontSize: '20px'}} onClick={handleToggle}>
+          <S.H2_title style={{ color: '#6D6D6D', fontSize: '20px' }} onClick={handleToggle}>
             표정 트래킹 이용방법
           </S.H2_title>
           <button id="descriptionBtn" onClick={handleToggle}>
@@ -148,9 +121,6 @@ const RealTimeTrackingList = () => {
           </div>
         </C.SubTitle>
       </div>
-
-      {/*<TrackingReportcard trackingReports={trackingReports} />*/}
-
     </C.Main_Container>
   );
 };
