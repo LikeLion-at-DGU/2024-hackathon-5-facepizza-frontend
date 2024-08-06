@@ -1,6 +1,10 @@
 import React from 'react';
+import * as S from '../../styles/StyledComponents';
+import * as RT from '../../styles/RealTimeTrackingStyled';
+import * as C from '../../styles/CameraStyled';
 import { Section, Container } from '../../styles/StyledComponents';
 import { useLocation } from 'react-router-dom';
+import ImportCharacter from "../Character/ImportCharacter";
 
 const RealTimeTrackingReport = () => {
   const location = useLocation();
@@ -64,40 +68,82 @@ const RealTimeTrackingReport = () => {
 
   const elapsedTime = calculateElapsedTime(startTime, endTime);
 
+  const emotionSequence = ['neutral', 'happy', 'sad', 'angry', 'surprised', 'afraid', 'disgusted'];
+  const getEmoticonKey = (emotion, characterType) => {
+    const emotionIndex = emotionSequence.indexOf(emotion);
+    if (emotionIndex === -1) return null;
+    return `${characterType}_${emotionSequence[emotionIndex]}`;
+  };
+
+  const CharacterDisplay = ({ bestEmotion, characterType = 's' }) => {
+    const emoticonKey = getEmoticonKey(bestEmotion.emotion, characterType);
+    const emoticonsrc = ImportCharacter[emoticonKey] || images['s_neutral'];
+    const imgstyle = {
+      width: '350px',
+      hieght: '200px',
+      objectFit: 'cover'
+    }
+    return (
+      <img src={emoticonsrc} alt={bestEmotion.emotion} style={imgstyle} />
+    );
+  };
+
   return (
-    <Container>
-      <Section>
-        <h2>누적 표정 데이터</h2>
-        {Object.entries(emotionPercentages).map(([emotion, percentage]) => (
-          <div key={emotion} style={{ marginRight: '10px' }}>
-            <h4>{emotionTranslations[emotion]}: {percentage}%</h4>
+      <RT.TrackingContainer>
+        <C.Main_Container>
+          <div id='title_bar' style={{ justifyContent: 'space-between', borderBottom: 'none' }}>
+            {/* <h3 style={{ margin: '0px', paddingLeft: '0px' }}>{report.title}</h3> */}
           </div>
-        ))}
-        {bestEmotion && (
+          <div className='dataContainer2'>
+            <RT.HeadP>data</RT.HeadP>
+
+            <h2>누적 표정 데이터</h2>
+
+            <div>
+              <RT.Data1 style={{ justifyContent: 'center' }}>
+                {Object.entries(emotionPercentages).map(([emotion, percentage]) => (
+                  <div key={emotion} style={{ marginRight: '10px' }}>
+                    <h4>{emotionTranslations[emotion]}: {percentage}%</h4>
+                  </div>
+                ))}
+              </RT.Data1>
+
+              <CharacterDisplay bestEmotion={bestEmotion} characterType="s" />
+
+              {bestEmotion && (
+                <div>
+                  {emotionTranslations[bestEmotion.emotion] === '무표정' ?
+                    <RT.H3magin>{emotionTranslations[bestEmotion.emotion]}을 가장 많이 지었어요!</RT.H3magin>
+                    : emotionTranslations[bestEmotion.emotion] === '행복' ?
+                      <RT.H3magin>행복한 표정을 가장 많이 지었어요!</RT.H3magin>
+                      : <RT.H3magin>{emotionTranslations[bestEmotion.emotion]} 표정을 가장 많이 지었어요!</RT.H3magin>
+                  }
+                </div>
+              )}
+            </div>
+          </div>
+
+
+          <C.FlexRow style={{ justifyContent: 'flex-start', alignItems: 'center', width: '100%', gap: '18px' }} >
+            <p style={{ fontSize: '18px' }}>총 {elapsedTime} 트래킹</p>
+            <p>시작 {formatDate(startTime)} {formatTime(startTime)}&nbsp;&nbsp; </p>
+            <p>종료 {formatDate(endTime)} {formatTime(endTime)}</p>
+          </C.FlexRow>
           <div>
-            {emotionTranslations[bestEmotion.emotion] === '무표정' ? 
-            <h3>{emotionTranslations[bestEmotion.emotion]}을 가장 많이 지었어요!</h3> 
-            : emotionTranslations[bestEmotion.emotion] === '행복' ?
-            <h3>행복한 표정을 가장 많이 지었어요!</h3>
-            : <h3>{emotionTranslations[bestEmotion.emotion]} 표정을 가장 많이 지었어요!</h3>
-          }  
+            <h3>하이라이트 사진</h3>
+            <RT.Gallery>
+              {emotionPics && Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
+                img ? (
+                  <div key={emotion}>
+                    <img src={img} alt={emotion} width="300" />
+                    <p>{emotionTranslations[emotion]} {(maxValue * 100).toFixed(1)}%</p><br />
+                  </div>
+                ) : null
+              ))}
+            </RT.Gallery>
           </div>
-        )}
-        <h3>총 {elapsedTime} 트래킹</h3>
-        <h3>시작 {formatDate(startTime)} {formatTime(startTime)}&nbsp;&nbsp; 종료 {formatDate(endTime)} {formatTime(endTime)}</h3>
-        <div>
-          <h3>하이라이트 사진</h3>
-          {emotionPics && Object.entries(emotionPics).map(([emotion, { img, maxValue }]) => (
-            img ? (
-              <div key={emotion}>
-                <img src={img} alt={emotion} width="300" />
-                <p>{emotionTranslations[emotion]} {(maxValue * 100).toFixed(5)}%</p><br />
-              </div>
-            ) : null
-          ))}
-        </div>
-      </Section>
-    </Container>
+        </C.Main_Container>
+      </RT.TrackingContainer>
   );
 };
 

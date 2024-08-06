@@ -53,10 +53,10 @@ const Header = () => {
           <T.Hlink to="/tracking/list" active={currentPath.includes('/tracking')}>
             표정 트래킹
           </T.Hlink>
-          <T.Hlink to="/snap" active={currentPath === '/snap'}>
+          <T.Hlink to="/snap" active={currentPath.includes('/snap')}>
             표정 스냅
           </T.Hlink>
-          <T.Hlink to="/album" active={currentPath === '/album'}>
+          <T.Hlink to="/album" active={currentPath.includes('/album')}>
             표정 앨범
           </T.Hlink>
           <T.Hlink to="/Magzine" active={currentPath.includes('/Magzine')}>
