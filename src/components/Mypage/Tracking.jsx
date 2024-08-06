@@ -12,15 +12,17 @@ const Interpret = {
 };
 
 const Tracking = ({ report }) => {
+  
+  console.log(report);
   // 감정 데이터를 배열로 변환
   const emotionData = [
-    { emotion: 'happy', value: report.happy },
-    { emotion: 'sad', value: report.sad },
-    { emotion: 'angry', value: report.angry },
-    { emotion: 'surprised', value: report.surprised },
-    { emotion: 'disgusted', value: report.disgusted },
-    { emotion: 'fearful', value: report.fearful },
-    { emotion: 'neutral', value: report.neutral },
+    { emotion: 'happy', value: report.happy === undefined ? 0 : report.happy },
+    { emotion: 'sad', value: report.sad === undefined ? 0 : report.sad},
+    { emotion: 'angry', value: report.angry === undefined ? 0 : report.angry},
+    { emotion: 'surprised', value: report.surprised  === undefined ? 0 : report.surprised},
+    { emotion: 'disgusted', value: report.disgusted === undefined ? 0 : report.disgusted},
+    { emotion: 'fearful', value: report.fearful === undefined ? 0 : report.fearful },
+    { emotion: 'neutral', value: report.neutral === undefined ? 0 : report.neutral },
   ];
 
   // 최대값을 찾기 위한 함수
@@ -31,6 +33,7 @@ const Tracking = ({ report }) => {
   const maxEmotion = getMaxEmotion();
 
   function getEmotionElements(data) {
+    console.log("Tracking: ", data);
     return data.map((entry, index) => (
       <Thinsmall key={index} style={{ color: entry.emotion === maxEmotion.emotion ? Interpret[entry.emotion].color : 'inherit' }}>
         {`${Interpret[entry.emotion].name} ${entry.value.toFixed(2)}%`}
@@ -41,7 +44,7 @@ const Tracking = ({ report }) => {
   return (
     <>
       <TrackingBox>
-        <Boldsmall>최근 표정 트래킹 비율</Boldsmall>
+        <Boldsmall style={{marginBottom:"20px"}}>최근 표정 트래킹 비율</Boldsmall>
         <div className="detail">
           <div>
             {getEmotionElements(emotionData)}

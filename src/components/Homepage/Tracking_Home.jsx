@@ -12,7 +12,7 @@ const Tracking_Home = ({sectionHeight }) => {
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         setToken(storedToken);
-        console.log('토큰:', storedToken);
+        // console.log('토큰:', storedToken);
     }, []);
 
     return (

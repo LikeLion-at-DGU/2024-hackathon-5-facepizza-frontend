@@ -38,7 +38,7 @@ const PhotoAlbumDetail = () => {
           Authorization: `${token}`,
         },
       });
-      console.log("리스펀스:", response.data);
+      // console.log("리스펀스:", response.data);
       setImages(response.data);
     } catch (error) {
       console.error(error);

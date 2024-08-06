@@ -3,6 +3,7 @@ import { Default, ProfileBox } from "../../styles/MypageStyled";
 import rename from "../../assets/rename.png";
 
 const Profile = ({data}) => {
+  
   const [age, setAge] = useState(1);
   const [name, setName] = useState("김치즈");
   const [newName, setNewName] = useState("");
