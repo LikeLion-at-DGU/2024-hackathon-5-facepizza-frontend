@@ -66,6 +66,11 @@ const RealTimeTrackingList = () => {
         <div className='description' style={{ width: 'auto' }}>
           <C.LetTracking onClick={() => navigate('/tracking')}>표정 트래킹 진행하기</C.LetTracking>
           <p style={{ textAlign: 'left', paddingLeft: '7px' }}>표정 트래킹이란?</p>
+          <p style={{ textAlign: 'left', paddingLeft: '6px' }}>
+            카메라에 인식된 유저의 표정을 트래킹해 실시간 표정 비율을 도출해준다.<br/>
+            사용자는 다른 활동을 하면서 평소 자신의 표정을 확인할 수 있고, 총 트래킹 된 표정 중 특정 표정의 비율을 확인할 수 있다.<br/>
+            분석된 레포트를 제공하여 사용자가 자신의 표정 관리 및 연습을 유도한다.<br/>
+          </p>
         </div>
       </div>
 

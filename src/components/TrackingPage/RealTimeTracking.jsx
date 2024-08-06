@@ -294,6 +294,7 @@ const RealTimeTracking = () => {
           </div>
         </div>
         <RT.Sspan>{startTime.current && '시작'} {startTime.current && `${formatDate(startTime.current)} ${formatTime(startTime.current)}`}</RT.Sspan>
+        <RT.Sspan>로딩이 오래 걸리니 기다려주세요ㅜㅜ</RT.Sspan>
         <RT.FinBtn onClick={handleEndTracking}>종료하기</RT.FinBtn>
 
         <div id='title_bar'>
