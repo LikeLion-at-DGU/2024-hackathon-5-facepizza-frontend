@@ -16,7 +16,7 @@ const PhotoElement = ({ data }) => {
         style={{ display: "inline-block", height: "100%", width:"100%"}}
       >
         <div style={{ height: "85%" }}>
-          <img src={data.image} alt={`Image ${data.id}`} style={{width:"100%", heigth:"100%"}}/>
+          <img src={data.image} alt={`Image ${data.id}`} style={{width:"100%", height:"100%"}}/>
         </div>
         {data.updated_at ? (
           <div
