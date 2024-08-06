@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import LoadApiModels from "./LoadApiModels";
 import VideoComponent from "./VideoComponent";
 import * as faceapi from "face-api.js";
@@ -56,7 +56,6 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
             }
           };
 
-          // Check if intervalId is being set and cleared correctly
           const intervalId = setInterval(detectFaces, 500); // 0.5초마다 얼굴 탐지
           console.log("Interval ID:", intervalId); // 디버깅: interval ID 확인
 
@@ -67,11 +66,14 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
         };
 
         // oncanplay 이벤트 핸들러 설정
-        videoRef.current.oncanplay = onVideoLoaded;
+        const video = videoRef.current;
+        if (video) {
+          video.oncanplay = onVideoLoaded;
 
-        // 비디오가 이미 로드된 상태라면, onVideoLoaded 콜백을 강제로 실행
-        if (videoRef.current.readyState >= 3) {
-          onVideoLoaded();
+          // 비디오가 이미 로드된 상태라면, onVideoLoaded 콜백을 강제로 실행
+          if (video.readyState >= 3) {
+            onVideoLoaded();
+          }
         }
       } catch (error) {
         console.error("Error가 감지되었습니다(FaceDetection.jsx):", error);
