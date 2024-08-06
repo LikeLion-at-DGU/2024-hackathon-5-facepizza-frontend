@@ -84,7 +84,8 @@ const PhotoAlbumDetail = () => {
           display: "flex",
           width: "100%",
           paddingBottom: "10px",
-          justifyContent: "flex-start",
+          justifyContent: "space-between",
+          alignItems: "center",
           borderBottom: "1px solid #C5C5C5",
           marginBottom: "20px",
         }}
@@ -107,7 +108,7 @@ const PhotoAlbumDetail = () => {
           />
           <Default>{Interpret[emotion]}</Default>
         </div>
-        <div>
+        <div style={{display:"flex"}}> 
           <button className="delete" onClick={handleDelete}>삭제하기</button>
           <button className="download">사진 다운받기</button>
         </div>
