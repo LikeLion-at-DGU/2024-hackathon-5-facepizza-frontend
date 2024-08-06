@@ -149,7 +149,7 @@ const Mypage = () => {
                 padding: "0px 200px",
               }}
             >
-              <DdayDetail character={character} />
+              <DdayDetail />
               <DetailTracking character={character} count={number.count} />
             </div>
           </DetailContent>

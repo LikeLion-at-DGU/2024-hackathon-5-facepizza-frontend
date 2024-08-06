@@ -14,16 +14,16 @@ const Interpret = {
 const Tracking = ({ report }) => {
 
   
-  console.log(report);
+  console.log("Traking report:", report);
   // 감정 데이터를 배열로 변환
   const emotionData = [
-    { emotion: 'happy', value: report.happy === null ? 0 : report.happy },
-    { emotion: 'sad', value: report.sad === null ? 0 : report.sad},
-    { emotion: 'angry', value: report.angry === null ? 0 : report.angry},
-    { emotion: 'surprised', value: report.surprised  === null ? 0 : report.surprised},
-    { emotion: 'disgusted', value: report.disgusted === null ? 0 : report.disgusted},
-    { emotion: 'fearful', value: report.fearful === null ? 0 : report.fearful },
-    { emotion: 'neutral', value: report.neutral === null ? 0 : report.neutral },
+    { emotion: 'happy', value: report === null ? 0 : report.happy },
+    { emotion: 'sad', value: report === null ? 0 : report.sad},
+    { emotion: 'angry', value: report === null ? 0 : report.angry},
+    { emotion: 'surprised', value: report  === null ? 0 : report.surprised},
+    { emotion: 'disgusted', value: report === null ? 0 : report.disgusted},
+    { emotion: 'fearful', value: report === null ? 0 : report.fearful },
+    { emotion: 'neutral', value: report === null ? 0 : report.neutral },
   ];
 
   console.log(emotionData);
