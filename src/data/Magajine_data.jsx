@@ -5,12 +5,12 @@ export let Magajine_data = [
     content: "치즈의 효능이 궁금하신가요? 여기서 확인하세요!",
     content_html: `
       <div class='box'>
-      <h1>치즈의 효능</h1>
-      <h3>안녕하세요!/h3>
+      <h3>안녕하세요!</h3>
       <p>표정 풍부화 서비스 치즈를 개발한 team 얼굴피자 입니다
       <br/>마흔이 되면 본인의 얼굴에 책임을 지어야 한다는 말이 있죠.
       <br/>마흔이 되면 본인의 얼굴에 책임을 지어야 한다는 말이 있죠, 즉 지금까지의 삶에서 웃는 일이 많았는지, 찡그리는 일이 많았는지 등에 따라 
       <br/>얼굴 근육은 특정 패턴으로 점점 굳어가게 되는데요
+      <img src='lesly-juarez-1AhGNGKuhR0-unsplash.png' alt='happyface'/>
       <p>이렇듯 살아가며 내가 짓는 표정들은 </p>
       <p>내 얼굴 근육의 양분이 되어 나를 한층 더욱 풍부하게 만들어주기도 하며, </p>
       <p>내 인상을 다시 만들어나가게 됩니다.</p>
@@ -37,23 +37,35 @@ export let Magajine_data = [
     postID: 2,
     title: "웃으면 복이온다",
     content: "귀여운 강아지 보고 웃고 가세요",
-    content_html: "작성 중인 글입니다.",
+    content_html: `
+      <div class='box'>
+      <h3>얼굴 근육도 몸 근육이랑 똑같다!</h3>
+      <p>주기적으로 얼굴 스트레칭을 하면 얼굴 근육이 활성화되어서 표정이 더 예쁘게 풍부해진다는데?! </p>
+      <br/>얼굴 스트레칭의 방법 중 하나는 바로 아에이오우야 ~
+      <p>과장되게 아에이오우를 실천해봐  </p>
+      <p>내가 안쓰고 있었던 내 얼굴 근육들이 풀어지는 것을 느낄 수 있을거야</p>
+      
+      <h3>이 글을 읽은 지금 이 순간부터, </h3>
+      <p>매일 아침 아에이오우와 함께 하루를 시작해보는 건 어떨까?</p>
+
+      </div>
+    `,
     thumbnail:
       "https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.JPG",
     createdAt: "2024-07-13 01:02:03",
   },
+  // {
+  //   postID: 3,
+  //   title: "[서비스 소개] 치즈 키우는법을 아시나요?",
+  //   content:
+  //     "운영진이 소개하는 치즈 키우는 법",
+  //   content_html: "작성 중인 글입니다.",
+  //   thumbnail:
+  //     "https://img.seoul.co.kr//img/upload/2017/11/12/SSI_20171112184242.jpg",
+  //   createdAt: "2024-07-14 01:02:03",
+  // },
   {
     postID: 3,
-    title: "[서비스 소개] 치즈 키우는법을 아시나요?",
-    content:
-      "운영진이 소개하는 치즈 키우는 법",
-    content_html: "작성 중인 글입니다.",
-    thumbnail:
-      "https://img.seoul.co.kr//img/upload/2017/11/12/SSI_20171112184242.jpg",
-    createdAt: "2024-07-14 01:02:03",
-  },
-  {
-    postID: 4,
     title: "[표정 인사이트] 예쁘게 웃는법 (입꼬리 올리는 법)",
     content: "얼굴피자가 강추하는 얼굴스트레칭 루틴 소개",
     content_html: `
