@@ -19,10 +19,13 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
         if (videoRef.current) {
           videoRef.current.onloadedmetadata = () => {
             console.log("Video metadata loaded."); // 디버깅: 비디오 메타데이터 로드 완료
+
             const displaySize = {
               width: videoRef.current.videoWidth,
               height: videoRef.current.videoHeight,
             };
+
+            console.log("Video dimensions:", displaySize); // 디버깅: 비디오 크기 확인
 
             const detectFaces = async () => {
               // videoRef.current이 여전히 유효한지 확인
@@ -55,8 +58,14 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
               }
             };
 
+            // Check if intervalId is being set and cleared correctly
             const intervalId = setInterval(detectFaces, 500); // 0.5초마다 얼굴 탐지
-            return () => clearInterval(intervalId); // Cleanup function
+            console.log("Interval ID:", intervalId); // 디버깅: interval ID 확인
+            
+            return () => {
+              clearInterval(intervalId); // Cleanup function
+              console.log("Interval cleared."); // 디버깅: interval이 클리어 되었는지 확인
+            };
           };
         }
       } catch (error) {
