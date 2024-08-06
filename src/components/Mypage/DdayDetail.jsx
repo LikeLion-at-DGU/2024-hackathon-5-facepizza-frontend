@@ -12,6 +12,7 @@ const Interpret = {
 };
 
 const DdayDetail = ({ character }) => {
+  console.log(character);
   function getMaxEmotionValue(character) {
     const emotions = {
       happy: character.reports[0]?.happy ?? 0,
