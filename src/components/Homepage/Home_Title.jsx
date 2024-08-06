@@ -30,13 +30,18 @@ const Home_Title = () => {
   }, []);
 
   const handleLogout = async () => {
+
+    // localStorage.removeItem('token');
+    // setIsLoggedIn(false)
     try {
+
       const token = localStorage.getItem('token');
 
+      console.log("1",token)
+      
       const response = await API.post('/api/accounts/logout', {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Token ${token}`,
+          Authorization: `Token ${token}`,
         },
       });
 
@@ -47,10 +52,10 @@ const Home_Title = () => {
         navigate('/'); //홈페이지로 이동
       } else {
         const errorData = await response.json();
-        alert('로그아웃 실패: ' + errorData.detail);
+        console.log('로그아웃 실패: ' + errorData);
       }
     } catch (error) {
-      alert('로그아웃 중 오류 발생: ' + error.message);
+      console.log('로그아웃 중 오류 발생: ' , error);
     }
   };
 
