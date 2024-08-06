@@ -61,6 +61,7 @@ const Mypage = () => {
           numberResponse,
           reportResponse,
         ] = await Promise.all([
+          
           API.get("/api/mypage/profile", {
             headers: { Authorization: `Token ${token}` },
           }),

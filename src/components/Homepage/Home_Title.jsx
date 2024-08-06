@@ -28,9 +28,39 @@ const Home_Title = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token);
+    setIsLoggedIn(!!token); //토큰이 존재하면 true값
+  }, []);
 
-    let subtitle;
+  const handleLogout = async () => {
+
+    // localStorage.removeItem('token');
+    // setIsLoggedIn(false)
+    try {
+
+      const token = localStorage.getItem('token');
+
+      console.log("1",token)
+      
+      const response = await API.post('/api/accounts/logout', {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+        alert('로그아웃 성공');
+        navigate('/'); //홈페이지로 이동
+      } else {
+        const errorData = await response.json();
+        console.log('로그아웃 실패: ' + errorData);
+      }
+    } catch (error) {
+      console.log('로그아웃 중 오류 발생: ' , error);
+    }
+  };
+
     switch (location.pathname) {
       case '/':
         subtitle = '풍부한 표정을 위한 냉동 치즈의 여정'
