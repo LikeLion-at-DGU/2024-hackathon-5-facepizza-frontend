@@ -30,7 +30,7 @@ const AppRouter = () => {
       <Route path="/snap" element={<PhotoSnap />} />
       <Route path="/snap/FourCut" element={<FourCutSnap />} />
       <Route path="/album" element={<PhotoAlbum />} />
-      <Route path="/album/:emotion" element={<PhotoAlbumDetail/>}/>
+      <Route path="/album/detail/:emotion" element={<PhotoAlbumDetail/>}/>
       <Route path="/Login" element={<Login/>} />
       <Route path="/Acount" element={<Acount/>} />
       <Route path="/Mypage" element={<Mypage/>} />

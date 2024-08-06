@@ -84,20 +84,20 @@ const Mypage = () => {
         const characterData = characterResponse.data;
         const reportData = reportResponse.data;
 
-        // // reports가 null인 경우 감정 값들을 0으로 설정
-        // if (!characterData.reports || characterData.reports.length === 0) {
-        //   characterData.reports = [
-        //     {
-        //       happy: 0,
-        //       sad: 0,
-        //       angry: 0,
-        //       surprised: 0,
-        //       disgusted: 0,
-        //       fearful: 0,
-        //       neutral: 0,
-        //     },
-        //   ];
-        // }
+        // reports가 null인 경우 감정 값들을 0으로 설정
+        if (!characterData.reports || characterData.reports.length === 0) {
+          characterData.reports = [
+            {
+              happy: 0,
+              sad: 0,
+              angry: 0,
+              surprised: 0,
+              disgusted: 0,
+              fearful: 0,
+              neutral: 0,
+            },
+          ];
+        }
 
         // 상태 업데이트
         setResponse(profileResponse.data);
