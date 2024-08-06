@@ -76,6 +76,7 @@ const PhotoAlbumDetail = () => {
   };
 
   const showImage = (id) => {
+    console.log(id);
     setSelectedImage(images.find(image => image.id === id)); // 클릭한 이미지 찾기
   };
 
