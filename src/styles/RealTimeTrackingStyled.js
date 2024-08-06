@@ -191,7 +191,8 @@ export const EmotionText = styled.h4`
         return '#000000';
     }
   }};
-`;
+;`
+
 
 ///////트래킹하기 페이지 RealTimeTracking.jsx 
 export const TrackingContainer = styled.div`
@@ -221,14 +222,15 @@ export const TrackingContainer = styled.div`
     /* height: 350px; */
   }
 
-  h3 {
-    text-align: center;
-    padding: 10px 20px 0px 20px;
-    margin: 8px 0 0px 0;
+  #deledtBTN{
+    background-color: #FF7575;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
   }
 
   .dataContainer h4 {
-    padding: 10px 20px;
+    padding: 10px 10px;
     margin: 0px;
   }
   .dataContainer p {
@@ -252,7 +254,28 @@ export const TrackingContainer = styled.div`
     border-radius: 15px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
+
+    .dataContainer2{
+      display: flex;
+     flex-direction: column;
+     align-items: center;
+     border-radius: 8px;
+     border: 1px solid #9E9E9E;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     width: 100%;
+    }
 `;
+
+
+export const HeadP = styled.p`
+    margin: 0px;
+    padding: 3px 0;
+    width: 100%;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-bottom: 1px solid #ccc;
+    background-color: #FFF0B6;
+`
 
 export const Sspan = styled.span`
 width: 100%;
@@ -270,6 +293,17 @@ border: none;
 export const Data1 = styled.div`
   display: flex;
   flex-wrap: wrap;
+
+  h4{
+    padding: 10px;
+    margin: 0px;
+  }
+`
+
+export const H3magin = styled.h3`
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 15px;
 `
 
 export const Gallery = styled.div`

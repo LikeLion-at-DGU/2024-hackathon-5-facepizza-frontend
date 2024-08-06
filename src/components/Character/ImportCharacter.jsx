@@ -20,6 +20,7 @@ import t_surprised from '../../assets/character/t_surprised.png';
 import t_fearful from '../../assets/character/t_fearful.png';
 import t_disgusted from '../../assets/character/t_disgusted.png';
 
+// 무표정-행복-슬픔-분노-놀람-두려움-혐오 순서
 const ImportCharacter = {
     'f_neutral': f_neutral,
     'f_happy': f_happy,
@@ -27,21 +28,21 @@ const ImportCharacter = {
     'f_angry': f_angry,
     'f_surprised': f_surprised,
     'f_fearful': f_fearful,
-    'f_disgusted': f_disgusted,
+    'f_disgusted': f_disgusted, //7
     's_neutral': s_neutral,
     's_happy': s_happy,
     's_sad': s_sad,
     's_angry': s_angry,
     's_surprised': s_surprised,
     's_fearful': s_fearful,
-    's_disgusted': s_disgusted,
+    's_disgusted': s_disgusted, //14
     't_neutral': t_neutral,
     't_happy': t_happy,
     't_sad': t_sad,
     't_angry': t_angry,
     't_surprised': t_surprised,
     't_fearful': t_fearful,
-    't_disgusted': t_disgusted,
+    't_disgusted': t_disgusted, //21
 };
 
 export default ImportCharacter;
