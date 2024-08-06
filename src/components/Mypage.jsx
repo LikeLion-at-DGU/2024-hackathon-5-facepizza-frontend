@@ -30,17 +30,7 @@ const Mypage = () => {
   const [response, setResponse] = useState(null);
   const [character, setCharacter] = useState(null);
   const [number, setNumber] = useState(null);
-  const [report, setReport] = useState([
-    {
-      happy: 0,
-      sad: 0,
-      angry: 0,
-      surprised: 0,
-      disgusted: 0,
-      fearful: 0,
-      neutral: 0,
-    },
-  ]);
+  const [report, setReport] = useState(null);
 
   let today = new Date();
   let month = today.getMonth() + 1; // 월은 0부터 시작하므로 +1
@@ -107,6 +97,7 @@ const Mypage = () => {
         setCharacter(characterData);
         setNumber(numberResponse.data);
         if (reportData.length !== 0) {
+          console.log(reportData);
           setReport(reportData);
         }
 
