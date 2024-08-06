@@ -66,7 +66,11 @@ const Home_Title = () => {
   return (
     <S.Nav>
       <div id="Head_Left">
-        <S.Blink to="/aboutus">team 얼굴피자</S.Blink>
+      {!isLoggedIn ? (
+          <></>
+        ) : (
+          <>반가워요</>
+        )}
       </div>
       <Title>
         <S.Blink to="/">
