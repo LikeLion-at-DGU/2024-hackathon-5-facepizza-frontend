@@ -39,13 +39,13 @@ const DdayDetail = ({ character }) => {
 
   // 감정 데이터를 배열로 변환, 값이 undefined인 경우 0으로 설정
   const emotionData = [
-    { emotion: 'happy', value: character.reports[0]?.happy ?? 0 },
-    { emotion: 'sad', value: character.reports[0]?.sad ?? 0 },
-    { emotion: 'angry', value: character.reports[0]?.angry ?? 0 },
-    { emotion: 'surprised', value: character.reports[0]?.surprised ?? 0 },
-    { emotion: 'disgusted', value: character.reports[0]?.disgusted ?? 0 },
-    { emotion: 'fearful', value: character.reports[0]?.fearful ?? 0 },
-    { emotion: 'neutral', value: character.reports[0]?.neutral ?? 0 },
+    { emotion: 'happy', value: character.reports[0].happy ?? 0 },
+    { emotion: 'sad', value: character.reports[0].sad ?? 0 },
+    { emotion: 'angry', value: character.reports[0].angry ?? 0 },
+    { emotion: 'surprised', value: character.reports[0].surprised ?? 0 },
+    { emotion: 'disgusted', value: character.reports[0].disgusted ?? 0 },
+    { emotion: 'fearful', value: character.reports[0].fearful ?? 0 },
+    { emotion: 'neutral', value: character.reports[0].neutral ?? 0 },
   ];
 
   // 감정 데이터를 value 기준으로 내림차순 정렬
