@@ -8,7 +8,6 @@ import Frame1 from '../../assets/Frame_W.png';
 import Frame2 from '../../assets/Frame_CW.png';
 import Frame3 from '../../assets/Frame_CY.png';
 import domtoimage from 'dom-to-image'; // dom-to-image 임포트 추가
-import QRCodeGenerator from './QRCodeGenerator'; // QRCodeGenerator 임포트 추가
 
 const FourCutSnap = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
