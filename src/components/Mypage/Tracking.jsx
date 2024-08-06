@@ -12,6 +12,7 @@ const Interpret = {
 };
 
 const Tracking = ({ report }) => {
+
   
   console.log(report);
   // 감정 데이터를 배열로 변환
@@ -24,6 +25,8 @@ const Tracking = ({ report }) => {
     { emotion: 'fearful', value: report.fearful === undefined ? 0 : report.fearful },
     { emotion: 'neutral', value: report.neutral === undefined ? 0 : report.neutral },
   ];
+
+  console.log(emotionData);
 
   // 최대값을 찾기 위한 함수
   const getMaxEmotion = () => {
