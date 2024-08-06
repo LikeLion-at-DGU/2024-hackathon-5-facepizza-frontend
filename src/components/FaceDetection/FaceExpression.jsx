@@ -45,7 +45,6 @@ const FaceExpression = ({ videoRef, onExpressions, style }) => {
 
   return (
     <>
-      <p>FaceDetection Key: {faceDetectionKey}</p> {/* 디버깅을 위한 키 출력 */}
       <FaceDetection key={faceDetectionKey} videoRef={videoRef} onDetections={handleDetections} style={style} />
     </>
   );
