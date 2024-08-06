@@ -17,13 +17,13 @@ const Tracking = ({ report }) => {
   console.log(report);
   // 감정 데이터를 배열로 변환
   const emotionData = [
-    { emotion: 'happy', value: report.happy === undefined ? 0 : report.happy },
-    { emotion: 'sad', value: report.sad === undefined ? 0 : report.sad},
-    { emotion: 'angry', value: report.angry === undefined ? 0 : report.angry},
-    { emotion: 'surprised', value: report.surprised  === undefined ? 0 : report.surprised},
-    { emotion: 'disgusted', value: report.disgusted === undefined ? 0 : report.disgusted},
-    { emotion: 'fearful', value: report.fearful === undefined ? 0 : report.fearful },
-    { emotion: 'neutral', value: report.neutral === undefined ? 0 : report.neutral },
+    { emotion: 'happy', value: report.happy === null ? 0 : report.happy },
+    { emotion: 'sad', value: report.sad === null ? 0 : report.sad},
+    { emotion: 'angry', value: report.angry === null ? 0 : report.angry},
+    { emotion: 'surprised', value: report.surprised  === null ? 0 : report.surprised},
+    { emotion: 'disgusted', value: report.disgusted === null ? 0 : report.disgusted},
+    { emotion: 'fearful', value: report.fearful === null ? 0 : report.fearful },
+    { emotion: 'neutral', value: report.neutral === null ? 0 : report.neutral },
   ];
 
   console.log(emotionData);
