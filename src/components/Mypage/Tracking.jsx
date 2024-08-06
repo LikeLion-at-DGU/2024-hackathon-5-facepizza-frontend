@@ -12,6 +12,7 @@ const Interpret = {
 };
 
 const Tracking = ({ report }) => {
+  
   console.log(report);
   // 감정 데이터를 배열로 변환
   const emotionData = [

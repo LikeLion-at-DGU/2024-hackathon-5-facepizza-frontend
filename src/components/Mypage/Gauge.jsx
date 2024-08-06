@@ -9,36 +9,11 @@ import {
 import MoreInfo from "../../assets/MoreInfo.png";
 import QuestionMark from "./QuestionMark";
 
-const Gauge = () => {
-  const [token, setToken] = useState(null);
-  const [info, setInfo] = useState(null);
+const Gauge = ({ info }) => {
   const [exp, setExp] = useState(0);
   const [maxExp, setMaxExp] = useState(10);
   const [level, setLevel] = useState(1);
   const ratio = parseFloat(exp / maxExp) * 100;
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        setToken(token);
-
-        const info = await Promise.all([
-          API.get("/api/report", {
-            headers: { Authorization: `Token ${token}` },
-          }),
-        ]);
-        setInfo(info[0]);
-        console.log(info.user);
-        setName(info.user.first_name);
-        console.log(info.characters[0]);
-        setAge(info.characters[0].level);
-      } catch (error) {
-        console.error("Error fetching user info:", error);
-      }
-    };
-    fetchUserData();
-  }, []);
 
   useEffect(()=>{
     if(info){

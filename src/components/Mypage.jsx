@@ -51,29 +51,24 @@ const Mypage = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("Token is missing");
+        }
         setToken(token);
-        // console.log("Token:", token);
 
-        // 여러 요청을 병렬로 처리합니다.
-        const [
-          profileResponse,
-          characterResponse,
-          numberResponse,
-          reportResponse,
-        ] = await Promise.all([
-          API.get("/api/mypage/profile", {
-            headers: { Authorization: `Token ${token}` },
-          }),
-          API.get("/api/characters/tracktime", {
-            headers: { Authorization: `Token ${token}` },
-          }),
-          API.get("/api/albums/count", {
-            headers: { Authorization: `Token ${token}` },
-          }),
-          API.get("/api/report", {
-            headers: { Authorization: `Token ${token}` },
-          }),
-        ]);
+        // 여러 요청을 순차적으로 처리
+        const profileResponse = await API.get("/api/mypage/profile", {
+          headers: { Authorization: `Token ${token}` },
+        });
+        const characterResponse = await API.get("/api/characters/tracktime", {
+          headers: { Authorization: `Token ${token}` },
+        });
+        const numberResponse = await API.get("/api/albums/count", {
+          headers: { Authorization: `Token ${token}` },
+        });
+        const reportResponse = await API.get("/api/report", {
+          headers: { Authorization: `Token ${token}` },
+        });
 
         console.log("Profile response:", profileResponse.data);
         console.log("Character response:", characterResponse.data);
@@ -103,7 +98,7 @@ const Mypage = () => {
         setResponse(profileResponse.data);
         setCharacter(characterData);
         setNumber(numberResponse.data);
-        if (reportData.length != 0) {
+        if (reportData.length !== 0) {
           setReport(reportData);
         }
 
@@ -132,21 +127,16 @@ const Mypage = () => {
   return (
     <>
       <WidthBox>
-        {/* <Home_Title/> */}
         <Subname id="Subname">마이페이지</Subname>
         <Container id="Border">
-          {/* 캐릭터 정보가 들어간 창 */}
           <CharacterBox className="CharacterBox">
             <Character />
             <hr />
-            <Profile /> {/* 데이터가 로드된 후에 렌더링 */}
-            <Gauge /> {/*게이지*/}
+            <Profile data={response} /> {/* 데이터가 로드된 후에 렌더링 */}
+            <Gauge info={response.characters[0]} /> {/*게이지*/}
           </CharacterBox>
-          {/* 트래킹 정보가 들어간 창 */}
           <Tracking report={report} />
-          {/* 출석과 1/1 기록이 들어간 창 */}
           <DetailContent className="DetailContent">
-            {/* <Attendence /> 출석 */}
             <div style={{ marginTop: "50px" }}>
               <Default id="Date">
                 {month}/{day} 기록
@@ -164,7 +154,6 @@ const Mypage = () => {
               <DetailTracking character={character} count={number.count} />
             </div>
           </DetailContent>
-          {/* 계정 정보가 들어간 창 */}
           <Account>
             <BoldBig>계정 정보</BoldBig>
             <AccountDetail user={response.user} />
