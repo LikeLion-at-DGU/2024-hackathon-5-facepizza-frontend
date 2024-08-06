@@ -69,8 +69,8 @@ const PhotoAlbumDetail = () => {
             src={emoticonsrc}
             alt={emotion}
             style={{
-              width: "36.87px",
-              height: "36.499px",
+              width: "100%",
+              height: "100%",
               marginRight: "10px",
             }}
           />
