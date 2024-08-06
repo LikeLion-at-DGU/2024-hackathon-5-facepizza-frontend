@@ -53,7 +53,7 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
             }
           } else {
             console.log("Video is not ready."); // 디버깅: 비디오가 준비되지 않음
-            videoRef.current = null;
+            // videoRef.current = null;
           }
         };
 
