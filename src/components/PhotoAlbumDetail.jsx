@@ -1,3 +1,4 @@
+// PhotoAlbumDetail.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ImportFace from "./PhotoSnap/ImportFace";
@@ -19,6 +20,7 @@ const PhotoAlbumDetail = () => {
   const { emotion } = useParams();
   const [token, setToken] = useState(null);
   const [images, setImages] = useState([]);
+  const [checkedImages, setCheckedImages] = useState(new Set());
 
   const emoticonsrc = ImportFace[emotion];
   if (!emoticonsrc) {
@@ -35,16 +37,39 @@ const PhotoAlbumDetail = () => {
           Authorization: `Token ${token}`,
         },
       });
-      
-      const deleteimg = {emotionimage_id} = await API.get(`/api/albums/images/${emotionimage_id}`,{
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      })
       console.log("리스펀스:", response.data);
       setImages(response.data);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleCheckboxChange = (id, isChecked) => {
+    setCheckedImages((prev) => {
+      const newCheckedImages = new Set(prev);
+      if (isChecked) {
+        newCheckedImages.add(id);
+      } else {
+        newCheckedImages.delete(id);
+      }
+      return newCheckedImages;
+    });
+  };
+
+  const handleDelete = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      for (const id of checkedImages) {
+        await API.delete(`/api/albums/images/${id}`, {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        });
+      }
+      // 삭제 후 이미지 목록을 다시 가져옵니다.
+      getImage();
+    } catch (error) {
+      console.error("Error deleting images:", error);
     }
   };
 
@@ -83,11 +108,11 @@ const PhotoAlbumDetail = () => {
           <Default>{Interpret[emotion]}</Default>
         </div>
         <div>
-          <button className="delete" >삭제하기</button>
+          <button className="delete" onClick={handleDelete}>삭제하기</button>
           <button className="download">사진 다운받기</button>
         </div>
       </div>
-      <PhotoAlbumDetailEelement images={images}/>
+      <PhotoAlbumDetailEelement images={images} onCheckboxChange={handleCheckboxChange} />
     </>
   );
 };
