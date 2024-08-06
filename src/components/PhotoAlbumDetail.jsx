@@ -61,37 +61,27 @@ const PhotoAlbumDetail = () => {
     try {
       const token = localStorage.getItem("token");
       for (const id of checkedImages) {
+        console.log(id);
         await API.delete(`/api/albums/images/${id}`, {
           headers: {
             Authorization: `Token ${token}`,
           },
         });
       }
-      // 삭제 후 이미지 목록을 다시 가져옵니다.
       getImage();
-      setCheckedImages(new Set()); // 체크박스 초기화
     } catch (error) {
       console.error("Error deleting images:", error);
     }
   };
 
-  const showImage = async (id) => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await API.get(`/api/albums/images/${id}`, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
-      setSelectedImage(response.data); // 클릭한 이미지 정보를 상태로 설정
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
+  const showImage = (id) => {
+    const image = images.find(img => img.id === id);
+    setSelectedImage(image); // 선택된 이미지 상태로 설정
   };
 
   useEffect(() => {
     getImage();
-  }, [emotion]); // Ensure useEffect runs when Emotion changes
+  }, [emotion]); 
 
   return (
     <>
@@ -124,14 +114,14 @@ const PhotoAlbumDetail = () => {
           />
           <Default>{Interpret[emotion]}</Default>
         </div>
-        <div style={{ display: "flex" }}>
+        <div style={{display:"flex"}}> 
           <button className="delete" onClick={handleDelete}>삭제하기</button>
           <button className="download">사진 다운받기</button>
         </div>
       </div>
       <PhotoAlbumDetailEelement images={images} onCheckboxChange={handleCheckboxChange} onImageClick={showImage} />
 
-      {/* 선택된 이미지를 화면에 보여주는 div */}
+      {/* 선택된 이미지를 화면의 중앙에 크게 보여주는 div */}
       {selectedImage && (
         <div
           style={{
@@ -145,15 +135,12 @@ const PhotoAlbumDetail = () => {
             borderRadius: "8px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
             zIndex: 1000,
-            maxWidth: "90%",
-            maxHeight: "80%",
-            overflow: "auto"
           }}
         >
           <img
             src={selectedImage.image}
             alt={`Selected Image ${selectedImage.id}`}
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "80vw", height: "80vh", objectFit: "contain" }}
           />
           <button onClick={() => setSelectedImage(null)}>닫기</button>
         </div>

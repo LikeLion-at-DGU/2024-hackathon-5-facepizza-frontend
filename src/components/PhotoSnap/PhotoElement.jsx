@@ -14,7 +14,7 @@ const PhotoElement = ({ data, onCheckboxChange, onClick, isDetailPage }) => {
   };
 
   return (
-    <ElementBox id="ElementBox" onClick={() => onClick(data.id)}>
+    <ElementBox id="ElementBox">
       <div
         key={data.id}
         style={{ display: "inline-block", height: "100%", width: "100%" }}
@@ -23,7 +23,8 @@ const PhotoElement = ({ data, onCheckboxChange, onClick, isDetailPage }) => {
           <img
             src={data.image}
             alt={`Image ${data.id}`}
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "100%", cursor: "pointer" }}
+            onClick={() => onClick(data.id)} // 이미지 클릭 시 onClick 호출
           />
         </div>
         {isDetail && data.updated_at ? (
