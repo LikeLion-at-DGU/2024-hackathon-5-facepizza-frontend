@@ -15,68 +15,64 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
         console.log("Loading models..."); // 디버깅: 모델 로드 시작
         await LoadApiModels();
         console.log("Models loaded successfully."); // 디버깅: 모델 로드 완료
-        
-        const videoElement = videoRef.current;
 
-        const detectFaces = async () => {
-          if (videoElement && videoElement.readyState >= 3) {
-            console.log("Running face detection..."); // 디버깅: 얼굴 탐지 실행
-            try {
-              const displaySize = {
-                width: videoElement.videoWidth,
-                height: videoElement.videoHeight,
-              };
+        const onVideoLoaded = () => {
+          console.log("Video can play."); // 디버깅: 비디오 재생 가능
 
-              const detections = await faceapi
-                .detectAllFaces(
-                  videoElement,
-                  new faceapi.TinyFaceDetectorOptions()
-                )
-                .withFaceLandmarks()
-                .withFaceExpressions();
+          const displaySize = {
+            width: videoRef.current.videoWidth,
+            height: videoRef.current.videoHeight,
+          };
 
-              console.log("Detected faces and expressions:", detections); // 디버깅: 감지된 얼굴 및 감정 로그
+          console.log("Video dimensions:", displaySize); // 디버깅: 비디오 크기 확인
 
-              const resizedDetections = faceapi.resizeResults(
-                detections,
-                displaySize
-              );
+          const detectFaces = async () => {
+            if (videoRef.current && videoRef.current.readyState === 4) {
+              console.log("Running face detection..."); // 디버깅: 얼굴 탐지 실행
+              try {
+                const detections = await faceapi
+                  .detectAllFaces(
+                    videoRef.current,
+                    new faceapi.TinyFaceDetectorOptions()
+                  )
+                  .withFaceLandmarks()
+                  .withFaceExpressions();
 
-              if (onDetections) {
-                onDetections(resizedDetections);
+                console.log("Detected faces and expressions:", detections); // 디버깅: 감지된 얼굴 및 감정 로그
+
+                const resizedDetections = faceapi.resizeResults(
+                  detections,
+                  displaySize
+                );
+
+                if (onDetections) {
+                  onDetections(resizedDetections);
+                }
+              } catch (error) {
+                console.error("Error during face detection:", error);
               }
-            } catch (error) {
-              console.error("Error during face detection:", error);
+            } else {
+              console.log("Video is not ready."); // 디버깅: 비디오가 준비되지 않음
             }
-          } else {
-            console.log("Video is not ready."); // 디버깅: 비디오가 준비되지 않음
-          }
-        };
+          };
 
-        // Video metadata event listener
-        const onLoadedMetadata = () => {
-          console.log("Video metadata loaded."); // 디버깅: 비디오 메타데이터 로드 완료
-
-          // Start face detection
+          // Check if intervalId is being set and cleared correctly
           const intervalId = setInterval(detectFaces, 500); // 0.5초마다 얼굴 탐지
           console.log("Interval ID:", intervalId); // 디버깅: interval ID 확인
 
-          // Cleanup function
           return () => {
             clearInterval(intervalId); // Cleanup function
             console.log("Interval cleared."); // 디버깅: interval이 클리어 되었는지 확인
           };
         };
 
-        videoElement.addEventListener('loadedmetadata', onLoadedMetadata);
+        // oncanplay 이벤트 핸들러 설정
+        videoRef.current.oncanplay = onVideoLoaded;
 
-        // Cleanup function for useEffect
-        return () => {
-          if (videoElement) {
-            videoElement.removeEventListener('loadedmetadata', onLoadedMetadata);
-          }
-        };
-
+        // 비디오가 이미 로드된 상태라면, onVideoLoaded 콜백을 강제로 실행
+        if (videoRef.current.readyState >= 3) {
+          onVideoLoaded();
+        }
       } catch (error) {
         console.error("Error가 감지되었습니다(FaceDetection.jsx):", error);
       }
@@ -86,7 +82,9 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
 
     // Cleanup function for useEffect
     return () => {
-      // Cleanup logic if needed
+      if (videoRef.current) {
+        videoRef.current.oncanplay = null;
+      }
     };
   }, [videoRef, onDetections]);
 
