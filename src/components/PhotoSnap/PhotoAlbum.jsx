@@ -48,7 +48,7 @@ const PhotoAlbum = () => {
   }, [navigate]);
 
   const handleEmotionClick = (emotion) => {
-    navigate(`/album/${emotion}`);
+    navigate(`/album/detail/${emotion}`);
   };
 
   return (

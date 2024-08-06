@@ -10,3 +10,28 @@
   width: 272.605px;
   height: 192.244px;
 }
+
+.delete {
+  display: flex;
+  width: 93px;
+  height: 32px;
+  padding: 6.11px 7.332px;
+  justify-content: center;
+  align-items: center;
+  gap: 6.11px;
+  border-radius: 6.11px;
+  background: #ff7575;
+  margin-right: 30px;
+}
+
+.download {
+  display: flex;
+  width: 131px;
+  height: 32px;
+  padding: 6.11px 7.332px;
+  justify-content: center;
+  align-items: center;
+  gap: 6.11px;
+  border-radius: 6.11px;
+  background: #6f6f6f;
+}
