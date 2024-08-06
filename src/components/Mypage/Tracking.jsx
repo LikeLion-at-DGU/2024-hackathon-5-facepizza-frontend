@@ -14,7 +14,7 @@ const Interpret = {
 const Tracking = ({ report }) => {
 
   
-  console.log(report);
+  console.log("Traking report:", report);
   // 감정 데이터를 배열로 변환
   const emotionData = [
     { emotion: 'happy', value: report === null ? 0 : report.happy },

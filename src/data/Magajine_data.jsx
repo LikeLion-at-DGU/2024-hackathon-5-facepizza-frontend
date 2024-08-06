@@ -10,7 +10,7 @@ export let Magajine_data = [
       <br/>마흔이 되면 본인의 얼굴에 책임을 지어야 한다는 말이 있죠.
       <br/>마흔이 되면 본인의 얼굴에 책임을 지어야 한다는 말이 있죠, 즉 지금까지의 삶에서 웃는 일이 많았는지, 찡그리는 일이 많았는지 등에 따라 
       <br/>얼굴 근육은 특정 패턴으로 점점 굳어가게 되는데요
-      <img src='lesly-juarez-1AhGNGKuhR0-unsplash.png' alt='happyface'/>
+      <img src='./웃는얼굴.jpeg' alt='happyface'/>
       <p>이렇듯 살아가며 내가 짓는 표정들은 </p>
       <p>내 얼굴 근육의 양분이 되어 나를 한층 더욱 풍부하게 만들어주기도 하며, </p>
       <p>내 인상을 다시 만들어나가게 됩니다.</p>
@@ -35,8 +35,8 @@ export let Magajine_data = [
   },
   {
     postID: 2,
-    title: "웃으면 복이온다",
-    content: "귀여운 강아지 보고 웃고 가세요",
+    title: "아에이오우 스트레칭",
+    content: "아에이오우 스트레칭이란?",
     content_html: `
       <div class='box'>
       <h3>얼굴 근육도 몸 근육이랑 똑같다!</h3>
