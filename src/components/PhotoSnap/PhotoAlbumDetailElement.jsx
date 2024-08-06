@@ -1,14 +1,12 @@
+// PhotoAlbumDetailEelement.js
 import React from "react";
 import { ImageBox } from "../../styles/PhotoAlbumStyle";
 import PhotoElement from "./PhotoElement";
 
-const PhotoAlbumDetailEelement = ({images}) => {
-
-
-    
+const PhotoAlbumDetailEelement = ({ images, onCheckboxChange }) => {
   return (
     <ImageBox
-    id="ImageBox"
+      id="ImageBox"
       style={{
         width: "100%",
         justifyContent: "flex-start",
@@ -17,11 +15,9 @@ const PhotoAlbumDetailEelement = ({images}) => {
         borderRadius: "0px"
       }}
     >
-      {
-        images.map(data =>
-          <PhotoElement key={data.id} data={data} />
-        )
-      }
+      {images.map(data =>
+        <PhotoElement key={data.id} data={data} onCheckboxChange={onCheckboxChange} />
+      )}
     </ImageBox>
   );
 };

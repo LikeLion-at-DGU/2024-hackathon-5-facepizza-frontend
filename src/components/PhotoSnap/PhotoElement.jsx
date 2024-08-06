@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
+// PhotoElement.js
+import React, { useState } from "react";
 import { ElementBox } from "../../styles/PhotoAlbumStyle";
 import { useLocation } from "react-router-dom";
 
-const PhotoElement = ({ data }) => {
+const PhotoElement = ({ data, onCheckboxChange }) => {
   const location = useLocation();
+  const [isChecked, setIsChecked] = useState(false);
 
   const isDetailPage = location.pathname.includes("detail");
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+    onCheckboxChange(data.id, event.target.checked);
+  };
 
   // Function to format the date
   const formatDate = (dateString) => {
@@ -29,7 +36,11 @@ const PhotoElement = ({ data }) => {
         {isDetailPage && data.updated_at ? (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <span>{formatDate(data.updated_at)}</span>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            />
           </div>
         ) : null}
       </div>
