@@ -61,7 +61,6 @@ const Home_Title = () => {
     }
   };
 
-    let subtitle;
     switch (location.pathname) {
       case '/':
         subtitle = '풍부한 표정을 위한 냉동 치즈의 여정'
