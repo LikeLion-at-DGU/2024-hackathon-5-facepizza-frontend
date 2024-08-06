@@ -22,9 +22,8 @@ const Header = () => {
     try {
       const token = localStorage.getItem('token');
 
-      
-      console.log("1",token)
       const response = await API.post('/api/accounts/logout', {
+        
         headers: {
           Authorization: `${token}`,
         },
