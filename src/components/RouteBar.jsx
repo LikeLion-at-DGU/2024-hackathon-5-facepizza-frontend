@@ -11,6 +11,7 @@ const Breadcrumb = styled.div`
 const RouteBar = () => {
   const location = useLocation();
   const { postID } = useParams();
+  console.log(location.pathname);
   let breadcrumb;
 
   switch (location.pathname) {
@@ -32,7 +33,7 @@ const RouteBar = () => {
     case '/snap':
       breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/snap">표정 스냅</R.RLink></R.ContBar>;
       break;
-      case '/snap/FourCut':
+    case '/snap/FourCut':
       breadcrumb = <R.ContBar><R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/snap">표정 스냅</R.RLink> 〉 <R.RLink to="/snap">치즈 네컷</R.RLink></R.ContBar>;
       break;
     case '/album':
@@ -54,7 +55,13 @@ const RouteBar = () => {
       if (location.pathname.includes('/Magzine/detail/')) {
         breadcrumb = (
           <R.ContBar>
-            <R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/Magzine">인사이트 창고</R.RLink> 〉 <R.RLink to={`/Magzine`}>포스트</R.RLink>
+            <R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/Magzine">인사이트 창고</R.RLink> 〉 <R.RLink to='/Magzine:postID'>포스트</R.RLink>
+          </R.ContBar>
+        );
+      } if (location.pathname.includes('/Magzine/report/')) {
+        breadcrumb = (
+          <R.ContBar>
+            <R.RLink to="/">홈</R.RLink> 〉 <R.RLink to="/tracking/list">트래킹 개요</R.RLink> 〉 <R.RLink to="/tracking/report:reportid">레포트</R.RLink>
           </R.ContBar>
         );
       } else {
@@ -62,7 +69,7 @@ const RouteBar = () => {
       }
   }
 
-  return <R.Breadcrumb>{breadcrumb}</R.Breadcrumb>;
+  return (<R.Breadcrumb>{breadcrumb}</R.Breadcrumb>);
 };
 
 export default RouteBar;

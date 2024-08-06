@@ -56,19 +56,27 @@ const Mypage = () => {
         }
         setToken(token);
 
-        // 여러 요청을 순차적으로 처리
-        const profileResponse = await API.get("/api/mypage/profile", {
-          headers: { Authorization: `Token ${token}` },
-        });
-        const characterResponse = await API.get("/api/characters/tracktime", {
-          headers: { Authorization: `Token ${token}` },
-        });
-        const numberResponse = await API.get("/api/albums/count", {
-          headers: { Authorization: `Token ${token}` },
-        });
-        const reportResponse = await API.get("/api/report", {
-          headers: { Authorization: `Token ${token}` },
-        });
+        // 여러 요청을 병렬로 처리합니다.
+        const [
+          profileResponse,
+          characterResponse,
+          numberResponse,
+          reportResponse,
+        ] = await Promise.all([
+          
+          API.get("/api/mypage/profile", {
+            headers: { Authorization: `Token ${token}` },
+          }),
+          API.get("/api/characters/tracktime", {
+            headers: { Authorization: `Token ${token}` },
+          }),
+          API.get("/api/albums/count", {
+            headers: { Authorization: `Token ${token}` },
+          }),
+          API.get("/api/report", {
+            headers: { Authorization: `Token ${token}` },
+          }),
+        ]);
 
         console.log("Profile response:", profileResponse.data);
         console.log("Character response:", characterResponse.data);
