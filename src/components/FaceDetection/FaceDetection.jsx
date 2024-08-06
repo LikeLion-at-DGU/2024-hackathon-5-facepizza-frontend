@@ -12,9 +12,13 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
       }
 
       try {
+        console.log("Loading models..."); // 디버깅: 모델 로드 시작
         await LoadApiModels();
-        if (videoRef.current){
+        console.log("Models loaded successfully."); // 디버깅: 모델 로드 완료
+        
+        if (videoRef.current) {
           videoRef.current.onloadedmetadata = () => {
+            console.log("Video metadata loaded."); // 디버깅: 비디오 메타데이터 로드 완료
             const displaySize = {
               width: videoRef.current.videoWidth,
               height: videoRef.current.videoHeight,
@@ -23,6 +27,7 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
             const detectFaces = async () => {
               // videoRef.current이 여전히 유효한지 확인
               if (videoRef.current && videoRef.current.readyState === 4) {
+                console.log("Running face detection..."); // 디버깅: 얼굴 탐지 실행
                 try {
                   const detections = await faceapi
                     .detectAllFaces(
@@ -32,8 +37,7 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
                     .withFaceLandmarks()
                     .withFaceExpressions();
 
-                  // 디버깅: 감지된 결과 로그
-                  console.log("Detected faces and expressions:", detections);
+                  console.log("Detected faces and expressions:", detections); // 디버깅: 감지된 얼굴 및 감정 로그
 
                   const resizedDetections = faceapi.resizeResults(
                     detections,
@@ -46,12 +50,13 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
                 } catch (error) {
                   console.error("Error during face detection:", error);
                 }
+              } else {
+                console.log("Video is not ready."); // 디버깅: 비디오가 준비되지 않음
               }
             };
 
             const intervalId = setInterval(detectFaces, 500); // 0.5초마다 얼굴 탐지
             return () => clearInterval(intervalId); // Cleanup function
-          
           };
         }
       } catch (error) {
@@ -72,7 +77,6 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
   return (
     <>
       <VideoComponent videoRef={videoRef} style={style} />
-      <p>FaceDetection Component Loaded</p> {/* 디버깅: 컴포넌트 로드 확인 */}
     </>
   );
 };
