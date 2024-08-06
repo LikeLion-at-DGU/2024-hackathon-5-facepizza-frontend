@@ -4,6 +4,7 @@ import * as S from '../../styles/StyledComponents';
 import Locked from '../../assets/Locked.png';
 import { API } from '../../api';
 import F_sad from '../../assets/character/f_sad.png'
+import PhotoElement from "../PhotoSnap/PhotoElement";
 
 const Album_Home = () => {
     const [token, setToken] = useState(null);
@@ -43,8 +44,8 @@ const Album_Home = () => {
                             </H.NoImg>
                         ) : (
                             <H.FlexRow>
-                                {images.map(data => (
-                                    <H.Example key={data.id} data={data} />
+                                {images.slice(-2).map(data => (
+                                    <PhotoElement key={data.id} data={data} />
                                 ))}
                             </H.FlexRow>
                         )}
