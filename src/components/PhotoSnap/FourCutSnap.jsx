@@ -8,6 +8,7 @@ import Frame1 from '../../assets/Frame_W.png';
 import Frame2 from '../../assets/Frame_CW.png';
 import Frame3 from '../../assets/Frame_CY.png';
 import domtoimage from 'dom-to-image'; // dom-to-image 임포트 추가
+import QRCodeGenerator from './QRCodeGenerator'; // QRCodeGenerator 임포트 추가
 
 const FourCutSnap = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,6 +20,7 @@ const FourCutSnap = () => {
   const [frameSrc, setFrameSrc] = useState(Frame1); // 프레임 소스를 저장하는 상태
   const [selectedFrame, setSelectedFrame] = useState('Frame1');
   const frameRef = useRef(null); // FourFrame을 참조하기 위한 useRef
+  const [photoURL, setPhotoURL] = useState(''); // 다운로드할 사진 URL
 
   const emotionsSequence = ['행복', '슬픔', '분노', '놀람']; // 감정 순서
 
@@ -61,6 +63,7 @@ const FourCutSnap = () => {
           link.href = dataUrl;
           link.download = 'Cheese_naecut.jpg';
           link.click();
+          setPhotoURL(dataUrl); // QR 코드 생성을 위해 URL 저장
         }).catch((error) => {
           console.error('Oops, something went wrong!', error);
         });
