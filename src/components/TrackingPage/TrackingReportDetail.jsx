@@ -4,6 +4,9 @@ import * as S from '../../styles/StyledComponents';
 import * as RT from '../../styles/RealTimeTrackingStyled';
 import * as C from '../../styles/CameraStyled';
 import { API } from '../../api';
+import ImportCharacter from "../Character/ImportCharacter";
+import { BsJustify } from 'react-icons/bs';
+import { width } from '@fortawesome/free-brands-svg-icons/fa42Group';
 
 const TrackingReportDetail = () => {
   const { reportid } = useParams();
@@ -80,7 +83,7 @@ const TrackingReportDetail = () => {
         maxPercentage = parseFloat(value);
         maxEmotion = key;
       }
-    });
+    }); 
 
     return maxEmotion ? { emotion: maxEmotion, percentage: maxPercentage } : null;
   };
@@ -128,46 +131,81 @@ const TrackingReportDetail = () => {
 
   const bestEmotion = report ? BestEmotion(report) : null;
 
-  return (
-    <C.Main_Container>
-      <h3>{report.title}</h3>
-      <button onClick={deleteReport}>삭제하기</button>
-      <h2>누적 표정 데이터</h2>
-      <div>
-        {Object.entries(report).map(([key, value]) => (
-          emotionTranslations[key] && (
-            <RT.EmotionText key={key} className={key}>
-              <p key={key}>{`${emotionTranslations[key]}: ${value}%`}</p>
-            </RT.EmotionText>
-          )
-        ))}
-        {bestEmotion && (
-          <div>
-            {emotionTranslations[bestEmotion.emotion] === '무표정' ? 
-            <h3>{emotionTranslations[bestEmotion.emotion]}을 가장 많이 지었어요!</h3> 
-            : emotionTranslations[bestEmotion.emotion] === '행복' ?
-            <h3>행복한 표정을 가장 많이 지었어요!</h3>
-            : <h3>{emotionTranslations[bestEmotion.emotion]} 표정을 가장 많이 지었어요!</h3>
-          }  
-          </div>
-        )}
+  const emotionSequence = ['neutral', 'happy', 'sad', 'angry', 'surprised', 'afraid', 'disgusted'];
+  const getEmoticonKey = (emotion, characterType) => {
+    const emotionIndex = emotionSequence.indexOf(emotion);
+    if (emotionIndex === -1) return null;
+    return `${characterType}_${emotionSequence[emotionIndex]}`;
+};
 
-        <p>총 {calculateElapsedTime(report.created_at, report.ended_at)} 트래킹</p>
-        <p>{`시작: ${formatDate(report.created_at)} ${formatTime(report.created_at)}`}</p>
-        <p>{`종료: ${formatDate(report.ended_at)} ${formatTime(report.ended_at)}`}</p>
-      </div>
-      <div>
-        <h3>하이라이트 사진</h3>
-        {Object.entries(emotionHighlightFields).map(([emotion, field]) => (
-          report[field] ? (
-            <div key={emotion}>
-              <img src={report[field]} alt={emotion} width="300" />
-              <p>{`${emotionTranslations[emotion]}`} |{`${(report[emotionMaxValueFields[emotion]] * 100).toFixed(5)}`}%</p>
-            </div>
-          ) : null
-        ))}
-      </div>
-    </C.Main_Container>
+const CharacterDisplay = ({ bestEmotion, characterType = 's' }) => {
+    const emoticonKey = getEmoticonKey(bestEmotion.emotion, characterType);
+    const emoticonsrc = ImportCharacter[emoticonKey] || images['s_neutral'];
+    const imgstyle = {
+      width: '350px',
+      hieght: '200px',
+      objectFit: 'cover'
+    }
+    return (
+    <img src={emoticonsrc} alt={bestEmotion.emotion} style={imgstyle} />
+    );
+}; 
+
+  return (
+    <RT.TrackingContainer>
+      <C.Main_Container>
+        <div id='title_bar' style={{ justifyContent: 'space-between', borderBottom: 'none' }}>
+          <h3 style={{ margin: '0px', paddingLeft: '0px' }}>{report.title}</h3>
+          <button id='deledtBTN' onClick={deleteReport}>삭제하기</button>
+        </div>
+        <div className='dataContainer2'>
+          <RT.HeadP>data</RT.HeadP>
+
+          <h2>누적 표정 데이터</h2>
+
+          <div>
+            <RT.Data1 style={{ justifyContent: 'center' }}>
+              {Object.entries(report).map(([key, value]) => (
+                emotionTranslations[key] && (
+                  <h4 key={key}>{`${emotionTranslations[key]}: ${value}%`}</h4>
+                )
+              ))}
+            </RT.Data1>
+
+            <CharacterDisplay bestEmotion={bestEmotion} characterType="s" />
+            {bestEmotion && (
+              <div style={{paddingBottom: '20px'}}>
+                {emotionTranslations[bestEmotion.emotion] === '무표정' ?
+                  <RT.H3magin>{emotionTranslations[bestEmotion.emotion]}을 가장 많이 지었어요!</RT.H3magin>
+                  : emotionTranslations[bestEmotion.emotion] === '행복' ?
+                    <RT.H3magin>행복한 표정을 가장 많이 지었어요!</RT.H3magin>
+                    : <RT.H3magin>{emotionTranslations[bestEmotion.emotion]} 표정을 가장 많이 지었어요!</RT.H3magin>
+                }
+              </div>
+            )}
+          </div>
+
+        </div>
+        <C.FlexRow style={{ justifyContent: 'flex-start',alignItems: 'center', width: '100%', gap: '18px' }} >
+          <p style={{fontSize: '18px'}}>총 {calculateElapsedTime(report.created_at, report.ended_at)} 트래킹</p>
+          <p>{`시작: ${formatDate(report.created_at)} ${formatTime(report.created_at)}`}</p>
+          <p>{`종료: ${formatDate(report.ended_at)} ${formatTime(report.ended_at)}`}</p>
+        </C.FlexRow>
+        <div>
+          <h3>하이라이트 사진</h3>
+          <RT.Gallery>
+            {Object.entries(emotionHighlightFields).map(([emotion, field]) => (
+              report[field] ? (
+                <div key={emotion}>
+                  <img src={report[field]} alt={emotion} width="300" />
+                  <p>{`${emotionTranslations[emotion]}`} |{`${(report[emotionMaxValueFields[emotion]] * 100).toFixed(5)}`}%</p>
+                </div>
+              ) : null
+            ))}
+          </RT.Gallery>
+        </div>
+      </C.Main_Container>
+    </RT.TrackingContainer>
   );
 };
 
