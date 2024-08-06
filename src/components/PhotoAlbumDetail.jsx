@@ -21,6 +21,7 @@ const PhotoAlbumDetail = () => {
   const [token, setToken] = useState(null);
   const [images, setImages] = useState([]);
   const [checkedImages, setCheckedImages] = useState(new Set());
+  const [selectedImage, setSelectedImage] = useState(null); // 선택된 이미지 상태 추가
 
   const emoticonsrc = ImportFace[emotion];
   if (!emoticonsrc) {
@@ -60,6 +61,7 @@ const PhotoAlbumDetail = () => {
     try {
       const token = localStorage.getItem("token");
       for (const id of checkedImages) {
+        console.log(id);
         await API.delete(`/api/albums/images/${id}`, {
           headers: {
             Authorization: `Token ${token}`,
@@ -71,6 +73,10 @@ const PhotoAlbumDetail = () => {
     } catch (error) {
       console.error("Error deleting images:", error);
     }
+  };
+
+  const showImage = (id) => {
+    setSelectedImage(images.find(image => image.id === id)); // 클릭한 이미지 찾기
   };
 
   useEffect(() => {
@@ -113,7 +119,32 @@ const PhotoAlbumDetail = () => {
           <button className="download">사진 다운받기</button>
         </div>
       </div>
-      <PhotoAlbumDetailEelement images={images} onCheckboxChange={handleCheckboxChange} />
+      <PhotoAlbumDetailEelement images={images} onCheckboxChange={handleCheckboxChange} onImageClick={showImage} />
+
+      {/* 선택된 이미지를 화면에 보여주는 div */}
+      {selectedImage && (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            padding: "20px",
+            backgroundColor: "white",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            zIndex: 1000,
+          }}
+        >
+          <img
+            src={selectedImage.image}
+            alt={`Selected Image ${selectedImage.id}`}
+            style={{ width: "100%", height: "auto" }}
+          />
+          <button onClick={() => setSelectedImage(null)}>닫기</button>
+        </div>
+      )}
     </>
   );
 };
