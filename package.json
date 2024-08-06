@@ -19,6 +19,7 @@
     "dom-to-image": "^2.6.0",
     "face-api.js": "^0.22.2",
     "html2canvas": "^1.4.1",
+    "qrcode.react": "^3.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-draggable": "^4.4.6",
