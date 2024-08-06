@@ -23,7 +23,7 @@ const RealTimeTrackingList = () => {
 
   const handleToggle = () => { setIsExplainOpen(!isExplainOpen); }
 
-  useEffect(() => {
+  {/*useEffect(() => {
     const fetchTrackingReports = async () => {
       try {
         const token = localStorage.getItem('token'); // 토큰을 가져옵니다
@@ -42,7 +42,7 @@ const RealTimeTrackingList = () => {
       }
     };
     fetchTrackingReports();
-  }, []);
+  }, []);*/}
 
   const VideoComponent = ({ videoRef }) => {
     useEffect(() => {
