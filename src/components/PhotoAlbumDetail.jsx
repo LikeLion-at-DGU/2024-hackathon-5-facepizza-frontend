@@ -21,7 +21,7 @@ const PhotoAlbumDetail = () => {
   const [token, setToken] = useState(null);
   const [images, setImages] = useState([]);
   const [checkedImages, setCheckedImages] = useState(new Set());
-  const [selectedImage, setSelectedImage] = useState(null); // 선택된 이미지 상태 추가
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const emoticonsrc = ImportFace[emotion];
   if (!emoticonsrc) {
@@ -61,7 +61,6 @@ const PhotoAlbumDetail = () => {
     try {
       const token = localStorage.getItem("token");
       for (const id of checkedImages) {
-        console.log(id);
         await API.delete(`/api/albums/images/${id}`, {
           headers: {
             Authorization: `Token ${token}`,
@@ -70,14 +69,24 @@ const PhotoAlbumDetail = () => {
       }
       // 삭제 후 이미지 목록을 다시 가져옵니다.
       getImage();
+      setCheckedImages(new Set()); // 체크박스 초기화
     } catch (error) {
       console.error("Error deleting images:", error);
     }
   };
 
-  const showImage = (id) => {
-    console.log(id);
-    setSelectedImage(images.find(image => image.id === id)); // 클릭한 이미지 찾기
+  const showImage = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await API.get(`/api/albums/images/${id}`, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      setSelectedImage(response.data); // 클릭한 이미지 정보를 상태로 설정
+    } catch (error) {
+      console.error("Error fetching image:", error);
+    }
   };
 
   useEffect(() => {
@@ -115,7 +124,7 @@ const PhotoAlbumDetail = () => {
           />
           <Default>{Interpret[emotion]}</Default>
         </div>
-        <div style={{display:"flex"}}> 
+        <div style={{ display: "flex" }}>
           <button className="delete" onClick={handleDelete}>삭제하기</button>
           <button className="download">사진 다운받기</button>
         </div>
@@ -136,6 +145,9 @@ const PhotoAlbumDetail = () => {
             borderRadius: "8px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
             zIndex: 1000,
+            maxWidth: "90%",
+            maxHeight: "80%",
+            overflow: "auto"
           }}
         >
           <img
