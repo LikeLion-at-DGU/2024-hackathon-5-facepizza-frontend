@@ -12,6 +12,7 @@ const Interpret = {
 };
 
 const DdayDetail = ({ character }) => {
+  console.log(character);
   function getMaxEmotionValue(character) {
     const emotions = {
       happy: character.reports[0]?.happy ?? 0,
@@ -39,52 +40,26 @@ const DdayDetail = ({ character }) => {
 
   // 감정 데이터를 배열로 변환, 값이 undefined인 경우 0으로 설정
   const emotionData = [
-    { emotion: 'happy', value: character.reports[0].happy ?? 0 },
-    { emotion: 'sad', value: character.reports[0].sad ?? 0 },
-    { emotion: 'angry', value: character.reports[0].angry ?? 0 },
-    { emotion: 'surprised', value: character.reports[0].surprised ?? 0 },
-    { emotion: 'disgusted', value: character.reports[0].disgusted ?? 0 },
-    { emotion: 'fearful', value: character.reports[0].fearful ?? 0 },
-    { emotion: 'neutral', value: character.reports[0].neutral ?? 0 },
+    { emotion: 'happy', value: character.reports[0]?.happy ?? 0 },
+    { emotion: 'sad', value: character.reports[0]?.sad ?? 0 },
+    { emotion: 'angry', value: character.reports[0]?.angry ?? 0 },
+    { emotion: 'surprised', value: character.reports[0]?.surprised ?? 0 },
+    { emotion: 'disgusted', value: character.reports[0]?.disgusted ?? 0 },
+    { emotion: 'fearful', value: character.reports[0]?.fearful ?? 0 },
+    { emotion: 'neutral', value: character.reports[0]?.neutral ?? 0 },
   ];
 
-  // 감정 데이터를 value 기준으로 내림차순 정렬
-  const sortedEmotionData = emotionData.sort((a, b) => b.value - a.value);
-
   function getEmotionElements(data) {
-    // 1번 인덱스부터 시작
-    const slicedData = data.slice(1);
-  
-    // 그룹을 나누기 위한 인덱스 범위 설정
-    const group1 = slicedData.slice(0, 3); // 1~3번
-    const group2 = slicedData.slice(3, 6); // 4~6번
-  
-    return (
-      <>
-        <div style={{display:"flex", marginBottom:"15px", gap: "30px"}}>
-          {group1.map((entry, index) => {
-            const value = typeof entry.value === 'number' ? entry.value.toFixed(2) : '0.00';
-            return (
-              <span key={index}>
-                {`${Interpret[entry.emotion].name} ${value}%`}
-              </span>
-            );
-          })}
-        </div>
-        <div style={{display:"flex", gap: "30px"}}>
-          {group2.map((entry, index) => {
-            const value = typeof entry.value === 'number' ? entry.value.toFixed(2) : '0.00';
-            return (
-              <span key={index + 3}>
-                {`${Interpret[entry.emotion].name} ${value}%`}
-                {/* 6번 요소 뒤에 줄바꿈 추가 (필요 시) */}
-                {index === 2 && <br />}
-              </span>
-            );
-          })}
-        </div>
-      </>
-    );
+    return data.map((entry, index) => {
+      // `entry.value`가 숫자인지 확인 후 `toFixed` 호출
+      console.log(entry.value);
+      const value = typeof entry.value === 'number' ? entry.value.toFixed(2) : '0.00';
+      return (
+        <span key={index} style={{ color: Interpret[entry.emotion].color }}>
+          {`${Interpret[entry.emotion].name} ${value}%`}
+        </span>
+      );
+    });
   }
 
   return (
@@ -104,7 +79,7 @@ const DdayDetail = ({ character }) => {
           <Explanation>
             <div style={{ gap: "15px;" }}>
               <div className="OtherExpression">
-                {getEmotionElements(sortedEmotionData)}
+                {getEmotionElements(emotionData)}
               </div>
             </div>
           </Explanation>
