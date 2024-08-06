@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+// PhotoElement.js
+import React from "react";
 import { ElementBox } from "../../styles/PhotoAlbumStyle";
 import { useLocation } from "react-router-dom";
 
-const PhotoElement = ({ data }) => {
+const PhotoElement = ({ data, onCheckboxChange, onClick, isDetailPage }) => {
   const location = useLocation();
-
-  const isDetailPage = location.pathname.includes("detail");
+  const isDetail = location.pathname.includes("detail");
 
   // Function to format the date
   const formatDate = (dateString) => {
@@ -19,17 +19,23 @@ const PhotoElement = ({ data }) => {
         key={data.id}
         style={{ display: "inline-block", height: "100%", width: "100%" }}
       >
-        <div style={{ height: isDetailPage ? "85%" : "100%" }}>
+        <div style={{ height: isDetail ? "85%" : "100%" }}>
           <img
             src={data.image}
             alt={`Image ${data.id}`}
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "100%", cursor: "pointer" }}
+            onClick={() => onClick(data.id)} // 이미지 클릭 시 onClick 호출
           />
         </div>
-        {isDetailPage && data.updated_at ? (
+        {isDetail && data.updated_at ? (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <span>{formatDate(data.updated_at)}</span>
-            <input type="checkbox" />
+            {isDetail && (
+              <input
+                type="checkbox"
+                onChange={(e) => onCheckboxChange(data.id, e.target.checked)}
+              />
+            )}
           </div>
         ) : null}
       </div>
