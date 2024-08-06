@@ -149,7 +149,7 @@ const RealTimeTrackingList = () => {
         </C.SubTitle>
       </div>
 
-      <TrackingReportcard trackingReports={trackingReports} />
+      {/*<TrackingReportcard trackingReports={trackingReports} />*/}
 
     </C.Main_Container>
   );
