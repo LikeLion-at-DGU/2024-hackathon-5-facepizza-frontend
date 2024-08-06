@@ -35,7 +35,7 @@ const PhotoAlbumDetail = () => {
       setToken(token);
       const response = await API.get(`/api/albums?emotion=${emotion}`, {
         headers: {
-          Authorization: `Token ${token}`,
+          Authorization: `${token}`,
         },
       });
       console.log("리스펀스:", response.data);
@@ -62,7 +62,7 @@ const PhotoAlbumDetail = () => {
       const token = localStorage.getItem("token");
       for (const id of checkedImages) {
         console.log(id);
-        await API.delete(`/api/albums/images/${id}`, {
+        await API.delete(`/api/images/${id}`, {
           headers: {
             Authorization: `Token ${token}`,
           },

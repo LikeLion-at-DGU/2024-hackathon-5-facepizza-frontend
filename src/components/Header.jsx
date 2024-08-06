@@ -14,18 +14,19 @@ const Header = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token); //토큰이 존재하면 true값
-    // console.log(token);
+
   }, []);
 
   const handleLogout = async () => {
+    // localStorage.removeItem('token');
     try {
       const token = localStorage.getItem('token');
 
-      const response = await fetch('http://127.0.0.1:8000/api/accounts/logout', {
-        method: 'POST',
+      
+      console.log("1",token)
+      const response = await API.post('/api/accounts/logout', {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          Authorization: `${token}`,
         },
       });
 
@@ -36,10 +37,10 @@ const Header = () => {
         navigate('/'); //홈페이지로 이동
       } else {
         const errorData = await response.json();
-        alert('로그아웃 실패: ' + errorData.detail);
+        console.log('로그아웃 실패: ' + errorData);
       }
     } catch (error) {
-      alert('로그아웃 중 오류 발생: ' + error.message);
+      console.log('로그아웃 중 오류 발생: ' , error);
     }
   };
 
