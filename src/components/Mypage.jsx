@@ -30,7 +30,17 @@ const Mypage = () => {
   const [response, setResponse] = useState(null);
   const [character, setCharacter] = useState(null);
   const [number, setNumber] = useState(null);
-  const [report, setReport] = useState(null);
+  const [report, setReport] = useState([
+    {
+      happy: 0,
+      sad: 0,
+      angry: 0,
+      surprised: 0,
+      disgusted: 0,
+      fearful: 0,
+      neutral: 0,
+    },
+  ]);
 
   let today = new Date();
   let month = today.getMonth() + 1; // 월은 0부터 시작하므로 +1
@@ -68,26 +78,11 @@ const Mypage = () => {
         console.log("Profile response:", profileResponse.data);
         console.log("Character response:", characterResponse.data);
         console.log("Number response:", numberResponse.data);
-        console.log("Report response:", reportResponse.data.length);
+        console.log("Report response:", reportResponse.data);
 
         // 상태 업데이트
         const characterData = characterResponse.data;
-        let reportData = reportResponse.data; // 변수를 조건문 밖에서 선언
-
-        // reportData가 빈 배열일 때 초기화된 배열로 설정
-        if (!reportData || reportData.length === 0) {
-          reportData = [
-            {
-              happy: 0,
-              sad: 0,
-              angry: 0,
-              surprised: 0,
-              disgusted: 0,
-              fearful: 0,
-              neutral: 0,
-            },
-          ];
-        }
+        const reportData = reportResponse.data;
 
         // reports가 null인 경우 감정 값들을 0으로 설정
         if (!characterData.reports || characterData.reports.length === 0) {
@@ -108,7 +103,9 @@ const Mypage = () => {
         setResponse(profileResponse.data);
         setCharacter(characterData);
         setNumber(numberResponse.data);
-        setReport(reportData);
+        if (reportData.length != 0) {
+          setReport(reportData);
+        }
 
         if (profileResponse.data.user.id) {
           setIsLoggedIn(true);

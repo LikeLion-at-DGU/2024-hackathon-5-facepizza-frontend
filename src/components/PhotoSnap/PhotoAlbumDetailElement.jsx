@@ -14,6 +14,7 @@ const PhotoAlbumDetailEelement = ({images}) => {
         justifyContent: "flex-start",
         gap: "44.5px",
         marginBottom: "41.5px",
+        borderRadius: "0px"
       }}
     >
       {
