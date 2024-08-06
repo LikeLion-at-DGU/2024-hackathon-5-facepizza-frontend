@@ -19,7 +19,7 @@ const PhotoElement = ({ data }) => {
         key={data.id}
         style={{ display: "inline-block", height: "100%", width: "100%" }}
       >
-        <div style={{ height: "85%" }}>
+        <div style={{ height: isDetailPage ? "85%" : "100%" }}>
           <img
             src={data.image}
             alt={`Image ${data.id}`}
