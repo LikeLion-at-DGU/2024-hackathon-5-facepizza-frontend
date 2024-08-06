@@ -45,17 +45,16 @@ const FaceDetection = ({ videoRef, onDetections, style }) => {
                   displaySize
                 );
 
-              if (onDetections) {
-                onDetections(resizedDetections);
+                if (onDetections) {
+                  onDetections(resizedDetections);
+                }
+              } catch (error) {
+                console.error("Error during face detection:", error);
               }
-            } catch (error) {
-              console.error("Error during face detection:", error);
+            } else {
+              console.log("Video is not ready."); // 디버깅: 비디오가 준비되지 않음
             }
-          } else {
-            console.log("Video is not ready."); // 디버깅: 비디오가 준비되지 않음
-            // videoRef.current = null;
-          }
-        };
+          };
 
           // Check if intervalId is being set and cleared correctly
           const intervalId = setInterval(detectFaces, 500); // 0.5초마다 얼굴 탐지
